@@ -1,0 +1,55 @@
+Package: crew.cluster
+Title: Crew Launcher Plugins for Traditional High-Performance Computing
+  Clusters
+Description: In computationally demanding analysis projects,
+  statisticians and data scientists asynchronously
+  deploy long-running tasks to distributed systems,
+  ranging from traditional clusters to cloud services.
+  The 'crew.cluster' package extends the 'mirai'-powered
+  'crew' package with worker launcher plugins for traditional
+  high-performance computing systems.
+  Inspiration also comes from packages 'mirai' by Gao (2023)
+  <https://github.com/shikokuchuo/mirai>,
+  'future' by Bengtsson (2021) <doi:10.32614/RJ-2021-048>,
+  'rrq' by FitzJohn and Ashton (2023) <https://github.com/mrc-ide/rrq>,
+  'clustermq' by Schubert (2019) <doi:10.1093/bioinformatics/btz284>),
+  and 'batchtools' by Lang, Bischel, and Surmann (2017).
+  <doi:10.21105/joss.00135>.
+Version: 0.0.0.9000
+License: MIT + file LICENSE
+URL: https://wlandau.github.io/crew.cluster/,
+  https://github.com/wlandau/crew.cluster
+BugReports: https://github.com/wlandau/crew.cluster/issues
+Authors@R: c(
+  person(
+    given = c("William", "Michael"),
+    family = "Landau",
+    role = c("aut", "cre"),
+    email = "will.landau@gmail.com",
+    comment = c(ORCID = "0000-0003-1878-3253")
+  ),
+  person(
+    family = "Eli Lilly and Company",
+    role = "cph"
+  ))
+Depends:
+  R (>= 4.0.0)
+Imports:
+  crew (>= 0.0.5.9007),
+  processx,
+  R6,
+  rlang,
+  utils
+Suggests:
+  knitr (>= 1.30),
+  markdown (>= 1.1),
+  rmarkdown (>= 2.4),
+  testthat (>= 3.0.0)
+Remotes:
+  wlandau/crew
+Encoding: UTF-8
+Language: en-US
+VignetteBuilder: knitr
+Config/testthat/edition: 3
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.2.3

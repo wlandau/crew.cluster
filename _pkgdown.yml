@@ -1,0 +1,14 @@
+destination: docs/
+reference:
+- title: Help
+  contents:
+  - '`crew.cluster-package`'
+- title: Controllers
+  contents:
+  - '`crew_controller_sge`'
+- title: Launchers
+  contents:
+  - '`crew_launcher_sge`'
+- title: Launcher classes
+  contents:
+  - '`crew_class_launcher_sge`'
