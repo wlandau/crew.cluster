@@ -1,4 +1,5 @@
-#' crew: a distributed worker launcher
+#' crew.cluster: crew launcher plugins for traditional high-performance
+#'   computing clusters
 #' @docType package
 #' @name crew.cluster-package
 #' @description In computationally demanding analysis projects,

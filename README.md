@@ -1,5 +1,5 @@
 
-# crew.cluster: crew launcher plugins for traditional high-performance computing <img src='man/figures/logo-readme.png' align="right" height="139"/>
+# crew.cluster: crew launcher plugins for traditional high-performance computing clusters <img src='man/figures/logo-readme.png' align="right" height="139"/>
 
 [![CRAN](https://www.r-pkg.org/badges/version/crew.cluster)](https://CRAN.R-project.org/package=crew.cluster)
 [![status](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#Active)

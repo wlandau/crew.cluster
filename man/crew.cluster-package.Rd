@@ -3,7 +3,8 @@
 \docType{package}
 \name{crew.cluster-package}
 \alias{crew.cluster-package}
-\title{crew: a distributed worker launcher}
+\title{crew.cluster: crew launcher plugins for traditional high-performance
+computing clusters}
 \description{
 In computationally demanding analysis projects,
 statisticians and data scientists asynchronously
