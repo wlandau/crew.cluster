@@ -13,7 +13,7 @@ Description: In computationally demanding analysis projects,
   'future' by Bengtsson (2021) <doi:10.32614/RJ-2021-048>,
   'rrq' by FitzJohn and Ashton (2023) <https://github.com/mrc-ide/rrq>,
   'clustermq' by Schubert (2019) <doi:10.1093/bioinformatics/btz284>),
-  and 'batchtools' by Lang, Bischel, and Surmann (2017).
+  and 'batchtools' by Lang, Bischl, and Surmann (2017).
   <doi:10.21105/joss.00135>.
 Version: 0.0.1
 License: MIT + file LICENSE
