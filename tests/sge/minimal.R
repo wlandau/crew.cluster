@@ -4,7 +4,8 @@ controller <- crew_controller_sge(
   name = "my_workflow",
   workers = 1L,
   seconds_idle = 300,
-  sge_lines = paste0("module load R/", getRversion())
+  sge_lines = paste0("module load R/", getRversion()),
+  verbose = TRUE
 )
 controller$start()
 controller$push(

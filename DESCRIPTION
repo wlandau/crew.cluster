@@ -36,9 +36,7 @@ Depends:
   R (>= 4.0.0)
 Imports:
   crew (>= 0.1.0),
-  processx,
   R6,
-  rlang,
   utils
 Suggests:
   knitr (>= 1.30),

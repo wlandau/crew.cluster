@@ -57,6 +57,8 @@
 #'   added to the SGE job script just after the more common flags.
 #'   An example would be `sge_lines = "module load R"` if your SGE cluster
 #'   supports R through an environment module.
+#' @param verbose Logical, whether to see console output and error messages
+#'   when submitting worker.
 crew_launcher_sge <- function(
   name = NULL,
   seconds_launch = 60,
@@ -81,7 +83,8 @@ crew_launcher_sge <- function(
   sge_memory_gigabytes_limit = NULL,
   sge_cores = NULL,
   sge_gpu = NULL,
-  sge_lines = NULL
+  sge_lines = NULL,
+  verbose = FALSE
 ) {
   name <- as.character(name %|||% crew::crew_random_name())
   launcher <- crew_class_launcher_sge$new(
@@ -108,7 +111,8 @@ crew_launcher_sge <- function(
     sge_memory_gigabytes_limit = sge_memory_gigabytes_limit,
     sge_cores = sge_cores,
     sge_gpu = sge_gpu,
-    sge_lines = sge_lines
+    sge_lines = sge_lines,
+    verbose = verbose
   )
   launcher$validate()
   launcher
@@ -146,6 +150,8 @@ crew_class_launcher_sge <- R6::R6Class(
     sge_gpu = NULL,
     #' @field sge_lines See [crew_launcher_sge()].
     sge_lines = NULL,
+    #' @field verbose See [crew_launcher_sge()].
+    verbose = NULL,
     #' @description SGE launcher constructor.
     #' @return an SGE launcher object.
     #' @param name See [crew_launcher_sge()].
@@ -172,6 +178,7 @@ crew_class_launcher_sge <- R6::R6Class(
     #' @param sge_cores See [crew_launcher_sge()].
     #' @param sge_gpu See [crew_launcher_sge()].
     #' @param sge_lines See [crew_launcher_sge()].
+    #' @param verbose See [crew_launcher_sge()].
     initialize = function(
       name = NULL,
       seconds_launch = NULL,
@@ -196,7 +203,8 @@ crew_class_launcher_sge <- R6::R6Class(
       sge_memory_gigabytes_limit = NULL,
       sge_cores = NULL,
       sge_gpu = NULL,
-      sge_lines = NULL
+      sge_lines = NULL,
+      verbose = NULL
     ) {
       super$initialize(
         name = name,
@@ -224,51 +232,7 @@ crew_class_launcher_sge <- R6::R6Class(
       self$sge_cores <- sge_cores
       self$sge_gpu <- sge_gpu
       self$sge_lines <- sge_lines
-    },
-    #' @description Launch a local process worker which will
-    #'   dial into a socket.
-    #' @details The `call` argument is R code that will run to
-    #'   initiate the worker. Together, the `launcher`, `worker`,
-    #'   and `instance` arguments are useful for
-    #'   constructing informative job names.
-    #' @return A handle object to allow the termination of the worker
-    #'   later on.
-    #' @param call Text string with a namespaced call to [crew_worker()]
-    #'   which will run in the worker and accept tasks.
-    #' @param launcher Character of length 1, name of the launcher.
-    #' @param worker Positive integer of length 1, index of the worker.
-    #'   This worker index remains the same even when the current instance
-    #'   of the worker exits and a new instance launches.
-    #'   It is always between 1 and the maximum number of concurrent workers.
-    #' @param instance Character of length 1 to uniquely identify
-    #'   the current instance of the worker.
-    launch_worker = function(call, launcher, worker, instance) {
-      name <- name_job(
-        launcher = launcher,
-        worker = worker,
-        instance = instance
-      )
-      lines <- c(
-        paste("#$ -N", name),
-        self$script(),
-        paste("R -e", shQuote(call))
-      )
-      script <- tempfile()
-      writeLines(text = lines, con = script)
-      on.exit(unlink(script))
-      processx::run(command = self$sge_qsub, args = script)
-      name
-    },
-    #' @description Terminate a local process worker.
-    #' @return `NULL` (invisibly).
-    #' @param handle A process handle object previously
-    #'   returned by `launch_worker()`.
-    terminate_worker = function(handle) {
-      processx::run(
-        command = self$sge_qdel,
-        args = handle,
-        error_on_status = FALSE
-      )
+      self$verbose <- verbose
     },
     #' @description Validate the launcher.
     #' @return `NULL` (invisibly). Throws an error if a field is invalid.
@@ -303,7 +267,8 @@ crew_class_launcher_sge <- R6::R6Class(
       fields <- c(
         "sge_cwd",
         "sge_envvars",
-        "sge_log_join"
+        "sge_log_join",
+        "verbose"
       )
       for (field in fields) {
         crew::crew_assert(
@@ -331,6 +296,59 @@ crew_class_launcher_sge <- R6::R6Class(
         }
       }
       invisible()
+    },
+    #' @description Launch a local process worker which will
+    #'   dial into a socket.
+    #' @details The `call` argument is R code that will run to
+    #'   initiate the worker. Together, the `launcher`, `worker`,
+    #'   and `instance` arguments are useful for
+    #'   constructing informative job names.
+    #' @return A handle object to allow the termination of the worker
+    #'   later on.
+    #' @param call Text string with a namespaced call to [crew_worker()]
+    #'   which will run in the worker and accept tasks.
+    #' @param launcher Character of length 1, name of the launcher.
+    #' @param worker Positive integer of length 1, index of the worker.
+    #'   This worker index remains the same even when the current instance
+    #'   of the worker exits and a new instance launches.
+    #'   It is always between 1 and the maximum number of concurrent workers.
+    #' @param instance Character of length 1 to uniquely identify
+    #'   the current instance of the worker.
+    launch_worker = function(call, launcher, worker, instance) {
+      name <- name_job(
+        launcher = launcher,
+        worker = worker,
+        instance = instance
+      )
+      lines <- c(
+        paste("#$ -N", name),
+        self$script(),
+        paste("R -e", shQuote(call))
+      )
+      script <- name_script(name = name)
+      writeLines(text = lines, con = script)
+      system2(
+        command = self$sge_qsub,
+        args = shQuote(script),
+        stdout = if_any(self$verbose, "", FALSE),
+        stderr = if_any(self$verbose, "", FALSE),
+        wait = FALSE
+      )
+      name
+    },
+    #' @description Terminate a local process worker.
+    #' @return `NULL` (invisibly).
+    #' @param handle A process handle object previously
+    #'   returned by `launch_worker()`.
+    terminate_worker = function(handle) {
+      unlink(name_script(name = handle), force = TRUE)
+      system2(
+        command = self$sge_qdel,
+        args = shQuote(handle),
+        stdout = if_any(self$verbose, "", FALSE),
+        stderr = if_any(self$verbose, "", FALSE),
+        wait = FALSE
+      )
     },
     #' @description Generate the job script.
     #' @details Includes everything except the worker-instance-specific

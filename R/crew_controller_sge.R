@@ -43,6 +43,7 @@ crew_controller_sge <- function(
   sge_cores = NULL,
   sge_gpu = NULL,
   sge_lines = NULL,
+  verbose = FALSE,
   auto_scale = "demand"
 ) {
   router <- crew::crew_router(
@@ -77,7 +78,8 @@ crew_controller_sge <- function(
     sge_memory_gigabytes_limit = sge_memory_gigabytes_limit,
     sge_cores = sge_cores,
     sge_gpu = sge_gpu,
-    sge_lines = sge_lines
+    sge_lines = sge_lines,
+    verbose = verbose
   )
   controller <- crew::crew_controller(
     router = router,

@@ -53,6 +53,8 @@ Other launchers:
 \item{\code{sge_gpu}}{See \code{\link[=crew_launcher_sge]{crew_launcher_sge()}}.}
 
 \item{\code{sge_lines}}{See \code{\link[=crew_launcher_sge]{crew_launcher_sge()}}.}
+
+\item{\code{verbose}}{See \code{\link[=crew_launcher_sge]{crew_launcher_sge()}}.}
 }
 \if{html}{\out{</div>}}
 }
@@ -60,9 +62,9 @@ Other launchers:
 \subsection{Public methods}{
 \itemize{
 \item \href{#method-crew_class_launcher_sge-new}{\code{crew_class_launcher_sge$new()}}
+\item \href{#method-crew_class_launcher_sge-validate}{\code{crew_class_launcher_sge$validate()}}
 \item \href{#method-crew_class_launcher_sge-launch_worker}{\code{crew_class_launcher_sge$launch_worker()}}
 \item \href{#method-crew_class_launcher_sge-terminate_worker}{\code{crew_class_launcher_sge$terminate_worker()}}
-\item \href{#method-crew_class_launcher_sge-validate}{\code{crew_class_launcher_sge$validate()}}
 \item \href{#method-crew_class_launcher_sge-script}{\code{crew_class_launcher_sge$script()}}
 }
 }
@@ -109,7 +111,8 @@ SGE launcher constructor.
   sge_memory_gigabytes_limit = NULL,
   sge_cores = NULL,
   sge_gpu = NULL,
-  sge_lines = NULL
+  sge_lines = NULL,
+  verbose = NULL
 )}\if{html}{\out{</div>}}
 }
 
@@ -163,11 +166,26 @@ SGE launcher constructor.
 \item{\code{sge_gpu}}{See \code{\link[=crew_launcher_sge]{crew_launcher_sge()}}.}
 
 \item{\code{sge_lines}}{See \code{\link[=crew_launcher_sge]{crew_launcher_sge()}}.}
+
+\item{\code{verbose}}{See \code{\link[=crew_launcher_sge]{crew_launcher_sge()}}.}
 }
 \if{html}{\out{</div>}}
 }
 \subsection{Returns}{
 an SGE launcher object.
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-crew_class_launcher_sge-validate"></a>}}
+\if{latex}{\out{\hypertarget{method-crew_class_launcher_sge-validate}{}}}
+\subsection{Method \code{validate()}}{
+Validate the launcher.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{crew_class_launcher_sge$validate()}\if{html}{\out{</div>}}
+}
+
+\subsection{Returns}{
+\code{NULL} (invisibly). Throws an error if a field is invalid.
 }
 }
 \if{html}{\out{<hr>}}
@@ -229,19 +247,6 @@ returned by \code{launch_worker()}.}
 }
 \subsection{Returns}{
 \code{NULL} (invisibly).
-}
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-crew_class_launcher_sge-validate"></a>}}
-\if{latex}{\out{\hypertarget{method-crew_class_launcher_sge-validate}{}}}
-\subsection{Method \code{validate()}}{
-Validate the launcher.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{crew_class_launcher_sge$validate()}\if{html}{\out{</div>}}
-}
-
-\subsection{Returns}{
-\code{NULL} (invisibly). Throws an error if a field is invalid.
 }
 }
 \if{html}{\out{<hr>}}

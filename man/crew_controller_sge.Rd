@@ -32,6 +32,7 @@ crew_controller_sge(
   sge_cores = NULL,
   sge_gpu = NULL,
   sge_lines = NULL,
+  verbose = FALSE,
   auto_scale = "demand"
 )
 }
@@ -158,6 +159,9 @@ request for the worker. \code{sge_gpu = 1} translates to a line of
 added to the SGE job script just after the more common flags.
 An example would be \code{sge_lines = "module load R"} if your SGE cluster
 supports R through an environment module.}
+
+\item{verbose}{Logical, whether to see console output and error messages
+when submitting worker.}
 
 \item{auto_scale}{Character of length 1, name of the method for
 automatically scaling workers to meet demand. \code{NULL} to default to

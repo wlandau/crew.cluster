@@ -20,9 +20,7 @@
 #' @family help
 #' @importFrom crew crew_assert crew_class_launcher crew_launcher
 #'   crew_random_name
-#' @importFrom processx run
 #' @importFrom R6 R6Class
-#' @importFrom rlang abort
 #' @importFrom utils globalVariables
 NULL
 

@@ -28,7 +28,8 @@ crew_launcher_sge(
   sge_memory_gigabytes_limit = NULL,
   sge_cores = NULL,
   sge_gpu = NULL,
-  sge_lines = NULL
+  sge_lines = NULL,
+  verbose = FALSE
 )
 }
 \arguments{
@@ -145,6 +146,9 @@ request for the worker. \code{sge_gpu = 1} translates to a line of
 added to the SGE job script just after the more common flags.
 An example would be \code{sge_lines = "module load R"} if your SGE cluster
 supports R through an environment module.}
+
+\item{verbose}{Logical, whether to see console output and error messages
+when submitting worker.}
 }
 \description{
 Create an \code{R6} object to launch and maintain

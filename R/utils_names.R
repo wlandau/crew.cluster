@@ -2,7 +2,11 @@ name_job <- function(launcher, worker, instance) {
   out <- paste(launcher, worker, instance, sep = "-")
   alpha <- all(grepl(pattern = "^[[:alpha:]]", x = out))
   if (!alpha) {
-    out <- paste0("sge-", out)
+    out <- paste0("worker-", out)
   }
   out
+}
+
+name_script <- function(name) {
+  file.path(tempdir(), paste0(name, ".sh"))
 }
