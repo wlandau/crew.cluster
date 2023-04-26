@@ -79,7 +79,8 @@ workers as Sun Grid Engine (SGE) jobs.</p>
 <span>  sge_memory_gigabytes_limit <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  sge_cores <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  sge_gpu <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  sge_lines <span class="op">=</span> <span class="cn">NULL</span></span>
+<span>  sge_lines <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  verbose <span class="op">=</span> <span class="cn">FALSE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -245,6 +246,11 @@ request for the worker. <code>sge_gpu = 1</code> translates to a line of
 added to the SGE job script just after the more common flags.
 An example would be <code>sge_lines = "module load R"</code> if your SGE cluster
 supports R through an environment module.</p></dd>
+
+
+<dt>verbose</dt>
+<dd><p>Logical, whether to see console output and error messages
+when submitting worker.</p></dd>
 
 </dl></div>
     <div id="details">
