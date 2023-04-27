@@ -152,6 +152,8 @@ crew_class_launcher_sge <- R6::R6Class(
     sge_lines = NULL,
     #' @field verbose See [crew_launcher_sge()].
     verbose = NULL,
+    #' @field prefix Unique prefix of worker scripts.
+    prefix = NULL,
     #' @description SGE launcher constructor.
     #' @return an SGE launcher object.
     #' @param name See [crew_launcher_sge()].
@@ -325,7 +327,12 @@ crew_class_launcher_sge <- R6::R6Class(
         self$script(),
         paste("R -e", shQuote(call))
       )
-      script <- name_script(name = name)
+      self$prefix <- self$prefix %|||% crew::crew_random_name()
+      script <- name_script(
+        prefix = self$prefix,
+        launcher = launcher,
+        worker = worker
+      )
       writeLines(text = lines, con = script)
       system2(
         command = self$sge_qsub,
@@ -334,21 +341,36 @@ crew_class_launcher_sge <- R6::R6Class(
         stderr = if_any(self$verbose, "", FALSE),
         wait = FALSE
       )
-      name
+      list(
+        launcher = launcher,
+        worker = worker,
+        instance = instance
+      )
     },
     #' @description Terminate a local process worker.
     #' @return `NULL` (invisibly).
     #' @param handle A process handle object previously
     #'   returned by `launch_worker()`.
     terminate_worker = function(handle) {
-      unlink(name_script(name = handle), force = TRUE)
+      script <- name_script(
+        prefix = self$prefix,
+        launcher = handle$launcher,
+        worker = handle$worker
+      )
+      unlink(script)
+      name <- name_job(
+        launcher = handle$launcher,
+        worker = handle$worker,
+        instance = handle$instance
+      )
       system2(
         command = self$sge_qdel,
-        args = shQuote(handle),
+        args = shQuote(name),
         stdout = if_any(self$verbose, "", FALSE),
         stderr = if_any(self$verbose, "", FALSE),
         wait = FALSE
       )
+      invisible()
     },
     #' @description Generate the job script.
     #' @details Includes everything except the worker-instance-specific

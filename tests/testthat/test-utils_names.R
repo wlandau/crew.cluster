@@ -4,7 +4,6 @@ test_that("name_job()", {
 })
 
 test_that("name_script()", {
-  name <- name_job("a", "b", "c")
-  script <- name_script(name)
+  script <- name_script(prefix = "a", launcher = "b", worker = "c")
   expect_equal(script, file.path(tempdir(), "a-b-c.sh"))
 })

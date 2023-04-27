@@ -55,6 +55,8 @@ Other launchers:
 \item{\code{sge_lines}}{See \code{\link[=crew_launcher_sge]{crew_launcher_sge()}}.}
 
 \item{\code{verbose}}{See \code{\link[=crew_launcher_sge]{crew_launcher_sge()}}.}
+
+\item{\code{prefix}}{Unique prefix of worker scripts.}
 }
 \if{html}{\out{</div>}}
 }
