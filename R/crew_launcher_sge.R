@@ -118,7 +118,7 @@ crew_launcher_sge <- function(
 #' @details See [crew_launcher_sge()].
 crew_class_launcher_sge <- R6::R6Class(
   classname = "crew_class_launcher_sge",
-  inherit = crew::crew_class_launcher,
+  inherit = crew_class_launcher_cluster,
   cloneable = FALSE,
   public = list(
     #' @field sge_cwd See [crew_launcher_sge()].
