@@ -143,7 +143,7 @@
 <span>  workers <span class="op">=</span> <span class="fl">16</span>,</span>
 <span>  tasks_max <span class="op">=</span> <span class="fl">2</span>, <span class="co"># to avoid reaching wall time limits</span></span>
 <span>  seconds_idle <span class="op">=</span> <span class="fl">10</span>, <span class="co"># to release resources when they are not needed</span></span>
-<span>  sge_lines <span class="op">=</span> <span class="st">"module load R"</span> <span class="co"># if R is an environment module</span></span>
+<span>  script_lines <span class="op">=</span> <span class="st">"module load R"</span> <span class="co"># if R is an environment module</span></span>
 <span><span class="op">)</span></span>
 <span><span class="va">controller</span><span class="op">$</span><span class="fu">start</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p>At this point, usage is exactly the same as basic <a href="https://wlandau.github.io/crew" class="external-link"><code>crew</code></a>. The <code>push()</code> method submits tasks and auto-scales SGE workers to meet demand.</p>
@@ -167,7 +167,7 @@
 <ul>
 <li>
 <code>crew.cluster</code> submits jobs over the local network using system calls to the resource manager (e.g SGE or SLURM). Please invoke <code>crew.cluster</code> on a node of the cluster, either a login node (head node) or a compute node.</li>
-<li>Most clusters install software like R in versioned environment modules. Most likely, you will need to call <code>module load R</code> (or <code>module load R/x.y.z</code> for a specific version) in order to use on the cluster. In <code>crew.cluster</code>, you will most likely need to supply <code>"module load R"</code> or similar to the <code>sge_lines</code> argument of e.g. <code><a href="reference/crew_controller_sge.html">crew_controller_sge()</a></code>.</li>
+<li>Most clusters install software like R in versioned environment modules. Most likely, you will need to call <code>module load R</code> (or <code>module load R/x.y.z</code> for a specific version) in order to use on the cluster. In <code>crew.cluster</code>, you will most likely need to supply <code>"module load R"</code> or similar to the <code>script_lines</code> argument of e.g. <code><a href="reference/crew_controller_sge.html">crew_controller_sge()</a></code>.</li>
 </ul>
 </div>
 <div class="section level1">
