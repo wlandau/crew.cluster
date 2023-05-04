@@ -40,7 +40,7 @@ Other launchers:
 
 \item{\code{sge_qdel}}{See \code{\link[=crew_launcher_sge]{crew_launcher_sge()}}.}
 
-\item{\code{sge_script_directory}}{See \code{\link[=crew_launcher_sge]{crew_launcher_sge()}}.}
+\item{\code{sge_script_dir}}{See \code{\link[=crew_launcher_sge]{crew_launcher_sge()}}.}
 
 \item{\code{sge_cwd}}{See \code{\link[=crew_launcher_sge]{crew_launcher_sge()}}.}
 
@@ -110,7 +110,7 @@ SGE launcher constructor.
   verbose = NULL,
   sge_qsub = NULL,
   sge_qdel = NULL,
-  sge_script_directory = NULL,
+  sge_script_dir = NULL,
   sge_cwd = NULL,
   sge_envvars = NULL,
   sge_log_files = NULL,
@@ -158,7 +158,7 @@ SGE launcher constructor.
 
 \item{\code{sge_qdel}}{See \code{\link[=crew_launcher_sge]{crew_launcher_sge()}}.}
 
-\item{\code{sge_script_directory}}{See \code{\link[=crew_launcher_sge]{crew_launcher_sge()}}.}
+\item{\code{sge_script_dir}}{See \code{\link[=crew_launcher_sge]{crew_launcher_sge()}}.}
 
 \item{\code{sge_cwd}}{See \code{\link[=crew_launcher_sge]{crew_launcher_sge()}}.}
 

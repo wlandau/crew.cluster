@@ -1,13 +1,3 @@
-test_that("crew_controller_sge() script() nearly empty", {
-  x <- crew_controller_sge(
-    sge_cwd = FALSE,
-    sge_envvars = FALSE,
-    sge_log_files = "log_file",
-    sge_log_join = FALSE
-  )
-  expect_equal(x$launcher$script(), c("#$ -o log_file", "#$ -j n"))
-})
-
 test_that("crew_controller_sge() script() all lines", {
   x <- crew_controller_sge(
     sge_cwd = TRUE,

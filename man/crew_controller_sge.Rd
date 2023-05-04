@@ -25,6 +25,7 @@ crew_controller_sge(
   verbose = FALSE,
   sge_qsub = as.character(Sys.which("qsub")),
   sge_qdel = as.character(Sys.which("qdel")),
+  sge_script_dir = tempdir(),
   sge_cwd = TRUE,
   sge_envvars = FALSE,
   sge_log_files = "/dev/null",
@@ -113,6 +114,15 @@ used to submit \code{crew} workers as SGE jobs.}
 
 \item{sge_qdel}{Character of length 1, file path to the \code{qdel} executable
 used to delete the SGE jobs running \code{crew} workers.}
+
+\item{sge_script_dir}{Character of length 1, directory path to the
+SGE job scripts. Just before each job submission, a job script
+is created in this folder. Script base names are unique to each
+launcher and worker, and the launcher deletes the script when the
+worker is manually terminated. \code{tempdir()} is the default, but it
+might not work for some systems.
+\code{tools::R_user_dir("crew.cluster", which = "cache")}
+is another reasonable choice.}
 
 \item{sge_cwd}{Logical of length 1, whether to
 launch the worker from the current working directory (as opposed to
