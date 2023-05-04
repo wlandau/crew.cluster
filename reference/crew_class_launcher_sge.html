@@ -317,7 +317,7 @@ the bottom of the script at launch time.</p>
 <span>  sge_cores <span class="op">=</span> <span class="fl">2</span>,</span>
 <span>  sge_memory_gigabytes_required <span class="op">=</span> <span class="fl">4</span></span>
 <span><span class="op">)</span></span>
-<span><span class="va">launcher</span><span class="op">$</span><span class="fu">script</span><span class="op">(</span><span class="va">name</span><span class="op">)</span></span></code></pre></div><p></p></div>
+<span><span class="va">launcher</span><span class="op">$</span><span class="fu">script</span><span class="op">(</span>name <span class="op">=</span> <span class="st">"my_job_name"</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 
@@ -336,8 +336,9 @@ the bottom of the script at launch time.</p>
 <span class="r-in"><span>  sge_cores <span class="op">=</span> <span class="fl">2</span>,</span></span>
 <span class="r-in"><span>  sge_memory_gigabytes_required <span class="op">=</span> <span class="fl">4</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="va">launcher</span><span class="op">$</span><span class="fu">script</span><span class="op">(</span><span class="va">name</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in eval(expr, envir, enclos):</span> object 'name' not found</span>
+<span class="r-in"><span><span class="va">launcher</span><span class="op">$</span><span class="fu">script</span><span class="op">(</span>name <span class="op">=</span> <span class="st">"my_job_name"</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "#$ -N my_job_name"   "#$ -cwd"             "#$ -o /dev/null"    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [4] "#$ -j y"             "$# -l m_mem_free=4G" "$# -pe smp 2"       </span>
 </code></pre></div>
     </div>
   </div>
