@@ -75,6 +75,7 @@ workers as Sun Grid Engine (SGE) jobs.</p>
 <span>  verbose <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  sge_qsub <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Sys.which.html" class="external-link">Sys.which</a></span><span class="op">(</span><span class="st">"qsub"</span><span class="op">)</span><span class="op">)</span>,</span>
 <span>  sge_qdel <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Sys.which.html" class="external-link">Sys.which</a></span><span class="op">(</span><span class="st">"qdel"</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>  sge_script_dir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  sge_cwd <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  sge_envvars <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  sge_log_files <span class="op">=</span> <span class="st">"/dev/null"</span>,</span>
@@ -186,6 +187,17 @@ used to submit <code>crew</code> workers as SGE jobs.</p></dd>
 <dt>sge_qdel</dt>
 <dd><p>Character of length 1, file path to the <code>qdel</code> executable
 used to delete the SGE jobs running <code>crew</code> workers.</p></dd>
+
+
+<dt>sge_script_dir</dt>
+<dd><p>Character of length 1, directory path to the
+SGE job scripts. Just before each job submission, a job script
+is created in this folder. Script base names are unique to each
+launcher and worker, and the launcher deletes the script when the
+worker is manually terminated. <code><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir()</a></code> is the default, but it
+might not work for some systems.
+<code>tools::R_user_dir("crew.cluster", which = "cache")</code>
+is another reasonable choice.</p></dd>
 
 
 <dt>sge_cwd</dt>
