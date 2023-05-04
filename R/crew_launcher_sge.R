@@ -1,4 +1,4 @@
-#' @title `lifecycle::badge("maturing")` Create a launcher with
+#' @title `r lifecycle::badge("maturing")` Create a launcher with
 #'   Sun Grid Engine (SGE) workers.
 #' @export
 #' @family launchers

@@ -2,7 +2,7 @@
 % Please edit documentation in R/crew_controller_sge.R
 \name{crew_controller_sge}
 \alias{crew_controller_sge}
-\title{\code{lifecycle::badge("maturing")} Create a controller with a
+\title{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#maturing}{\figure{lifecycle-maturing.svg}{options: alt='[Maturing]'}}}{\strong{[Maturing]}} Create a controller with a
 Sun Grid Engine (SGE) launcher.}
 \usage{
 crew_controller_sge(

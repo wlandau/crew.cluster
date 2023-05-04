@@ -2,7 +2,7 @@
 % Please edit documentation in R/crew_launcher_sge.R
 \name{crew_launcher_sge}
 \alias{crew_launcher_sge}
-\title{\code{lifecycle::badge("maturing")} Create a launcher with
+\title{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#maturing}{\figure{lifecycle-maturing.svg}{options: alt='[Maturing]'}}}{\strong{[Maturing]}} Create a launcher with
 Sun Grid Engine (SGE) workers.}
 \usage{
 crew_launcher_sge(

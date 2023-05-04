@@ -1,4 +1,4 @@
-#' @title `lifecycle::badge("experimental")` Create a controller with a
+#' @title `r lifecycle::badge("experimental")` Create a controller with a
 #'   SLURM launcher.
 #' @export
 #' @family controllers

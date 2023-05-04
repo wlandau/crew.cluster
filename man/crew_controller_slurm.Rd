@@ -2,7 +2,7 @@
 % Please edit documentation in R/crew_controller_slurm.R
 \name{crew_controller_slurm}
 \alias{crew_controller_slurm}
-\title{\code{lifecycle::badge("experimental")} Create a controller with a
+\title{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}} Create a controller with a
 SLURM launcher.}
 \usage{
 crew_controller_slurm(

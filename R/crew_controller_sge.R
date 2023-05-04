@@ -1,4 +1,4 @@
-#' @title `lifecycle::badge("maturing")` Create a controller with a
+#' @title `r lifecycle::badge("maturing")` Create a controller with a
 #'   Sun Grid Engine (SGE) launcher.
 #' @export
 #' @family controllers
