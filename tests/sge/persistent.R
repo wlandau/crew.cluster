@@ -4,7 +4,7 @@ x <- crew_controller_sge(
   name = "123",
   workers = 1L,
   seconds_idle = 300,
-  sge_lines = paste0("module load R/", getRversion())
+  script_lines = paste0("module load R/", getRversion())
 )
 x$start()
 n <- 200
