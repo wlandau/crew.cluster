@@ -89,6 +89,9 @@ tasks, \code{FALSE} to skip.}
 when submitting worker.}
 
 \item{command_submit}{Character of length 1,
+file path to the executable to submit a worker job.}
+
+\item{command_delete}{Character of length 1,
 file path to the executable to delete a worker job.}
 
 \item{script_directory}{Character of length 1, directory path to the

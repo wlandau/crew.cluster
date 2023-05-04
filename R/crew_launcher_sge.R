@@ -279,7 +279,7 @@ crew_class_launcher_sge <- R6::R6Class(
     #'   sge_cores = 2,
     #'   sge_memory_gigabytes_required = 4
     #' )
-    #' launcher$script(name)
+    #' launcher$script(name = "my_job_name")
     script = function(name) {
       c(
         paste("#$ -N", name),

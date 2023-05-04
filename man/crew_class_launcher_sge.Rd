@@ -19,7 +19,7 @@ launcher <- crew_launcher_sge(
   sge_cores = 2,
   sge_memory_gigabytes_required = 4
 )
-launcher$script(name)
+launcher$script(name = "my_job_name")
 }
 \seealso{
 Other launchers: 
@@ -220,7 +220,7 @@ Character vector of the lines of the job script.
   sge_cores = 2,
   sge_memory_gigabytes_required = 4
 )
-launcher$script(name)
+launcher$script(name = "my_job_name")
 }
 \if{html}{\out{</div>}}
 
