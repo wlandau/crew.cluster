@@ -44,7 +44,8 @@ crew_controller_slurm <- function(
   slurm_log_error = "/dev/null",
   slurm_memory_megabytes_per_cpu = NULL,
   slurm_cpus_per_task = NULL,
-  slurm_lines = NULL
+  slurm_lines = NULL,
+  auto_scale = "demand"
 ) {
   router <- crew::crew_router(
     name = name,

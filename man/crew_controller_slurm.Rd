@@ -29,7 +29,8 @@ crew_controller_slurm(
   slurm_log_error = "/dev/null",
   slurm_memory_megabytes_per_cpu = NULL,
   slurm_cpus_per_task = NULL,
-  slurm_lines = NULL
+  slurm_lines = NULL,
+  auto_scale = "demand"
 )
 }
 \arguments{
@@ -144,6 +145,28 @@ to a line of \verb{#SBATCH --cpus-per-task=4} in the SLURM job script.
 added to the SLURM job script just after the more common flags.
 An example would be \code{slurm_lines = "module load R"} if your SLURM cluster
 supports R through an environment module.}
+
+\item{auto_scale}{Character of length 1, name of the method for
+automatically scaling workers to meet demand. \code{NULL} to default to
+\code{"demand"}. Possible values include the following:
+\itemize{
+\item \code{"demand"}: just after pushing a new task in \code{push()}, launch
+\code{min(n, max(0, t - w))} workers, where \code{n} is the maximum number of
+workers, \code{t} is the number of queued tasks, and \code{w} is the current
+number of workers already running. In other words, scale up the
+number of workers to meet the current demand.
+If you trust tasks not to crash workers, this is a good choice.
+But if you think a task may always crash a worker
+(e.g. segmentation fault or maxed out memory) then
+this could be somewhat risky because \code{mirai} resubmits
+failed tasks behind the scenes and \code{crew} responds by
+re-launching workers. If you are worried about this scenario,
+choose \code{auto_scale = "one"} instead, which will only launch
+up to one worker whenever a task is pushed.
+\item \code{"one"}: just after pushing a new task in \code{push()}, launch
+a one worker if demand \code{min(n, max(0, t - w))} is greater than 0.
+\item \code{"none"}: do not auto-scale at all.
+}}
 }
 \description{
 Create an \code{R6} object to submit tasks and
