@@ -7,6 +7,6 @@ name_job <- function(launcher, worker, instance) {
   out
 }
 
-name_script <- function(prefix, launcher, worker) {
-  file.path(sprintf("%s-%s-%s.sh", prefix, launcher, worker))
+path_script <- function(dir, prefix, launcher, worker) {
+  file.path(dir, sprintf("%s-%s-%s.sh", prefix, launcher, worker))
 }

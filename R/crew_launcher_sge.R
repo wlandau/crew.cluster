@@ -334,7 +334,7 @@ crew_class_launcher_sge <- R6::R6Class(
     #'   the current instance of the worker.
     launch_worker = function(call, launcher, worker, instance) {
       name <- name_job(
-        launcher = launcher,
+        launcher = self$name,
         worker = worker,
         instance = instance
       )
@@ -344,17 +344,17 @@ crew_class_launcher_sge <- R6::R6Class(
         paste("R -e", shQuote(call))
       )
       if (is.null(self$prefix)) {
-        self$prefix <- crew::crew_random_name()
         if (!file.exists(self$sge_script_dir)) {
           dir.create(self$sge_script_dir, recursive = TRUE)
         }
+        self$prefix <- crew::crew_random_name()
       }
-      script <- name_script(
+      script <- path_script(
+        dir = self$sge_script_dir,
         prefix = self$prefix,
-        launcher = launcher,
+        launcher = self$name,
         worker = worker
       )
-      script <- file.path(self$sge_script_dir, script)
       writeLines(text = lines, con = script)
       system2(
         command = self$sge_qsub,
@@ -363,26 +363,22 @@ crew_class_launcher_sge <- R6::R6Class(
         stderr = if_any(self$verbose, "", FALSE),
         wait = FALSE
       )
-      list(
-        launcher = launcher,
-        worker = worker,
-        instance = instance
-      )
+      list(worker = worker, instance = instance)
     },
     #' @description Terminate a local process worker.
     #' @return `NULL` (invisibly).
     #' @param handle A process handle object previously
     #'   returned by `launch_worker()`.
     terminate_worker = function(handle) {
-      script <- name_script(
+      script <- path_script(
+        dir = self$sge_script_dir,
         prefix = self$prefix,
-        launcher = handle$launcher,
+        launcher = self$name,
         worker = handle$worker
       )
-      script <- file.path(self$sge_script_dir, script)
       unlink(script)
       name <- name_job(
-        launcher = handle$launcher,
+        launcher = self$name,
         worker = handle$worker,
         instance = handle$instance
       )

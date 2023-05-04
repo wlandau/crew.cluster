@@ -88,15 +88,19 @@ test_that("crew_controller_sge() mock job creates a tempdir() job script", {
   expect_null(x$prefix)
   x$launch(index = 1L, socket = "my_socket")
   expect_false(is.null(x$prefix))
-  script <- name_script(prefix = x$prefix, launcher = x$name, worker = 1L)
+  script <- path_script(
+    dir = tempdir(),
+    prefix = x$prefix,
+    launcher = x$name,
+    worker = 1L
+  )
   job <- name_job(
     launcher = x$name,
     worker = 1L,
     instance = x$workers$handle[[1]]$instance
   )
-  path <- file.path(tempdir(), script)
-  expect_true(file.exists(path))
-  out <- readLines(path)
+  expect_true(file.exists(script))
+  out <- readLines(script)
   exp <- c(
     "#$ -cwd",
     "#$ -V",
@@ -112,7 +116,7 @@ test_that("crew_controller_sge() mock job creates a tempdir() job script", {
   )
   expect_equal(out[seq_along(exp)], exp)
   x$terminate()
-  expect_false(file.exists(path))
+  expect_false(file.exists(script))
 })
 
 test_that("crew_controller_sge() mock job creates a custom job script", {
@@ -137,7 +141,7 @@ test_that("crew_controller_sge() mock job creates a custom job script", {
   expect_null(x$prefix)
   x$launch(index = 1L, socket = "my_socket")
   expect_false(is.null(x$prefix))
-  script <- name_script(prefix = x$prefix, launcher = x$name, worker = 1L)
+  script <- path_script(prefix = x$prefix, launcher = x$name, worker = 1L)
   job <- name_job(
     launcher = x$name,
     worker = 1L,

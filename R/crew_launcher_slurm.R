@@ -26,6 +26,14 @@
 #' @param slurm_scancel Character of length 1,
 #'   file path to the `scancel` executable
 #'   used to delete the SLURM jobs running `crew` workers.
+#' @param slurm_script_dir Character of length 1, directory path to the
+#'   SLURM job scripts. Just before each job submission, a job script
+#'   is created in this folder. Script base names are unique to each
+#'   launcher and worker, and the launcher deletes the script when the
+#'   worker is manually terminated. `tempdir()` is the default, but it
+#'   might not work for some systems.
+#'   `tools::R_user_dir("crew.cluster", which = "cache")`
+#'   is another reasonable choice.
 #' @param slurm_log_output Character of length 1, file pattern to control
 #'   the locations of the SLURM worker log files. By default, both standard
 #'   output and standard error go to the same file.
@@ -72,6 +80,7 @@ crew_launcher_slurm <- function(
   garbage_collection = FALSE,
   slurm_sbatch = as.character(Sys.which("sbatch")),
   slurm_scancel = as.character(Sys.which("scancel")),
+  slurm_script_dir = tempdir(),
   slurm_log_output = "/dev/null",
   slurm_log_error = "/dev/null",
   slurm_memory_megabytes_per_cpu = NULL,
@@ -96,6 +105,7 @@ crew_launcher_slurm <- function(
     verbose = verbose,
     slurm_sbatch = slurm_sbatch,
     slurm_scancel = slurm_scancel,
+    slurm_script_dir = slurm_script_dir,
     slurm_log_output = slurm_log_output,
     slurm_log_error = slurm_log_error,
     slurm_memory_megabytes_per_cpu = slurm_memory_megabytes_per_cpu,
@@ -122,6 +132,8 @@ crew_class_launcher_slurm <- R6::R6Class(
     slurm_sbatch = NULL,
     #' @field slurm_scancel See [crew_launcher_slurm()].
     slurm_scancel = NULL,
+    #' @field slurm_script_dir See [crew_launcher_slurm()].
+    slurm_script_dir = NULL,
     #' @field slurm_log_output See [crew_launcher_slurm()].
     slurm_log_output = NULL,
     #' @field slurm_log_error See [crew_launcher_slurm()].
@@ -152,6 +164,7 @@ crew_class_launcher_slurm <- R6::R6Class(
     #' @param verbose See [crew_launcher_slurm()].
     #' @param slurm_sbatch See [crew_launcher_slurm()].
     #' @param slurm_scancel See [crew_launcher_slurm()].
+    #' @param slurm_script_dir See [crew_launcher_slurm()].
     #' @param slurm_log_output See [crew_launcher_slurm()].
     #' @param slurm_log_error See [crew_launcher_slurm()].
     #' @param slurm_memory_megabytes_per_cpu See [crew_launcher_slurm()].
@@ -174,6 +187,7 @@ crew_class_launcher_slurm <- R6::R6Class(
       verbose = NULL,
       slurm_sbatch = NULL,
       slurm_scancel = NULL,
+      slurm_script_dir = NULL,
       slurm_log_output = NULL,
       slurm_log_error = NULL,
       slurm_memory_megabytes_per_cpu = NULL,
@@ -198,6 +212,7 @@ crew_class_launcher_slurm <- R6::R6Class(
       self$verbose <- verbose
       self$slurm_sbatch <- slurm_sbatch
       self$slurm_scancel <- slurm_scancel
+      self$slurm_script_dir <- slurm_script_dir
       self$slurm_log_output <- slurm_log_output
       self$slurm_log_error <- slurm_log_error
       self$slurm_memory_megabytes_per_cpu <- slurm_memory_megabytes_per_cpu
@@ -208,14 +223,14 @@ crew_class_launcher_slurm <- R6::R6Class(
     #' @return `NULL` (invisibly). Throws an error if a field is invalid.
     validate = function() {
       super$validate()
-      fields <- c("slurm_sbatch", "slurm_scancel")
+      fields <- c("slurm_sbatch", "slurm_scancel", "slurm_script_dir")
       for (field in fields) {
         crew::crew_assert(
           self[[field]],
           is.character(.),
           length(.) == 1L,
           !anyNA(.),
-          message = paste(field, "must be a valid character string.")
+          message = paste(field, "must be a valid length-1 character string.")
         )
       }
       fields <- c("slurm_log_output", "slurm_log_error")
@@ -293,10 +308,16 @@ crew_class_launcher_slurm <- R6::R6Class(
         paste0("#SBATCH --job-name=", name),
         paste("R -e", shQuote(call))
       )
-      self$prefix <- self$prefix %|||% crew::crew_random_name()
-      script <- name_script(
+      if (is.null(self$prefix)) {
+        if (!file.exists(self$slurm_script_dir)) {
+          dir.create(self$slurm_script_dir, recursive = TRUE)
+        }
+        self$prefix <- crew::crew_random_name()
+      }
+      script <- path_script(
+        dir = self$slurm_script_dir,
         prefix = self$prefix,
-        launcher = launcher,
+        launcher = self$name,
         worker = worker
       )
       writeLines(text = lines, con = script)
@@ -307,25 +328,22 @@ crew_class_launcher_slurm <- R6::R6Class(
         stderr = if_any(self$verbose, "", FALSE),
         wait = FALSE
       )
-      list(
-        launcher = launcher,
-        worker = worker,
-        instance = instance
-      )
+      list(worker = worker, instance = instance)
     },
     #' @description Terminate a local process worker.
     #' @return `NULL` (invisibly).
     #' @param handle A process handle object previously
     #'   returned by `launch_worker()`.
     terminate_worker = function(handle) {
-      script <- name_script(
+      script <- path_script(
+        dir = self$slurm_script_dir,
         prefix = self$prefix,
-        launcher = handle$launcher,
+        launcher = self$name,
         worker = handle$worker
       )
       unlink(script)
       name <- name_job(
-        launcher = handle$launcher,
+        launcher = self$name,
         worker = handle$worker,
         instance = handle$instance
       )
