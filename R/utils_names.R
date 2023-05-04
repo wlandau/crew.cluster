@@ -8,5 +8,5 @@ name_job <- function(launcher, worker, instance) {
 }
 
 name_script <- function(prefix, launcher, worker) {
-  file.path(tempdir(), sprintf("%s-%s-%s.sh", prefix, launcher, worker))
+  file.path(sprintf("%s-%s-%s.sh", prefix, launcher, worker))
 }

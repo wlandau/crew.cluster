@@ -19,6 +19,14 @@
 #'   used to submit `crew` workers as SGE jobs.
 #' @param sge_qdel Character of length 1, file path to the `qdel` executable
 #'   used to delete the SGE jobs running `crew` workers.
+#' @param sge_script_directory Character of length 1, directory path to the
+#'   SGE job scripts. Just before each job submission, a job script
+#'   is created in this folder. Script base names are unique to each
+#'   launcher and worker, and the launcher deletes the script when the
+#'   worker is manually terminated. `tempdir()` is the default, but it
+#'   might not work for some systems.
+#'   `tools::R_user_dir("crew.cluster", which = "cache")`
+#'   is another reasonable choice.
 #' @param sge_cwd Logical of length 1, whether to
 #'   launch the worker from the current working directory (as opposed to
 #'   the user home directory). `sge_cwd = TRUE` translates to a line of
@@ -77,6 +85,7 @@ crew_launcher_sge <- function(
   verbose = FALSE,
   sge_qsub = as.character(Sys.which("qsub")),
   sge_qdel = as.character(Sys.which("qdel")),
+  sge_script_directory = tempdir(),
   sge_cwd = TRUE,
   sge_envvars = FALSE,
   sge_log_files = "/dev/null",
@@ -105,6 +114,7 @@ crew_launcher_sge <- function(
     verbose = verbose,
     sge_qsub = sge_qsub,
     sge_qdel = sge_qdel,
+    sge_script_directory = sge_script_directory,
     sge_cwd = sge_cwd,
     sge_envvars = sge_envvars,
     sge_log_files = sge_log_files,
@@ -135,6 +145,8 @@ crew_class_launcher_sge <- R6::R6Class(
     sge_qsub = NULL,
     #' @field sge_qdel See [crew_launcher_sge()].
     sge_qdel = NULL,
+    #' @field sge_script_directory See [crew_launcher_sge()].
+    sge_script_directory = NULL,
     #' @field sge_cwd See [crew_launcher_sge()].
     sge_cwd = NULL,
     #' @field sge_envvars See [crew_launcher_sge()].
@@ -173,6 +185,7 @@ crew_class_launcher_sge <- R6::R6Class(
     #' @param garbage_collection See [crew_launcher_sge()].
     #' @param sge_qsub See [crew_launcher_sge()].
     #' @param sge_qdel See [crew_launcher_sge()].
+    #' @param sge_script_directory See [crew_launcher_sge()].
     #' @param sge_cwd See [crew_launcher_sge()].
     #' @param sge_envvars See [crew_launcher_sge()].
     #' @param sge_log_files See [crew_launcher_sge()].
@@ -199,6 +212,7 @@ crew_class_launcher_sge <- R6::R6Class(
       verbose = NULL,
       sge_qsub = NULL,
       sge_qdel = NULL,
+      sge_script_directory = NULL,
       sge_cwd = NULL,
       sge_envvars = NULL,
       sge_log_files = NULL,
@@ -227,6 +241,7 @@ crew_class_launcher_sge <- R6::R6Class(
       self$verbose <- verbose
       self$sge_qsub <- sge_qsub
       self$sge_qdel <- sge_qdel
+      self$sge_script_directory <- sge_script_directory
       self$sge_cwd <- sge_cwd
       self$sge_envvars <- sge_envvars
       self$sge_log_files <- sge_log_files
@@ -241,14 +256,14 @@ crew_class_launcher_sge <- R6::R6Class(
     #' @return `NULL` (invisibly). Throws an error if a field is invalid.
     validate = function() {
       super$validate()
-      fields <- c("sge_qsub", "sge_qdel")
+      fields <- c("sge_qsub", "sge_qdel", "sge_script_directory")
       for (field in fields) {
         crew::crew_assert(
           self[[field]],
           is.character(.),
           length(.) == 1L,
           !anyNA(.),
-          message = "sge_qdel and sge_qsub must be valid character strings."
+          message = paste(field, "must be a valid length-1 character string.")
         )
       }
       crew::crew_assert(
@@ -328,12 +343,18 @@ crew_class_launcher_sge <- R6::R6Class(
         paste("#$ -N", name),
         paste("R -e", shQuote(call))
       )
-      self$prefix <- self$prefix %|||% crew::crew_random_name()
+      if (is.null(self$prefix)) {
+        self$prefix <- crew::crew_random_name()
+        if (!file.exists(self$sge_script_directory)) {
+          dir.create(self$sge_script_directory)
+        }
+      }
       script <- name_script(
         prefix = self$prefix,
         launcher = launcher,
         worker = worker
       )
+      script <- file.path(self$sge_script_directory, script)
       writeLines(text = lines, con = script)
       system2(
         command = self$sge_qsub,
@@ -358,6 +379,7 @@ crew_class_launcher_sge <- R6::R6Class(
         launcher = handle$launcher,
         worker = handle$worker
       )
+      script <- file.path(self$sge_script_directory, script)
       unlink(script)
       name <- name_job(
         launcher = handle$launcher,
