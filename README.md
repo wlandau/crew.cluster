@@ -102,14 +102,32 @@ always be able to terminate leftover jobs. It is your responsibility to
 monitor your jobs an manually terminate jobs that `crew.cluster` may not
 be able to.
 
-## Code of Conduct
+# Thanks
+
+- [Charlie Gao](https://github.com/shikokuchuo) created
+  [`mirai`](https://github.com/shikokuchuo/mirai) and
+  [`nanonext`](https://github.com/shikokuchuo/nanonext) and graciously
+  accommodated the complicated and demanding feature requests that made
+  `crew` and its ecosystem possible.
+- Thanks to [Michael Schubert](https://github.com/mschubert) for sharing
+  the [template
+  files](https://github.com/mschubert/clustermq/tree/master/inst) in
+  [`clustermq`](https://github.com/mschubert/clustermq) with the
+  permissive [Apache License
+  2.0](https://github.com/mschubert/clustermq/blob/master/LICENSE).
+  These scripts helped construct launcher plugins to clusters where
+  direct access was not possible. See the
+  [`NOTICE`](https://github.com/wlandau/crew.cluster/blob/main/NOTICE)
+  file in this package.
+
+# Code of Conduct
 
 Please note that the `crew` project is released with a [Contributor Code
 of
 Conduct](https://github.com/wlandau/crew/blob/main/CODE_OF_CONDUCT.md).
 By contributing to this project, you agree to abide by its terms.
 
-## Citation
+# Citation
 
 ``` r
 citation("crew.cluster")

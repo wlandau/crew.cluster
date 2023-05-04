@@ -20,6 +20,7 @@
 #' @family help
 #' @importFrom crew crew_assert crew_class_launcher crew_launcher
 #'   crew_random_name
+#' @importFrom lifecycle badge
 #' @importFrom R6 R6Class
 #' @importFrom utils globalVariables
 NULL

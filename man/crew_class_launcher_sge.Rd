@@ -23,7 +23,9 @@ launcher$script()
 }
 \seealso{
 Other launchers: 
-\code{\link{crew_launcher_sge}()}
+\code{\link{crew_class_launcher_slurm}},
+\code{\link{crew_launcher_sge}()},
+\code{\link{crew_launcher_slurm}()}
 }
 \concept{launchers}
 \section{Super class}{
@@ -32,6 +34,8 @@ Other launchers:
 \section{Public fields}{
 \if{html}{\out{<div class="r6-fields">}}
 \describe{
+\item{\code{verbose}}{See \code{\link[=crew_launcher_sge]{crew_launcher_sge()}}.}
+
 \item{\code{sge_qsub}}{See \code{\link[=crew_launcher_sge]{crew_launcher_sge()}}.}
 
 \item{\code{sge_qdel}}{See \code{\link[=crew_launcher_sge]{crew_launcher_sge()}}.}
@@ -53,8 +57,6 @@ Other launchers:
 \item{\code{sge_gpu}}{See \code{\link[=crew_launcher_sge]{crew_launcher_sge()}}.}
 
 \item{\code{sge_lines}}{See \code{\link[=crew_launcher_sge]{crew_launcher_sge()}}.}
-
-\item{\code{verbose}}{See \code{\link[=crew_launcher_sge]{crew_launcher_sge()}}.}
 
 \item{\code{prefix}}{Unique prefix of worker scripts.}
 }
@@ -103,6 +105,7 @@ SGE launcher constructor.
   reset_packages = NULL,
   reset_options = NULL,
   garbage_collection = NULL,
+  verbose = NULL,
   sge_qsub = NULL,
   sge_qdel = NULL,
   sge_cwd = NULL,
@@ -113,8 +116,7 @@ SGE launcher constructor.
   sge_memory_gigabytes_limit = NULL,
   sge_cores = NULL,
   sge_gpu = NULL,
-  sge_lines = NULL,
-  verbose = NULL
+  sge_lines = NULL
 )}\if{html}{\out{</div>}}
 }
 
@@ -147,6 +149,8 @@ SGE launcher constructor.
 
 \item{\code{garbage_collection}}{See \code{\link[=crew_launcher_sge]{crew_launcher_sge()}}.}
 
+\item{\code{verbose}}{See \code{\link[=crew_launcher_sge]{crew_launcher_sge()}}.}
+
 \item{\code{sge_qsub}}{See \code{\link[=crew_launcher_sge]{crew_launcher_sge()}}.}
 
 \item{\code{sge_qdel}}{See \code{\link[=crew_launcher_sge]{crew_launcher_sge()}}.}
@@ -168,8 +172,6 @@ SGE launcher constructor.
 \item{\code{sge_gpu}}{See \code{\link[=crew_launcher_sge]{crew_launcher_sge()}}.}
 
 \item{\code{sge_lines}}{See \code{\link[=crew_launcher_sge]{crew_launcher_sge()}}.}
-
-\item{\code{verbose}}{See \code{\link[=crew_launcher_sge]{crew_launcher_sge()}}.}
 }
 \if{html}{\out{</div>}}
 }
@@ -263,8 +265,8 @@ Generate the job script.
 \subsection{Details}{
 Includes everything except the worker-instance-specific
 job name and the worker-instance-specific
-call to \code{crew::crew_worker()} at the very bottom, which gets
-inserted at launch time.
+call to \code{crew::crew_worker()}, both of which get inserted at
+the bottom of the script at launch time.
 }
 
 \subsection{Returns}{

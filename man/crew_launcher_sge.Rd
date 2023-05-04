@@ -2,7 +2,8 @@
 % Please edit documentation in R/crew_launcher_sge.R
 \name{crew_launcher_sge}
 \alias{crew_launcher_sge}
-\title{Create a launcher with Sun Grid Engine (SGE) workers.}
+\title{\code{lifecycle::badge("maturing")} Create a launcher with
+Sun Grid Engine (SGE) workers.}
 \usage{
 crew_launcher_sge(
   name = NULL,
@@ -18,6 +19,7 @@ crew_launcher_sge(
   reset_packages = FALSE,
   reset_options = FALSE,
   garbage_collection = FALSE,
+  verbose = FALSE,
   sge_qsub = as.character(Sys.which("qsub")),
   sge_qdel = as.character(Sys.which("qdel")),
   sge_cwd = TRUE,
@@ -28,8 +30,7 @@ crew_launcher_sge(
   sge_memory_gigabytes_limit = NULL,
   sge_cores = NULL,
   sge_gpu = NULL,
-  sge_lines = NULL,
-  verbose = FALSE
+  sge_lines = NULL
 )
 }
 \arguments{
@@ -91,6 +92,9 @@ because packages sometimes rely on options they set at loading time.}
 \item{garbage_collection}{\code{TRUE} to run garbage collection between
 tasks, \code{FALSE} to skip.}
 
+\item{verbose}{Logical, whether to see console output and error messages
+when submitting worker.}
+
 \item{sge_qsub}{Character of length 1, file path to the \code{qsub} executable
 used to submit \code{crew} workers as SGE jobs.}
 
@@ -146,9 +150,6 @@ request for the worker. \code{sge_gpu = 1} translates to a line of
 added to the SGE job script just after the more common flags.
 An example would be \code{sge_lines = "module load R"} if your SGE cluster
 supports R through an environment module.}
-
-\item{verbose}{Logical, whether to see console output and error messages
-when submitting worker.}
 }
 \description{
 Create an \code{R6} object to launch and maintain
@@ -166,6 +167,8 @@ to actually launch a worker.
 }
 \seealso{
 Other launchers: 
-\code{\link{crew_class_launcher_sge}}
+\code{\link{crew_class_launcher_sge}},
+\code{\link{crew_class_launcher_slurm}},
+\code{\link{crew_launcher_slurm}()}
 }
 \concept{launchers}

@@ -2,7 +2,8 @@
 % Please edit documentation in R/crew_controller_sge.R
 \name{crew_controller_sge}
 \alias{crew_controller_sge}
-\title{Create a controller with a Sun Grid Engine (SGE) launcher.}
+\title{\code{lifecycle::badge("maturing")} Create a controller with a
+Sun Grid Engine (SGE) launcher.}
 \usage{
 crew_controller_sge(
   name = NULL,
@@ -21,6 +22,7 @@ crew_controller_sge(
   reset_packages = FALSE,
   reset_options = FALSE,
   garbage_collection = FALSE,
+  verbose = FALSE,
   sge_qsub = as.character(Sys.which("qsub")),
   sge_qdel = as.character(Sys.which("qdel")),
   sge_cwd = TRUE,
@@ -32,7 +34,6 @@ crew_controller_sge(
   sge_cores = NULL,
   sge_gpu = NULL,
   sge_lines = NULL,
-  verbose = FALSE,
   auto_scale = "demand"
 )
 }
@@ -104,6 +105,9 @@ because packages sometimes rely on options they set at loading time.}
 \item{garbage_collection}{\code{TRUE} to run garbage collection between
 tasks, \code{FALSE} to skip.}
 
+\item{verbose}{Logical, whether to see console output and error messages
+when submitting worker.}
+
 \item{sge_qsub}{Character of length 1, file path to the \code{qsub} executable
 used to submit \code{crew} workers as SGE jobs.}
 
@@ -159,9 +163,6 @@ request for the worker. \code{sge_gpu = 1} translates to a line of
 added to the SGE job script just after the more common flags.
 An example would be \code{sge_lines = "module load R"} if your SGE cluster
 supports R through an environment module.}
-
-\item{verbose}{Logical, whether to see console output and error messages
-when submitting worker.}
 
 \item{auto_scale}{Character of length 1, name of the method for
 automatically scaling workers to meet demand. \code{NULL} to default to

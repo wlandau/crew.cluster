@@ -1,4 +1,5 @@
-#' @title Create a controller with a Sun Grid Engine (SGE) launcher.
+#' @title `lifecycle::badge("maturing")` Create a controller with a
+#'   Sun Grid Engine (SGE) launcher.
 #' @export
 #' @family controllers
 #' @description Create an `R6` object to submit tasks and
@@ -32,6 +33,7 @@ crew_controller_sge <- function(
   reset_packages = FALSE,
   reset_options = FALSE,
   garbage_collection = FALSE,
+  verbose = FALSE,
   sge_qsub = as.character(Sys.which("qsub")),
   sge_qdel = as.character(Sys.which("qdel")),
   sge_cwd = TRUE,
@@ -43,7 +45,6 @@ crew_controller_sge <- function(
   sge_cores = NULL,
   sge_gpu = NULL,
   sge_lines = NULL,
-  verbose = FALSE,
   auto_scale = "demand"
 ) {
   router <- crew::crew_router(
@@ -68,6 +69,7 @@ crew_controller_sge <- function(
     reset_packages = reset_packages,
     reset_options = reset_options,
     garbage_collection = garbage_collection,
+    verbose = verbose,
     sge_qsub = sge_qsub,
     sge_qdel = sge_qdel,
     sge_cwd = sge_cwd,
@@ -78,8 +80,7 @@ crew_controller_sge <- function(
     sge_memory_gigabytes_limit = sge_memory_gigabytes_limit,
     sge_cores = sge_cores,
     sge_gpu = sge_gpu,
-    sge_lines = sge_lines,
-    verbose = verbose
+    sge_lines = sge_lines
   )
   controller <- crew::crew_controller(
     router = router,

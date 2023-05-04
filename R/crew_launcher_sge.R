@@ -1,4 +1,5 @@
-#' @title Create a launcher with Sun Grid Engine (SGE) workers.
+#' @title `lifecycle::badge("maturing")` Create a launcher with
+#'   Sun Grid Engine (SGE) workers.
 #' @export
 #' @family launchers
 #' @description Create an `R6` object to launch and maintain
@@ -12,6 +13,8 @@
 #'   which will be inserted at the last minute when it is time
 #'   to actually launch a worker.
 #' @inheritParams crew::crew_launcher
+#' @param verbose Logical, whether to see console output and error messages
+#'   when submitting worker.
 #' @param sge_qsub Character of length 1, file path to the `qsub` executable
 #'   used to submit `crew` workers as SGE jobs.
 #' @param sge_qdel Character of length 1, file path to the `qdel` executable
@@ -57,8 +60,6 @@
 #'   added to the SGE job script just after the more common flags.
 #'   An example would be `sge_lines = "module load R"` if your SGE cluster
 #'   supports R through an environment module.
-#' @param verbose Logical, whether to see console output and error messages
-#'   when submitting worker.
 crew_launcher_sge <- function(
   name = NULL,
   seconds_launch = 60,
@@ -73,6 +74,7 @@ crew_launcher_sge <- function(
   reset_packages = FALSE,
   reset_options = FALSE,
   garbage_collection = FALSE,
+  verbose = FALSE,
   sge_qsub = as.character(Sys.which("qsub")),
   sge_qdel = as.character(Sys.which("qdel")),
   sge_cwd = TRUE,
@@ -83,8 +85,7 @@ crew_launcher_sge <- function(
   sge_memory_gigabytes_limit = NULL,
   sge_cores = NULL,
   sge_gpu = NULL,
-  sge_lines = NULL,
-  verbose = FALSE
+  sge_lines = NULL
 ) {
   name <- as.character(name %|||% crew::crew_random_name())
   launcher <- crew_class_launcher_sge$new(
@@ -101,6 +102,7 @@ crew_launcher_sge <- function(
     reset_packages = reset_packages,
     reset_options = reset_options,
     garbage_collection = garbage_collection,
+    verbose = verbose,
     sge_qsub = sge_qsub,
     sge_qdel = sge_qdel,
     sge_cwd = sge_cwd,
@@ -111,8 +113,7 @@ crew_launcher_sge <- function(
     sge_memory_gigabytes_limit = sge_memory_gigabytes_limit,
     sge_cores = sge_cores,
     sge_gpu = sge_gpu,
-    sge_lines = sge_lines,
-    verbose = verbose
+    sge_lines = sge_lines
   )
   launcher$validate()
   launcher
@@ -128,6 +129,8 @@ crew_class_launcher_sge <- R6::R6Class(
   inherit = crew::crew_class_launcher,
   cloneable = FALSE,
   public = list(
+    #' @field verbose See [crew_launcher_sge()].
+    verbose = NULL,
     #' @field sge_qsub See [crew_launcher_sge()].
     sge_qsub = NULL,
     #' @field sge_qdel See [crew_launcher_sge()].
@@ -150,13 +153,12 @@ crew_class_launcher_sge <- R6::R6Class(
     sge_gpu = NULL,
     #' @field sge_lines See [crew_launcher_sge()].
     sge_lines = NULL,
-    #' @field verbose See [crew_launcher_sge()].
-    verbose = NULL,
     #' @field prefix Unique prefix of worker scripts.
     prefix = NULL,
     #' @description SGE launcher constructor.
     #' @return an SGE launcher object.
     #' @param name See [crew_launcher_sge()].
+    #' @param verbose See [crew_launcher_sge()].
     #' @param seconds_launch See [crew_launcher_sge()].
     #' @param seconds_interval See [crew_launcher_sge()].
     #' @param seconds_timeout See [crew_launcher_sge()].
@@ -180,7 +182,6 @@ crew_class_launcher_sge <- R6::R6Class(
     #' @param sge_cores See [crew_launcher_sge()].
     #' @param sge_gpu See [crew_launcher_sge()].
     #' @param sge_lines See [crew_launcher_sge()].
-    #' @param verbose See [crew_launcher_sge()].
     initialize = function(
       name = NULL,
       seconds_launch = NULL,
@@ -195,6 +196,7 @@ crew_class_launcher_sge <- R6::R6Class(
       reset_packages = NULL,
       reset_options = NULL,
       garbage_collection = NULL,
+      verbose = NULL,
       sge_qsub = NULL,
       sge_qdel = NULL,
       sge_cwd = NULL,
@@ -205,8 +207,7 @@ crew_class_launcher_sge <- R6::R6Class(
       sge_memory_gigabytes_limit = NULL,
       sge_cores = NULL,
       sge_gpu = NULL,
-      sge_lines = NULL,
-      verbose = NULL
+      sge_lines = NULL
     ) {
       super$initialize(
         name = name,
@@ -223,6 +224,7 @@ crew_class_launcher_sge <- R6::R6Class(
         reset_options = reset_options,
         garbage_collection = garbage_collection
       )
+      self$verbose <- verbose
       self$sge_qsub <- sge_qsub
       self$sge_qdel <- sge_qdel
       self$sge_cwd <- sge_cwd
@@ -234,7 +236,6 @@ crew_class_launcher_sge <- R6::R6Class(
       self$sge_cores <- sge_cores
       self$sge_gpu <- sge_gpu
       self$sge_lines <- sge_lines
-      self$verbose <- verbose
     },
     #' @description Validate the launcher.
     #' @return `NULL` (invisibly). Throws an error if a field is invalid.
@@ -323,8 +324,8 @@ crew_class_launcher_sge <- R6::R6Class(
         instance = instance
       )
       lines <- c(
-        paste("#$ -N", name),
         self$script(),
+        paste("#$ -N", name),
         paste("R -e", shQuote(call))
       )
       self$prefix <- self$prefix %|||% crew::crew_random_name()
@@ -375,8 +376,8 @@ crew_class_launcher_sge <- R6::R6Class(
     #' @description Generate the job script.
     #' @details Includes everything except the worker-instance-specific
     #'   job name and the worker-instance-specific
-    #'   call to `crew::crew_worker()` at the very bottom, which gets
-    #'   inserted at launch time.
+    #'   call to `crew::crew_worker()`, both of which get inserted at
+    #'   the bottom of the script at launch time.
     #' @return Character vector of the lines of the job script.
     #' @examples
     #' launcher <- crew_launcher_sge(
