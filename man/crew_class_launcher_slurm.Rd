@@ -2,7 +2,7 @@
 % Please edit documentation in R/crew_launcher_slurm.R
 \name{crew_class_launcher_slurm}
 \alias{crew_class_launcher_slurm}
-\title{SLURM launcher class}
+\title{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}} SLURM launcher class}
 \description{
 \code{R6} class to launch and manage SLURM workers.
 }

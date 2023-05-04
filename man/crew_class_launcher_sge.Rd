@@ -2,7 +2,7 @@
 % Please edit documentation in R/crew_launcher_sge.R
 \name{crew_class_launcher_sge}
 \alias{crew_class_launcher_sge}
-\title{SGE launcher class}
+\title{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#maturing}{\figure{lifecycle-maturing.svg}{options: alt='[Maturing]'}}}{\strong{[Maturing]}} SGE launcher class}
 \description{
 \code{R6} class to launch and manage SGE workers.
 }

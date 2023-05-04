@@ -2,7 +2,7 @@
 % Please edit documentation in R/crew_launcher_cluster.R
 \name{crew_class_launcher_cluster}
 \alias{crew_class_launcher_cluster}
-\title{Abstract cluster launcher class}
+\title{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#maturing}{\figure{lifecycle-maturing.svg}{options: alt='[Maturing]'}}}{\strong{[Maturing]}} Abstract cluster launcher class}
 \description{
 \code{R6} class to help develop specific cluster launcher plugins.
 }

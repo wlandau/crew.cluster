@@ -96,7 +96,7 @@ crew_launcher_slurm <- function(
   launcher
 }
 
-#' @title SLURM launcher class
+#' @title `r lifecycle::badge("experimental")` SLURM launcher class
 #' @export
 #' @family launchers
 #' @description `R6` class to launch and manage SLURM workers.

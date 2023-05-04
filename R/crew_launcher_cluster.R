@@ -69,7 +69,7 @@ crew_launcher_cluster <- function(
   launcher
 }
 
-#' @title Abstract cluster launcher class
+#' @title `r lifecycle::badge("maturing")` Abstract cluster launcher class
 #' @export
 #' @family launchers
 #' @description `R6` class to help develop specific cluster launcher plugins.

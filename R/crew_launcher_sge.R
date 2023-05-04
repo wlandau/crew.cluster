@@ -111,7 +111,7 @@ crew_launcher_sge <- function(
   launcher
 }
 
-#' @title SGE launcher class
+#' @title `r lifecycle::badge("maturing")` SGE launcher class
 #' @export
 #' @family launchers
 #' @description `R6` class to launch and manage SGE workers.
