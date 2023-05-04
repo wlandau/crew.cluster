@@ -60,29 +60,19 @@
     <div id="see-also">
     <h2>See also</h2>
     <div class="dont-index"><p>Other launchers: 
+<code><a href="crew_class_launcher_cluster.html">crew_class_launcher_cluster</a></code>,
 <code><a href="crew_class_launcher_sge.html">crew_class_launcher_sge</a></code>,
+<code><a href="crew_launcher_cluster.html">crew_launcher_cluster</a>()</code>,
 <code><a href="crew_launcher_sge.html">crew_launcher_sge</a>()</code>,
 <code><a href="crew_launcher_slurm.html">crew_launcher_slurm</a>()</code></p></div>
     </div>
-    <div id="super-class">
-    <h2>Super class</h2>
-    <p><code><a href="https://wlandau.github.io/crew/reference/crew_class_launcher.html" class="external-link">crew::crew_class_launcher</a></code> -&gt; <code>crew_class_launcher_slurm</code></p>
+    <div id="super-classes">
+    <h2>Super classes</h2>
+    <p><code><a href="https://wlandau.github.io/crew/reference/crew_class_launcher.html" class="external-link">crew::crew_class_launcher</a></code> -&gt; <code><a href="crew_class_launcher_cluster.html">crew.cluster::crew_class_launcher_cluster</a></code> -&gt; <code>crew_class_launcher_slurm</code></p>
     </div>
     <div id="public-fields">
     <h2>Public fields</h2>
-    <p></p><div class="r6-fields"><dl><dt><code>verbose</code></dt>
-<dd><p>See <code><a href="crew_launcher_slurm.html">crew_launcher_slurm()</a></code>.</p></dd>
-
-
-<dt><code>slurm_sbatch</code></dt>
-<dd><p>See <code><a href="crew_launcher_slurm.html">crew_launcher_slurm()</a></code>.</p></dd>
-
-
-<dt><code>slurm_scancel</code></dt>
-<dd><p>See <code><a href="crew_launcher_slurm.html">crew_launcher_slurm()</a></code>.</p></dd>
-
-
-<dt><code>slurm_log_output</code></dt>
+    <p></p><div class="r6-fields"><dl><dt><code>slurm_log_output</code></dt>
 <dd><p>See <code><a href="crew_launcher_slurm.html">crew_launcher_slurm()</a></code>.</p></dd>
 
 
@@ -98,14 +88,6 @@
 <dd><p>See <code><a href="crew_launcher_slurm.html">crew_launcher_slurm()</a></code>.</p></dd>
 
 
-<dt><code>slurm_lines</code></dt>
-<dd><p>See <code><a href="crew_launcher_slurm.html">crew_launcher_slurm()</a></code>.</p></dd>
-
-
-<dt><code>prefix</code></dt>
-<dd><p>Unique prefix of worker scripts.</p></dd>
-
-
 </dl><p></p></div>
     </div>
     <div id="methods">
@@ -116,8 +98,6 @@
 
 <ul><li><p><a href="#method-crew_class_launcher_slurm-new"><code>crew_class_launcher_slurm$new()</code></a></p></li>
 <li><p><a href="#method-crew_class_launcher_slurm-validate"><code>crew_class_launcher_slurm$validate()</code></a></p></li>
-<li><p><a href="#method-crew_class_launcher_slurm-launch_worker"><code>crew_class_launcher_slurm$launch_worker()</code></a></p></li>
-<li><p><a href="#method-crew_class_launcher_slurm-terminate_worker"><code>crew_class_launcher_slurm$terminate_worker()</code></a></p></li>
 <li><p><a href="#method-crew_class_launcher_slurm-script"><code>crew_class_launcher_slurm$script()</code></a></p></li>
 </ul></div><p><details><summary>Inherited methods</summary><ul><li><span class="pkg-link" data-pkg="crew" data-topic="crew_class_launcher" data-id="call"><a href="https://wlandau.github.io/crew/reference/crew_class_launcher.html#method-call"><code>crew::crew_class_launcher$call()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="crew" data-topic="crew_class_launcher" data-id="expected"><a href="https://wlandau.github.io/crew/reference/crew_class_launcher.html#method-expected"><code>crew::crew_class_launcher$expected()</code></a></span></li>
@@ -126,6 +106,8 @@
 <li><span class="pkg-link" data-pkg="crew" data-topic="crew_class_launcher" data-id="settings"><a href="https://wlandau.github.io/crew/reference/crew_class_launcher.html#method-settings"><code>crew::crew_class_launcher$settings()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="crew" data-topic="crew_class_launcher" data-id="start"><a href="https://wlandau.github.io/crew/reference/crew_class_launcher.html#method-start"><code>crew::crew_class_launcher$start()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="crew" data-topic="crew_class_launcher" data-id="terminate"><a href="https://wlandau.github.io/crew/reference/crew_class_launcher.html#method-terminate"><code>crew::crew_class_launcher$terminate()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="crew.cluster" data-topic="crew_class_launcher_cluster" data-id="launch_worker"><a href="crew_class_launcher_cluster.html#method-launch_worker"><code>crew.cluster::crew_class_launcher_cluster$launch_worker()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="crew.cluster" data-topic="crew_class_launcher_cluster" data-id="terminate_worker"><a href="crew_class_launcher_cluster.html#method-terminate_worker"><code>crew.cluster::crew_class_launcher_cluster$terminate_worker()</code></a></span></li>
 </ul></details></p><hr><a id="method-crew_class_launcher_slurm-new"></a><div class="section">
 <h3 id="method-new-">Method <code>new()</code><a class="anchor" aria-label="anchor" href="#method-new-"></a></h3>
 <p>SLURM launcher constructor.</p><div class="section">
@@ -145,13 +127,14 @@
 <span>  reset_options <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  garbage_collection <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  verbose <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  slurm_sbatch <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  slurm_scancel <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  command_submit <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  command_delete <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  script_directory <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  script_lines <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  slurm_log_output <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  slurm_log_error <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  slurm_memory_megabytes_per_cpu <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  slurm_cpus_per_task <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  slurm_lines <span class="op">=</span> <span class="cn">NULL</span></span>
+<span>  slurm_cpus_per_task <span class="op">=</span> <span class="cn">NULL</span></span>
 <span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
@@ -213,12 +196,20 @@
 <dd><p>See <code><a href="crew_launcher_slurm.html">crew_launcher_slurm()</a></code>.</p></dd>
 
 
-<dt><code>slurm_sbatch</code></dt>
-<dd><p>See <code><a href="crew_launcher_slurm.html">crew_launcher_slurm()</a></code>.</p></dd>
+<dt><code>command_submit</code></dt>
+<dd><p>See <code><a href="crew_launcher_sge.html">crew_launcher_sge()</a></code>.</p></dd>
 
 
-<dt><code>slurm_scancel</code></dt>
-<dd><p>See <code><a href="crew_launcher_slurm.html">crew_launcher_slurm()</a></code>.</p></dd>
+<dt><code>command_delete</code></dt>
+<dd><p>See <code><a href="crew_launcher_sge.html">crew_launcher_sge()</a></code>.</p></dd>
+
+
+<dt><code>script_directory</code></dt>
+<dd><p>See <code><a href="crew_launcher_sge.html">crew_launcher_sge()</a></code>.</p></dd>
+
+
+<dt><code>script_lines</code></dt>
+<dd><p>See <code><a href="crew_launcher_sge.html">crew_launcher_sge()</a></code>.</p></dd>
 
 
 <dt><code>slurm_log_output</code></dt>
@@ -234,10 +225,6 @@
 
 
 <dt><code>slurm_cpus_per_task</code></dt>
-<dd><p>See <code><a href="crew_launcher_slurm.html">crew_launcher_slurm()</a></code>.</p></dd>
-
-
-<dt><code>slurm_lines</code></dt>
 <dd><p>See <code><a href="crew_launcher_slurm.html">crew_launcher_slurm()</a></code>.</p></dd>
 
 
@@ -260,83 +247,24 @@
 <p><code>NULL</code> (invisibly). Throws an error if a field is invalid.</p>
 </div>
 
-</div><p></p><hr><a id="method-crew_class_launcher_slurm-launch_worker"></a><div class="section">
-<h3 id="method-launch-worker-">Method <code>launch_worker()</code><a class="anchor" aria-label="anchor" href="#method-launch-worker-"></a></h3>
-<p>Launch a local process worker which will
-dial into a socket.</p><div class="section">
+</div><p></p><hr><a id="method-crew_class_launcher_slurm-script"></a><div class="section">
+<h3 id="method-script-">Method <code>script()</code><a class="anchor" aria-label="anchor" href="#method-script-"></a></h3>
+<p>Generate the job script.</p><div class="section">
 <h4 id="usage-2">Usage<a class="anchor" aria-label="anchor" href="#usage-2"></a></h4>
-<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">crew_class_launcher_slurm</span><span class="op">$</span><span class="fu">launch_worker</span><span class="op">(</span><span class="va">call</span>, <span class="va">launcher</span>, <span class="va">worker</span>, <span class="va">instance</span><span class="op">)</span></span></code></pre></div><p></p></div>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">crew_class_launcher_slurm</span><span class="op">$</span><span class="fu">script</span><span class="op">(</span><span class="va">name</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
 <h4 id="arguments-1">Arguments<a class="anchor" aria-label="anchor" href="#arguments-1"></a></h4>
-<p></p><div class="arguments"><dl><dt><code>call</code></dt>
-<dd><p>Text string with a namespaced call to <code>crew_worker()</code>
-which will run in the worker and accept tasks.</p></dd>
-
-
-<dt><code>launcher</code></dt>
-<dd><p>Character of length 1, name of the launcher.</p></dd>
-
-
-<dt><code>worker</code></dt>
-<dd><p>Positive integer of length 1, index of the worker.
-This worker index remains the same even when the current instance
-of the worker exits and a new instance launches.
-It is always between 1 and the maximum number of concurrent workers.</p></dd>
-
-
-<dt><code>instance</code></dt>
-<dd><p>Character of length 1 to uniquely identify
-the current instance of the worker.</p></dd>
+<p></p><div class="arguments"><dl><dt><code>name</code></dt>
+<dd><p>Character of length 1, name of the job. For inspection
+purposes, you can supply a mock job name.</p></dd>
 
 
 </dl><p></p></div>
 </div>
 <div class="section">
 <h4 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h4>
-<p>The <code>call</code> argument is R code that will run to
-initiate the worker. Together, the <code>launcher</code>, <code>worker</code>,
-and <code>instance</code> arguments are useful for
-constructing informative job names.</p>
-</div>
-
-<div class="section">
-<h4 id="returns-2">Returns<a class="anchor" aria-label="anchor" href="#returns-2"></a></h4>
-<p>A handle object to allow the termination of the worker
-later on.</p>
-</div>
-
-</div><p></p><hr><a id="method-crew_class_launcher_slurm-terminate_worker"></a><div class="section">
-<h3 id="method-terminate-worker-">Method <code>terminate_worker()</code><a class="anchor" aria-label="anchor" href="#method-terminate-worker-"></a></h3>
-<p>Terminate a local process worker.</p><div class="section">
-<h4 id="usage-3">Usage<a class="anchor" aria-label="anchor" href="#usage-3"></a></h4>
-<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">crew_class_launcher_slurm</span><span class="op">$</span><span class="fu">terminate_worker</span><span class="op">(</span><span class="va">handle</span><span class="op">)</span></span></code></pre></div><p></p></div>
-</div>
-
-<div class="section">
-<h4 id="arguments-2">Arguments<a class="anchor" aria-label="anchor" href="#arguments-2"></a></h4>
-<p></p><div class="arguments"><dl><dt><code>handle</code></dt>
-<dd><p>A process handle object previously
-returned by <code>launch_worker()</code>.</p></dd>
-
-
-</dl><p></p></div>
-</div>
-<div class="section">
-<h4 id="returns-3">Returns<a class="anchor" aria-label="anchor" href="#returns-3"></a></h4>
-<p><code>NULL</code> (invisibly).</p>
-</div>
-
-</div><p></p><hr><a id="method-crew_class_launcher_slurm-script"></a><div class="section">
-<h3 id="method-script-">Method <code>script()</code><a class="anchor" aria-label="anchor" href="#method-script-"></a></h3>
-<p>Generate the job script.</p><div class="section">
-<h4 id="usage-4">Usage<a class="anchor" aria-label="anchor" href="#usage-4"></a></h4>
-<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">crew_class_launcher_slurm</span><span class="op">$</span><span class="fu">script</span><span class="op">(</span><span class="op">)</span></span></code></pre></div><p></p></div>
-</div>
-
-<div class="section">
-<h4 id="details-1">Details<a class="anchor" aria-label="anchor" href="#details-1"></a></h4>
 <p>Includes everything except the worker-instance-specific
 job name and the worker-instance-specific
 call to <code><a href="https://wlandau.github.io/crew/reference/crew_worker.html" class="external-link">crew::crew_worker()</a></code>, both of which get inserted at
@@ -344,7 +272,7 @@ the bottom of the script at launch time.</p>
 </div>
 
 <div class="section">
-<h4 id="returns-4">Returns<a class="anchor" aria-label="anchor" href="#returns-4"></a></h4>
+<h4 id="returns-2">Returns<a class="anchor" aria-label="anchor" href="#returns-2"></a></h4>
 <p>Character vector of the lines of the job script.</p>
 </div>
 <div class="section">
@@ -354,7 +282,7 @@ the bottom of the script at launch time.</p>
 <span>  slurm_log_error <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  slurm_memory_megabytes_per_cpu <span class="op">=</span> <span class="fl">4096</span></span>
 <span><span class="op">)</span></span>
-<span><span class="va">launcher</span><span class="op">$</span><span class="fu">script</span><span class="op">(</span><span class="op">)</span></span></code></pre></div><p></p></div>
+<span><span class="va">launcher</span><span class="op">$</span><span class="fu">script</span><span class="op">(</span>name <span class="op">=</span> <span class="st">"my_job_name"</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 
@@ -374,9 +302,9 @@ the bottom of the script at launch time.</p>
 <span class="r-in"><span>  slurm_log_error <span class="op">=</span> <span class="cn">NULL</span>,</span></span>
 <span class="r-in"><span>  slurm_memory_megabytes_per_cpu <span class="op">=</span> <span class="fl">4096</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="va">launcher</span><span class="op">$</span><span class="fu">script</span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "#!/bin/sh"                        "$SBATCH --output=log_file_%A.log"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [3] "$SBATCH --mem-per-cpu=4096"      </span>
+<span class="r-in"><span><span class="va">launcher</span><span class="op">$</span><span class="fu">script</span><span class="op">(</span>name <span class="op">=</span> <span class="st">"my_job_name"</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "#!/bin/sh"                        "#SBATCH --job-name=my_job_name"  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [3] "#SBATCH --output=log_file_%A.log" "#SBATCH --mem-per-cpu=4096"      </span>
 </code></pre></div>
     </div>
   </div>

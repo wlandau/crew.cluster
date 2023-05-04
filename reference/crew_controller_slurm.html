@@ -76,13 +76,14 @@ launch workers on SLURM workers.</p>
 <span>  reset_options <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  garbage_collection <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  verbose <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span>  slurm_sbatch <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Sys.which.html" class="external-link">Sys.which</a></span><span class="op">(</span><span class="st">"sbatch"</span><span class="op">)</span><span class="op">)</span>,</span>
-<span>  slurm_scancel <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Sys.which.html" class="external-link">Sys.which</a></span><span class="op">(</span><span class="st">"scancel"</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>  command_submit <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Sys.which.html" class="external-link">Sys.which</a></span><span class="op">(</span><span class="st">"sbatch"</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>  command_delete <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Sys.which.html" class="external-link">Sys.which</a></span><span class="op">(</span><span class="st">"scancel"</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>  script_directory <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  script_lines <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">character</a></span><span class="op">(</span><span class="fl">0L</span><span class="op">)</span>,</span>
 <span>  slurm_log_output <span class="op">=</span> <span class="st">"/dev/null"</span>,</span>
 <span>  slurm_log_error <span class="op">=</span> <span class="st">"/dev/null"</span>,</span>
 <span>  slurm_memory_megabytes_per_cpu <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  slurm_cpus_per_task <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  slurm_lines <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  auto_scale <span class="op">=</span> <span class="st">"demand"</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -193,16 +194,27 @@ tasks, <code>FALSE</code> to skip.</p></dd>
 when submitting worker.</p></dd>
 
 
-<dt>slurm_sbatch</dt>
+<dt>command_submit</dt>
 <dd><p>Character of length 1,
-file path to the <code>sbatch</code> executable
-used to submit <code>crew</code> workers as SLURM jobs.</p></dd>
+file path to the executable to delete a worker job.</p></dd>
 
 
-<dt>slurm_scancel</dt>
-<dd><p>Character of length 1,
-file path to the <code>scancel</code> executable
-used to delete the SLURM jobs running <code>crew</code> workers.</p></dd>
+<dt>script_directory</dt>
+<dd><p>Character of length 1, directory path to the
+job scripts. Just before each job submission, a job script
+is created in this folder. Script base names are unique to each
+launcher and worker, and the launcher deletes the script when the
+worker is manually terminated. <code><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir()</a></code> is the default, but it
+might not work for some systems.
+<code>tools::R_user_dir("crew.cluster", which = "cache")</code>
+is another reasonable choice.</p></dd>
+
+
+<dt>script_lines</dt>
+<dd><p>Optional character vector of additional lines to be
+added to the job script just after the more common flags.
+An example would be <code>script_lines = "module load R"</code> if your cluster
+supports R through an environment module.</p></dd>
 
 
 <dt>slurm_log_output</dt>
@@ -240,13 +252,6 @@ number of CPUs for the worker.
 <code>slurm_cpus_per_task = 4</code> translates
 to a line of <code>#SBATCH --cpus-per-task=4</code> in the SLURM job script.
 <code>slurm_cpus_per_task = NULL</code> omits this line.</p></dd>
-
-
-<dt>slurm_lines</dt>
-<dd><p>Optional character vector of additional lines to be
-added to the SLURM job script just after the more common flags.
-An example would be <code>slurm_lines = "module load R"</code> if your SLURM cluster
-supports R through an environment module.</p></dd>
 
 
 <dt>auto_scale</dt>

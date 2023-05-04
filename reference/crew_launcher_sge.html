@@ -73,9 +73,10 @@ workers as Sun Grid Engine (SGE) jobs.</p>
 <span>  reset_options <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  garbage_collection <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  verbose <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span>  sge_qsub <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Sys.which.html" class="external-link">Sys.which</a></span><span class="op">(</span><span class="st">"qsub"</span><span class="op">)</span><span class="op">)</span>,</span>
-<span>  sge_qdel <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Sys.which.html" class="external-link">Sys.which</a></span><span class="op">(</span><span class="st">"qdel"</span><span class="op">)</span><span class="op">)</span>,</span>
-<span>  sge_script_dir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  command_submit <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Sys.which.html" class="external-link">Sys.which</a></span><span class="op">(</span><span class="st">"qsub"</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>  command_delete <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Sys.which.html" class="external-link">Sys.which</a></span><span class="op">(</span><span class="st">"qdel"</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>  script_directory <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  script_lines <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">character</a></span><span class="op">(</span><span class="fl">0L</span><span class="op">)</span>,</span>
 <span>  sge_cwd <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  sge_envvars <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  sge_log_files <span class="op">=</span> <span class="st">"/dev/null"</span>,</span>
@@ -83,8 +84,7 @@ workers as Sun Grid Engine (SGE) jobs.</p>
 <span>  sge_memory_gigabytes_required <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  sge_memory_gigabytes_limit <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  sge_cores <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  sge_gpu <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  sge_lines <span class="op">=</span> <span class="cn">NULL</span></span>
+<span>  sge_gpu <span class="op">=</span> <span class="cn">NULL</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -179,25 +179,27 @@ tasks, <code>FALSE</code> to skip.</p></dd>
 when submitting worker.</p></dd>
 
 
-<dt>sge_qsub</dt>
-<dd><p>Character of length 1, file path to the <code>qsub</code> executable
-used to submit <code>crew</code> workers as SGE jobs.</p></dd>
+<dt>command_submit</dt>
+<dd><p>Character of length 1,
+file path to the executable to delete a worker job.</p></dd>
 
 
-<dt>sge_qdel</dt>
-<dd><p>Character of length 1, file path to the <code>qdel</code> executable
-used to delete the SGE jobs running <code>crew</code> workers.</p></dd>
-
-
-<dt>sge_script_dir</dt>
+<dt>script_directory</dt>
 <dd><p>Character of length 1, directory path to the
-SGE job scripts. Just before each job submission, a job script
+job scripts. Just before each job submission, a job script
 is created in this folder. Script base names are unique to each
 launcher and worker, and the launcher deletes the script when the
 worker is manually terminated. <code><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir()</a></code> is the default, but it
 might not work for some systems.
 <code>tools::R_user_dir("crew.cluster", which = "cache")</code>
 is another reasonable choice.</p></dd>
+
+
+<dt>script_lines</dt>
+<dd><p>Optional character vector of additional lines to be
+added to the job script just after the more common flags.
+An example would be <code>script_lines = "module load R"</code> if your cluster
+supports R through an environment module.</p></dd>
 
 
 <dt>sge_cwd</dt>
@@ -260,13 +262,6 @@ to a line of <code>#$ -pe smp 4</code> in the SGE job script.
 request for the worker. <code>sge_gpu = 1</code> translates to a line of
 <code>"#$ -l gpu=1"</code> in the SGE job script. <code>sge_gpu = NULL</code> omits this line.</p></dd>
 
-
-<dt>sge_lines</dt>
-<dd><p>Optional character vector of additional lines to be
-added to the SGE job script just after the more common flags.
-An example would be <code>sge_lines = "module load R"</code> if your SGE cluster
-supports R through an environment module.</p></dd>
-
 </dl></div>
     <div id="details">
     <h2>Details</h2>
@@ -282,8 +277,10 @@ to actually launch a worker.</p>
     <div id="see-also">
     <h2>See also</h2>
     <div class="dont-index"><p>Other launchers: 
+<code><a href="crew_class_launcher_cluster.html">crew_class_launcher_cluster</a></code>,
 <code><a href="crew_class_launcher_sge.html">crew_class_launcher_sge</a></code>,
 <code><a href="crew_class_launcher_slurm.html">crew_class_launcher_slurm</a></code>,
+<code><a href="crew_launcher_cluster.html">crew_launcher_cluster</a>()</code>,
 <code><a href="crew_launcher_slurm.html">crew_launcher_slurm</a>()</code></p></div>
     </div>
 
