@@ -4,7 +4,7 @@ controller <- crew_controller_slurm(
   name = "my_workflow",
   workers = 1L,
   seconds_idle = 300,
-  slurm_lines = paste0("module load R/", getRversion()),
+  script_lines = paste0("module load R/", getRversion()),
   verbose = TRUE
 )
 controller$start()
