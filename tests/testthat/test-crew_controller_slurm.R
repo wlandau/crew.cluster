@@ -23,7 +23,7 @@ test_that("crew_launcher_slurm() script() all lines", {
     "$SBATCH --error=log2",
     "$SBATCH --mem-per-cpu=2096",
     "$SBATCH --cpus-per-task=2",
-    "module load R", 
+    "module load R",
     "echo 'start'"
   )
   expect_equal(out, exp)

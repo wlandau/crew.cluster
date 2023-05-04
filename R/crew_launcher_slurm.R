@@ -215,7 +215,7 @@ crew_class_launcher_slurm <- R6::R6Class(
           is.character(.),
           length(.) == 1L,
           !anyNA(.),
-          message = "slurm_scancel and slurm_sbatch must be valid character strings."
+          message = paste(field, "must be a valid character string.")
         )
       }
       fields <- c("slurm_log_output", "slurm_log_error")
