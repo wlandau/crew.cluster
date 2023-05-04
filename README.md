@@ -46,7 +46,7 @@ controller <- crew_controller_sge(
   workers = 16,
   tasks_max = 2, # to avoid reaching wall time limits
   seconds_idle = 10, # to release resources when they are not needed
-  sge_lines = "module load R" # if R is an environment module
+  script_lines = "module load R" # if R is an environment module
 )
 controller$start()
 ```
@@ -86,7 +86,7 @@ controller$terminate()
   modules. Most likely, you will need to call `module load R` (or
   `module load R/x.y.z` for a specific version) in order to use on the
   cluster. In `crew.cluster`, you will most likely need to supply
-  `"module load R"` or similar to the `sge_lines` argument of
+  `"module load R"` or similar to the `script_lines` argument of
   e.g. `crew_controller_sge()`.
 
 # Risks
