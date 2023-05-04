@@ -19,7 +19,7 @@ launcher <- crew_launcher_sge(
   sge_cores = 2,
   sge_memory_gigabytes_required = 4
 )
-launcher$script()
+launcher$script(name)
 }
 \seealso{
 Other launchers: 
@@ -36,14 +36,6 @@ Other launchers:
 \section{Public fields}{
 \if{html}{\out{<div class="r6-fields">}}
 \describe{
-\item{\code{verbose}}{See \code{\link[=crew_launcher_sge]{crew_launcher_sge()}}.}
-
-\item{\code{sge_qsub}}{See \code{\link[=crew_launcher_sge]{crew_launcher_sge()}}.}
-
-\item{\code{sge_qdel}}{See \code{\link[=crew_launcher_sge]{crew_launcher_sge()}}.}
-
-\item{\code{sge_script_dir}}{See \code{\link[=crew_launcher_sge]{crew_launcher_sge()}}.}
-
 \item{\code{sge_cwd}}{See \code{\link[=crew_launcher_sge]{crew_launcher_sge()}}.}
 
 \item{\code{sge_envvars}}{See \code{\link[=crew_launcher_sge]{crew_launcher_sge()}}.}
@@ -59,10 +51,6 @@ Other launchers:
 \item{\code{sge_cores}}{See \code{\link[=crew_launcher_sge]{crew_launcher_sge()}}.}
 
 \item{\code{sge_gpu}}{See \code{\link[=crew_launcher_sge]{crew_launcher_sge()}}.}
-
-\item{\code{sge_lines}}{See \code{\link[=crew_launcher_sge]{crew_launcher_sge()}}.}
-
-\item{\code{prefix}}{Unique prefix of worker scripts.}
 }
 \if{html}{\out{</div>}}
 }
@@ -71,8 +59,6 @@ Other launchers:
 \itemize{
 \item \href{#method-crew_class_launcher_sge-new}{\code{crew_class_launcher_sge$new()}}
 \item \href{#method-crew_class_launcher_sge-validate}{\code{crew_class_launcher_sge$validate()}}
-\item \href{#method-crew_class_launcher_sge-launch_worker}{\code{crew_class_launcher_sge$launch_worker()}}
-\item \href{#method-crew_class_launcher_sge-terminate_worker}{\code{crew_class_launcher_sge$terminate_worker()}}
 \item \href{#method-crew_class_launcher_sge-script}{\code{crew_class_launcher_sge$script()}}
 }
 }
@@ -86,6 +72,7 @@ Other launchers:
 <li><span class="pkg-link" data-pkg="crew" data-topic="crew_class_launcher" data-id="settings"><a href='../../crew/html/crew_class_launcher.html#method-crew_class_launcher-settings'><code>crew::crew_class_launcher$settings()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="crew" data-topic="crew_class_launcher" data-id="start"><a href='../../crew/html/crew_class_launcher.html#method-crew_class_launcher-start'><code>crew::crew_class_launcher$start()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="crew" data-topic="crew_class_launcher" data-id="terminate"><a href='../../crew/html/crew_class_launcher.html#method-crew_class_launcher-terminate'><code>crew::crew_class_launcher$terminate()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="crew" data-topic="crew_class_launcher" data-id="terminate_worker"><a href='../../crew/html/crew_class_launcher.html#method-crew_class_launcher-terminate_worker'><code>crew::crew_class_launcher$terminate_worker()</code></a></span></li>
 </ul>
 </details>
 }}
@@ -110,9 +97,10 @@ SGE launcher constructor.
   reset_options = NULL,
   garbage_collection = NULL,
   verbose = NULL,
-  sge_qsub = NULL,
-  sge_qdel = NULL,
-  sge_script_dir = NULL,
+  command_submit = NULL,
+  command_delete = NULL,
+  script_directory = NULL,
+  script_lines = NULL,
   sge_cwd = NULL,
   sge_envvars = NULL,
   sge_log_files = NULL,
@@ -120,8 +108,7 @@ SGE launcher constructor.
   sge_memory_gigabytes_required = NULL,
   sge_memory_gigabytes_limit = NULL,
   sge_cores = NULL,
-  sge_gpu = NULL,
-  sge_lines = NULL
+  sge_gpu = NULL
 )}\if{html}{\out{</div>}}
 }
 
@@ -156,11 +143,13 @@ SGE launcher constructor.
 
 \item{\code{verbose}}{See \code{\link[=crew_launcher_sge]{crew_launcher_sge()}}.}
 
-\item{\code{sge_qsub}}{See \code{\link[=crew_launcher_sge]{crew_launcher_sge()}}.}
+\item{\code{command_submit}}{See \code{\link[=crew_launcher_sge]{crew_launcher_sge()}}.}
 
-\item{\code{sge_qdel}}{See \code{\link[=crew_launcher_sge]{crew_launcher_sge()}}.}
+\item{\code{command_delete}}{See \code{\link[=crew_launcher_sge]{crew_launcher_sge()}}.}
 
-\item{\code{sge_script_dir}}{See \code{\link[=crew_launcher_sge]{crew_launcher_sge()}}.}
+\item{\code{script_directory}}{See \code{\link[=crew_launcher_sge]{crew_launcher_sge()}}.}
+
+\item{\code{script_lines}}{See \code{\link[=crew_launcher_sge]{crew_launcher_sge()}}.}
 
 \item{\code{sge_cwd}}{See \code{\link[=crew_launcher_sge]{crew_launcher_sge()}}.}
 
@@ -177,8 +166,6 @@ SGE launcher constructor.
 \item{\code{sge_cores}}{See \code{\link[=crew_launcher_sge]{crew_launcher_sge()}}.}
 
 \item{\code{sge_gpu}}{See \code{\link[=crew_launcher_sge]{crew_launcher_sge()}}.}
-
-\item{\code{sge_lines}}{See \code{\link[=crew_launcher_sge]{crew_launcher_sge()}}.}
 }
 \if{html}{\out{</div>}}
 }
@@ -200,75 +187,22 @@ Validate the launcher.
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-crew_class_launcher_sge-launch_worker"></a>}}
-\if{latex}{\out{\hypertarget{method-crew_class_launcher_sge-launch_worker}{}}}
-\subsection{Method \code{launch_worker()}}{
-Launch a local process worker which will
-dial into a socket.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{crew_class_launcher_sge$launch_worker(call, launcher, worker, instance)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{call}}{Text string with a namespaced call to \code{\link[=crew_worker]{crew_worker()}}
-which will run in the worker and accept tasks.}
-
-\item{\code{launcher}}{Character of length 1, name of the launcher.}
-
-\item{\code{worker}}{Positive integer of length 1, index of the worker.
-This worker index remains the same even when the current instance
-of the worker exits and a new instance launches.
-It is always between 1 and the maximum number of concurrent workers.}
-
-\item{\code{instance}}{Character of length 1 to uniquely identify
-the current instance of the worker.}
-}
-\if{html}{\out{</div>}}
-}
-\subsection{Details}{
-The \code{call} argument is R code that will run to
-initiate the worker. Together, the \code{launcher}, \code{worker},
-and \code{instance} arguments are useful for
-constructing informative job names.
-}
-
-\subsection{Returns}{
-A handle object to allow the termination of the worker
-later on.
-}
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-crew_class_launcher_sge-terminate_worker"></a>}}
-\if{latex}{\out{\hypertarget{method-crew_class_launcher_sge-terminate_worker}{}}}
-\subsection{Method \code{terminate_worker()}}{
-Terminate a local process worker.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{crew_class_launcher_sge$terminate_worker(handle)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{handle}}{A process handle object previously
-returned by \code{launch_worker()}.}
-}
-\if{html}{\out{</div>}}
-}
-\subsection{Returns}{
-\code{NULL} (invisibly).
-}
-}
-\if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-crew_class_launcher_sge-script"></a>}}
 \if{latex}{\out{\hypertarget{method-crew_class_launcher_sge-script}{}}}
 \subsection{Method \code{script()}}{
 Generate the job script.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{crew_class_launcher_sge$script()}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{crew_class_launcher_sge$script(name)}\if{html}{\out{</div>}}
 }
 
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{name}}{Character of length 1, name of the job. For inspection
+purposes, you can supply a mock job name.}
+}
+\if{html}{\out{</div>}}
+}
 \subsection{Details}{
 Includes everything except the worker-instance-specific
 job name and the worker-instance-specific
@@ -285,7 +219,7 @@ Character vector of the lines of the job script.
   sge_cores = 2,
   sge_memory_gigabytes_required = 4
 )
-launcher$script()
+launcher$script(name)
 }
 \if{html}{\out{</div>}}
 

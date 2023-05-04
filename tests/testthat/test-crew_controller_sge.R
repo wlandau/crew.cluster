@@ -1,5 +1,6 @@
 test_that("crew_controller_sge() script() all lines", {
   x <- crew_controller_sge(
+    script_lines = c("module load R", "echo 'start'"),
     sge_cwd = TRUE,
     sge_envvars = TRUE,
     sge_log_files = "log_dir/",
@@ -7,11 +8,11 @@ test_that("crew_controller_sge() script() all lines", {
     sge_memory_gigabytes_required = 2.4,
     sge_memory_gigabytes_limit = 8,
     sge_cores = 2L,
-    sge_gpu = 1L,
-    sge_lines = c("module load R", "echo 'start'")
+    sge_gpu = 1L
   )
-  out <- x$launcher$script()
+  out <- x$launcher$script(name = "a_job")
   exp <- c(
+    "#$ -N a_job",
     "#$ -cwd",
     "#$ -V",
     "#$ -o log_dir/",

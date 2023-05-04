@@ -23,9 +23,10 @@ crew_controller_sge(
   reset_options = FALSE,
   garbage_collection = FALSE,
   verbose = FALSE,
-  sge_qsub = as.character(Sys.which("qsub")),
-  sge_qdel = as.character(Sys.which("qdel")),
-  sge_script_dir = tempdir(),
+  command_submit = "",
+  command_delete = "",
+  script_directory = tempdir(),
+  script_lines = character(0L),
   sge_cwd = TRUE,
   sge_envvars = FALSE,
   sge_log_files = "/dev/null",
@@ -34,7 +35,6 @@ crew_controller_sge(
   sge_memory_gigabytes_limit = NULL,
   sge_cores = NULL,
   sge_gpu = NULL,
-  sge_lines = NULL,
   auto_scale = "demand"
 )
 }
@@ -109,20 +109,22 @@ tasks, \code{FALSE} to skip.}
 \item{verbose}{Logical, whether to see console output and error messages
 when submitting worker.}
 
-\item{sge_qsub}{Character of length 1, file path to the \code{qsub} executable
-used to submit \code{crew} workers as SGE jobs.}
+\item{command_submit}{Character of length 1,
+file path to the executable to delete a worker job.}
 
-\item{sge_qdel}{Character of length 1, file path to the \code{qdel} executable
-used to delete the SGE jobs running \code{crew} workers.}
-
-\item{sge_script_dir}{Character of length 1, directory path to the
-SGE job scripts. Just before each job submission, a job script
+\item{script_directory}{Character of length 1, directory path to the
+job scripts. Just before each job submission, a job script
 is created in this folder. Script base names are unique to each
 launcher and worker, and the launcher deletes the script when the
 worker is manually terminated. \code{tempdir()} is the default, but it
 might not work for some systems.
 \code{tools::R_user_dir("crew.cluster", which = "cache")}
 is another reasonable choice.}
+
+\item{script_lines}{Optional character vector of additional lines to be
+added to the job script just after the more common flags.
+An example would be \code{script_lines = "module load R"} if your cluster
+supports R through an environment module.}
 
 \item{sge_cwd}{Logical of length 1, whether to
 launch the worker from the current working directory (as opposed to
@@ -168,11 +170,6 @@ to a line of \verb{#$ -pe smp 4} in the SGE job script.
 \item{sge_gpu}{Optional integer of length 1 with the number of GPUs to
 request for the worker. \code{sge_gpu = 1} translates to a line of
 \code{"#$ -l gpu=1"} in the SGE job script. \code{sge_gpu = NULL} omits this line.}
-
-\item{sge_lines}{Optional character vector of additional lines to be
-added to the SGE job script just after the more common flags.
-An example would be \code{sge_lines = "module load R"} if your SGE cluster
-supports R through an environment module.}
 
 \item{auto_scale}{Character of length 1, name of the method for
 automatically scaling workers to meet demand. \code{NULL} to default to

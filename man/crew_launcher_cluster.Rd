@@ -22,7 +22,7 @@ crew_launcher_cluster(
   verbose = FALSE,
   command_submit = "",
   command_delete = "",
-  script_dir = tempdir(),
+  script_directory = tempdir(),
   script_lines = character(0L)
 )
 }
@@ -91,11 +91,6 @@ when submitting worker.}
 \item{command_submit}{Character of length 1,
 file path to the executable to delete a worker job.}
 
-\item{script_lines}{Optional character vector of additional lines to be
-added to the job script just after the more common flags.
-An example would be \code{script_lines = "module load R"} if your cluster
-supports R through an environment module.}
-
 \item{script_directory}{Character of length 1, directory path to the
 job scripts. Just before each job submission, a job script
 is created in this folder. Script base names are unique to each
@@ -104,6 +99,11 @@ worker is manually terminated. \code{tempdir()} is the default, but it
 might not work for some systems.
 \code{tools::R_user_dir("crew.cluster", which = "cache")}
 is another reasonable choice.}
+
+\item{script_lines}{Optional character vector of additional lines to be
+added to the job script just after the more common flags.
+An example would be \code{script_lines = "module load R"} if your cluster
+supports R through an environment module.}
 }
 \description{
 Create an \code{R6} abstract cluster launcher object.

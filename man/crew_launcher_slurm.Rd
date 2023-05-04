@@ -7,7 +7,6 @@ SLURM workers.}
 \usage{
 crew_launcher_slurm(
   name = NULL,
-  verbose = FALSE,
   seconds_launch = 60,
   seconds_interval = 0.001,
   seconds_timeout = 10,
@@ -20,21 +19,19 @@ crew_launcher_slurm(
   reset_packages = FALSE,
   reset_options = FALSE,
   garbage_collection = FALSE,
-  slurm_sbatch = as.character(Sys.which("sbatch")),
-  slurm_scancel = as.character(Sys.which("scancel")),
-  slurm_script_dir = tempdir(),
+  verbose = FALSE,
+  command_submit = "",
+  command_delete = "",
+  script_directory = tempdir(),
+  script_lines = character(0L),
   slurm_log_output = "/dev/null",
   slurm_log_error = "/dev/null",
   slurm_memory_megabytes_per_cpu = NULL,
-  slurm_cpus_per_task = NULL,
-  slurm_lines = NULL
+  slurm_cpus_per_task = NULL
 )
 }
 \arguments{
 \item{name}{Name of the launcher.}
-
-\item{verbose}{Logical, whether to see console output and error messages
-when submitting worker.}
 
 \item{seconds_launch}{Seconds of startup time to allow.
 A worker is unconditionally assumed to be alive
@@ -92,22 +89,25 @@ because packages sometimes rely on options they set at loading time.}
 \item{garbage_collection}{\code{TRUE} to run garbage collection between
 tasks, \code{FALSE} to skip.}
 
-\item{slurm_sbatch}{Character of length 1,
-file path to the \code{sbatch} executable
-used to submit \code{crew} workers as SLURM jobs.}
+\item{verbose}{Logical, whether to see console output and error messages
+when submitting worker.}
 
-\item{slurm_scancel}{Character of length 1,
-file path to the \code{scancel} executable
-used to delete the SLURM jobs running \code{crew} workers.}
+\item{command_submit}{Character of length 1,
+file path to the executable to delete a worker job.}
 
-\item{slurm_script_dir}{Character of length 1, directory path to the
-SLURM job scripts. Just before each job submission, a job script
+\item{script_directory}{Character of length 1, directory path to the
+job scripts. Just before each job submission, a job script
 is created in this folder. Script base names are unique to each
 launcher and worker, and the launcher deletes the script when the
 worker is manually terminated. \code{tempdir()} is the default, but it
 might not work for some systems.
 \code{tools::R_user_dir("crew.cluster", which = "cache")}
 is another reasonable choice.}
+
+\item{script_lines}{Optional character vector of additional lines to be
+added to the job script just after the more common flags.
+An example would be \code{script_lines = "module load R"} if your cluster
+supports R through an environment module.}
 
 \item{slurm_log_output}{Character of length 1, file pattern to control
 the locations of the SLURM worker log files. By default, both standard
@@ -137,11 +137,6 @@ number of CPUs for the worker.
 \code{slurm_cpus_per_task = 4} translates
 to a line of \verb{#SBATCH --cpus-per-task=4} in the SLURM job script.
 \code{slurm_cpus_per_task = NULL} omits this line.}
-
-\item{slurm_lines}{Optional character vector of additional lines to be
-added to the SLURM job script just after the more common flags.
-An example would be \code{slurm_lines = "module load R"} if your SLURM cluster
-supports R through an environment module.}
 }
 \description{
 Create an \code{R6} object to launch and maintain

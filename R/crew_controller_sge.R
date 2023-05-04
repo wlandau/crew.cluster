@@ -34,9 +34,10 @@ crew_controller_sge <- function(
   reset_options = FALSE,
   garbage_collection = FALSE,
   verbose = FALSE,
-  sge_qsub = as.character(Sys.which("qsub")),
-  sge_qdel = as.character(Sys.which("qdel")),
-  sge_script_dir = tempdir(),
+  command_submit = "",
+  command_delete = "",
+  script_directory = tempdir(),
+  script_lines = character(0L),
   sge_cwd = TRUE,
   sge_envvars = FALSE,
   sge_log_files = "/dev/null",
@@ -45,7 +46,6 @@ crew_controller_sge <- function(
   sge_memory_gigabytes_limit = NULL,
   sge_cores = NULL,
   sge_gpu = NULL,
-  sge_lines = NULL,
   auto_scale = "demand"
 ) {
   router <- crew::crew_router(
@@ -71,9 +71,10 @@ crew_controller_sge <- function(
     reset_options = reset_options,
     garbage_collection = garbage_collection,
     verbose = verbose,
-    sge_qsub = sge_qsub,
-    sge_qdel = sge_qdel,
-    sge_script_dir = sge_script_dir,
+    command_submit = command_submit,
+    command_delete = command_delete,
+    script_directory = script_directory,
+    script_lines = script_lines,
     sge_cwd = sge_cwd,
     sge_envvars = sge_envvars,
     sge_log_files = sge_log_files,
@@ -81,8 +82,7 @@ crew_controller_sge <- function(
     sge_memory_gigabytes_required = sge_memory_gigabytes_required,
     sge_memory_gigabytes_limit = sge_memory_gigabytes_limit,
     sge_cores = sge_cores,
-    sge_gpu = sge_gpu,
-    sge_lines = sge_lines
+    sge_gpu = sge_gpu
   )
   controller <- crew::crew_controller(
     router = router,

@@ -38,14 +38,14 @@ crew_controller_slurm <- function(
   reset_options = FALSE,
   garbage_collection = FALSE,
   verbose = FALSE,
-  slurm_sbatch = as.character(Sys.which("sbatch")),
-  slurm_scancel = as.character(Sys.which("scancel")),
-  slurm_script_dir = tempdir(),
+  command_submit = "",
+  command_delete = "",
+  script_directory = tempdir(),
+  script_lines = character(0L),
   slurm_log_output = "/dev/null",
   slurm_log_error = "/dev/null",
   slurm_memory_megabytes_per_cpu = NULL,
   slurm_cpus_per_task = NULL,
-  slurm_lines = NULL,
   auto_scale = "demand"
 ) {
   router <- crew::crew_router(
@@ -71,14 +71,14 @@ crew_controller_slurm <- function(
     reset_options = reset_options,
     garbage_collection = garbage_collection,
     verbose = verbose,
-    slurm_sbatch = slurm_sbatch,
-    slurm_scancel = slurm_scancel,
-    slurm_script_dir = slurm_script_dir,
+    command_submit = command_submit,
+    command_delete = command_delete,
+    script_directory = script_directory,
+    script_lines = script_lines,
     slurm_log_output = slurm_log_output,
     slurm_log_error = slurm_log_error,
     slurm_memory_megabytes_per_cpu = slurm_memory_megabytes_per_cpu,
-    slurm_cpus_per_task = slurm_cpus_per_task,
-    slurm_lines = slurm_lines
+    slurm_cpus_per_task = slurm_cpus_per_task
   )
   controller <- crew::crew_controller(
     router = router,

@@ -41,7 +41,7 @@ crew_launcher_cluster <- function(
   verbose = FALSE,
   command_submit = "",
   command_delete = "",
-  script_dir = tempdir(),
+  script_directory = tempdir(),
   script_lines = character(0L)
 ) {
   name <- as.character(name %|||% crew::crew_random_name())
@@ -62,7 +62,7 @@ crew_launcher_cluster <- function(
     verbose = verbose,
     command_submit = command_submit,
     command_delete = command_delete,
-    script_dir = script_dir,
+    script_directory = script_directory,
     script_lines = script_lines
   )
   launcher$validate()

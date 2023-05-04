@@ -20,7 +20,7 @@ launcher <- crew_launcher_slurm(
   slurm_log_error = NULL,
   slurm_memory_megabytes_per_cpu = 4096
 )
-launcher$script()
+launcher$script(name = "my_job_name")
 }
 \seealso{
 Other launchers: 
@@ -31,20 +31,12 @@ Other launchers:
 \code{\link{crew_launcher_slurm}()}
 }
 \concept{launchers}
-\section{Super class}{
-\code{\link[crew:crew_class_launcher]{crew::crew_class_launcher}} -> \code{crew_class_launcher_slurm}
+\section{Super classes}{
+\code{\link[crew:crew_class_launcher]{crew::crew_class_launcher}} -> \code{\link[crew.cluster:crew_class_launcher_cluster]{crew.cluster::crew_class_launcher_cluster}} -> \code{crew_class_launcher_slurm}
 }
 \section{Public fields}{
 \if{html}{\out{<div class="r6-fields">}}
 \describe{
-\item{\code{verbose}}{See \code{\link[=crew_launcher_slurm]{crew_launcher_slurm()}}.}
-
-\item{\code{slurm_sbatch}}{See \code{\link[=crew_launcher_slurm]{crew_launcher_slurm()}}.}
-
-\item{\code{slurm_scancel}}{See \code{\link[=crew_launcher_slurm]{crew_launcher_slurm()}}.}
-
-\item{\code{slurm_script_dir}}{See \code{\link[=crew_launcher_slurm]{crew_launcher_slurm()}}.}
-
 \item{\code{slurm_log_output}}{See \code{\link[=crew_launcher_slurm]{crew_launcher_slurm()}}.}
 
 \item{\code{slurm_log_error}}{See \code{\link[=crew_launcher_slurm]{crew_launcher_slurm()}}.}
@@ -52,10 +44,6 @@ Other launchers:
 \item{\code{slurm_memory_megabytes_per_cpu}}{See \code{\link[=crew_launcher_slurm]{crew_launcher_slurm()}}.}
 
 \item{\code{slurm_cpus_per_task}}{See \code{\link[=crew_launcher_slurm]{crew_launcher_slurm()}}.}
-
-\item{\code{slurm_lines}}{See \code{\link[=crew_launcher_slurm]{crew_launcher_slurm()}}.}
-
-\item{\code{prefix}}{Unique prefix of worker scripts.}
 }
 \if{html}{\out{</div>}}
 }
@@ -64,8 +52,6 @@ Other launchers:
 \itemize{
 \item \href{#method-crew_class_launcher_slurm-new}{\code{crew_class_launcher_slurm$new()}}
 \item \href{#method-crew_class_launcher_slurm-validate}{\code{crew_class_launcher_slurm$validate()}}
-\item \href{#method-crew_class_launcher_slurm-launch_worker}{\code{crew_class_launcher_slurm$launch_worker()}}
-\item \href{#method-crew_class_launcher_slurm-terminate_worker}{\code{crew_class_launcher_slurm$terminate_worker()}}
 \item \href{#method-crew_class_launcher_slurm-script}{\code{crew_class_launcher_slurm$script()}}
 }
 }
@@ -79,6 +65,8 @@ Other launchers:
 <li><span class="pkg-link" data-pkg="crew" data-topic="crew_class_launcher" data-id="settings"><a href='../../crew/html/crew_class_launcher.html#method-crew_class_launcher-settings'><code>crew::crew_class_launcher$settings()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="crew" data-topic="crew_class_launcher" data-id="start"><a href='../../crew/html/crew_class_launcher.html#method-crew_class_launcher-start'><code>crew::crew_class_launcher$start()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="crew" data-topic="crew_class_launcher" data-id="terminate"><a href='../../crew/html/crew_class_launcher.html#method-crew_class_launcher-terminate'><code>crew::crew_class_launcher$terminate()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="crew.cluster" data-topic="crew_class_launcher_cluster" data-id="launch_worker"><a href='../../crew.cluster/html/crew_class_launcher_cluster.html#method-crew_class_launcher_cluster-launch_worker'><code>crew.cluster::crew_class_launcher_cluster$launch_worker()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="crew.cluster" data-topic="crew_class_launcher_cluster" data-id="terminate_worker"><a href='../../crew.cluster/html/crew_class_launcher_cluster.html#method-crew_class_launcher_cluster-terminate_worker'><code>crew.cluster::crew_class_launcher_cluster$terminate_worker()</code></a></span></li>
 </ul>
 </details>
 }}
@@ -103,14 +91,14 @@ SLURM launcher constructor.
   reset_options = NULL,
   garbage_collection = NULL,
   verbose = NULL,
-  slurm_sbatch = NULL,
-  slurm_scancel = NULL,
-  slurm_script_dir = NULL,
+  command_submit = NULL,
+  command_delete = NULL,
+  script_directory = NULL,
+  script_lines = NULL,
   slurm_log_output = NULL,
   slurm_log_error = NULL,
   slurm_memory_megabytes_per_cpu = NULL,
-  slurm_cpus_per_task = NULL,
-  slurm_lines = NULL
+  slurm_cpus_per_task = NULL
 )}\if{html}{\out{</div>}}
 }
 
@@ -145,11 +133,13 @@ SLURM launcher constructor.
 
 \item{\code{verbose}}{See \code{\link[=crew_launcher_slurm]{crew_launcher_slurm()}}.}
 
-\item{\code{slurm_sbatch}}{See \code{\link[=crew_launcher_slurm]{crew_launcher_slurm()}}.}
+\item{\code{command_submit}}{See \code{\link[=crew_launcher_sge]{crew_launcher_sge()}}.}
 
-\item{\code{slurm_scancel}}{See \code{\link[=crew_launcher_slurm]{crew_launcher_slurm()}}.}
+\item{\code{command_delete}}{See \code{\link[=crew_launcher_sge]{crew_launcher_sge()}}.}
 
-\item{\code{slurm_script_dir}}{See \code{\link[=crew_launcher_slurm]{crew_launcher_slurm()}}.}
+\item{\code{script_directory}}{See \code{\link[=crew_launcher_sge]{crew_launcher_sge()}}.}
+
+\item{\code{script_lines}}{See \code{\link[=crew_launcher_sge]{crew_launcher_sge()}}.}
 
 \item{\code{slurm_log_output}}{See \code{\link[=crew_launcher_slurm]{crew_launcher_slurm()}}.}
 
@@ -158,8 +148,6 @@ SLURM launcher constructor.
 \item{\code{slurm_memory_megabytes_per_cpu}}{See \code{\link[=crew_launcher_slurm]{crew_launcher_slurm()}}.}
 
 \item{\code{slurm_cpus_per_task}}{See \code{\link[=crew_launcher_slurm]{crew_launcher_slurm()}}.}
-
-\item{\code{slurm_lines}}{See \code{\link[=crew_launcher_slurm]{crew_launcher_slurm()}}.}
 }
 \if{html}{\out{</div>}}
 }
@@ -181,75 +169,22 @@ Validate the launcher.
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-crew_class_launcher_slurm-launch_worker"></a>}}
-\if{latex}{\out{\hypertarget{method-crew_class_launcher_slurm-launch_worker}{}}}
-\subsection{Method \code{launch_worker()}}{
-Launch a local process worker which will
-dial into a socket.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{crew_class_launcher_slurm$launch_worker(call, launcher, worker, instance)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{call}}{Text string with a namespaced call to \code{\link[=crew_worker]{crew_worker()}}
-which will run in the worker and accept tasks.}
-
-\item{\code{launcher}}{Character of length 1, name of the launcher.}
-
-\item{\code{worker}}{Positive integer of length 1, index of the worker.
-This worker index remains the same even when the current instance
-of the worker exits and a new instance launches.
-It is always between 1 and the maximum number of concurrent workers.}
-
-\item{\code{instance}}{Character of length 1 to uniquely identify
-the current instance of the worker.}
-}
-\if{html}{\out{</div>}}
-}
-\subsection{Details}{
-The \code{call} argument is R code that will run to
-initiate the worker. Together, the \code{launcher}, \code{worker},
-and \code{instance} arguments are useful for
-constructing informative job names.
-}
-
-\subsection{Returns}{
-A handle object to allow the termination of the worker
-later on.
-}
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-crew_class_launcher_slurm-terminate_worker"></a>}}
-\if{latex}{\out{\hypertarget{method-crew_class_launcher_slurm-terminate_worker}{}}}
-\subsection{Method \code{terminate_worker()}}{
-Terminate a local process worker.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{crew_class_launcher_slurm$terminate_worker(handle)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{handle}}{A process handle object previously
-returned by \code{launch_worker()}.}
-}
-\if{html}{\out{</div>}}
-}
-\subsection{Returns}{
-\code{NULL} (invisibly).
-}
-}
-\if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-crew_class_launcher_slurm-script"></a>}}
 \if{latex}{\out{\hypertarget{method-crew_class_launcher_slurm-script}{}}}
 \subsection{Method \code{script()}}{
 Generate the job script.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{crew_class_launcher_slurm$script()}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{crew_class_launcher_slurm$script(name)}\if{html}{\out{</div>}}
 }
 
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{name}}{Character of length 1, name of the job. For inspection
+purposes, you can supply a mock job name.}
+}
+\if{html}{\out{</div>}}
+}
 \subsection{Details}{
 Includes everything except the worker-instance-specific
 job name and the worker-instance-specific
@@ -267,7 +202,7 @@ Character vector of the lines of the job script.
   slurm_log_error = NULL,
   slurm_memory_megabytes_per_cpu = 4096
 )
-launcher$script()
+launcher$script(name = "my_job_name")
 }
 \if{html}{\out{</div>}}
 
