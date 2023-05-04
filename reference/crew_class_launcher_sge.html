@@ -60,7 +60,9 @@
     <div id="see-also">
     <h2>See also</h2>
     <div class="dont-index"><p>Other launchers: 
-<code><a href="crew_launcher_sge.html">crew_launcher_sge</a>()</code></p></div>
+<code><a href="crew_class_launcher_slurm.html">crew_class_launcher_slurm</a></code>,
+<code><a href="crew_launcher_sge.html">crew_launcher_sge</a>()</code>,
+<code><a href="crew_launcher_slurm.html">crew_launcher_slurm</a>()</code></p></div>
     </div>
     <div id="super-class">
     <h2>Super class</h2>
@@ -68,7 +70,11 @@
     </div>
     <div id="public-fields">
     <h2>Public fields</h2>
-    <p></p><div class="r6-fields"><dl><dt><code>sge_qsub</code></dt>
+    <p></p><div class="r6-fields"><dl><dt><code>verbose</code></dt>
+<dd><p>See <code><a href="crew_launcher_sge.html">crew_launcher_sge()</a></code>.</p></dd>
+
+
+<dt><code>sge_qsub</code></dt>
 <dd><p>See <code><a href="crew_launcher_sge.html">crew_launcher_sge()</a></code>.</p></dd>
 
 
@@ -109,10 +115,6 @@
 
 
 <dt><code>sge_lines</code></dt>
-<dd><p>See <code><a href="crew_launcher_sge.html">crew_launcher_sge()</a></code>.</p></dd>
-
-
-<dt><code>verbose</code></dt>
 <dd><p>See <code><a href="crew_launcher_sge.html">crew_launcher_sge()</a></code>.</p></dd>
 
 
@@ -158,6 +160,7 @@
 <span>  reset_packages <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  reset_options <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  garbage_collection <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  verbose <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  sge_qsub <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  sge_qdel <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  sge_cwd <span class="op">=</span> <span class="cn">NULL</span>,</span>
@@ -168,8 +171,7 @@
 <span>  sge_memory_gigabytes_limit <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  sge_cores <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  sge_gpu <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  sge_lines <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  verbose <span class="op">=</span> <span class="cn">NULL</span></span>
+<span>  sge_lines <span class="op">=</span> <span class="cn">NULL</span></span>
 <span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
@@ -227,6 +229,10 @@
 <dd><p>See <code><a href="crew_launcher_sge.html">crew_launcher_sge()</a></code>.</p></dd>
 
 
+<dt><code>verbose</code></dt>
+<dd><p>See <code><a href="crew_launcher_sge.html">crew_launcher_sge()</a></code>.</p></dd>
+
+
 <dt><code>sge_qsub</code></dt>
 <dd><p>See <code><a href="crew_launcher_sge.html">crew_launcher_sge()</a></code>.</p></dd>
 
@@ -268,10 +274,6 @@
 
 
 <dt><code>sge_lines</code></dt>
-<dd><p>See <code><a href="crew_launcher_sge.html">crew_launcher_sge()</a></code>.</p></dd>
-
-
-<dt><code>verbose</code></dt>
 <dd><p>See <code><a href="crew_launcher_sge.html">crew_launcher_sge()</a></code>.</p></dd>
 
 
@@ -373,8 +375,8 @@ returned by <code>launch_worker()</code>.</p></dd>
 <h4 id="details-1">Details<a class="anchor" aria-label="anchor" href="#details-1"></a></h4>
 <p>Includes everything except the worker-instance-specific
 job name and the worker-instance-specific
-call to <code><a href="https://wlandau.github.io/crew/reference/crew_worker.html" class="external-link">crew::crew_worker()</a></code> at the very bottom, which gets
-inserted at launch time.</p>
+call to <code><a href="https://wlandau.github.io/crew/reference/crew_worker.html" class="external-link">crew::crew_worker()</a></code>, both of which get inserted at
+the bottom of the script at launch time.</p>
 </div>
 
 <div class="section">

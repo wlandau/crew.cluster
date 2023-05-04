@@ -34,10 +34,19 @@
     <loc>/reference/crew_class_launcher_sge.html</loc>
   </url>
   <url>
+    <loc>/reference/crew_class_launcher_slurm.html</loc>
+  </url>
+  <url>
     <loc>/reference/crew_controller_sge.html</loc>
   </url>
   <url>
+    <loc>/reference/crew_controller_slurm.html</loc>
+  </url>
+  <url>
     <loc>/reference/crew_launcher_sge.html</loc>
+  </url>
+  <url>
+    <loc>/reference/crew_launcher_slurm.html</loc>
   </url>
   <url>
     <loc>/reference/index.html</loc>
