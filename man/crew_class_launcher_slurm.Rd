@@ -24,7 +24,9 @@ launcher$script()
 }
 \seealso{
 Other launchers: 
+\code{\link{crew_class_launcher_cluster}},
 \code{\link{crew_class_launcher_sge}},
+\code{\link{crew_launcher_cluster}()},
 \code{\link{crew_launcher_sge}()},
 \code{\link{crew_launcher_slurm}()}
 }
@@ -40,6 +42,8 @@ Other launchers:
 \item{\code{slurm_sbatch}}{See \code{\link[=crew_launcher_slurm]{crew_launcher_slurm()}}.}
 
 \item{\code{slurm_scancel}}{See \code{\link[=crew_launcher_slurm]{crew_launcher_slurm()}}.}
+
+\item{\code{slurm_script_dir}}{See \code{\link[=crew_launcher_slurm]{crew_launcher_slurm()}}.}
 
 \item{\code{slurm_log_output}}{See \code{\link[=crew_launcher_slurm]{crew_launcher_slurm()}}.}
 
@@ -101,6 +105,7 @@ SLURM launcher constructor.
   verbose = NULL,
   slurm_sbatch = NULL,
   slurm_scancel = NULL,
+  slurm_script_dir = NULL,
   slurm_log_output = NULL,
   slurm_log_error = NULL,
   slurm_memory_megabytes_per_cpu = NULL,
@@ -143,6 +148,8 @@ SLURM launcher constructor.
 \item{\code{slurm_sbatch}}{See \code{\link[=crew_launcher_slurm]{crew_launcher_slurm()}}.}
 
 \item{\code{slurm_scancel}}{See \code{\link[=crew_launcher_slurm]{crew_launcher_slurm()}}.}
+
+\item{\code{slurm_script_dir}}{See \code{\link[=crew_launcher_slurm]{crew_launcher_slurm()}}.}
 
 \item{\code{slurm_log_output}}{See \code{\link[=crew_launcher_slurm]{crew_launcher_slurm()}}.}
 

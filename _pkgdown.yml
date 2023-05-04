@@ -11,7 +11,9 @@ reference:
   contents:
   - '`crew_launcher_sge`'
   - '`crew_launcher_slurm`'
+  - '`crew_launcher_cluster`'
 - title: Launcher classes
   contents:
   - '`crew_class_launcher_sge`'
   - '`crew_class_launcher_slurm`'
+  - '`crew_class_launcher_cluster`'

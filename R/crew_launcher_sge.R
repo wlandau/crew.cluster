@@ -285,8 +285,7 @@ crew_class_launcher_sge <- R6::R6Class(
       fields <- c(
         "sge_cwd",
         "sge_envvars",
-        "sge_log_join",
-        "verbose"
+        "sge_log_join"
       )
       for (field in fields) {
         crew::crew_assert(

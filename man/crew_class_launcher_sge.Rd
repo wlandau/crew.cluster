@@ -23,7 +23,9 @@ launcher$script()
 }
 \seealso{
 Other launchers: 
+\code{\link{crew_class_launcher_cluster}},
 \code{\link{crew_class_launcher_slurm}},
+\code{\link{crew_launcher_cluster}()},
 \code{\link{crew_launcher_sge}()},
 \code{\link{crew_launcher_slurm}()}
 }

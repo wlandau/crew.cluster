@@ -25,6 +25,7 @@ crew_controller_slurm(
   verbose = FALSE,
   slurm_sbatch = as.character(Sys.which("sbatch")),
   slurm_scancel = as.character(Sys.which("scancel")),
+  slurm_script_dir = tempdir(),
   slurm_log_output = "/dev/null",
   slurm_log_error = "/dev/null",
   slurm_memory_megabytes_per_cpu = NULL,
@@ -111,6 +112,15 @@ used to submit \code{crew} workers as SLURM jobs.}
 \item{slurm_scancel}{Character of length 1,
 file path to the \code{scancel} executable
 used to delete the SLURM jobs running \code{crew} workers.}
+
+\item{slurm_script_dir}{Character of length 1, directory path to the
+SLURM job scripts. Just before each job submission, a job script
+is created in this folder. Script base names are unique to each
+launcher and worker, and the launcher deletes the script when the
+worker is manually terminated. \code{tempdir()} is the default, but it
+might not work for some systems.
+\code{tools::R_user_dir("crew.cluster", which = "cache")}
+is another reasonable choice.}
 
 \item{slurm_log_output}{Character of length 1, file pattern to control
 the locations of the SLURM worker log files. By default, both standard
