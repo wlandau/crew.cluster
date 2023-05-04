@@ -4,7 +4,12 @@
 #' @family launchers
 #' @description Create an `R6` object to launch and maintain
 #'   workers as SLURM jobs.
-#' @details To launch a SLURM worker, this launcher
+#' @details WARNING: the `crew.cluster` SLURM plugin is experimental
+#'   and has not actually been tested on a SLURM cluster. Please proceed
+#'   with caution and report bugs to
+#'   <https://github.com/wlandau/crew.cluster>.
+#'
+#'   To launch a SLURM worker, this launcher
 #'   creates a temporary job script with a call to `crew::crew_worker()`
 #'   and submits it as an SLURM job with `sbatch`. To see most of the lines
 #'   of the job script in advance, use the `script()` method of the launcher.

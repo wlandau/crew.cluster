@@ -3,6 +3,7 @@
 export(crew_class_launcher_sge)
 export(crew_class_launcher_slurm)
 export(crew_controller_sge)
+export(crew_controller_slurm)
 export(crew_launcher_sge)
 export(crew_launcher_slurm)
 importFrom(R6,R6Class)
