@@ -187,7 +187,11 @@ file path to the executable to submit a worker job.</p></dd>
 
 <dt>command_delete</dt>
 <dd><p>Character of length 1,
-file path to the executable to delete a worker job.</p></dd>
+file path to the executable to delete a worker job.
+Set to <code>""</code> to skip manually terminating the worker.
+Unless there is an issue with the platform,
+the job should still exit thanks to the NNG-powered network programming
+capabilities of <code>mirai</code>,</p></dd>
 
 
 <dt>script_directory</dt>
