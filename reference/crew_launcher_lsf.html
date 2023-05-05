@@ -216,7 +216,7 @@ supports R through an environment module.</p></dd>
 launch the worker from (as opposed to
 the system default). <code>lsf_cwd = "/home"</code> translates to a line of
 <code>#BSUB -cwd /home</code> in the LSF job script. <code>lsf_cwd = getwd()</code> is the
-default, which launches workers from the current working directory.#'
+default, which launches workers from the current working directory.
 Set <code>lsf_cwd = NULL</code> to omit this line from the job script.</p></dd>
 
 
@@ -268,8 +268,8 @@ to a line of <code>#BSUB -n 4</code> in the LSF job script.
 </dl></div>
     <div id="details">
     <h2>Details</h2>
-    <p>WARNING: the <code>crew.cluster</code> LSF plugin is experimental. Please proceed
-with caution and report bugs to
+    <p>WARNING: the <code>crew.cluster</code> LSF plugin is experimental.
+Please proceed with caution and report bugs to
 <a href="https://github.com/wlandau/crew.cluster" class="external-link">https://github.com/wlandau/crew.cluster</a>.</p>
 <p>To launch a LSF worker, this launcher
 creates a temporary job script with a call to <code><a href="https://wlandau.github.io/crew/reference/crew_worker.html" class="external-link">crew::crew_worker()</a></code>

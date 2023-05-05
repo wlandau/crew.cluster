@@ -85,8 +85,8 @@ launch workers on Sun Grid Engine (SGE) workers.</p>
 <span>  sge_log_output <span class="op">=</span> <span class="st">"/dev/null"</span>,</span>
 <span>  sge_log_error <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  sge_log_join <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>  sge_memory_gigabytes_required <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  sge_memory_gigabytes_limit <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  sge_memory_gigabytes_required <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  sge_cores <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  sge_gpu <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  auto_scale <span class="op">=</span> <span class="st">"demand"</span></span>
@@ -277,14 +277,6 @@ equivalent to <code>#$ -j n</code>. If <code>sge_log_join = TRUE</code>, then <c
 should be <code>NULL</code>.</p></dd>
 
 
-<dt>sge_memory_gigabytes_required</dt>
-<dd><p>Optional positive numeric of length 1
-with the gigabytes of memory required to run the worker.
-<code>sge_memory_gigabytes_required = 2.4</code>
-translates to a line of <code>#$ -l m_mem_free=2.4G</code> in the SGE job script.
-<code>sge_memory_gigabytes_required = NULL</code> omits this line.</p></dd>
-
-
 <dt>sge_memory_gigabytes_limit</dt>
 <dd><p>Optional numeric of length 1
 with the maximum number of gigabytes of memory a worker is allowed to
@@ -292,6 +284,14 @@ consume. If the worker consumes more than this level of memory, then
 SGE will terminate it. <code>sge_memory_gigabytes_limit = 5.7"</code>
 translates to a line of <code>"#$ -l h_rss=5.7G"</code> in the SGE job script.
 <code>sge_memory_gigabytes_limit = NULL</code> omits this line.</p></dd>
+
+
+<dt>sge_memory_gigabytes_required</dt>
+<dd><p>Optional positive numeric of length 1
+with the gigabytes of memory required to run the worker.
+<code>sge_memory_gigabytes_required = 2.4</code>
+translates to a line of <code>#$ -l m_mem_free=2.4G</code> in the SGE job script.
+<code>sge_memory_gigabytes_required = NULL</code> omits this line.</p></dd>
 
 
 <dt>sge_cores</dt>
