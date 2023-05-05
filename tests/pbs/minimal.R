@@ -1,6 +1,6 @@
 library(crew.cluster)
 library(testthat)
-controller <- crew_controller_slurm(
+controller <- crew_controller_pbs(
   name = "my_workflow",
   workers = 1L,
   seconds_idle = 300,
