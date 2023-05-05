@@ -17,6 +17,12 @@
 #'   which will be inserted at the last minute when it is time
 #'   to actually launch a worker.
 #' @inheritParams crew_launcher_cluster
+#' @param lsf_cwd Character of length 1, directory to
+#'   launch the worker from (as opposed to
+#'   the system default). `lsf_cwd = "/home"` translates to a line of
+#'   `#BSUB -cwd /home` in the LSF job script. `lsf_cwd = getwd()` is the
+#'   default, which launches workers from the current working directory.#'   
+#'   Set `lsf_cwd = NULL` to omit this line from the job script.
 #' @param lsf_log_output Character of length 1, file pattern to control
 #'   the locations of the LSF worker log files. By default, both standard
 #'   output and standard error go to the same file.
@@ -61,6 +67,7 @@ crew_launcher_lsf <- function(
   command_delete = as.character(Sys.which("bkill")),
   script_directory = tempdir(),
   script_lines = character(0L),
+  lsf_cwd = getwd(),
   lsf_log_output = "/dev/null",
   lsf_log_error = "/dev/null",
   lsf_memory_limit_megabytes = NULL,
@@ -86,6 +93,7 @@ crew_launcher_lsf <- function(
     command_delete = command_delete,
     script_directory = script_directory,
     script_lines = script_lines,
+    lsf_cwd = lsf_cwd,
     lsf_log_output = lsf_log_output,
     lsf_log_error = lsf_log_error,
     lsf_memory_limit_megabytes = lsf_memory_limit_megabytes,
@@ -105,6 +113,8 @@ crew_class_launcher_lsf <- R6::R6Class(
   inherit = crew_class_launcher_cluster,
   cloneable = FALSE,
   public = list(
+    #' @field lsf_cwd See [crew_launcher_lsf()].
+    lsf_cwd = NULL,
     #' @field lsf_log_output See [crew_launcher_lsf()].
     lsf_log_output = NULL,
     #' @field lsf_log_error See [crew_launcher_lsf()].
@@ -129,10 +139,11 @@ crew_class_launcher_lsf <- R6::R6Class(
     #' @param reset_options See [crew_launcher_lsf()].
     #' @param garbage_collection See [crew_launcher_lsf()].
     #' @param verbose See [crew_launcher_lsf()].
-    #' @param command_submit See [crew_launcher_sge()].
-    #' @param command_delete See [crew_launcher_sge()].
-    #' @param script_directory See [crew_launcher_sge()].
-    #' @param script_lines See [crew_launcher_sge()].
+    #' @param command_submit See [crew_launcher_lsf()].
+    #' @param command_delete See [crew_launcher_lsf()].
+    #' @param script_directory See [crew_launcher_lsf()].
+    #' @param script_lines See [crew_launcher_lsf()].
+    #' @param lsf_cwd See [crew_launcher_lsf()].
     #' @param lsf_log_output See [crew_launcher_lsf()].
     #' @param lsf_log_error See [crew_launcher_lsf()].
     #' @param lsf_memory_limit_megabytes See [crew_launcher_lsf()].
@@ -156,6 +167,7 @@ crew_class_launcher_lsf <- R6::R6Class(
       command_delete = NULL,
       script_directory = NULL,
       script_lines = NULL,
+      lsf_cwd = NULL,
       lsf_log_output = NULL,
       lsf_log_error = NULL,
       lsf_memory_limit_megabytes = NULL,
@@ -181,6 +193,7 @@ crew_class_launcher_lsf <- R6::R6Class(
         script_directory = script_directory,
         script_lines = script_lines
       )
+      self$lsf_cwd <- lsf_cwd
       self$lsf_log_output <- lsf_log_output
       self$lsf_log_error <- lsf_log_error
       self$lsf_memory_limit_megabytes <- lsf_memory_limit_megabytes
@@ -190,7 +203,7 @@ crew_class_launcher_lsf <- R6::R6Class(
     #' @return `NULL` (invisibly). Throws an error if a field is invalid.
     validate = function() {
       super$validate()
-      fields <- c("lsf_log_output", "lsf_log_error")
+      fields <- c("lsf_log_output", "lsf_log_error", "lsf_cwd")
       for (field in fields) {
         if (!is.null(self[[field]])) {
           crew::crew_assert(
@@ -234,6 +247,7 @@ crew_class_launcher_lsf <- R6::R6Class(
     #'   purposes, you can supply a mock job name.
     #' @examples
     #' launcher <- crew_launcher_lsf(
+    #'   lsf_log_output = getwd(),
     #'   lsf_log_output = "log_file_%J.log",
     #'   lsf_log_error = NULL,
     #'   lsf_memory_limit_megabytes = 4096
@@ -243,6 +257,11 @@ crew_class_launcher_lsf <- R6::R6Class(
       c(
         "#!/bin/sh",
         paste("#BSUB -J", name),
+        if_any(
+          is.null(self$lsf_cwd),
+          character(0L),
+          paste("#BSUB -cwd", self$lsf_cwd)
+        ),
         if_any(
           is.null(self$lsf_log_output),
           character(0L),

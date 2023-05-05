@@ -16,6 +16,7 @@ See \code{\link[=crew_launcher_lsf]{crew_launcher_lsf()}}.
 ## ------------------------------------------------
 
 launcher <- crew_launcher_lsf(
+  lsf_log_output = getwd(),
   lsf_log_output = "log_file_\%J.log",
   lsf_log_error = NULL,
   lsf_memory_limit_megabytes = 4096
@@ -39,6 +40,8 @@ Other launchers:
 \section{Public fields}{
 \if{html}{\out{<div class="r6-fields">}}
 \describe{
+\item{\code{lsf_cwd}}{See \code{\link[=crew_launcher_lsf]{crew_launcher_lsf()}}.}
+
 \item{\code{lsf_log_output}}{See \code{\link[=crew_launcher_lsf]{crew_launcher_lsf()}}.}
 
 \item{\code{lsf_log_error}}{See \code{\link[=crew_launcher_lsf]{crew_launcher_lsf()}}.}
@@ -99,6 +102,7 @@ LSF launcher constructor.
   command_delete = NULL,
   script_directory = NULL,
   script_lines = NULL,
+  lsf_cwd = NULL,
   lsf_log_output = NULL,
   lsf_log_error = NULL,
   lsf_memory_limit_megabytes = NULL,
@@ -137,13 +141,15 @@ LSF launcher constructor.
 
 \item{\code{verbose}}{See \code{\link[=crew_launcher_lsf]{crew_launcher_lsf()}}.}
 
-\item{\code{command_submit}}{See \code{\link[=crew_launcher_sge]{crew_launcher_sge()}}.}
+\item{\code{command_submit}}{See \code{\link[=crew_launcher_lsf]{crew_launcher_lsf()}}.}
 
-\item{\code{command_delete}}{See \code{\link[=crew_launcher_sge]{crew_launcher_sge()}}.}
+\item{\code{command_delete}}{See \code{\link[=crew_launcher_lsf]{crew_launcher_lsf()}}.}
 
-\item{\code{script_directory}}{See \code{\link[=crew_launcher_sge]{crew_launcher_sge()}}.}
+\item{\code{script_directory}}{See \code{\link[=crew_launcher_lsf]{crew_launcher_lsf()}}.}
 
-\item{\code{script_lines}}{See \code{\link[=crew_launcher_sge]{crew_launcher_sge()}}.}
+\item{\code{script_lines}}{See \code{\link[=crew_launcher_lsf]{crew_launcher_lsf()}}.}
+
+\item{\code{lsf_cwd}}{See \code{\link[=crew_launcher_lsf]{crew_launcher_lsf()}}.}
 
 \item{\code{lsf_log_output}}{See \code{\link[=crew_launcher_lsf]{crew_launcher_lsf()}}.}
 
@@ -202,6 +208,7 @@ Character vector of the lines of the job script.
 \subsection{Examples}{
 \if{html}{\out{<div class="r example copy">}}
 \preformatted{launcher <- crew_launcher_lsf(
+  lsf_log_output = getwd(),
   lsf_log_output = "log_file_\%J.log",
   lsf_log_error = NULL,
   lsf_memory_limit_megabytes = 4096

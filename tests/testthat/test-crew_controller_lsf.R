@@ -1,8 +1,11 @@
 test_that("crew_controller_lsf() script() nearly empty", {
-  x <- crew_controller_lsf()
+  x <- crew_controller_lsf(
+    lsf_cwd = "/home"
+  )
   lines <- c(
     "#!/bin/sh",
     "#BSUB -J name",
+    "#BSUB -cwd /home",
     "#BSUB -o /dev/null",
     "#BSUB -e /dev/null"
   )
@@ -12,6 +15,7 @@ test_that("crew_controller_lsf() script() nearly empty", {
 test_that("crew_controller_lsf() script() all lines", {
   x <- crew_controller_lsf(
     script_lines = c("module load R", "echo 'start'"),
+    lsf_cwd = "/home",
     lsf_log_output = "log1",
     lsf_log_error = "log2",
     lsf_memory_limit_megabytes = 2096,
@@ -21,6 +25,7 @@ test_that("crew_controller_lsf() script() all lines", {
   exp <- c(
     "#!/bin/sh",
     "#BSUB -J my_name",
+    "#BSUB -cwd /home",
     "#BSUB -o log1",
     "#BSUB -e log2",
     "#BSUB -M 2096MB",
