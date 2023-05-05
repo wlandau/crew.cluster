@@ -166,6 +166,18 @@ call to \code{crew::crew_worker()}, both of
 which will be inserted at the last minute when it is time
 to actually launch a worker.
 }
+\section{Attribution}{
+
+The template files at
+\url{https://github.com/mschubert/clustermq/tree/master/inst}
+informed the development of the \code{crew} launcher plugins in
+\code{crew.cluster}, and we would like to thank
+Michael Schubert for developing \code{clustermq} and releasing it under
+the permissive Apache License 2.0.
+See the \code{NOTICE} and \code{README.md} files in the \code{crew.cluster}
+source code for additional attribution.
+}
+
 \seealso{
 Other launchers: 
 \code{\link{crew_class_launcher_cluster}},

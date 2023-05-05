@@ -5,6 +5,7 @@
 #' @description Create an `R6` abstract cluster launcher object.
 #' @details This abstract class is used to develop specific launcher classes
 #'   for specific computing platforms.
+#' @inheritSection crew.cluster-package Attribution
 #' @inheritParams crew::crew_launcher
 #' @param verbose Logical, whether to see console output and error messages
 #'   when submitting worker.
@@ -80,6 +81,7 @@ crew_launcher_cluster <- function(
 #' @family launchers
 #' @description `R6` class to help develop specific cluster launcher plugins.
 #' @details See [crew_launcher_cluster()].
+#' @inheritSection crew.cluster-package Attribution
 crew_class_launcher_cluster <- R6::R6Class(
   classname = "crew_class_launcher_cluster",
   inherit = crew::crew_class_launcher,

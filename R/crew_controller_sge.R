@@ -4,6 +4,7 @@
 #' @family controllers
 #' @description Create an `R6` object to submit tasks and
 #'   launch workers on Sun Grid Engine (SGE) workers.
+#' @inheritSection crew.cluster-package Attribution
 #' @inheritParams crew::crew_router
 #' @inheritParams crew_launcher_sge
 #' @inheritParams crew::crew_controller

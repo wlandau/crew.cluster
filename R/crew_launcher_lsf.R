@@ -16,6 +16,7 @@
 #'   call to `crew::crew_worker()`, both of
 #'   which will be inserted at the last minute when it is time
 #'   to actually launch a worker.
+#' @inheritSection crew.cluster-package Attribution
 #' @inheritParams crew_launcher_cluster
 #' @param lsf_cwd Character of length 1, directory to
 #'   launch the worker from (as opposed to
@@ -116,6 +117,7 @@ crew_launcher_lsf <- function(
 #' @family launchers
 #' @description `R6` class to launch and manage LSF workers.
 #' @details See [crew_launcher_lsf()].
+#' @inheritSection crew.cluster-package Attribution
 crew_class_launcher_lsf <- R6::R6Class(
   classname = "crew_class_launcher_lsf",
   inherit = crew_class_launcher_cluster,

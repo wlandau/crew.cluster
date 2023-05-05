@@ -17,6 +17,7 @@
 #'   call to `crew::crew_worker()`, both of
 #'   which will be inserted at the last minute when it is time
 #'   to actually launch a worker.
+#' @inheritSection crew.cluster-package Attribution
 #' @inheritParams crew_launcher_cluster
 #' @param slurm_log_output Character of length 1, file pattern to control
 #'   the locations of the SLURM worker log files. By default, both standard
@@ -101,6 +102,7 @@ crew_launcher_slurm <- function(
 #' @family launchers
 #' @description `R6` class to launch and manage SLURM workers.
 #' @details See [crew_launcher_slurm()].
+#' @inheritSection crew.cluster-package Attribution
 crew_class_launcher_slurm <- R6::R6Class(
   classname = "crew_class_launcher_slurm",
   inherit = crew_class_launcher_cluster,

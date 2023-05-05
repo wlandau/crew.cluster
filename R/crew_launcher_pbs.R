@@ -17,6 +17,7 @@
 #'   call to `crew::crew_worker()`, both of
 #'   which will be inserted at the last minute when it is time
 #'   to actually launch a worker.
+#' @inheritSection crew.cluster-package Attribution
 #' @inheritParams crew_launcher_cluster
 #' @param pbs_cwd Logical of length 1, whether to set the working directory
 #'   of the worker to the working directory it was launched from.
@@ -123,6 +124,7 @@ crew_launcher_pbs <- function(
 #' @family launchers
 #' @description `R6` class to launch and manage PBS/TORQUE workers.
 #' @details See [crew_launcher_pbs()].
+#' @inheritSection crew.cluster-package Attribution
 crew_class_launcher_pbs <- R6::R6Class(
   classname = "crew_class_launcher_pbs",
   inherit = crew_class_launcher_cluster,

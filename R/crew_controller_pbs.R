@@ -4,6 +4,7 @@
 #' @family controllers
 #' @description Create an `R6` object to submit tasks and
 #'   launch workers on a PBS or TORQUE cluster.
+#' @inheritSection crew.cluster-package Attribution
 #' @inheritParams crew::crew_router
 #' @inheritParams crew_launcher_pbs
 #' @inheritParams crew::crew_controller

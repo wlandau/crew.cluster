@@ -1,7 +1,8 @@
-#' crew.cluster: crew launcher plugins for traditional high-performance
+#' @title crew.cluster: crew launcher plugins for traditional high-performance
 #'   computing clusters
-#' @docType package
 #' @name crew.cluster-package
+#' @docType package
+#' @family help
 #' @description In computationally demanding analysis projects,
 #'   statisticians and data scientists asynchronously
 #'   deploy long-running tasks to distributed systems,
@@ -17,7 +18,15 @@
 #'   [`rrq`](https://mrc-ide.github.io/rrq/),
 #'   [`clustermq`](https://mschubert.github.io/clustermq/),
 #'   and [`batchtools`](https://mllg.github.io/batchtools/).
-#' @family help
+#' @section Attribution:
+#'   The template files at
+#'   <https://github.com/mschubert/clustermq/tree/master/inst>
+#'   informed the development of the `crew` launcher plugins in
+#'   `crew.cluster`, and we would like to thank
+#'   Michael Schubert for developing `clustermq` and releasing it under
+#'   the permissive Apache License 2.0.
+#'   See the `NOTICE` and `README.md` files in the `crew.cluster`
+#'   source code for additional attribution.
 #' @importFrom crew crew_assert crew_class_launcher crew_launcher
 #'   crew_random_name
 #' @importFrom lifecycle badge

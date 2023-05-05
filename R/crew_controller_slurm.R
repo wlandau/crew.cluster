@@ -8,6 +8,7 @@
 #'   and has not actually been tested on a SLURM cluster. Please proceed
 #'   with caution and report bugs to
 #'   <https://github.com/wlandau/crew.cluster>.
+#' @inheritSection crew.cluster-package Attribution
 #' @inheritParams crew::crew_router
 #' @inheritParams crew_launcher_slurm
 #' @inheritParams crew::crew_controller
