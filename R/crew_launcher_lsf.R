@@ -267,7 +267,14 @@ crew_class_launcher_lsf <- R6::R6Class(
         self$script_lines
       )
     },
-    
+    #' @description Worker launch arguments.
+    #' @return Character vector of arguments to the command that
+    #'   launches a worker.
+    #' @param script Character of length 1, path to the job script for
+    #'   the scheduler.
+    args_launch = function(script) {
+      c("<", shQuote(script))
+    },
     #' @description Termination arguments.
     #' @return Character vector of arguments to the command that
     #'   terminates a worker.
