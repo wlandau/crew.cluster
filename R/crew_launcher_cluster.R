@@ -218,10 +218,10 @@ crew_class_launcher_cluster <- R6::R6Class(
         worker = worker
       )
       writeLines(text = lines, con = script)
-      Sys.chmod(script, mode = "755")
+
       system2(
         command = self$command_submit,
-        args = c("-cwd", "/project/damrauer_shared/Users/mglevin/crew.cluster/", "-m", "judicator", "<", shQuote(script)),
+        args = shQuote(script),
         stdout = if_any(self$verbose, "", FALSE),
         stderr = if_any(self$verbose, "", FALSE),
         wait = FALSE
