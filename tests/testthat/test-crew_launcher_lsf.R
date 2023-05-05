@@ -9,7 +9,7 @@ test_that("valid populated crew_launcher_lsf()", {
       lsf_cwd = "/home",
       lsf_log_output = "log1",
       lsf_log_error = "log2",
-      lsf_memory_limit_megabytes = NULL,
+      lsf_memory_megabytes_limit = NULL,
       lsf_cpus_per_task = NULL
     )
   )
@@ -47,7 +47,7 @@ test_that("crew_launcher_lsf() script() all lines", {
     lsf_cwd = "/home",
     lsf_log_output = "log1",
     lsf_log_error = "log2",
-    lsf_memory_limit_megabytes = 2096,
+    lsf_memory_megabytes_limit = 2096,
     lsf_cpus_per_task = 2
   )
   out <- x$script(name = "this_job")

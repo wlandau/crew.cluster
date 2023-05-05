@@ -16,10 +16,10 @@ See \code{\link[=crew_launcher_lsf]{crew_launcher_lsf()}}.
 ## ------------------------------------------------
 
 launcher <- crew_launcher_lsf(
-  lsf_log_output = getwd(),
+  lsf_cwd = getwd(),
   lsf_log_output = "log_file_\%J.log",
   lsf_log_error = NULL,
-  lsf_memory_limit_megabytes = 4096
+  lsf_memory_megabytes_limit = 4096
 )
 launcher$script(name = "my_job_name")
 }
@@ -46,7 +46,7 @@ Other launchers:
 
 \item{\code{lsf_log_error}}{See \code{\link[=crew_launcher_lsf]{crew_launcher_lsf()}}.}
 
-\item{\code{lsf_memory_limit_megabytes}}{See \code{\link[=crew_launcher_lsf]{crew_launcher_lsf()}}.}
+\item{\code{lsf_memory_megabytes_limit}}{See \code{\link[=crew_launcher_lsf]{crew_launcher_lsf()}}.}
 
 \item{\code{lsf_cpus_per_task}}{See \code{\link[=crew_launcher_lsf]{crew_launcher_lsf()}}.}
 }
@@ -105,7 +105,7 @@ LSF launcher constructor.
   lsf_cwd = NULL,
   lsf_log_output = NULL,
   lsf_log_error = NULL,
-  lsf_memory_limit_megabytes = NULL,
+  lsf_memory_megabytes_limit = NULL,
   lsf_cpus_per_task = NULL
 )}\if{html}{\out{</div>}}
 }
@@ -155,7 +155,7 @@ LSF launcher constructor.
 
 \item{\code{lsf_log_error}}{See \code{\link[=crew_launcher_lsf]{crew_launcher_lsf()}}.}
 
-\item{\code{lsf_memory_limit_megabytes}}{See \code{\link[=crew_launcher_lsf]{crew_launcher_lsf()}}.}
+\item{\code{lsf_memory_megabytes_limit}}{See \code{\link[=crew_launcher_lsf]{crew_launcher_lsf()}}.}
 
 \item{\code{lsf_cpus_per_task}}{See \code{\link[=crew_launcher_lsf]{crew_launcher_lsf()}}.}
 }
@@ -208,10 +208,10 @@ Character vector of the lines of the job script.
 \subsection{Examples}{
 \if{html}{\out{<div class="r example copy">}}
 \preformatted{launcher <- crew_launcher_lsf(
-  lsf_log_output = getwd(),
+  lsf_cwd = getwd(),
   lsf_log_output = "log_file_\%J.log",
   lsf_log_error = NULL,
-  lsf_memory_limit_megabytes = 4096
+  lsf_memory_megabytes_limit = 4096
 )
 launcher$script(name = "my_job_name")
 }
