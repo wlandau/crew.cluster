@@ -242,12 +242,20 @@ crew_class_launcher_cluster <- R6::R6Class(
       name <- do.call(what = name_job, args = handle)
       system2(
         command = self$command_delete,
-        args = shQuote(name),
+        args = self$args_terminate(name = name),
         stdout = if_any(self$verbose, "", FALSE),
         stderr = if_any(self$verbose, "", FALSE),
         wait = FALSE
       )
       invisible()
+    },
+    #' @description Termination arguments.
+    #' @return Character vector of arguments to the command that
+    #'   terminates a worker.
+    #' @param name Character of length 1, name of the job of the worker
+    #'   on the scheduler.
+    args_terminate = function(name) {
+      shQuote(name)
     }
   )
 )
