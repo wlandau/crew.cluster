@@ -44,7 +44,7 @@ crew_controller_slurm <- function(
   script_lines = character(0L),
   slurm_log_output = "/dev/null",
   slurm_log_error = "/dev/null",
-  slurm_memory_megabytes_per_cpu = NULL,
+  slurm_memory_gigabytes_per_cpu = NULL,
   slurm_cpus_per_task = NULL,
   auto_scale = "demand"
 ) {
@@ -77,7 +77,7 @@ crew_controller_slurm <- function(
     script_lines = script_lines,
     slurm_log_output = slurm_log_output,
     slurm_log_error = slurm_log_error,
-    slurm_memory_megabytes_per_cpu = slurm_memory_megabytes_per_cpu,
+    slurm_memory_gigabytes_per_cpu = slurm_memory_gigabytes_per_cpu,
     slurm_cpus_per_task = slurm_cpus_per_task
   )
   controller <- crew::crew_controller(
