@@ -26,7 +26,7 @@ crew_launcher_lsf(
   script_lines = character(0L),
   lsf_log_output = "/dev/null",
   lsf_log_error = "/dev/null",
-  lsf_memory_megabytes_per_cpu = NULL,
+  lsf_memory_limit_megabytes = NULL,
   lsf_cpus_per_task = NULL
 )
 }
@@ -116,29 +116,29 @@ supports R through an environment module.}
 the locations of the LSF worker log files. By default, both standard
 output and standard error go to the same file.
 \code{lsf_log_output = "crew_log_\%J.log"} translates to a line of
-\verb{#BSUB-o crew_log_\%J.log} in the LSF job script,
+\verb{#BSUB -o crew_log_\%J.log} in the LSF job script,
 where \verb{\%J} is replaced by the job ID of the worker.
 The default is \verb{/dev/null} to omit these logs.
 Set \code{lsf_log_output = NULL} to omit this line from the job script.}
 
 \item{lsf_log_error}{Character of length 1, file pattern for standard
 error. \code{lsf_log_error = "crew_error_\%J.err"} translates to a line of
-\verb{#BSUB-e crew_error_\%J.err} in the LSF job script,
+\verb{#BSUB -e crew_error_\%J.err} in the LSF job script,
 where \verb{\%J} is replaced by the job ID of the worker.
 The default is \verb{/dev/null} to omit these logs.
 Set \code{lsf_log_error = NULL} to omit this line from the job script.}
 
-\item{lsf_memory_megabytes_per_cpu}{Positive numeric of length 1
-with the megabytes of memory required.
-\code{lsf_memory_megabytes_per_cpu = 4096}
-translates to a line of \verb{#BSUB-M 4096}
+\item{lsf_memory_limit_megabytes}{Positive numeric of length 1
+with the limit in megabytes
+\code{lsf_memory_limit_megabytes = 4096}
+translates to a line of \verb{#BSUB -M 4096MB}
 in the LSF job script.
-\code{lsf_memory_megabytes_per_cpu = NULL} omits this line.}
+\code{lsf_memory_limit_megabytes = NULL} omits this line.}
 
 \item{lsf_cpus_per_task}{Optional positive integer of length 1,
 number of CPUs for the worker.
 \code{lsf_cpus_per_task = 4} translates
-to a line of \verb{#BSUB-n 4} in the LSF job script.
+to a line of \verb{#BSUB -n 4} in the LSF job script.
 \code{lsf_cpus_per_task = NULL} omits this line.}
 }
 \description{
@@ -146,8 +146,7 @@ Create an \code{R6} object to launch and maintain
 workers as LSF jobs.
 }
 \details{
-WARNING: the \code{crew.cluster} LSF plugin is experimental
-and has not actually been tested on a LSF cluster. Please proceed
+WARNING: the \code{crew.cluster} LSF plugin is experimental. Please proceed
 with caution and report bugs to
 \url{https://github.com/wlandau/crew.cluster}.
 

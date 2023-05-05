@@ -44,7 +44,7 @@ crew_controller_lsf <- function(
   script_lines = character(0L),
   lsf_log_output = "/dev/null",
   lsf_log_error = "/dev/null",
-  lsf_memory_megabytes_per_cpu = NULL,
+  lsf_memory_limit_megabytes = NULL,
   lsf_cpus_per_task = NULL,
   auto_scale = "demand"
 ) {
@@ -77,7 +77,7 @@ crew_controller_lsf <- function(
     script_lines = script_lines,
     lsf_log_output = lsf_log_output,
     lsf_log_error = lsf_log_error,
-    lsf_memory_megabytes_per_cpu = lsf_memory_megabytes_per_cpu,
+    lsf_memory_limit_megabytes = lsf_memory_limit_megabytes,
     lsf_cpus_per_task = lsf_cpus_per_task
   )
   controller <- crew::crew_controller(

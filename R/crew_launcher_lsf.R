@@ -4,8 +4,7 @@
 #' @family launchers
 #' @description Create an `R6` object to launch and maintain
 #'   workers as LSF jobs.
-#' @details WARNING: the `crew.cluster` LSF plugin is experimental
-#'   and has not actually been tested on a LSF cluster. Please proceed
+#' @details WARNING: the `crew.cluster` LSF plugin is experimental. Please proceed
 #'   with caution and report bugs to
 #'   <https://github.com/wlandau/crew.cluster>.
 #'
@@ -22,26 +21,26 @@
 #'   the locations of the LSF worker log files. By default, both standard
 #'   output and standard error go to the same file.
 #'   `lsf_log_output = "crew_log_%J.log"` translates to a line of
-#'   `#BSUB-o crew_log_%J.log` in the LSF job script,
+#'   `#BSUB -o crew_log_%J.log` in the LSF job script,
 #'   where `%J` is replaced by the job ID of the worker.
 #'   The default is `/dev/null` to omit these logs.
 #'   Set `lsf_log_output = NULL` to omit this line from the job script.
 #' @param lsf_log_error Character of length 1, file pattern for standard
 #'   error. `lsf_log_error = "crew_error_%J.err"` translates to a line of
-#'   `#BSUB-e crew_error_%J.err` in the LSF job script,
+#'   `#BSUB -e crew_error_%J.err` in the LSF job script,
 #'   where `%J` is replaced by the job ID of the worker.
 #'   The default is `/dev/null` to omit these logs.
 #'   Set `lsf_log_error = NULL` to omit this line from the job script.
-#' @param lsf_memory_megabytes_per_cpu Positive numeric of length 1
-#'   with the megabytes of memory required.
-#'   `lsf_memory_megabytes_per_cpu = 4096`
-#'   translates to a line of `#BSUB-M 4096`
+#' @param lsf_memory_limit_megabytes Positive numeric of length 1
+#'   with the limit in megabytes
+#'   `lsf_memory_limit_megabytes = 4096`
+#'   translates to a line of `#BSUB -M 4096MB`
 #'   in the LSF job script.
-#'   `lsf_memory_megabytes_per_cpu = NULL` omits this line.
+#'   `lsf_memory_limit_megabytes = NULL` omits this line.
 #' @param lsf_cpus_per_task Optional positive integer of length 1,
 #'   number of CPUs for the worker.
 #'   `lsf_cpus_per_task = 4` translates
-#'   to a line of `#BSUB-n 4` in the LSF job script.
+#'   to a line of `#BSUB -n 4` in the LSF job script.
 #'   `lsf_cpus_per_task = NULL` omits this line.
 crew_launcher_lsf <- function(
   name = NULL,
@@ -64,7 +63,7 @@ crew_launcher_lsf <- function(
   script_lines = character(0L),
   lsf_log_output = "/dev/null",
   lsf_log_error = "/dev/null",
-  lsf_memory_megabytes_per_cpu = NULL,
+  lsf_memory_limit_megabytes = NULL,
   lsf_cpus_per_task = NULL
 ) {
   name <- as.character(name %|||% crew::crew_random_name())
@@ -89,7 +88,7 @@ crew_launcher_lsf <- function(
     script_lines = script_lines,
     lsf_log_output = lsf_log_output,
     lsf_log_error = lsf_log_error,
-    lsf_memory_megabytes_per_cpu = lsf_memory_megabytes_per_cpu,
+    lsf_memory_limit_megabytes = lsf_memory_limit_megabytes,
     lsf_cpus_per_task = lsf_cpus_per_task
   )
   launcher$validate()
@@ -110,8 +109,8 @@ crew_class_launcher_lsf <- R6::R6Class(
     lsf_log_output = NULL,
     #' @field lsf_log_error See [crew_launcher_lsf()].
     lsf_log_error = NULL,
-    #' @field lsf_memory_megabytes_per_cpu See [crew_launcher_lsf()].
-    lsf_memory_megabytes_per_cpu = NULL,
+    #' @field lsf_memory_limit_megabytes See [crew_launcher_lsf()].
+    lsf_memory_limit_megabytes = NULL,
     #' @field lsf_cpus_per_task See [crew_launcher_lsf()].
     lsf_cpus_per_task = NULL,
     #' @description LSF launcher constructor.
@@ -136,7 +135,7 @@ crew_class_launcher_lsf <- R6::R6Class(
     #' @param script_lines See [crew_launcher_sge()].
     #' @param lsf_log_output See [crew_launcher_lsf()].
     #' @param lsf_log_error See [crew_launcher_lsf()].
-    #' @param lsf_memory_megabytes_per_cpu See [crew_launcher_lsf()].
+    #' @param lsf_memory_limit_megabytes See [crew_launcher_lsf()].
     #' @param lsf_cpus_per_task See [crew_launcher_lsf()].
     initialize = function(
       name = NULL,
@@ -159,7 +158,7 @@ crew_class_launcher_lsf <- R6::R6Class(
       script_lines = NULL,
       lsf_log_output = NULL,
       lsf_log_error = NULL,
-      lsf_memory_megabytes_per_cpu = NULL,
+      lsf_memory_limit_megabytes = NULL,
       lsf_cpus_per_task = NULL
     ) {
       super$initialize(
@@ -184,7 +183,7 @@ crew_class_launcher_lsf <- R6::R6Class(
       )
       self$lsf_log_output <- lsf_log_output
       self$lsf_log_error <- lsf_log_error
-      self$lsf_memory_megabytes_per_cpu <- lsf_memory_megabytes_per_cpu
+      self$lsf_memory_limit_megabytes <- lsf_memory_limit_megabytes
       self$lsf_cpus_per_task <- lsf_cpus_per_task
     },
     #' @description Validate the launcher.
@@ -208,7 +207,7 @@ crew_class_launcher_lsf <- R6::R6Class(
         }
       }
       fields <- c(
-        "lsf_memory_megabytes_per_cpu",
+        "lsf_memory_limit_megabytes",
         "lsf_cpus_per_task"
       )
       for (field in fields) {
@@ -237,32 +236,32 @@ crew_class_launcher_lsf <- R6::R6Class(
     #' launcher <- crew_launcher_lsf(
     #'   lsf_log_output = "log_file_%J.log",
     #'   lsf_log_error = NULL,
-    #'   lsf_memory_megabytes_per_cpu = 4096
+    #'   lsf_memory_limit_megabytes = 4096
     #' )
     #' launcher$script(name = "my_job_name")
     script = function(name) {
       c(
         "#!/bin/sh",
-        paste("#BSUB-J", name),
+        paste("#BSUB -J", name),
         if_any(
           is.null(self$lsf_log_output),
           character(0L),
-          paste("#BSUB-o", self$lsf_log_output)
+          paste("#BSUB -o", self$lsf_log_output)
         ),
         if_any(
           is.null(self$lsf_log_error),
           character(0L),
-          paste("#BSUB-e", self$lsf_log_error)
+          paste("#BSUB -e", self$lsf_log_error)
         ),
         if_any(
-          is.null(self$lsf_memory_megabytes_per_cpu),
+          is.null(self$lsf_memory_limit_megabytes),
           character(0L),
-          paste("#BSUB-M", self$lsf_memory_megabytes_per_cpu)
+          paste0("#BSUB -M ", self$lsf_memory_limit_megabytes, "MB")
         ),
         if_any(
           is.null(self$lsf_cpus_per_task),
           character(0L),
-          paste("#BSUB-n", self$lsf_cpus_per_task)
+          paste("#BSUB -n", self$lsf_cpus_per_task)
         ),
         self$script_lines
       )
