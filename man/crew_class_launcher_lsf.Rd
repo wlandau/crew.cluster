@@ -55,6 +55,7 @@ Other launchers:
 \item \href{#method-crew_class_launcher_lsf-new}{\code{crew_class_launcher_lsf$new()}}
 \item \href{#method-crew_class_launcher_lsf-validate}{\code{crew_class_launcher_lsf$validate()}}
 \item \href{#method-crew_class_launcher_lsf-script}{\code{crew_class_launcher_lsf$script()}}
+\item \href{#method-crew_class_launcher_lsf-args_launch}{\code{crew_class_launcher_lsf$args_launch()}}
 \item \href{#method-crew_class_launcher_lsf-args_terminate}{\code{crew_class_launcher_lsf$args_terminate()}}
 }
 }
@@ -211,6 +212,28 @@ launcher$script(name = "my_job_name")
 
 }
 
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-crew_class_launcher_lsf-args_launch"></a>}}
+\if{latex}{\out{\hypertarget{method-crew_class_launcher_lsf-args_launch}{}}}
+\subsection{Method \code{args_launch()}}{
+Worker launch arguments.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{crew_class_launcher_lsf$args_launch(script)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{script}}{Character of length 1, path to the job script for
+the scheduler.}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+Character vector of arguments to the command that
+launches a worker.
+}
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-crew_class_launcher_lsf-args_terminate"></a>}}
