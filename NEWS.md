@@ -6,6 +6,7 @@
 * Implement a SLURM launcher.
 * Create an abstract cluster launcher class to combine common elements of cluster launchers.
 * Add a `script_directory` argument to customize the location of job scripts (#3, @mglev1n).
+* Implement an LSF launcher (#4, @mglev1n).
 
 # crew.cluster 0.0.2
 
