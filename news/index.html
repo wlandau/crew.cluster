@@ -52,7 +52,7 @@
 <ul><li>Submit workers asynchronously (<a href="https://github.com/wlandau/crew.cluster/issues/2" class="external-link">#2</a>).</li>
 <li>Use <code><a href="https://rdrr.io/r/base/system2.html" class="external-link">system2()</a></code> instead of <code>processx</code> to submit workers (<a href="https://github.com/wlandau/crew.cluster/issues/2" class="external-link">#2</a>).</li>
 <li>Add a <code>verbose</code> argument to the SGE launcher to optionally print <code><a href="https://rdrr.io/r/base/system2.html" class="external-link">system2()</a></code> stdout and stderr.</li>
-<li>Implement a SLURM launcher.</li>
+<li>Implement SLURM and PBS/TORQUE launchers (<a href="https://github.com/wlandau/crew.cluster/issues/1" class="external-link">#1</a>, <a href="https://github.com/wlandau/crew.cluster/issues/5" class="external-link">#5</a>, <a href="https://github.com/wlandau/crew.cluster/issues/6" class="external-link">#6</a>).</li>
 <li>Create an abstract cluster launcher class to combine common elements of cluster launchers.</li>
 <li>Add a <code>script_directory</code> argument to customize the location of job scripts (<a href="https://github.com/wlandau/crew.cluster/issues/3" class="external-link">#3</a>, <a href="https://github.com/mglev1n" class="external-link">@mglev1n</a>).</li>
 <li>Implement an LSF launcher (<a href="https://github.com/wlandau/crew.cluster/issues/4" class="external-link">#4</a>, <a href="https://github.com/mglev1n" class="external-link">@mglev1n</a>).</li>
