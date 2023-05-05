@@ -326,22 +326,22 @@ crew_class_launcher_sge <- R6::R6Class(
         if_any(
           is.null(self$sge_memory_gigabytes_required),
           character(0L),
-          sprintf("$# -l m_mem_free=%sG", self$sge_memory_gigabytes_required)
+          sprintf("#$ -l m_mem_free=%sG", self$sge_memory_gigabytes_required)
         ),
         if_any(
           is.null(self$sge_memory_gigabytes_limit),
           character(0L),
-          sprintf("$# -l h_rss=%sG", self$sge_memory_gigabytes_limit)
+          sprintf("#$ -l h_rss=%sG", self$sge_memory_gigabytes_limit)
         ),
         if_any(
           is.null(self$sge_cores),
           character(0L),
-          paste("$# -pe smp", as.character(self$sge_cores))
+          paste("#$ -pe smp", as.character(self$sge_cores))
         ),
         if_any(
           is.null(self$sge_gpu),
           character(0L),
-          paste0("$# -l gpu=", as.character(self$sge_gpu))
+          paste0("#$ -l gpu=", as.character(self$sge_gpu))
         ),
         self$script_lines
       )

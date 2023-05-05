@@ -49,10 +49,10 @@ test_that("SGE subclass mock job creates a tempdir() job script", {
     "#$ -o out_dir/",
     "#$ -e err_dir/",
     "#$ -j n",
-    "$# -l m_mem_free=2.4G",
-    "$# -l h_rss=8.4G",
-    "$# -pe smp 2",
-    "$# -l gpu=1",
+    "#$ -l m_mem_free=2.4G",
+    "#$ -l h_rss=8.4G",
+    "#$ -pe smp 2",
+    "#$ -l gpu=1",
     "module load R",
     "echo 'start'"
   )
@@ -104,10 +104,10 @@ test_that("SGE subclass mock job creates a custom job script", {
     "#$ -o out_dir/",
     "#$ -e err_dir/",
     "#$ -j n",
-    "$# -l m_mem_free=2.4G",
-    "$# -l h_rss=8.4G",
-    "$# -pe smp 2",
-    "$# -l gpu=1",
+    "#$ -l m_mem_free=2.4G",
+    "#$ -l h_rss=8.4G",
+    "#$ -pe smp 2",
+    "#$ -l gpu=1",
     "module load R",
     "echo 'start'"
   )

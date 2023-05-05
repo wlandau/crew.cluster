@@ -19,10 +19,10 @@ test_that("crew_controller_sge() script() all lines", {
     "#$ -o out_dir/",
     "#$ -e err_dir/",
     "#$ -j n",
-    "$# -l m_mem_free=2.4G",
-    "$# -l h_rss=8G",
-    "$# -pe smp 2",
-    "$# -l gpu=1",
+    "#$ -l m_mem_free=2.4G",
+    "#$ -l h_rss=8G",
+    "#$ -pe smp 2",
+    "#$ -l gpu=1",
     "module load R",
     "echo 'start'"
   )

@@ -198,6 +198,7 @@ controller$terminate()
 }
 \seealso{
 Other controllers: 
+\code{\link{crew_controller_pbs}()},
 \code{\link{crew_controller_sge}()}
 }
 \concept{controllers}

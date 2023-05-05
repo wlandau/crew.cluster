@@ -5,15 +5,19 @@ reference:
   - '`crew.cluster-package`'
 - title: Controllers
   contents:
+  - '`crew_controller_pbs`'
   - '`crew_controller_sge`'
   - '`crew_controller_slurm`'
 - title: Launchers
   contents:
+  - '`crew_launcher_cluster`'
+  - '`crew_launcher_pbs`'
   - '`crew_launcher_sge`'
   - '`crew_launcher_slurm`'
-  - '`crew_launcher_cluster`'
 - title: Launcher classes
   contents:
+  - '`crew_class_launcher_cluster`'
+  - '`crew_class_launcher_pbs`'
   - '`crew_class_launcher_sge`'
   - '`crew_class_launcher_slurm`'
-  - '`crew_class_launcher_cluster`'
+  

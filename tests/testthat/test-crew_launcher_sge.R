@@ -65,10 +65,10 @@ test_that("crew_launcher_sge() script() all lines", {
     "#$ -o out_dir/",
     "#$ -e err_dir/",
     "#$ -j n",
-    "$# -l m_mem_free=2G",
-    "$# -l h_rss=8.4G",
-    "$# -pe smp 2",
-    "$# -l gpu=1",
+    "#$ -l m_mem_free=2G",
+    "#$ -l h_rss=8.4G",
+    "#$ -pe smp 2",
+    "#$ -l gpu=1",
     "module load R",
     "echo 'start'"
   )
