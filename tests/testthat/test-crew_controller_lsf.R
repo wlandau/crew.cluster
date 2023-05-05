@@ -18,7 +18,7 @@ test_that("crew_controller_lsf() script() all lines", {
     lsf_cwd = "/home",
     lsf_log_output = "log1",
     lsf_log_error = "log2",
-    lsf_memory_megabytes_limit = 2096,
+    lsf_memory_gigabytes_limit = 2,
     lsf_cpus_per_task = 2
   )
   out <- x$launcher$script(name = "my_name")
@@ -28,7 +28,7 @@ test_that("crew_controller_lsf() script() all lines", {
     "#BSUB -cwd /home",
     "#BSUB -o log1",
     "#BSUB -e log2",
-    "#BSUB -M 2096MB",
+    "#BSUB -M 2G",
     "#BSUB -n 2",
     "module load R",
     "echo 'start'"

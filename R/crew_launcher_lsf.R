@@ -37,12 +37,12 @@
 #'   where `%J` is replaced by the job ID of the worker.
 #'   The default is `/dev/null` to omit these logs.
 #'   Set `lsf_log_error = NULL` to omit this line from the job script.
-#' @param lsf_memory_megabytes_limit Positive numeric of length 1
+#' @param lsf_memory_gigabytes_limit Positive numeric of length 1
 #'   with the limit in megabytes
-#'   `lsf_memory_megabytes_limit = 4096`
-#'   translates to a line of `#BSUB -M 4096MB`
+#'   `lsf_memory_gigabytes_limit = 4`
+#'   translates to a line of `#BSUB -M 4G`
 #'   in the LSF job script.
-#'   `lsf_memory_megabytes_limit = NULL` omits this line.
+#'   `lsf_memory_gigabytes_limit = NULL` omits this line.
 #' @param lsf_cpus_per_task Optional positive integer of length 1,
 #'   number of CPUs for the worker.
 #'   `lsf_cpus_per_task = 4` translates
@@ -70,7 +70,7 @@ crew_launcher_lsf <- function(
   lsf_cwd = getwd(),
   lsf_log_output = "/dev/null",
   lsf_log_error = "/dev/null",
-  lsf_memory_megabytes_limit = NULL,
+  lsf_memory_gigabytes_limit = NULL,
   lsf_cpus_per_task = NULL
 ) {
   name <- as.character(name %|||% crew::crew_random_name())
@@ -96,7 +96,7 @@ crew_launcher_lsf <- function(
     lsf_cwd = lsf_cwd,
     lsf_log_output = lsf_log_output,
     lsf_log_error = lsf_log_error,
-    lsf_memory_megabytes_limit = lsf_memory_megabytes_limit,
+    lsf_memory_gigabytes_limit = lsf_memory_gigabytes_limit,
     lsf_cpus_per_task = lsf_cpus_per_task
   )
   launcher$validate()
@@ -119,8 +119,8 @@ crew_class_launcher_lsf <- R6::R6Class(
     lsf_log_output = NULL,
     #' @field lsf_log_error See [crew_launcher_lsf()].
     lsf_log_error = NULL,
-    #' @field lsf_memory_megabytes_limit See [crew_launcher_lsf()].
-    lsf_memory_megabytes_limit = NULL,
+    #' @field lsf_memory_gigabytes_limit See [crew_launcher_lsf()].
+    lsf_memory_gigabytes_limit = NULL,
     #' @field lsf_cpus_per_task See [crew_launcher_lsf()].
     lsf_cpus_per_task = NULL,
     #' @description LSF launcher constructor.
@@ -146,7 +146,7 @@ crew_class_launcher_lsf <- R6::R6Class(
     #' @param lsf_cwd See [crew_launcher_lsf()].
     #' @param lsf_log_output See [crew_launcher_lsf()].
     #' @param lsf_log_error See [crew_launcher_lsf()].
-    #' @param lsf_memory_megabytes_limit See [crew_launcher_lsf()].
+    #' @param lsf_memory_gigabytes_limit See [crew_launcher_lsf()].
     #' @param lsf_cpus_per_task See [crew_launcher_lsf()].
     initialize = function(
       name = NULL,
@@ -170,7 +170,7 @@ crew_class_launcher_lsf <- R6::R6Class(
       lsf_cwd = NULL,
       lsf_log_output = NULL,
       lsf_log_error = NULL,
-      lsf_memory_megabytes_limit = NULL,
+      lsf_memory_gigabytes_limit = NULL,
       lsf_cpus_per_task = NULL
     ) {
       super$initialize(
@@ -196,7 +196,7 @@ crew_class_launcher_lsf <- R6::R6Class(
       self$lsf_cwd <- lsf_cwd
       self$lsf_log_output <- lsf_log_output
       self$lsf_log_error <- lsf_log_error
-      self$lsf_memory_megabytes_limit <- lsf_memory_megabytes_limit
+      self$lsf_memory_gigabytes_limit <- lsf_memory_gigabytes_limit
       self$lsf_cpus_per_task <- lsf_cpus_per_task
     },
     #' @description Validate the launcher.
@@ -220,7 +220,7 @@ crew_class_launcher_lsf <- R6::R6Class(
         }
       }
       fields <- c(
-        "lsf_memory_megabytes_limit",
+        "lsf_memory_gigabytes_limit",
         "lsf_cpus_per_task"
       )
       for (field in fields) {
@@ -250,7 +250,7 @@ crew_class_launcher_lsf <- R6::R6Class(
     #'   lsf_cwd = getwd(),
     #'   lsf_log_output = "log_file_%J.log",
     #'   lsf_log_error = NULL,
-    #'   lsf_memory_megabytes_limit = 4096
+    #'   lsf_memory_gigabytes_limit = 4
     #' )
     #' launcher$script(name = "my_job_name")
     script = function(name) {
@@ -273,9 +273,9 @@ crew_class_launcher_lsf <- R6::R6Class(
           paste("#BSUB -e", self$lsf_log_error)
         ),
         if_any(
-          is.null(self$lsf_memory_megabytes_limit),
+          is.null(self$lsf_memory_gigabytes_limit),
           character(0L),
-          paste0("#BSUB -M ", self$lsf_memory_megabytes_limit, "MB")
+          paste0("#BSUB -M ", self$lsf_memory_gigabytes_limit, "G")
         ),
         if_any(
           is.null(self$lsf_cpus_per_task),

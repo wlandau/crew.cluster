@@ -30,7 +30,7 @@ crew_controller_lsf(
   lsf_cwd = getwd(),
   lsf_log_output = "/dev/null",
   lsf_log_error = "/dev/null",
-  lsf_memory_megabytes_limit = NULL,
+  lsf_memory_gigabytes_limit = NULL,
   lsf_cpus_per_task = NULL,
   auto_scale = "demand"
 )
@@ -149,12 +149,12 @@ where \verb{\%J} is replaced by the job ID of the worker.
 The default is \verb{/dev/null} to omit these logs.
 Set \code{lsf_log_error = NULL} to omit this line from the job script.}
 
-\item{lsf_memory_megabytes_limit}{Positive numeric of length 1
+\item{lsf_memory_gigabytes_limit}{Positive numeric of length 1
 with the limit in megabytes
-\code{lsf_memory_megabytes_limit = 4096}
-translates to a line of \verb{#BSUB -M 4096MB}
+\code{lsf_memory_gigabytes_limit = 4}
+translates to a line of \verb{#BSUB -M 4G}
 in the LSF job script.
-\code{lsf_memory_megabytes_limit = NULL} omits this line.}
+\code{lsf_memory_gigabytes_limit = NULL} omits this line.}
 
 \item{lsf_cpus_per_task}{Optional positive integer of length 1,
 number of CPUs for the worker.
