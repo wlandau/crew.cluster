@@ -10,6 +10,7 @@ test_that("valid populated crew_launcher_lsf()", {
       lsf_log_output = "log1",
       lsf_log_error = "log2",
       lsf_memory_gigabytes_limit = NULL,
+      lsf_memory_gigabytes_required = NULL,
       lsf_cores = NULL
     )
   )
@@ -48,6 +49,7 @@ test_that("crew_launcher_lsf() script() all lines", {
     lsf_log_output = "log1",
     lsf_log_error = "log2",
     lsf_memory_gigabytes_limit = 2,
+    lsf_memory_gigabytes_required = 2,
     lsf_cores = 2
   )
   out <- x$script(name = "this_job")
@@ -58,6 +60,7 @@ test_that("crew_launcher_lsf() script() all lines", {
     "#BSUB -o log1",
     "#BSUB -e log2",
     "#BSUB -M 2G",
+    "#BSUB -R 'rusage[mem=2G]'",
     "#BSUB -n 2",
     "module load R",
     "echo 'start'"

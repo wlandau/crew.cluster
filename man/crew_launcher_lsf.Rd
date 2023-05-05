@@ -28,6 +28,7 @@ crew_launcher_lsf(
   lsf_log_output = "/dev/null",
   lsf_log_error = "/dev/null",
   lsf_memory_gigabytes_limit = NULL,
+  lsf_memory_gigabytes_required = NULL,
   lsf_cores = NULL
 )
 }
@@ -137,11 +138,18 @@ The default is \verb{/dev/null} to omit these logs.
 Set \code{lsf_log_error = NULL} to omit this line from the job script.}
 
 \item{lsf_memory_gigabytes_limit}{Positive numeric of length 1
-with the limit in megabytes
+with the limit in gigabytes
 \code{lsf_memory_gigabytes_limit = 4}
 translates to a line of \verb{#BSUB -M 4G}
 in the LSF job script.
 \code{lsf_memory_gigabytes_limit = NULL} omits this line.}
+
+\item{lsf_memory_gigabytes_required}{Positive numeric of length 1
+with the memory requirement in gigabytes
+\code{lsf_memory_gigabytes_required = 4}
+translates to a line of \verb{#BSUB -R 'rusage[mem=4G]'}
+in the LSF job script.
+\code{lsf_memory_gigabytes_required = NULL} omits this line.}
 
 \item{lsf_cores}{Optional positive integer of length 1,
 number of CPU cores for the worker.

@@ -46,6 +46,7 @@ crew_controller_lsf <- function(
   lsf_log_output = "/dev/null",
   lsf_log_error = "/dev/null",
   lsf_memory_gigabytes_limit = NULL,
+  lsf_memory_gigabytes_required = NULL,
   lsf_cores = NULL,
   auto_scale = "demand"
 ) {
@@ -80,6 +81,7 @@ crew_controller_lsf <- function(
     lsf_log_output = lsf_log_output,
     lsf_log_error = lsf_log_error,
     lsf_memory_gigabytes_limit = lsf_memory_gigabytes_limit,
+    lsf_memory_gigabytes_required = lsf_memory_gigabytes_required,
     lsf_cores = lsf_cores
   )
   controller <- crew::crew_controller(
