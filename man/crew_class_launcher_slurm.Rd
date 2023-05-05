@@ -25,9 +25,11 @@ launcher$script(name = "my_job_name")
 \seealso{
 Other launchers: 
 \code{\link{crew_class_launcher_cluster}},
+\code{\link{crew_class_launcher_lsf}},
 \code{\link{crew_class_launcher_pbs}},
 \code{\link{crew_class_launcher_sge}},
 \code{\link{crew_launcher_cluster}()},
+\code{\link{crew_launcher_lsf}()},
 \code{\link{crew_launcher_pbs}()},
 \code{\link{crew_launcher_sge}()},
 \code{\link{crew_launcher_slurm}()}

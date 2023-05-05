@@ -232,6 +232,7 @@ controller$terminate()
 \seealso{
 Other controllers: 
 \code{\link{crew_controller_lsf}()},
+\code{\link{crew_controller_pbs}()},
 \code{\link{crew_controller_slurm}()}
 }
 \concept{controllers}
