@@ -2,9 +2,9 @@
 % Please edit documentation in R/crew_launcher_pbs.R
 \name{crew_class_launcher_pbs}
 \alias{crew_class_launcher_pbs}
-\title{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#maturing}{\figure{lifecycle-maturing.svg}{options: alt='[Maturing]'}}}{\strong{[Maturing]}} PBS launcher class}
+\title{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#maturing}{\figure{lifecycle-maturing.svg}{options: alt='[Maturing]'}}}{\strong{[Maturing]}} PBS/TORQUE launcher class}
 \description{
-\code{R6} class to launch and manage PBS workers.
+\code{R6} class to launch and manage PBS/TORQUE workers.
 }
 \details{
 See \code{\link[=crew_launcher_pbs]{crew_launcher_pbs()}}.
@@ -85,7 +85,7 @@ Other launchers:
 \if{html}{\out{<a id="method-crew_class_launcher_pbs-new"></a>}}
 \if{latex}{\out{\hypertarget{method-crew_class_launcher_pbs-new}{}}}
 \subsection{Method \code{new()}}{
-PBS launcher constructor.
+PBS/TORQUE launcher constructor.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{crew_class_launcher_pbs$new(
   name = NULL,
@@ -172,7 +172,7 @@ PBS launcher constructor.
 \if{html}{\out{</div>}}
 }
 \subsection{Returns}{
-an PBS launcher object.
+an PBS/TORQUE launcher object.
 }
 }
 \if{html}{\out{<hr>}}

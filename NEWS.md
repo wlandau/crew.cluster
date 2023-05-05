@@ -3,7 +3,7 @@
 * Submit workers asynchronously (#2).
 * Use `system2()` instead of `processx` to submit workers (#2).
 * Add a `verbose` argument to the SGE launcher to optionally print `system2()` stdout and stderr.
-* Implement a SLURM launcher.
+* Implement SLURM and PBS/TORQUE launchers (#1, #5, #6).
 * Create an abstract cluster launcher class to combine common elements of cluster launchers.
 * Add a `script_directory` argument to customize the location of job scripts (#3, @mglev1n).
 * Implement an LSF launcher (#4, @mglev1n).

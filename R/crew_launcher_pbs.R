@@ -1,15 +1,15 @@
 #' @title `r lifecycle::badge("experimental")` Create a launcher with
-#'   PBS workers.
+#'   PBS or TORQUE workers.
 #' @export
 #' @family launchers
 #' @description Create an `R6` object to launch and maintain
-#'   workers as PBS jobs.
+#'   workers as jobs on a PBS or TORQUE cluster.
 #' @details WARNING: the `crew.cluster` PBS plugin is experimental
 #'   and has not actually been tested on a PBS cluster. Please proceed
 #'   with caution and report bugs to
 #'   <https://github.com/wlandau/crew.cluster>.
 #'
-#'   To launch a PBS worker, this launcher
+#'   To launch a PBS/TORQUE worker, this launcher
 #'   creates a temporary job script with a call to `crew::crew_worker()`
 #'   and submits it as an PBS job with `qsub`. To see most of the lines
 #'   of the job script in advance, use the `script()` method of the launcher.
@@ -118,10 +118,10 @@ crew_launcher_pbs <- function(
   launcher
 }
 
-#' @title `r lifecycle::badge("maturing")` PBS launcher class
+#' @title `r lifecycle::badge("maturing")` PBS/TORQUE launcher class
 #' @export
 #' @family launchers
-#' @description `R6` class to launch and manage PBS workers.
+#' @description `R6` class to launch and manage PBS/TORQUE workers.
 #' @details See [crew_launcher_pbs()].
 crew_class_launcher_pbs <- R6::R6Class(
   classname = "crew_class_launcher_pbs",
@@ -142,8 +142,8 @@ crew_class_launcher_pbs <- R6::R6Class(
     pbs_cores = NULL,
     #' @field pbs_walltime_hours See [crew_launcher_pbs()].
     pbs_walltime_hours = NULL,
-    #' @description PBS launcher constructor.
-    #' @return an PBS launcher object.
+    #' @description PBS/TORQUE launcher constructor.
+    #' @return an PBS/TORQUE launcher object.
     #' @param name See [crew_launcher_pbs()].
     #' @param seconds_launch See [crew_launcher_pbs()].
     #' @param seconds_interval See [crew_launcher_pbs()].

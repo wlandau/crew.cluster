@@ -1,9 +1,9 @@
 #' @title `r lifecycle::badge("experimental")` Create a controller with a
-#'   PBS launcher.
+#'   PBS/TORQUE launcher.
 #' @export
 #' @family controllers
 #' @description Create an `R6` object to submit tasks and
-#'   launch workers on PBS workers.
+#'   launch workers on a PBS or TORQUE cluster.
 #' @inheritParams crew::crew_router
 #' @inheritParams crew_launcher_pbs
 #' @inheritParams crew::crew_controller

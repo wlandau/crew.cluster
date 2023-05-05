@@ -3,7 +3,7 @@
 \name{crew_controller_pbs}
 \alias{crew_controller_pbs}
 \title{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}} Create a controller with a
-PBS launcher.}
+PBS/TORQUE launcher.}
 \usage{
 crew_controller_pbs(
   name = NULL,
@@ -206,7 +206,7 @@ a one worker if demand \code{min(n, max(0, t - w))} is greater than 0.
 }
 \description{
 Create an \code{R6} object to submit tasks and
-launch workers on PBS workers.
+launch workers on a PBS or TORQUE cluster.
 }
 \examples{
 if (identical(Sys.getenv("CREW_EXAMPLES"), "true")) {

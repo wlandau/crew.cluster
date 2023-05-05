@@ -3,7 +3,7 @@
 \name{crew_launcher_pbs}
 \alias{crew_launcher_pbs}
 \title{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}} Create a launcher with
-PBS workers.}
+PBS or TORQUE workers.}
 \usage{
 crew_launcher_pbs(
   name = NULL,
@@ -171,7 +171,7 @@ a line of \verb{#PBS -l walltime=23:00:00} in the job script.
 }
 \description{
 Create an \code{R6} object to launch and maintain
-workers as PBS jobs.
+workers as jobs on a PBS or TORQUE cluster.
 }
 \details{
 WARNING: the \code{crew.cluster} PBS plugin is experimental
@@ -179,7 +179,7 @@ and has not actually been tested on a PBS cluster. Please proceed
 with caution and report bugs to
 \url{https://github.com/wlandau/crew.cluster}.
 
-To launch a PBS worker, this launcher
+To launch a PBS/TORQUE worker, this launcher
 creates a temporary job script with a call to \code{crew::crew_worker()}
 and submits it as an PBS job with \code{qsub}. To see most of the lines
 of the job script in advance, use the \code{script()} method of the launcher.
