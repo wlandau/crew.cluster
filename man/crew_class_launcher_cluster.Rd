@@ -11,11 +11,11 @@ See \code{\link[=crew_launcher_cluster]{crew_launcher_cluster()}}.
 }
 \seealso{
 Other launchers: 
-\code{\link{crew_class_launcher_lsf}},
+\code{\link{crew_class_launcher_pbs}},
 \code{\link{crew_class_launcher_sge}},
 \code{\link{crew_class_launcher_slurm}},
 \code{\link{crew_launcher_cluster}()},
-\code{\link{crew_launcher_lsf}()},
+\code{\link{crew_launcher_pbs}()},
 \code{\link{crew_launcher_sge}()},
 \code{\link{crew_launcher_slurm}()}
 }

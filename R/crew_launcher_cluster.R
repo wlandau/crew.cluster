@@ -12,6 +12,12 @@
 #'   file path to the executable to submit a worker job.
 #' @param command_delete Character of length 1,
 #'   file path to the executable to delete a worker job.
+#'   Set to `""` to skip manually terminating the worker.
+#'   Unless there is an issue with the platform,
+#'   the job should still exit thanks to the NNG-powered network programming
+#'   capabilities of `mirai`. Still, if you set `command_delete = ""`,
+#'   you are assuming extra responsibility for manually monitoring
+#'   your jobs on the cluster and manually terminating jobs as appropriate.
 #' @param script_directory Character of length 1, directory path to the
 #'   job scripts. Just before each job submission, a job script
 #'   is created in this folder. Script base names are unique to each
@@ -241,13 +247,15 @@ crew_class_launcher_cluster <- R6::R6Class(
       )
       unlink(script)
       name <- do.call(what = name_job, args = handle)
-      system2(
-        command = self$command_delete,
-        args = self$args_terminate(name = name),
-        stdout = if_any(self$verbose, "", FALSE),
-        stderr = if_any(self$verbose, "", FALSE),
-        wait = FALSE
-      )
+      if (nzchar(self$command_delete)) {
+        system2(
+          command = self$command_delete,
+          args = self$args_terminate(name = name),
+          stdout = if_any(self$verbose, "", FALSE),
+          stderr = if_any(self$verbose, "", FALSE),
+          wait = FALSE
+        )
+      }
       invisible()
     },
     #' @description Worker launch arguments.

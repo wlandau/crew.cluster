@@ -1,26 +1,22 @@
 #' @title `r lifecycle::badge("experimental")` Create a controller with a
-#'   SLURM launcher.
+#'   PBS launcher.
 #' @export
 #' @family controllers
 #' @description Create an `R6` object to submit tasks and
-#'   launch workers on SLURM workers.
-#' @details WARNING: the `crew.cluster` SLURM plugin is experimental
-#'   and has not actually been tested on a SLURM cluster. Please proceed
-#'   with caution and report bugs to
-#'   <https://github.com/wlandau/crew.cluster>.
+#'   launch workers on PBS workers.
 #' @inheritParams crew::crew_router
-#' @inheritParams crew_launcher_slurm
+#' @inheritParams crew_launcher_pbs
 #' @inheritParams crew::crew_controller
 #' @examples
 #' if (identical(Sys.getenv("CREW_EXAMPLES"), "true")) {
-#' controller <- crew_controller_slurm()
+#' controller <- crew_controller_pbs()
 #' controller$start()
 #' controller$push(name = "task", command = sqrt(4))
 #' controller$wait()
 #' controller$pop()$result
 #' controller$terminate()
 #' }
-crew_controller_slurm <- function(
+crew_controller_pbs <- function(
   name = NULL,
   workers = 1L,
   host = NULL,
@@ -38,14 +34,17 @@ crew_controller_slurm <- function(
   reset_options = FALSE,
   garbage_collection = FALSE,
   verbose = FALSE,
-  command_submit = as.character(Sys.which("sbatch")),
-  command_delete = as.character(Sys.which("scancel")),
+  command_submit = as.character(Sys.which("qsub")),
+  command_delete = as.character(Sys.which("qdel")),
   script_directory = tempdir(),
   script_lines = character(0L),
-  slurm_log_output = "/dev/null",
-  slurm_log_error = "/dev/null",
-  slurm_memory_gigabytes_per_cpu = NULL,
-  slurm_cpus_per_task = NULL,
+  pbs_cwd = TRUE,
+  pbs_log_output = "/dev/null",
+  pbs_log_error = NULL,
+  pbs_log_join = TRUE,
+  pbs_memory_gigabytes_required = NULL,
+  pbs_cores = NULL,
+  pbs_walltime_hours = 12,
   auto_scale = "demand"
 ) {
   router <- crew::crew_router(
@@ -56,7 +55,7 @@ crew_controller_slurm <- function(
     seconds_interval = seconds_interval,
     seconds_timeout = seconds_timeout
   )
-  launcher <- crew_launcher_slurm(
+  launcher <- crew_launcher_pbs(
     name = name,
     seconds_launch = seconds_launch,
     seconds_interval = seconds_interval,
@@ -75,10 +74,13 @@ crew_controller_slurm <- function(
     command_delete = command_delete,
     script_directory = script_directory,
     script_lines = script_lines,
-    slurm_log_output = slurm_log_output,
-    slurm_log_error = slurm_log_error,
-    slurm_memory_gigabytes_per_cpu = slurm_memory_gigabytes_per_cpu,
-    slurm_cpus_per_task = slurm_cpus_per_task
+    pbs_cwd = pbs_cwd,
+    pbs_log_output = pbs_log_output,
+    pbs_log_error = pbs_log_error,
+    pbs_log_join = pbs_log_join,
+    pbs_memory_gigabytes_required = pbs_memory_gigabytes_required,
+    pbs_cores = pbs_cores,
+    pbs_walltime_hours = pbs_walltime_hours
   )
   controller <- crew::crew_controller(
     router = router,

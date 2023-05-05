@@ -18,17 +18,17 @@ See \code{\link[=crew_launcher_slurm]{crew_launcher_slurm()}}.
 launcher <- crew_launcher_slurm(
   slurm_log_output = "log_file_\%A.log",
   slurm_log_error = NULL,
-  slurm_memory_megabytes_per_cpu = 4096
+  slurm_memory_gigabytes_per_cpu = 4096
 )
 launcher$script(name = "my_job_name")
 }
 \seealso{
 Other launchers: 
 \code{\link{crew_class_launcher_cluster}},
-\code{\link{crew_class_launcher_lsf}},
+\code{\link{crew_class_launcher_pbs}},
 \code{\link{crew_class_launcher_sge}},
 \code{\link{crew_launcher_cluster}()},
-\code{\link{crew_launcher_lsf}()},
+\code{\link{crew_launcher_pbs}()},
 \code{\link{crew_launcher_sge}()},
 \code{\link{crew_launcher_slurm}()}
 }
@@ -43,7 +43,7 @@ Other launchers:
 
 \item{\code{slurm_log_error}}{See \code{\link[=crew_launcher_slurm]{crew_launcher_slurm()}}.}
 
-\item{\code{slurm_memory_megabytes_per_cpu}}{See \code{\link[=crew_launcher_slurm]{crew_launcher_slurm()}}.}
+\item{\code{slurm_memory_gigabytes_per_cpu}}{See \code{\link[=crew_launcher_slurm]{crew_launcher_slurm()}}.}
 
 \item{\code{slurm_cpus_per_task}}{See \code{\link[=crew_launcher_slurm]{crew_launcher_slurm()}}.}
 }
@@ -55,6 +55,7 @@ Other launchers:
 \item \href{#method-crew_class_launcher_slurm-new}{\code{crew_class_launcher_slurm$new()}}
 \item \href{#method-crew_class_launcher_slurm-validate}{\code{crew_class_launcher_slurm$validate()}}
 \item \href{#method-crew_class_launcher_slurm-script}{\code{crew_class_launcher_slurm$script()}}
+\item \href{#method-crew_class_launcher_slurm-args_terminate}{\code{crew_class_launcher_slurm$args_terminate()}}
 }
 }
 \if{html}{\out{
@@ -68,7 +69,6 @@ Other launchers:
 <li><span class="pkg-link" data-pkg="crew" data-topic="crew_class_launcher" data-id="start"><a href='../../crew/html/crew_class_launcher.html#method-crew_class_launcher-start'><code>crew::crew_class_launcher$start()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="crew" data-topic="crew_class_launcher" data-id="terminate"><a href='../../crew/html/crew_class_launcher.html#method-crew_class_launcher-terminate'><code>crew::crew_class_launcher$terminate()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="crew.cluster" data-topic="crew_class_launcher_cluster" data-id="args_launch"><a href='../../crew.cluster/html/crew_class_launcher_cluster.html#method-crew_class_launcher_cluster-args_launch'><code>crew.cluster::crew_class_launcher_cluster$args_launch()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="crew.cluster" data-topic="crew_class_launcher_cluster" data-id="args_terminate"><a href='../../crew.cluster/html/crew_class_launcher_cluster.html#method-crew_class_launcher_cluster-args_terminate'><code>crew.cluster::crew_class_launcher_cluster$args_terminate()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="crew.cluster" data-topic="crew_class_launcher_cluster" data-id="launch_worker"><a href='../../crew.cluster/html/crew_class_launcher_cluster.html#method-crew_class_launcher_cluster-launch_worker'><code>crew.cluster::crew_class_launcher_cluster$launch_worker()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="crew.cluster" data-topic="crew_class_launcher_cluster" data-id="terminate_worker"><a href='../../crew.cluster/html/crew_class_launcher_cluster.html#method-crew_class_launcher_cluster-terminate_worker'><code>crew.cluster::crew_class_launcher_cluster$terminate_worker()</code></a></span></li>
 </ul>
@@ -101,7 +101,7 @@ SLURM launcher constructor.
   script_lines = NULL,
   slurm_log_output = NULL,
   slurm_log_error = NULL,
-  slurm_memory_megabytes_per_cpu = NULL,
+  slurm_memory_gigabytes_per_cpu = NULL,
   slurm_cpus_per_task = NULL
 )}\if{html}{\out{</div>}}
 }
@@ -149,7 +149,7 @@ SLURM launcher constructor.
 
 \item{\code{slurm_log_error}}{See \code{\link[=crew_launcher_slurm]{crew_launcher_slurm()}}.}
 
-\item{\code{slurm_memory_megabytes_per_cpu}}{See \code{\link[=crew_launcher_slurm]{crew_launcher_slurm()}}.}
+\item{\code{slurm_memory_gigabytes_per_cpu}}{See \code{\link[=crew_launcher_slurm]{crew_launcher_slurm()}}.}
 
 \item{\code{slurm_cpus_per_task}}{See \code{\link[=crew_launcher_slurm]{crew_launcher_slurm()}}.}
 }
@@ -204,7 +204,7 @@ Character vector of the lines of the job script.
 \preformatted{launcher <- crew_launcher_slurm(
   slurm_log_output = "log_file_\%A.log",
   slurm_log_error = NULL,
-  slurm_memory_megabytes_per_cpu = 4096
+  slurm_memory_gigabytes_per_cpu = 4096
 )
 launcher$script(name = "my_job_name")
 }
@@ -212,5 +212,27 @@ launcher$script(name = "my_job_name")
 
 }
 
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-crew_class_launcher_slurm-args_terminate"></a>}}
+\if{latex}{\out{\hypertarget{method-crew_class_launcher_slurm-args_terminate}{}}}
+\subsection{Method \code{args_terminate()}}{
+Worker termination arguments.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{crew_class_launcher_slurm$args_terminate(name)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{name}}{Character of length 1, name of the job of the worker
+on the scheduler.}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+Character vector of arguments to the command that
+terminates a worker.
+}
 }
 }

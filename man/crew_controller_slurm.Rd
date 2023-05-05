@@ -29,7 +29,7 @@ crew_controller_slurm(
   script_lines = character(0L),
   slurm_log_output = "/dev/null",
   slurm_log_error = "/dev/null",
-  slurm_memory_megabytes_per_cpu = NULL,
+  slurm_memory_gigabytes_per_cpu = NULL,
   slurm_cpus_per_task = NULL,
   auto_scale = "demand"
 )
@@ -109,7 +109,13 @@ when submitting worker.}
 file path to the executable to submit a worker job.}
 
 \item{command_delete}{Character of length 1,
-file path to the executable to delete a worker job.}
+file path to the executable to delete a worker job.
+Set to \code{""} to skip manually terminating the worker.
+Unless there is an issue with the platform,
+the job should still exit thanks to the NNG-powered network programming
+capabilities of \code{mirai}. Still, if you set \code{command_delete = ""},
+you are assuming extra responsibility for manually monitoring
+your jobs on the cluster and manually terminating jobs as appropriate.}
 
 \item{script_directory}{Character of length 1, directory path to the
 job scripts. Just before each job submission, a job script
@@ -141,12 +147,12 @@ where \verb{\%A} is replaced by the job ID of the worker.
 The default is \verb{/dev/null} to omit these logs.
 Set \code{slurm_log_error = NULL} to omit this line from the job script.}
 
-\item{slurm_memory_megabytes_per_cpu}{Positive numeric of length 1
-with the megabytes of memory required.
-\code{slurm_memory_megabytes_per_cpu = 4096}
-translates to a line of \verb{#SBATCH --mem-per-cpu=4096}
+\item{slurm_memory_gigabytes_per_cpu}{Positive numeric of length 1
+with the gigabytes of memory required per CPU.
+\code{slurm_memory_gigabytes_per_cpu = 2.4}
+translates to a line of \verb{#SBATCH --mem-per-cpu=2.4G}
 in the SLURM job script.
-\code{slurm_memory_megabytes_per_cpu = NULL} omits this line.}
+\code{slurm_memory_gigabytes_per_cpu = NULL} omits this line.}
 
 \item{slurm_cpus_per_task}{Optional positive integer of length 1,
 number of CPUs for the worker.

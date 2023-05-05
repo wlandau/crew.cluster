@@ -92,7 +92,13 @@ when submitting worker.}
 file path to the executable to submit a worker job.}
 
 \item{command_delete}{Character of length 1,
-file path to the executable to delete a worker job.}
+file path to the executable to delete a worker job.
+Set to \code{""} to skip manually terminating the worker.
+Unless there is an issue with the platform,
+the job should still exit thanks to the NNG-powered network programming
+capabilities of \code{mirai}. Still, if you set \code{command_delete = ""},
+you are assuming extra responsibility for manually monitoring
+your jobs on the cluster and manually terminating jobs as appropriate.}
 
 \item{script_directory}{Character of length 1, directory path to the
 job scripts. Just before each job submission, a job script

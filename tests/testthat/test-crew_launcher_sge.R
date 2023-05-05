@@ -8,8 +8,9 @@ test_that("valid populated crew_launcher_sge()", {
       script_lines = c("module load R", "echo 'start'"),
       sge_cwd = TRUE,
       sge_envvars = TRUE,
-      sge_log_files = "log",
-      sge_log_join = TRUE,
+      sge_log_output = "out",
+      sge_log_error = "err",
+      sge_log_join = FALSE,
       sge_memory_gigabytes_required = 2,
       sge_memory_gigabytes_limit = 8,
       sge_cores = 2L,
@@ -34,7 +35,7 @@ test_that("crew_launcher_sge() script() nearly empty", {
   x <- crew_launcher_sge(
     sge_cwd = FALSE,
     sge_envvars = FALSE,
-    sge_log_files = "log_file",
+    sge_log_output = "log_file",
     sge_log_join = FALSE
   )
   expect_equal(
@@ -48,8 +49,9 @@ test_that("crew_launcher_sge() script() all lines", {
     script_lines = c("module load R", "echo 'start'"),
     sge_cwd = TRUE,
     sge_envvars = TRUE,
-    sge_log_files = "log_dir/",
-    sge_log_join = TRUE,
+    sge_log_output = "out_dir/",
+    sge_log_error = "err_dir/",
+    sge_log_join = FALSE,
     sge_memory_gigabytes_required = 2,
     sge_memory_gigabytes_limit = 8.4,
     sge_cores = 2L,
@@ -60,12 +62,13 @@ test_that("crew_launcher_sge() script() all lines", {
     "#$ -N this_job",
     "#$ -cwd",
     "#$ -V",
-    "#$ -o log_dir/",
-    "#$ -j y",
-    "$# -l m_mem_free=2G",
-    "$# -l h_rss=8.4G",
-    "$# -pe smp 2",
-    "$# -l gpu=1",
+    "#$ -o out_dir/",
+    "#$ -e err_dir/",
+    "#$ -j n",
+    "#$ -l m_mem_free=2G",
+    "#$ -l h_rss=8.4G",
+    "#$ -pe smp 2",
+    "#$ -l gpu=1",
     "module load R",
     "echo 'start'"
   )
