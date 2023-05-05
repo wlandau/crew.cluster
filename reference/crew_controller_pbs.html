@@ -80,6 +80,7 @@ launch workers on PBS workers.</p>
 <span>  command_delete <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Sys.which.html" class="external-link">Sys.which</a></span><span class="op">(</span><span class="st">"qdel"</span><span class="op">)</span><span class="op">)</span>,</span>
 <span>  script_directory <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  script_lines <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">character</a></span><span class="op">(</span><span class="fl">0L</span><span class="op">)</span>,</span>
+<span>  pbs_cwd <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  pbs_log_output <span class="op">=</span> <span class="st">"/dev/null"</span>,</span>
 <span>  pbs_log_error <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  pbs_log_join <span class="op">=</span> <span class="cn">TRUE</span>,</span>
@@ -228,6 +229,15 @@ is another reasonable choice.</p></dd>
 added to the job script just after the more common flags.
 An example would be <code>script_lines = "module load R"</code> if your cluster
 supports R through an environment module.</p></dd>
+
+
+<dt>pbs_cwd</dt>
+<dd><p>Logical of length 1, whether to set the working directory
+of the worker to the working directory it was launched from.
+<code>pbs_cwd = TRUE</code> is translates to a line of <code>cd "$PBS_O_WORKDIR"</code>
+in the job script. This line is inserted after the content of
+<code>script_lines</code> to make sure the <code>#PBS</code> directives are above
+system commands. <code>pbs_cwd = FALSE</code> omits this line.</p></dd>
 
 
 <dt>pbs_log_output</dt>

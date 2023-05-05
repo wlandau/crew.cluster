@@ -74,7 +74,11 @@
     </div>
     <div id="public-fields">
     <h2>Public fields</h2>
-    <p></p><div class="r6-fields"><dl><dt><code>pbs_log_output</code></dt>
+    <p></p><div class="r6-fields"><dl><dt><code>pbs_cwd</code></dt>
+<dd><p>See <code><a href="crew_launcher_pbs.html">crew_launcher_pbs()</a></code>.</p></dd>
+
+
+<dt><code>pbs_log_output</code></dt>
 <dd><p>See <code><a href="crew_launcher_pbs.html">crew_launcher_pbs()</a></code>.</p></dd>
 
 
@@ -143,6 +147,7 @@
 <span>  command_delete <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  script_directory <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  script_lines <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  pbs_cwd <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  pbs_log_output <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  pbs_log_error <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  pbs_log_join <span class="op">=</span> <span class="cn">NULL</span>,</span>
@@ -224,6 +229,10 @@
 
 <dt><code>script_lines</code></dt>
 <dd><p>See <code><a href="crew_launcher_pbs.html">crew_launcher_pbs()</a></code>.</p></dd>
+
+
+<dt><code>pbs_cwd</code></dt>
+<dd><p>See <code><a href="crew_launcher_sge.html">crew_launcher_sge()</a></code>.</p></dd>
 
 
 <dt><code>pbs_log_output</code></dt>
@@ -326,6 +335,7 @@ the bottom of the script at launch time.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "#PBS -N my_job_name"       "#PBS -o /dev/null"        </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [3] "#PBS -j oe"                "#PBS -l mem=4gb"          </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [5] "#PBS -l ppn=2"             "#PBS -l walltime=12:00:00"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [7] "cd \"$PBS_O_WORKDIR\""    </span>
 </code></pre></div>
     </div>
   </div>
