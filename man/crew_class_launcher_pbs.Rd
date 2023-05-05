@@ -38,6 +38,8 @@ Other launchers:
 \section{Public fields}{
 \if{html}{\out{<div class="r6-fields">}}
 \describe{
+\item{\code{pbs_cwd}}{See \code{\link[=crew_launcher_pbs]{crew_launcher_pbs()}}.}
+
 \item{\code{pbs_log_output}}{See \code{\link[=crew_launcher_pbs]{crew_launcher_pbs()}}.}
 
 \item{\code{pbs_log_error}}{See \code{\link[=crew_launcher_pbs]{crew_launcher_pbs()}}.}
@@ -102,6 +104,7 @@ PBS launcher constructor.
   command_delete = NULL,
   script_directory = NULL,
   script_lines = NULL,
+  pbs_cwd = NULL,
   pbs_log_output = NULL,
   pbs_log_error = NULL,
   pbs_log_join = NULL,
@@ -149,6 +152,8 @@ PBS launcher constructor.
 \item{\code{script_directory}}{See \code{\link[=crew_launcher_pbs]{crew_launcher_pbs()}}.}
 
 \item{\code{script_lines}}{See \code{\link[=crew_launcher_pbs]{crew_launcher_pbs()}}.}
+
+\item{\code{pbs_cwd}}{See \code{\link[=crew_launcher_sge]{crew_launcher_sge()}}.}
 
 \item{\code{pbs_log_output}}{See \code{\link[=crew_launcher_pbs]{crew_launcher_pbs()}}.}
 

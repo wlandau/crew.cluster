@@ -24,6 +24,7 @@ crew_launcher_pbs(
   command_delete = as.character(Sys.which("qdel")),
   script_directory = tempdir(),
   script_lines = character(0L),
+  pbs_cwd = TRUE,
   pbs_log_output = "/dev/null",
   pbs_log_error = NULL,
   pbs_log_join = TRUE,
@@ -119,6 +120,13 @@ is another reasonable choice.}
 added to the job script just after the more common flags.
 An example would be \code{script_lines = "module load R"} if your cluster
 supports R through an environment module.}
+
+\item{pbs_cwd}{Logical of length 1, whether to set the working directory
+of the worker to the working directory it was launched from.
+\code{pbs_cwd = TRUE} is translates to a line of \verb{cd "$PBS_O_WORKDIR"}
+in the job script. This line is inserted after the content of
+\code{script_lines} to make sure the \verb{#PBS} directives are above
+system commands. \code{pbs_cwd = FALSE} omits this line.}
 
 \item{pbs_log_output}{Character of length 1, file or directory path to PBS
 worker log files for standard output.

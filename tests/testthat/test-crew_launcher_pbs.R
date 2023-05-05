@@ -30,6 +30,7 @@ test_that("invalid crew_launcher_pbs(): non-pbs field", {
 
 test_that("crew_launcher_pbs() script() nearly empty", {
   x <- crew_launcher_pbs(
+    pbs_cwd = FALSE,
     pbs_log_output = "log_file",
     pbs_log_join = FALSE,
     pbs_walltime_hours = NULL
@@ -60,7 +61,8 @@ test_that("crew_launcher_pbs() script() all lines", {
     "#PBS -l ppn=2",
     "#PBS -l walltime=57:00:00",
     "module load R",
-    "echo 'start'"
+    "echo 'start'",
+    "cd \"$PBS_O_WORKDIR\""
   )
   expect_equal(out, exp)
 })

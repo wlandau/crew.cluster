@@ -1,6 +1,7 @@
 test_that("crew_controller_pbs() script() all lines", {
   x <- crew_controller_pbs(
     script_lines = c("module load R", "echo 'start'"),
+    pbs_cwd = TRUE,
     pbs_log_output = "out_dir/",
     pbs_log_error = "err_dir/",
     pbs_log_join = FALSE,
@@ -18,7 +19,8 @@ test_that("crew_controller_pbs() script() all lines", {
     "#PBS -l ppn=2",
     "#PBS -l walltime=57:00:00",
     "module load R",
-    "echo 'start'"
+    "echo 'start'",
+    "cd \"$PBS_O_WORKDIR\""
   )
   expect_equal(out, exp)
 })

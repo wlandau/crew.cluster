@@ -18,6 +18,12 @@
 #'   which will be inserted at the last minute when it is time
 #'   to actually launch a worker.
 #' @inheritParams crew_launcher_cluster
+#' @param pbs_cwd Logical of length 1, whether to set the working directory
+#'   of the worker to the working directory it was launched from.
+#'   `pbs_cwd = TRUE` is translates to a line of `cd "$PBS_O_WORKDIR"`
+#'   in the job script. This line is inserted after the content of
+#'   `script_lines` to make sure the `#PBS` directives are above
+#'   system commands. `pbs_cwd = FALSE` omits this line.
 #' @param pbs_log_output Character of length 1, file or directory path to PBS
 #'   worker log files for standard output.
 #'   `pbs_log_output = "VALUE"` translates to a line of
@@ -72,6 +78,7 @@ crew_launcher_pbs <- function(
   command_delete = as.character(Sys.which("qdel")),
   script_directory = tempdir(),
   script_lines = character(0L),
+  pbs_cwd = TRUE,
   pbs_log_output = "/dev/null",
   pbs_log_error = NULL,
   pbs_log_join = TRUE,
@@ -99,6 +106,7 @@ crew_launcher_pbs <- function(
     command_delete = command_delete,
     script_directory = script_directory,
     script_lines = script_lines,
+    pbs_cwd = pbs_cwd,
     pbs_log_output = pbs_log_output,
     pbs_log_error = pbs_log_error,
     pbs_log_join = pbs_log_join,
@@ -120,6 +128,8 @@ crew_class_launcher_pbs <- R6::R6Class(
   inherit = crew_class_launcher_cluster,
   cloneable = FALSE,
   public = list(
+    #' @field pbs_cwd See [crew_launcher_pbs()].
+    pbs_cwd = NULL,
     #' @field pbs_log_output See [crew_launcher_pbs()].
     pbs_log_output = NULL,
     #' @field pbs_log_error See [crew_launcher_pbs()].
@@ -152,6 +162,7 @@ crew_class_launcher_pbs <- R6::R6Class(
     #' @param command_delete See [crew_launcher_pbs()].
     #' @param script_directory See [crew_launcher_pbs()].
     #' @param script_lines See [crew_launcher_pbs()].
+    #' @param pbs_cwd See [crew_launcher_sge()].
     #' @param pbs_log_output See [crew_launcher_pbs()].
     #' @param pbs_log_error See [crew_launcher_pbs()].
     #' @param pbs_log_join See [crew_launcher_pbs()].
@@ -177,6 +188,7 @@ crew_class_launcher_pbs <- R6::R6Class(
       command_delete = NULL,
       script_directory = NULL,
       script_lines = NULL,
+      pbs_cwd = NULL,
       pbs_log_output = NULL,
       pbs_log_error = NULL,
       pbs_log_join = NULL,
@@ -204,6 +216,7 @@ crew_class_launcher_pbs <- R6::R6Class(
         script_directory = script_directory,
         script_lines = script_lines
       )
+      self$pbs_cwd <- pbs_cwd
       self$pbs_log_output <- pbs_log_output
       self$pbs_log_error <- pbs_log_error
       self$pbs_log_join <- pbs_log_join
@@ -236,11 +249,17 @@ crew_class_launcher_pbs <- R6::R6Class(
           )
         )
       }
-      crew::crew_assert(
-        self$pbs_log_join,
-        isTRUE(.) || isFALSE(.),
-        message = "pbs_log_join is not a length-1 logical."
+      fields <- c(
+        "pbs_cwd",
+        "pbs_log_join"
       )
+      for (field in fields) {
+        crew::crew_assert(
+          self[[field]],
+          isTRUE(.) || isFALSE(.),
+          message = paste(field, "must be a length-1 logical.")
+        )
+      }
       fields <- c(
         "pbs_memory_gigabytes_required",
         "pbs_cores",
@@ -305,7 +324,8 @@ crew_class_launcher_pbs <- R6::R6Class(
             as.character(self$pbs_walltime_hours)
           )
         ),
-        self$script_lines
+        self$script_lines,
+        if_any(self$pbs_cwd, "cd \"$PBS_O_WORKDIR\"", character(0L))
       )
     }
   )
