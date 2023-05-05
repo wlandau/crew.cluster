@@ -184,7 +184,13 @@ file path to the executable to submit a worker job.</p></dd>
 
 <dt>command_delete</dt>
 <dd><p>Character of length 1,
-file path to the executable to delete a worker job.</p></dd>
+file path to the executable to delete a worker job.
+Set to <code>""</code> to skip manually terminating the worker.
+Unless there is an issue with the platform,
+the job should still exit thanks to the NNG-powered network programming
+capabilities of <code>mirai</code>. Still, if you set <code>command_delete = ""</code>,
+you are assuming extra responsibility for manually monitoring
+your jobs on the cluster and manually terminating jobs as appropriate.</p></dd>
 
 
 <dt>script_directory</dt>
@@ -279,9 +285,11 @@ to actually launch a worker.</p>
     <div class="dont-index"><p>Other launchers: 
 <code><a href="crew_class_launcher_cluster.html">crew_class_launcher_cluster</a></code>,
 <code><a href="crew_class_launcher_lsf.html">crew_class_launcher_lsf</a></code>,
+<code><a href="crew_class_launcher_pbs.html">crew_class_launcher_pbs</a></code>,
 <code><a href="crew_class_launcher_sge.html">crew_class_launcher_sge</a></code>,
 <code><a href="crew_class_launcher_slurm.html">crew_class_launcher_slurm</a></code>,
 <code><a href="crew_launcher_cluster.html">crew_launcher_cluster</a>()</code>,
+<code><a href="crew_launcher_pbs.html">crew_launcher_pbs</a>()</code>,
 <code><a href="crew_launcher_sge.html">crew_launcher_sge</a>()</code>,
 <code><a href="crew_launcher_slurm.html">crew_launcher_slurm</a>()</code></p></div>
     </div>
