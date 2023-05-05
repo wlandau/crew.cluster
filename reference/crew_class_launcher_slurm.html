@@ -80,7 +80,7 @@
 <dd><p>See <code><a href="crew_launcher_slurm.html">crew_launcher_slurm()</a></code>.</p></dd>
 
 
-<dt><code>slurm_memory_megabytes_per_cpu</code></dt>
+<dt><code>slurm_memory_gigabytes_per_cpu</code></dt>
 <dd><p>See <code><a href="crew_launcher_slurm.html">crew_launcher_slurm()</a></code>.</p></dd>
 
 
@@ -99,6 +99,7 @@
 <ul><li><p><a href="#method-crew_class_launcher_slurm-new"><code>crew_class_launcher_slurm$new()</code></a></p></li>
 <li><p><a href="#method-crew_class_launcher_slurm-validate"><code>crew_class_launcher_slurm$validate()</code></a></p></li>
 <li><p><a href="#method-crew_class_launcher_slurm-script"><code>crew_class_launcher_slurm$script()</code></a></p></li>
+<li><p><a href="#method-crew_class_launcher_slurm-args_terminate"><code>crew_class_launcher_slurm$args_terminate()</code></a></p></li>
 </ul></div><p><details><summary>Inherited methods</summary><ul><li><span class="pkg-link" data-pkg="crew" data-topic="crew_class_launcher" data-id="call"><a href="https://wlandau.github.io/crew/reference/crew_class_launcher.html#method-call"><code>crew::crew_class_launcher$call()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="crew" data-topic="crew_class_launcher" data-id="expected"><a href="https://wlandau.github.io/crew/reference/crew_class_launcher.html#method-expected"><code>crew::crew_class_launcher$expected()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="crew" data-topic="crew_class_launcher" data-id="launch"><a href="https://wlandau.github.io/crew/reference/crew_class_launcher.html#method-launch"><code>crew::crew_class_launcher$launch()</code></a></span></li>
@@ -107,7 +108,6 @@
 <li><span class="pkg-link" data-pkg="crew" data-topic="crew_class_launcher" data-id="start"><a href="https://wlandau.github.io/crew/reference/crew_class_launcher.html#method-start"><code>crew::crew_class_launcher$start()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="crew" data-topic="crew_class_launcher" data-id="terminate"><a href="https://wlandau.github.io/crew/reference/crew_class_launcher.html#method-terminate"><code>crew::crew_class_launcher$terminate()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="crew.cluster" data-topic="crew_class_launcher_cluster" data-id="args_launch"><a href="crew_class_launcher_cluster.html#method-args_launch"><code>crew.cluster::crew_class_launcher_cluster$args_launch()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="crew.cluster" data-topic="crew_class_launcher_cluster" data-id="args_terminate"><a href="crew_class_launcher_cluster.html#method-args_terminate"><code>crew.cluster::crew_class_launcher_cluster$args_terminate()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="crew.cluster" data-topic="crew_class_launcher_cluster" data-id="launch_worker"><a href="crew_class_launcher_cluster.html#method-launch_worker"><code>crew.cluster::crew_class_launcher_cluster$launch_worker()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="crew.cluster" data-topic="crew_class_launcher_cluster" data-id="terminate_worker"><a href="crew_class_launcher_cluster.html#method-terminate_worker"><code>crew.cluster::crew_class_launcher_cluster$terminate_worker()</code></a></span></li>
 </ul></details></p><hr><a id="method-crew_class_launcher_slurm-new"></a><div class="section">
@@ -135,7 +135,7 @@
 <span>  script_lines <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  slurm_log_output <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  slurm_log_error <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  slurm_memory_megabytes_per_cpu <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  slurm_memory_gigabytes_per_cpu <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  slurm_cpus_per_task <span class="op">=</span> <span class="cn">NULL</span></span>
 <span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
@@ -222,7 +222,7 @@
 <dd><p>See <code><a href="crew_launcher_slurm.html">crew_launcher_slurm()</a></code>.</p></dd>
 
 
-<dt><code>slurm_memory_megabytes_per_cpu</code></dt>
+<dt><code>slurm_memory_gigabytes_per_cpu</code></dt>
 <dd><p>See <code><a href="crew_launcher_slurm.html">crew_launcher_slurm()</a></code>.</p></dd>
 
 
@@ -282,11 +282,33 @@ the bottom of the script at launch time.</p>
 <p></p><div class="r example copy"><div class="sourceCode"><pre><code><span><span class="va">launcher</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/crew_launcher_slurm.html">crew_launcher_slurm</a></span><span class="op">(</span></span>
 <span>  slurm_log_output <span class="op">=</span> <span class="st">"log_file_%A.log"</span>,</span>
 <span>  slurm_log_error <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  slurm_memory_megabytes_per_cpu <span class="op">=</span> <span class="fl">4096</span></span>
+<span>  slurm_memory_gigabytes_per_cpu <span class="op">=</span> <span class="fl">4096</span></span>
 <span><span class="op">)</span></span>
 <span><span class="va">launcher</span><span class="op">$</span><span class="fu">script</span><span class="op">(</span>name <span class="op">=</span> <span class="st">"my_job_name"</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
+
+</div><p></p><hr><a id="method-crew_class_launcher_slurm-args_terminate"></a><div class="section">
+<h3 id="method-args-terminate-">Method <code>args_terminate()</code><a class="anchor" aria-label="anchor" href="#method-args-terminate-"></a></h3>
+<p>Worker termination arguments.</p><div class="section">
+<h4 id="usage-3">Usage<a class="anchor" aria-label="anchor" href="#usage-3"></a></h4>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">crew_class_launcher_slurm</span><span class="op">$</span><span class="fu">args_terminate</span><span class="op">(</span><span class="va">name</span><span class="op">)</span></span></code></pre></div><p></p></div>
+</div>
+
+<div class="section">
+<h4 id="arguments-2">Arguments<a class="anchor" aria-label="anchor" href="#arguments-2"></a></h4>
+<p></p><div class="arguments"><dl><dt><code>name</code></dt>
+<dd><p>Character of length 1, name of the job of the worker
+on the scheduler.</p></dd>
+
+
+</dl><p></p></div>
+</div>
+<div class="section">
+<h4 id="returns-3">Returns<a class="anchor" aria-label="anchor" href="#returns-3"></a></h4>
+<p>Character vector of arguments to the command that
+terminates a worker.</p>
+</div>
 
 </div>
 
@@ -302,11 +324,11 @@ the bottom of the script at launch time.</p>
 <span class="r-in"><span><span class="va">launcher</span> <span class="op">&lt;-</span> <span class="fu"><a href="crew_launcher_slurm.html">crew_launcher_slurm</a></span><span class="op">(</span></span></span>
 <span class="r-in"><span>  slurm_log_output <span class="op">=</span> <span class="st">"log_file_%A.log"</span>,</span></span>
 <span class="r-in"><span>  slurm_log_error <span class="op">=</span> <span class="cn">NULL</span>,</span></span>
-<span class="r-in"><span>  slurm_memory_megabytes_per_cpu <span class="op">=</span> <span class="fl">4096</span></span></span>
+<span class="r-in"><span>  slurm_memory_gigabytes_per_cpu <span class="op">=</span> <span class="fl">4096</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">launcher</span><span class="op">$</span><span class="fu">script</span><span class="op">(</span>name <span class="op">=</span> <span class="st">"my_job_name"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "#!/bin/sh"                        "#SBATCH --job-name=my_job_name"  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [3] "#SBATCH --output=log_file_%A.log" "#SBATCH --mem-per-cpu=4096"      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [3] "#SBATCH --output=log_file_%A.log" "#SBATCH --mem-per-cpu=4096G"     </span>
 </code></pre></div>
     </div>
   </div>
