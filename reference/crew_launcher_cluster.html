@@ -180,7 +180,9 @@ file path to the executable to delete a worker job.
 Set to <code>""</code> to skip manually terminating the worker.
 Unless there is an issue with the platform,
 the job should still exit thanks to the NNG-powered network programming
-capabilities of <code>mirai</code>,</p></dd>
+capabilities of <code>mirai</code>. Still, if you set <code>command_delete = ""</code>,
+you are assuming extra responsibility for manually monitoring
+your jobs on the cluster and manually terminating jobs as appropriate.</p></dd>
 
 
 <dt>script_directory</dt>
