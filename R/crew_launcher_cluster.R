@@ -244,7 +244,6 @@ crew_class_launcher_cluster <- R6::R6Class(
       system2(
         command = self$command_delete,
         args = self$args_terminate(name = name),
-        # args = c("-J", name),
         stdout = if_any(self$verbose, "", FALSE),
         stderr = if_any(self$verbose, "", FALSE),
         wait = FALSE
