@@ -43,11 +43,11 @@
 #'   translates to a line of `#BSUB -M 4G`
 #'   in the LSF job script.
 #'   `lsf_memory_gigabytes_limit = NULL` omits this line.
-#' @param lsf_cpus_per_task Optional positive integer of length 1,
-#'   number of CPUs for the worker.
-#'   `lsf_cpus_per_task = 4` translates
+#' @param lsf_cores Optional positive integer of length 1,
+#'   number of CPU cores for the worker.
+#'   `lsf_cores = 4` translates
 #'   to a line of `#BSUB -n 4` in the LSF job script.
-#'   `lsf_cpus_per_task = NULL` omits this line.
+#'   `lsf_cores = NULL` omits this line.
 crew_launcher_lsf <- function(
   name = NULL,
   seconds_launch = 60,
@@ -71,7 +71,7 @@ crew_launcher_lsf <- function(
   lsf_log_output = "/dev/null",
   lsf_log_error = "/dev/null",
   lsf_memory_gigabytes_limit = NULL,
-  lsf_cpus_per_task = NULL
+  lsf_cores = NULL
 ) {
   name <- as.character(name %|||% crew::crew_random_name())
   launcher <- crew_class_launcher_lsf$new(
@@ -97,7 +97,7 @@ crew_launcher_lsf <- function(
     lsf_log_output = lsf_log_output,
     lsf_log_error = lsf_log_error,
     lsf_memory_gigabytes_limit = lsf_memory_gigabytes_limit,
-    lsf_cpus_per_task = lsf_cpus_per_task
+    lsf_cores = lsf_cores
   )
   launcher$validate()
   launcher
@@ -121,8 +121,8 @@ crew_class_launcher_lsf <- R6::R6Class(
     lsf_log_error = NULL,
     #' @field lsf_memory_gigabytes_limit See [crew_launcher_lsf()].
     lsf_memory_gigabytes_limit = NULL,
-    #' @field lsf_cpus_per_task See [crew_launcher_lsf()].
-    lsf_cpus_per_task = NULL,
+    #' @field lsf_cores See [crew_launcher_lsf()].
+    lsf_cores = NULL,
     #' @description LSF launcher constructor.
     #' @return an LSF launcher object.
     #' @param name See [crew_launcher_lsf()].
@@ -147,7 +147,7 @@ crew_class_launcher_lsf <- R6::R6Class(
     #' @param lsf_log_output See [crew_launcher_lsf()].
     #' @param lsf_log_error See [crew_launcher_lsf()].
     #' @param lsf_memory_gigabytes_limit See [crew_launcher_lsf()].
-    #' @param lsf_cpus_per_task See [crew_launcher_lsf()].
+    #' @param lsf_cores See [crew_launcher_lsf()].
     initialize = function(
       name = NULL,
       seconds_launch = NULL,
@@ -171,7 +171,7 @@ crew_class_launcher_lsf <- R6::R6Class(
       lsf_log_output = NULL,
       lsf_log_error = NULL,
       lsf_memory_gigabytes_limit = NULL,
-      lsf_cpus_per_task = NULL
+      lsf_cores = NULL
     ) {
       super$initialize(
         name = name,
@@ -197,7 +197,7 @@ crew_class_launcher_lsf <- R6::R6Class(
       self$lsf_log_output <- lsf_log_output
       self$lsf_log_error <- lsf_log_error
       self$lsf_memory_gigabytes_limit <- lsf_memory_gigabytes_limit
-      self$lsf_cpus_per_task <- lsf_cpus_per_task
+      self$lsf_cores <- lsf_cores
     },
     #' @description Validate the launcher.
     #' @return `NULL` (invisibly). Throws an error if a field is invalid.
@@ -221,7 +221,7 @@ crew_class_launcher_lsf <- R6::R6Class(
       }
       fields <- c(
         "lsf_memory_gigabytes_limit",
-        "lsf_cpus_per_task"
+        "lsf_cores"
       )
       for (field in fields) {
         if (!is.null(self[[field]])) {
@@ -278,9 +278,9 @@ crew_class_launcher_lsf <- R6::R6Class(
           paste0("#BSUB -M ", self$lsf_memory_gigabytes_limit, "G")
         ),
         if_any(
-          is.null(self$lsf_cpus_per_task),
+          is.null(self$lsf_cores),
           character(0L),
-          paste("#BSUB -n", self$lsf_cpus_per_task)
+          paste("#BSUB -n", self$lsf_cores)
         ),
         self$script_lines
       )

@@ -31,7 +31,7 @@ crew_controller_lsf(
   lsf_log_output = "/dev/null",
   lsf_log_error = "/dev/null",
   lsf_memory_gigabytes_limit = NULL,
-  lsf_cpus_per_task = NULL,
+  lsf_cores = NULL,
   auto_scale = "demand"
 )
 }
@@ -156,11 +156,11 @@ translates to a line of \verb{#BSUB -M 4G}
 in the LSF job script.
 \code{lsf_memory_gigabytes_limit = NULL} omits this line.}
 
-\item{lsf_cpus_per_task}{Optional positive integer of length 1,
-number of CPUs for the worker.
-\code{lsf_cpus_per_task = 4} translates
+\item{lsf_cores}{Optional positive integer of length 1,
+number of CPU cores for the worker.
+\code{lsf_cores = 4} translates
 to a line of \verb{#BSUB -n 4} in the LSF job script.
-\code{lsf_cpus_per_task = NULL} omits this line.}
+\code{lsf_cores = NULL} omits this line.}
 
 \item{auto_scale}{Character of length 1, name of the method for
 automatically scaling workers to meet demand. \code{NULL} to default to

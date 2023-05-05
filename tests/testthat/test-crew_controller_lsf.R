@@ -19,7 +19,7 @@ test_that("crew_controller_lsf() script() all lines", {
     lsf_log_output = "log1",
     lsf_log_error = "log2",
     lsf_memory_gigabytes_limit = 2,
-    lsf_cpus_per_task = 2
+    lsf_cores = 2
   )
   out <- x$launcher$script(name = "my_name")
   exp <- c(

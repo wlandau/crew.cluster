@@ -10,14 +10,14 @@ test_that("valid populated crew_launcher_lsf()", {
       lsf_log_output = "log1",
       lsf_log_error = "log2",
       lsf_memory_gigabytes_limit = NULL,
-      lsf_cpus_per_task = NULL
+      lsf_cores = NULL
     )
   )
 })
 
 test_that("invalid crew_launcher_lsf(): lsf field", {
   x <- crew_launcher_lsf()
-  x$lsf_cpus_per_task <- - 1L
+  x$lsf_cores <- - 1L
   expect_error(x$validate(), class = "crew_error")
 })
 
@@ -48,7 +48,7 @@ test_that("crew_launcher_lsf() script() all lines", {
     lsf_log_output = "log1",
     lsf_log_error = "log2",
     lsf_memory_gigabytes_limit = 2,
-    lsf_cpus_per_task = 2
+    lsf_cores = 2
   )
   out <- x$script(name = "this_job")
   exp <- c(

@@ -48,7 +48,7 @@ Other launchers:
 
 \item{\code{lsf_memory_gigabytes_limit}}{See \code{\link[=crew_launcher_lsf]{crew_launcher_lsf()}}.}
 
-\item{\code{lsf_cpus_per_task}}{See \code{\link[=crew_launcher_lsf]{crew_launcher_lsf()}}.}
+\item{\code{lsf_cores}}{See \code{\link[=crew_launcher_lsf]{crew_launcher_lsf()}}.}
 }
 \if{html}{\out{</div>}}
 }
@@ -106,7 +106,7 @@ LSF launcher constructor.
   lsf_log_output = NULL,
   lsf_log_error = NULL,
   lsf_memory_gigabytes_limit = NULL,
-  lsf_cpus_per_task = NULL
+  lsf_cores = NULL
 )}\if{html}{\out{</div>}}
 }
 
@@ -157,7 +157,7 @@ LSF launcher constructor.
 
 \item{\code{lsf_memory_gigabytes_limit}}{See \code{\link[=crew_launcher_lsf]{crew_launcher_lsf()}}.}
 
-\item{\code{lsf_cpus_per_task}}{See \code{\link[=crew_launcher_lsf]{crew_launcher_lsf()}}.}
+\item{\code{lsf_cores}}{See \code{\link[=crew_launcher_lsf]{crew_launcher_lsf()}}.}
 }
 \if{html}{\out{</div>}}
 }
