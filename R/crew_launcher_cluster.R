@@ -224,6 +224,7 @@ crew_class_launcher_cluster <- R6::R6Class(
         worker = worker
       )
       writeLines(text = lines, con = script)
+
       system2(
         command = self$command_submit,
         args = self$args_launch(script = script),
