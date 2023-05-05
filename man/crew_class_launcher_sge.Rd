@@ -24,8 +24,10 @@ launcher$script(name = "my_job_name")
 \seealso{
 Other launchers: 
 \code{\link{crew_class_launcher_cluster}},
+\code{\link{crew_class_launcher_pbs}},
 \code{\link{crew_class_launcher_slurm}},
 \code{\link{crew_launcher_cluster}()},
+\code{\link{crew_launcher_pbs}()},
 \code{\link{crew_launcher_sge}()},
 \code{\link{crew_launcher_slurm}()}
 }
@@ -40,7 +42,9 @@ Other launchers:
 
 \item{\code{sge_envvars}}{See \code{\link[=crew_launcher_sge]{crew_launcher_sge()}}.}
 
-\item{\code{sge_log_files}}{See \code{\link[=crew_launcher_sge]{crew_launcher_sge()}}.}
+\item{\code{sge_log_output}}{See \code{\link[=crew_launcher_sge]{crew_launcher_sge()}}.}
+
+\item{\code{sge_log_error}}{See \code{\link[=crew_launcher_sge]{crew_launcher_sge()}}.}
 
 \item{\code{sge_log_join}}{See \code{\link[=crew_launcher_sge]{crew_launcher_sge()}}.}
 
@@ -106,7 +110,8 @@ SGE launcher constructor.
   script_lines = NULL,
   sge_cwd = NULL,
   sge_envvars = NULL,
-  sge_log_files = NULL,
+  sge_log_output = NULL,
+  sge_log_error = NULL,
   sge_log_join = NULL,
   sge_memory_gigabytes_required = NULL,
   sge_memory_gigabytes_limit = NULL,
@@ -158,7 +163,9 @@ SGE launcher constructor.
 
 \item{\code{sge_envvars}}{See \code{\link[=crew_launcher_sge]{crew_launcher_sge()}}.}
 
-\item{\code{sge_log_files}}{See \code{\link[=crew_launcher_sge]{crew_launcher_sge()}}.}
+\item{\code{sge_log_output}}{See \code{\link[=crew_launcher_sge]{crew_launcher_sge()}}.}
+
+\item{\code{sge_log_error}}{See \code{\link[=crew_launcher_sge]{crew_launcher_sge()}}.}
 
 \item{\code{sge_log_join}}{See \code{\link[=crew_launcher_sge]{crew_launcher_sge()}}.}
 

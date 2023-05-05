@@ -29,7 +29,8 @@ crew_controller_sge(
   script_lines = character(0L),
   sge_cwd = TRUE,
   sge_envvars = FALSE,
-  sge_log_files = "/dev/null",
+  sge_log_output = "/dev/null",
+  sge_log_error = NULL,
   sge_log_join = TRUE,
   sge_memory_gigabytes_required = NULL,
   sge_memory_gigabytes_limit = NULL,
@@ -139,17 +140,29 @@ variables of the current session to the SGE worker. \code{sge_envvars = TRUE}
 translates to a line of \verb{#$ -V} in the SGE job script.
 \code{sge_envvars = FALSE} omits this line.}
 
-\item{sge_log_files}{Character of length 1, file or directory path to SGE
-worker log files. \code{sge_log_files = "VALUE"} translates to a line of
+\item{sge_log_output}{Character of length 1, file or directory path to SGE
+worker log files for standard output.
+\code{sge_log_output = "VALUE"} translates to a line of
 \verb{#$ -o VALUE} in the SGE job script. The default is \verb{/dev/null} to omit
-the logs. If you do supply a value, it is recommended to supply a
+the logs. If you do supply a non-\verb{/dev/null} value,
+it is recommended to supply a
+directory path with a trailing slash so that each worker gets its own set
+of log files.}
+
+\item{sge_log_error}{Character of length 1, file or directory path to SGE
+worker log files for standard error.
+\code{sge_log_error = "VALUE"} translates to a line of
+\verb{#$ -e VALUE} in the SGE job script.
+The default of \code{NULL} omits this line.
+If you do supply a non-\verb{/dev/null} value, it is recommended to supply a
 directory path with a trailing slash so that each worker gets its own set
 of log files.}
 
 \item{sge_log_join}{Logical, whether to join the stdout and stderr log
 files together into one file. \code{sge_log_join = TRUE} translates to a line
-of \verb{#$ -j y} in the SGE job script. \code{sge_log_join = FALSE} is equivalent
-to \verb{#$ -j n}.}
+of \verb{#$ -j y} in the SGE job script, while \code{sge_log_join = FALSE} is
+equivalent to \verb{#$ -j n}. If \code{sge_log_join = TRUE}, then \code{sge_log_error}
+should be \code{NULL}.}
 
 \item{sge_memory_gigabytes_required}{Optional positive numeric of length 1
 with the gigabytes of memory required to run the worker.
