@@ -221,7 +221,7 @@ crew_class_launcher_cluster <- R6::R6Class(
 
       system2(
         command = self$command_submit,
-        args = shQuote(script),
+        args = self$args_launch(script = script),
         stdout = if_any(self$verbose, "", FALSE),
         stderr = if_any(self$verbose, "", FALSE),
         wait = FALSE
@@ -250,7 +250,15 @@ crew_class_launcher_cluster <- R6::R6Class(
       )
       invisible()
     },
-    #' @description Termination arguments.
+    #' @description Worker launch arguments.
+    #' @return Character vector of arguments to the command that
+    #'   launches a worker.
+    #' @param script Character of length 1, path to the job script for
+    #'   the scheduler.
+    args_launch = function(script) {
+      shQuote(script)
+    },
+    #' @description Worker termination arguments.
     #' @return Character vector of arguments to the command that
     #'   terminates a worker.
     #' @param name Character of length 1, name of the job of the worker
