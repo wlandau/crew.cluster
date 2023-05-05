@@ -61,8 +61,10 @@
     <h2>See also</h2>
     <div class="dont-index"><p>Other launchers: 
 <code><a href="crew_class_launcher_cluster.html">crew_class_launcher_cluster</a></code>,
+<code><a href="crew_class_launcher_pbs.html">crew_class_launcher_pbs</a></code>,
 <code><a href="crew_class_launcher_slurm.html">crew_class_launcher_slurm</a></code>,
 <code><a href="crew_launcher_cluster.html">crew_launcher_cluster</a>()</code>,
+<code><a href="crew_launcher_pbs.html">crew_launcher_pbs</a>()</code>,
 <code><a href="crew_launcher_sge.html">crew_launcher_sge</a>()</code>,
 <code><a href="crew_launcher_slurm.html">crew_launcher_slurm</a>()</code></p></div>
     </div>
@@ -80,7 +82,11 @@
 <dd><p>See <code><a href="crew_launcher_sge.html">crew_launcher_sge()</a></code>.</p></dd>
 
 
-<dt><code>sge_log_files</code></dt>
+<dt><code>sge_log_output</code></dt>
+<dd><p>See <code><a href="crew_launcher_sge.html">crew_launcher_sge()</a></code>.</p></dd>
+
+
+<dt><code>sge_log_error</code></dt>
 <dd><p>See <code><a href="crew_launcher_sge.html">crew_launcher_sge()</a></code>.</p></dd>
 
 
@@ -151,7 +157,8 @@
 <span>  script_lines <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  sge_cwd <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  sge_envvars <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  sge_log_files <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  sge_log_output <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  sge_log_error <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  sge_log_join <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  sge_memory_gigabytes_required <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  sge_memory_gigabytes_limit <span class="op">=</span> <span class="cn">NULL</span>,</span>
@@ -242,7 +249,11 @@
 <dd><p>See <code><a href="crew_launcher_sge.html">crew_launcher_sge()</a></code>.</p></dd>
 
 
-<dt><code>sge_log_files</code></dt>
+<dt><code>sge_log_output</code></dt>
+<dd><p>See <code><a href="crew_launcher_sge.html">crew_launcher_sge()</a></code>.</p></dd>
+
+
+<dt><code>sge_log_error</code></dt>
 <dd><p>See <code><a href="crew_launcher_sge.html">crew_launcher_sge()</a></code>.</p></dd>
 
 
@@ -340,7 +351,7 @@ the bottom of the script at launch time.</p>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">launcher</span><span class="op">$</span><span class="fu">script</span><span class="op">(</span>name <span class="op">=</span> <span class="st">"my_job_name"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "#$ -N my_job_name"   "#$ -cwd"             "#$ -o /dev/null"    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [4] "#$ -j y"             "$# -l m_mem_free=4G" "$# -pe smp 2"       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [4] "#$ -j y"             "#$ -l m_mem_free=4G" "#$ -pe smp 2"       </span>
 </code></pre></div>
     </div>
   </div>
