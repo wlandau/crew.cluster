@@ -124,7 +124,7 @@ supports R through an environment module.}
 launch the worker from (as opposed to
 the system default). \code{lsf_cwd = "/home"} translates to a line of
 \verb{#BSUB -cwd /home} in the LSF job script. \code{lsf_cwd = getwd()} is the
-default, which launches workers from the current working directory.#'
+default, which launches workers from the current working directory.
 Set \code{lsf_cwd = NULL} to omit this line from the job script.}
 
 \item{lsf_log_output}{Character of length 1, file pattern to control
@@ -168,8 +168,8 @@ Create an \code{R6} object to launch and maintain
 workers as LSF jobs.
 }
 \details{
-WARNING: the \code{crew.cluster} LSF plugin is experimental. Please proceed
-with caution and report bugs to
+WARNING: the \code{crew.cluster} LSF plugin is experimental.
+Please proceed with caution and report bugs to
 \url{https://github.com/wlandau/crew.cluster}.
 
 To launch a LSF worker, this launcher

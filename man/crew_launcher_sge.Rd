@@ -29,8 +29,8 @@ crew_launcher_sge(
   sge_log_output = "/dev/null",
   sge_log_error = NULL,
   sge_log_join = TRUE,
-  sge_memory_gigabytes_required = NULL,
   sge_memory_gigabytes_limit = NULL,
+  sge_memory_gigabytes_required = NULL,
   sge_cores = NULL,
   sge_gpu = NULL
 )
@@ -157,18 +157,18 @@ of \verb{#$ -j y} in the SGE job script, while \code{sge_log_join = FALSE} is
 equivalent to \verb{#$ -j n}. If \code{sge_log_join = TRUE}, then \code{sge_log_error}
 should be \code{NULL}.}
 
-\item{sge_memory_gigabytes_required}{Optional positive numeric of length 1
-with the gigabytes of memory required to run the worker.
-\code{sge_memory_gigabytes_required = 2.4}
-translates to a line of \verb{#$ -l m_mem_free=2.4G} in the SGE job script.
-\code{sge_memory_gigabytes_required = NULL} omits this line.}
-
 \item{sge_memory_gigabytes_limit}{Optional numeric of length 1
 with the maximum number of gigabytes of memory a worker is allowed to
 consume. If the worker consumes more than this level of memory, then
 SGE will terminate it. \verb{sge_memory_gigabytes_limit = 5.7"}
 translates to a line of \code{"#$ -l h_rss=5.7G"} in the SGE job script.
 \code{sge_memory_gigabytes_limit = NULL} omits this line.}
+
+\item{sge_memory_gigabytes_required}{Optional positive numeric of length 1
+with the gigabytes of memory required to run the worker.
+\code{sge_memory_gigabytes_required = 2.4}
+translates to a line of \verb{#$ -l m_mem_free=2.4G} in the SGE job script.
+\code{sge_memory_gigabytes_required = NULL} omits this line.}
 
 \item{sge_cores}{Optional positive integer of length 1,
 number of cores per worker ("slots" in SGE lingo).

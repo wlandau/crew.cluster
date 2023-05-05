@@ -50,9 +50,9 @@ Other launchers:
 
 \item{\code{sge_log_join}}{See \code{\link[=crew_launcher_sge]{crew_launcher_sge()}}.}
 
-\item{\code{sge_memory_gigabytes_required}}{See \code{\link[=crew_launcher_sge]{crew_launcher_sge()}}.}
-
 \item{\code{sge_memory_gigabytes_limit}}{See \code{\link[=crew_launcher_sge]{crew_launcher_sge()}}.}
+
+\item{\code{sge_memory_gigabytes_required}}{See \code{\link[=crew_launcher_sge]{crew_launcher_sge()}}.}
 
 \item{\code{sge_cores}}{See \code{\link[=crew_launcher_sge]{crew_launcher_sge()}}.}
 
@@ -115,8 +115,8 @@ SGE launcher constructor.
   sge_log_output = NULL,
   sge_log_error = NULL,
   sge_log_join = NULL,
-  sge_memory_gigabytes_required = NULL,
   sge_memory_gigabytes_limit = NULL,
+  sge_memory_gigabytes_required = NULL,
   sge_cores = NULL,
   sge_gpu = NULL
 )}\if{html}{\out{</div>}}
@@ -171,9 +171,9 @@ SGE launcher constructor.
 
 \item{\code{sge_log_join}}{See \code{\link[=crew_launcher_sge]{crew_launcher_sge()}}.}
 
-\item{\code{sge_memory_gigabytes_required}}{See \code{\link[=crew_launcher_sge]{crew_launcher_sge()}}.}
-
 \item{\code{sge_memory_gigabytes_limit}}{See \code{\link[=crew_launcher_sge]{crew_launcher_sge()}}.}
+
+\item{\code{sge_memory_gigabytes_required}}{See \code{\link[=crew_launcher_sge]{crew_launcher_sge()}}.}
 
 \item{\code{sge_cores}}{See \code{\link[=crew_launcher_sge]{crew_launcher_sge()}}.}
 

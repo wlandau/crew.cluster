@@ -43,8 +43,8 @@ crew_controller_sge <- function(
   sge_log_output = "/dev/null",
   sge_log_error = NULL,
   sge_log_join = TRUE,
-  sge_memory_gigabytes_required = NULL,
   sge_memory_gigabytes_limit = NULL,
+  sge_memory_gigabytes_required = NULL,
   sge_cores = NULL,
   sge_gpu = NULL,
   auto_scale = "demand"
@@ -81,8 +81,8 @@ crew_controller_sge <- function(
     sge_log_output = sge_log_output,
     sge_log_error = sge_log_error,
     sge_log_join = sge_log_join,
-    sge_memory_gigabytes_required = sge_memory_gigabytes_required,
     sge_memory_gigabytes_limit = sge_memory_gigabytes_limit,
+    sge_memory_gigabytes_required = sge_memory_gigabytes_required,
     sge_cores = sge_cores,
     sge_gpu = sge_gpu
   )

@@ -42,17 +42,17 @@
 #'   of `#$ -j y` in the SGE job script, while `sge_log_join = FALSE` is
 #'   equivalent to `#$ -j n`. If `sge_log_join = TRUE`, then `sge_log_error`
 #'   should be `NULL`.
-#' @param sge_memory_gigabytes_required Optional positive numeric of length 1
-#'   with the gigabytes of memory required to run the worker.
-#'   `sge_memory_gigabytes_required = 2.4`
-#'   translates to a line of `#$ -l m_mem_free=2.4G` in the SGE job script.
-#'   `sge_memory_gigabytes_required = NULL` omits this line.
 #' @param sge_memory_gigabytes_limit Optional numeric of length 1
 #'   with the maximum number of gigabytes of memory a worker is allowed to
 #'   consume. If the worker consumes more than this level of memory, then
 #'   SGE will terminate it. `sge_memory_gigabytes_limit = 5.7"`
 #'   translates to a line of `"#$ -l h_rss=5.7G"` in the SGE job script.
 #'   `sge_memory_gigabytes_limit = NULL` omits this line.
+#' @param sge_memory_gigabytes_required Optional positive numeric of length 1
+#'   with the gigabytes of memory required to run the worker.
+#'   `sge_memory_gigabytes_required = 2.4`
+#'   translates to a line of `#$ -l m_mem_free=2.4G` in the SGE job script.
+#'   `sge_memory_gigabytes_required = NULL` omits this line.
 #' @param sge_cores Optional positive integer of length 1,
 #'   number of cores per worker ("slots" in SGE lingo).
 #'   `sge_cores = 4` translates
@@ -85,8 +85,8 @@ crew_launcher_sge <- function(
   sge_log_output = "/dev/null",
   sge_log_error = NULL,
   sge_log_join = TRUE,
-  sge_memory_gigabytes_required = NULL,
   sge_memory_gigabytes_limit = NULL,
+  sge_memory_gigabytes_required = NULL,
   sge_cores = NULL,
   sge_gpu = NULL
 ) {
@@ -115,8 +115,8 @@ crew_launcher_sge <- function(
     sge_log_output = sge_log_output,
     sge_log_error = sge_log_error,
     sge_log_join = sge_log_join,
-    sge_memory_gigabytes_required = sge_memory_gigabytes_required,
     sge_memory_gigabytes_limit = sge_memory_gigabytes_limit,
+    sge_memory_gigabytes_required = sge_memory_gigabytes_required,
     sge_cores = sge_cores,
     sge_gpu = sge_gpu
   )
@@ -144,10 +144,10 @@ crew_class_launcher_sge <- R6::R6Class(
     sge_log_error = NULL,
     #' @field sge_log_join See [crew_launcher_sge()].
     sge_log_join = NULL,
-    #' @field sge_memory_gigabytes_required See [crew_launcher_sge()].
-    sge_memory_gigabytes_required = NULL,
     #' @field sge_memory_gigabytes_limit See [crew_launcher_sge()].
     sge_memory_gigabytes_limit = NULL,
+    #' @field sge_memory_gigabytes_required See [crew_launcher_sge()].
+    sge_memory_gigabytes_required = NULL,
     #' @field sge_cores See [crew_launcher_sge()].
     sge_cores = NULL,
     #' @field sge_gpu See [crew_launcher_sge()].
@@ -177,8 +177,8 @@ crew_class_launcher_sge <- R6::R6Class(
     #' @param sge_log_output See [crew_launcher_sge()].
     #' @param sge_log_error See [crew_launcher_sge()].
     #' @param sge_log_join See [crew_launcher_sge()].
-    #' @param sge_memory_gigabytes_required See [crew_launcher_sge()].
     #' @param sge_memory_gigabytes_limit See [crew_launcher_sge()].
+    #' @param sge_memory_gigabytes_required See [crew_launcher_sge()].
     #' @param sge_cores See [crew_launcher_sge()].
     #' @param sge_gpu See [crew_launcher_sge()].
     initialize = function(
@@ -205,8 +205,8 @@ crew_class_launcher_sge <- R6::R6Class(
       sge_log_output = NULL,
       sge_log_error = NULL,
       sge_log_join = NULL,
-      sge_memory_gigabytes_required = NULL,
       sge_memory_gigabytes_limit = NULL,
+      sge_memory_gigabytes_required = NULL,
       sge_cores = NULL,
       sge_gpu = NULL
     ) {
@@ -235,8 +235,8 @@ crew_class_launcher_sge <- R6::R6Class(
       self$sge_log_output <- sge_log_output
       self$sge_log_error <- sge_log_error
       self$sge_log_join <- sge_log_join
-      self$sge_memory_gigabytes_required <- sge_memory_gigabytes_required
       self$sge_memory_gigabytes_limit <- sge_memory_gigabytes_limit
+      self$sge_memory_gigabytes_required <- sge_memory_gigabytes_required
       self$sge_cores <- sge_cores
       self$sge_gpu <- sge_gpu
     },
@@ -278,8 +278,8 @@ crew_class_launcher_sge <- R6::R6Class(
         )
       }
       fields <- c(
-        "sge_memory_gigabytes_required",
         "sge_memory_gigabytes_limit",
+        "sge_memory_gigabytes_required",
         "sge_cores",
         "sge_gpu"
       )
@@ -324,14 +324,14 @@ crew_class_launcher_sge <- R6::R6Class(
         ),
         if_any(self$sge_log_join, "#$ -j y", "#$ -j n"),
         if_any(
-          is.null(self$sge_memory_gigabytes_required),
-          character(0L),
-          sprintf("#$ -l m_mem_free=%sG", self$sge_memory_gigabytes_required)
-        ),
-        if_any(
           is.null(self$sge_memory_gigabytes_limit),
           character(0L),
           sprintf("#$ -l h_rss=%sG", self$sge_memory_gigabytes_limit)
+        ),
+        if_any(
+          is.null(self$sge_memory_gigabytes_required),
+          character(0L),
+          sprintf("#$ -l m_mem_free=%sG", self$sge_memory_gigabytes_required)
         ),
         if_any(
           is.null(self$sge_cores),

@@ -137,7 +137,7 @@ supports R through an environment module.}
 launch the worker from (as opposed to
 the system default). \code{lsf_cwd = "/home"} translates to a line of
 \verb{#BSUB -cwd /home} in the LSF job script. \code{lsf_cwd = getwd()} is the
-default, which launches workers from the current working directory.#'
+default, which launches workers from the current working directory.
 Set \code{lsf_cwd = NULL} to omit this line from the job script.}
 
 \item{lsf_log_output}{Character of length 1, file pattern to control

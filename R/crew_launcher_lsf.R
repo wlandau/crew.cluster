@@ -4,8 +4,8 @@
 #' @family launchers
 #' @description Create an `R6` object to launch and maintain
 #'   workers as LSF jobs.
-#' @details WARNING: the `crew.cluster` LSF plugin is experimental. Please proceed
-#'   with caution and report bugs to
+#' @details WARNING: the `crew.cluster` LSF plugin is experimental.
+#'   Please proceed with caution and report bugs to
 #'   <https://github.com/wlandau/crew.cluster>.
 #'
 #'   To launch a LSF worker, this launcher
@@ -21,7 +21,7 @@
 #'   launch the worker from (as opposed to
 #'   the system default). `lsf_cwd = "/home"` translates to a line of
 #'   `#BSUB -cwd /home` in the LSF job script. `lsf_cwd = getwd()` is the
-#'   default, which launches workers from the current working directory.#'   
+#'   default, which launches workers from the current working directory.
 #'   Set `lsf_cwd = NULL` to omit this line from the job script.
 #' @param lsf_log_output Character of length 1, file pattern to control
 #'   the locations of the LSF worker log files. By default, both standard
@@ -289,12 +289,15 @@ crew_class_launcher_lsf <- R6::R6Class(
         if_any(
           is.null(self$lsf_memory_gigabytes_limit),
           character(0L),
-          paste0("#BSUB -M ", self$lsf_memory_gigabytes_limit, "G")
+          sprintf("#BSUB -M %sG", self$lsf_memory_gigabytes_limit)
         ),
         if_any(
           is.null(self$lsf_memory_gigabytes_required),
           character(0L),
-          paste0("#BSUB -R 'rusage[mem=", self$lsf_memory_gigabytes_required, "G]'")
+          sprintf(
+            "#BSUB -R 'rusage[mem=%sG]'",
+            self$lsf_memory_gigabytes_required
+          )
         ),
         if_any(
           is.null(self$lsf_cores),

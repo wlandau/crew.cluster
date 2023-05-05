@@ -67,3 +67,19 @@ test_that("crew_launcher_lsf() script() all lines", {
   )
   expect_equal(out, exp)
 })
+
+test_that("crew_launcher_lsf() args_launch()", {
+  x <- crew_launcher_lsf()
+  expect_equal(
+    x$args_launch(script = "this_script"),
+    c("<", shQuote("this_script"))
+  )
+})
+
+test_that("crew_launcher_lsf() args_terminate()", {
+  x <- crew_launcher_lsf()
+  expect_equal(
+    x$args_terminate(name = "this_name"),
+    c("-J", shQuote("this_name"))
+  )
+})
