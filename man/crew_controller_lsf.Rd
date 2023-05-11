@@ -15,7 +15,7 @@ crew_controller_lsf(
   seconds_timeout = 5,
   seconds_idle = Inf,
   seconds_wall = Inf,
-  seconds_exit = 0.1,
+  seconds_exit = 1,
   tasks_max = Inf,
   tasks_timers = 0L,
   reset_globals = TRUE,
@@ -56,7 +56,9 @@ considered alive if it is actively connected to its assign websocket.}
 
 \item{seconds_interval}{Number of seconds between
 polling intervals waiting for certain internal
-synchronous operations to complete.}
+synchronous operations to complete. If \code{space_poll} is \code{TRUE}, then
+this is also the minimum number of seconds between calls to
+\code{mirai::daemons()} for the purposes of checking worker status.}
 
 \item{seconds_timeout}{Number of seconds until timing
 out while waiting for certain synchronous operations to complete.}
@@ -76,7 +78,8 @@ have completed.
 See the \code{walltime} argument of \code{mirai::server()}.}
 
 \item{seconds_exit}{Number of seconds to wait for NNG websockets
-to finish sending large data (in case an exit signal is received).
+to finish sending large data (when a worker exits after reaching a
+timeout or having completed a certain number of tasks).
 See the \code{exitlinger} argument of \code{mirai::server()}.}
 
 \item{tasks_max}{Maximum number of tasks that a worker will do before
@@ -88,7 +91,7 @@ the assignment of tasks to workers, it is recommended to set
 
 \item{tasks_timers}{Number of tasks to do before activating
 the timers for \code{seconds_idle} and \code{seconds_wall}.
-See the \code{timerlaunch} argument of \code{mirai::server()}.}
+See the \code{timerstart} argument of \code{mirai::server()}.}
 
 \item{reset_globals}{\code{TRUE} to reset global environment
 variables between tasks, \code{FALSE} to leave them alone.}

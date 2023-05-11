@@ -63,7 +63,8 @@ have completed.
 See the \code{walltime} argument of \code{mirai::server()}.}
 
 \item{seconds_exit}{Number of seconds to wait for NNG websockets
-to finish sending large data (in case an exit signal is received).
+to finish sending large data (when a worker exits after reaching a
+timeout or having completed a certain number of tasks).
 See the \code{exitlinger} argument of \code{mirai::server()}.}
 
 \item{tasks_max}{Maximum number of tasks that a worker will do before
@@ -75,7 +76,7 @@ the assignment of tasks to workers, it is recommended to set
 
 \item{tasks_timers}{Number of tasks to do before activating
 the timers for \code{seconds_idle} and \code{seconds_wall}.
-See the \code{timerlaunch} argument of \code{mirai::server()}.}
+See the \code{timerstart} argument of \code{mirai::server()}.}
 
 \item{reset_globals}{\code{TRUE} to reset global environment
 variables between tasks, \code{FALSE} to leave them alone.}
