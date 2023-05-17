@@ -134,8 +134,6 @@ source code for additional attribution.</p>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va"><a href="../reference/crew_class_launcher_slurm.html">crew_class_launcher_slurm</a></span><span class="op">$</span><span class="fu">new</span><span class="op">(</span></span>
 <span>  name <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  seconds_launch <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  seconds_interval <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  seconds_timeout <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  seconds_idle <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  seconds_wall <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  seconds_exit <span class="op">=</span> <span class="cn">NULL</span>,</span>
@@ -164,14 +162,6 @@ source code for additional attribution.</p>
 
 
 <dt><code>seconds_launch</code></dt>
-<dd><p>See <code><a href="crew_launcher_slurm.html">crew_launcher_slurm()</a></code>.</p></dd>
-
-
-<dt><code>seconds_interval</code></dt>
-<dd><p>See <code><a href="crew_launcher_slurm.html">crew_launcher_slurm()</a></code>.</p></dd>
-
-
-<dt><code>seconds_timeout</code></dt>
 <dd><p>See <code><a href="crew_launcher_slurm.html">crew_launcher_slurm()</a></code>.</p></dd>
 
 
@@ -343,9 +333,9 @@ terminates a worker.</p>
 <span class="r-in"><span>  slurm_log_error <span class="op">=</span> <span class="cn">NULL</span>,</span></span>
 <span class="r-in"><span>  slurm_memory_gigabytes_per_cpu <span class="op">=</span> <span class="fl">4096</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> all(is.numeric(.)) &amp;&amp; all(. &gt;= 0) &amp;&amp; all(length(.) == 1L) &amp;&amp; all(!anyNA(.)) is not true on . = self[[field]]</span>
 <span class="r-in"><span><span class="va">launcher</span><span class="op">$</span><span class="fu">script</span><span class="op">(</span>name <span class="op">=</span> <span class="st">"my_job_name"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "#!/bin/sh"                        "#SBATCH --job-name=my_job_name"  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [3] "#SBATCH --output=log_file_%A.log" "#SBATCH --mem-per-cpu=4096G"     </span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in eval(expr, envir, enclos):</span> object 'launcher' not found</span>
 </code></pre></div>
     </div>
   </div>

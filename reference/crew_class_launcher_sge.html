@@ -154,8 +154,6 @@ source code for additional attribution.</p>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va"><a href="../reference/crew_class_launcher_sge.html">crew_class_launcher_sge</a></span><span class="op">$</span><span class="fu">new</span><span class="op">(</span></span>
 <span>  name <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  seconds_launch <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  seconds_interval <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  seconds_timeout <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  seconds_idle <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  seconds_wall <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  seconds_exit <span class="op">=</span> <span class="cn">NULL</span>,</span>
@@ -189,14 +187,6 @@ source code for additional attribution.</p>
 
 
 <dt><code>seconds_launch</code></dt>
-<dd><p>See <code><a href="crew_launcher_sge.html">crew_launcher_sge()</a></code>.</p></dd>
-
-
-<dt><code>seconds_interval</code></dt>
-<dd><p>See <code><a href="crew_launcher_sge.html">crew_launcher_sge()</a></code>.</p></dd>
-
-
-<dt><code>seconds_timeout</code></dt>
 <dd><p>See <code><a href="crew_launcher_sge.html">crew_launcher_sge()</a></code>.</p></dd>
 
 
@@ -364,9 +354,9 @@ the bottom of the script at launch time.</p>
 <span class="r-in"><span>  sge_cores <span class="op">=</span> <span class="fl">2</span>,</span></span>
 <span class="r-in"><span>  sge_memory_gigabytes_required <span class="op">=</span> <span class="fl">4</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> all(is.numeric(.)) &amp;&amp; all(. &gt;= 0) &amp;&amp; all(length(.) == 1L) &amp;&amp; all(!anyNA(.)) is not true on . = self[[field]]</span>
 <span class="r-in"><span><span class="va">launcher</span><span class="op">$</span><span class="fu">script</span><span class="op">(</span>name <span class="op">=</span> <span class="st">"my_job_name"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "#$ -N my_job_name"   "#$ -cwd"             "#$ -o /dev/null"    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [4] "#$ -j y"             "#$ -l m_mem_free=4G" "#$ -pe smp 2"       </span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in eval(expr, envir, enclos):</span> object 'launcher' not found</span>
 </code></pre></div>
     </div>
   </div>

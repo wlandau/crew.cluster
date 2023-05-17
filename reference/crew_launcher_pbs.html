@@ -61,8 +61,6 @@ workers as jobs on a PBS or TORQUE cluster.</p>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">crew_launcher_pbs</span><span class="op">(</span></span>
 <span>  name <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  seconds_launch <span class="op">=</span> <span class="fl">60</span>,</span>
-<span>  seconds_interval <span class="op">=</span> <span class="fl">0.001</span>,</span>
-<span>  seconds_timeout <span class="op">=</span> <span class="fl">10</span>,</span>
 <span>  seconds_idle <span class="op">=</span> <span class="cn">Inf</span>,</span>
 <span>  seconds_wall <span class="op">=</span> <span class="cn">Inf</span>,</span>
 <span>  seconds_exit <span class="op">=</span> <span class="fl">1</span>,</span>
@@ -99,17 +97,6 @@ A worker is unconditionally assumed to be alive
 from the moment of its launch until <code>seconds_launch</code> seconds later.
 After <code>seconds_launch</code> seconds, the worker is only
 considered alive if it is actively connected to its assign websocket.</p></dd>
-
-
-<dt>seconds_interval</dt>
-<dd><p>Number of seconds between
-polling intervals waiting for certain internal
-synchronous operations to complete.</p></dd>
-
-
-<dt>seconds_timeout</dt>
-<dd><p>Number of seconds until timing
-out while waiting for certain synchronous operations to complete.</p></dd>
 
 
 <dt>seconds_idle</dt>
