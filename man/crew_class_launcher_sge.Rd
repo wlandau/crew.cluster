@@ -106,8 +106,6 @@ SGE launcher constructor.
 \if{html}{\out{<div class="r">}}\preformatted{crew_class_launcher_sge$new(
   name = NULL,
   seconds_launch = NULL,
-  seconds_interval = NULL,
-  seconds_timeout = NULL,
   seconds_idle = NULL,
   seconds_wall = NULL,
   seconds_exit = NULL,
@@ -140,10 +138,6 @@ SGE launcher constructor.
 \item{\code{name}}{See \code{\link[=crew_launcher_sge]{crew_launcher_sge()}}.}
 
 \item{\code{seconds_launch}}{See \code{\link[=crew_launcher_sge]{crew_launcher_sge()}}.}
-
-\item{\code{seconds_interval}}{See \code{\link[=crew_launcher_sge]{crew_launcher_sge()}}.}
-
-\item{\code{seconds_timeout}}{See \code{\link[=crew_launcher_sge]{crew_launcher_sge()}}.}
 
 \item{\code{seconds_idle}}{See \code{\link[=crew_launcher_sge]{crew_launcher_sge()}}.}
 

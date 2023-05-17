@@ -63,8 +63,6 @@
 crew_launcher_pbs <- function(
   name = NULL,
   seconds_launch = 60,
-  seconds_interval = 0.001,
-  seconds_timeout = 10,
   seconds_idle = Inf,
   seconds_wall = Inf,
   seconds_exit = 1,
@@ -91,8 +89,6 @@ crew_launcher_pbs <- function(
   launcher <- crew_class_launcher_pbs$new(
     name = name,
     seconds_launch = seconds_launch,
-    seconds_interval = seconds_interval,
-    seconds_timeout = seconds_timeout,
     seconds_idle = seconds_idle,
     seconds_wall = seconds_wall,
     seconds_exit = seconds_exit,
@@ -148,8 +144,6 @@ crew_class_launcher_pbs <- R6::R6Class(
     #' @return an PBS/TORQUE launcher object.
     #' @param name See [crew_launcher_pbs()].
     #' @param seconds_launch See [crew_launcher_pbs()].
-    #' @param seconds_interval See [crew_launcher_pbs()].
-    #' @param seconds_timeout See [crew_launcher_pbs()].
     #' @param seconds_idle See [crew_launcher_pbs()].
     #' @param seconds_wall See [crew_launcher_pbs()].
     #' @param seconds_exit See [crew_launcher_pbs()].
@@ -174,8 +168,6 @@ crew_class_launcher_pbs <- R6::R6Class(
     initialize = function(
       name = NULL,
       seconds_launch = NULL,
-      seconds_interval = NULL,
-      seconds_timeout = NULL,
       seconds_idle = NULL,
       seconds_wall = NULL,
       seconds_exit = NULL,
@@ -201,8 +193,6 @@ crew_class_launcher_pbs <- R6::R6Class(
       super$initialize(
         name = name,
         seconds_launch = seconds_launch,
-        seconds_interval = seconds_interval,
-        seconds_timeout = seconds_timeout,
         seconds_idle = seconds_idle,
         seconds_wall = seconds_wall,
         seconds_exit = seconds_exit,
