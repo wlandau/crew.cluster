@@ -10,9 +10,9 @@ crew_controller_lsf(
   workers = 1L,
   host = NULL,
   port = NULL,
-  seconds_launch = 60,
-  seconds_interval = 0.5,
+  seconds_interval = 0.25,
   seconds_timeout = 10,
+  seconds_launch = 60,
   seconds_idle = Inf,
   seconds_wall = Inf,
   seconds_exit = 1,
@@ -32,8 +32,7 @@ crew_controller_lsf(
   lsf_log_error = "/dev/null",
   lsf_memory_gigabytes_limit = NULL,
   lsf_memory_gigabytes_required = NULL,
-  lsf_cores = NULL,
-  auto_scale = "demand"
+  lsf_cores = NULL
 )
 }
 \arguments{
@@ -48,12 +47,6 @@ If \code{NULL}, the host defaults to the local IP address.}
 \item{port}{TCP port to listen for the workers. If \code{NULL},
 then an available ephemeral port is automatically chosen.}
 
-\item{seconds_launch}{Seconds of startup time to allow.
-A worker is unconditionally assumed to be alive
-from the moment of its launch until \code{seconds_launch} seconds later.
-After \code{seconds_launch} seconds, the worker is only
-considered alive if it is actively connected to its assign websocket.}
-
 \item{seconds_interval}{Number of seconds between
 polling intervals waiting for certain internal
 synchronous operations to complete. If \code{space_poll} is \code{TRUE}, then
@@ -62,6 +55,12 @@ this is also the minimum number of seconds between calls to
 
 \item{seconds_timeout}{Number of seconds until timing
 out while waiting for certain synchronous operations to complete.}
+
+\item{seconds_launch}{Seconds of startup time to allow.
+A worker is unconditionally assumed to be alive
+from the moment of its launch until \code{seconds_launch} seconds later.
+After \code{seconds_launch} seconds, the worker is only
+considered alive if it is actively connected to its assign websocket.}
 
 \item{seconds_idle}{Maximum number of seconds that a worker can idle
 since the completion of the last task. If exceeded, the worker exits.
@@ -178,28 +177,6 @@ number of CPU cores for the worker.
 \code{lsf_cores = 4} translates
 to a line of \verb{#BSUB -n 4} in the LSF job script.
 \code{lsf_cores = NULL} omits this line.}
-
-\item{auto_scale}{Character of length 1, name of the method for
-automatically scaling workers to meet demand. \code{NULL} to default to
-\code{"demand"}. Possible values include the following:
-\itemize{
-\item \code{"demand"}: just after pushing a new task in \code{push()}, launch
-\code{min(n, max(0, t - w))} workers, where \code{n} is the maximum number of
-workers, \code{t} is the number of queued tasks, and \code{w} is the current
-number of workers already running. In other words, scale up the
-number of workers to meet the current demand.
-If you trust tasks not to crash workers, this is a good choice.
-But if you think a task may always crash a worker
-(e.g. segmentation fault or maxed out memory) then
-this could be somewhat risky because \code{mirai} resubmits
-failed tasks behind the scenes and \code{crew} responds by
-re-launching workers. If you are worried about this scenario,
-choose \code{auto_scale = "one"} instead, which will only launch
-up to one worker whenever a task is pushed.
-\item \code{"one"}: just after pushing a new task in \code{push()}, launch
-a one worker if demand \code{min(n, max(0, t - w))} is greater than 0.
-\item \code{"none"}: do not auto-scale at all.
-}}
 }
 \description{
 Create an \code{R6} object to submit tasks and

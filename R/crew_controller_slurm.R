@@ -26,9 +26,9 @@ crew_controller_slurm <- function(
   workers = 1L,
   host = NULL,
   port = NULL,
-  seconds_launch = 60,
-  seconds_interval = 0.5,
+  seconds_interval = 0.25,
   seconds_timeout = 10,
+  seconds_launch = 60,
   seconds_idle = Inf,
   seconds_wall = Inf,
   seconds_exit = 1,
@@ -46,8 +46,7 @@ crew_controller_slurm <- function(
   slurm_log_output = "/dev/null",
   slurm_log_error = "/dev/null",
   slurm_memory_gigabytes_per_cpu = NULL,
-  slurm_cpus_per_task = NULL,
-  auto_scale = "demand"
+  slurm_cpus_per_task = NULL
 ) {
   router <- crew::crew_router(
     name = name,
@@ -79,11 +78,7 @@ crew_controller_slurm <- function(
     slurm_memory_gigabytes_per_cpu = slurm_memory_gigabytes_per_cpu,
     slurm_cpus_per_task = slurm_cpus_per_task
   )
-  controller <- crew::crew_controller(
-    router = router,
-    launcher = launcher,
-    auto_scale = auto_scale
-  )
+  controller <- crew::crew_controller(router = router, launcher = launcher)
   controller$validate()
   controller
 }

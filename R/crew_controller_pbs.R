@@ -22,9 +22,9 @@ crew_controller_pbs <- function(
   workers = 1L,
   host = NULL,
   port = NULL,
-  seconds_launch = 60,
-  seconds_interval = 0.5,
+  seconds_interval = 0.25,
   seconds_timeout = 10,
+  seconds_launch = 60,
   seconds_idle = Inf,
   seconds_wall = Inf,
   seconds_exit = 1,
@@ -45,8 +45,7 @@ crew_controller_pbs <- function(
   pbs_log_join = TRUE,
   pbs_memory_gigabytes_required = NULL,
   pbs_cores = NULL,
-  pbs_walltime_hours = 12,
-  auto_scale = "demand"
+  pbs_walltime_hours = 12
 ) {
   router <- crew::crew_router(
     name = name,
@@ -81,11 +80,7 @@ crew_controller_pbs <- function(
     pbs_cores = pbs_cores,
     pbs_walltime_hours = pbs_walltime_hours
   )
-  controller <- crew::crew_controller(
-    router = router,
-    launcher = launcher,
-    auto_scale = auto_scale
-  )
+  controller <- crew::crew_controller(router = router, launcher = launcher)
   controller$validate()
   controller
 }

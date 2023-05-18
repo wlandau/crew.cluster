@@ -22,9 +22,9 @@ crew_controller_sge <- function(
   workers = 1L,
   host = NULL,
   port = NULL,
-  seconds_launch = 60,
-  seconds_interval = 0.5,
+  seconds_interval = 0.25,
   seconds_timeout = 10,
+  seconds_launch = 60,
   seconds_idle = Inf,
   seconds_wall = Inf,
   seconds_exit = 1,
@@ -47,8 +47,7 @@ crew_controller_sge <- function(
   sge_memory_gigabytes_limit = NULL,
   sge_memory_gigabytes_required = NULL,
   sge_cores = NULL,
-  sge_gpu = NULL,
-  auto_scale = "demand"
+  sge_gpu = NULL
 ) {
   router <- crew::crew_router(
     name = name,
@@ -85,11 +84,7 @@ crew_controller_sge <- function(
     sge_cores = sge_cores,
     sge_gpu = sge_gpu
   )
-  controller <- crew::crew_controller(
-    router = router,
-    launcher = launcher,
-    auto_scale = auto_scale
-  )
+  controller <- crew::crew_controller(router = router, launcher = launcher)
   controller$validate()
   controller
 }

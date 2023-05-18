@@ -26,9 +26,9 @@ crew_controller_lsf <- function(
   workers = 1L,
   host = NULL,
   port = NULL,
-  seconds_launch = 60,
-  seconds_interval = 0.5,
+  seconds_interval = 0.25,
   seconds_timeout = 10,
+  seconds_launch = 60,
   seconds_idle = Inf,
   seconds_wall = Inf,
   seconds_exit = 1,
@@ -48,8 +48,7 @@ crew_controller_lsf <- function(
   lsf_log_error = "/dev/null",
   lsf_memory_gigabytes_limit = NULL,
   lsf_memory_gigabytes_required = NULL,
-  lsf_cores = NULL,
-  auto_scale = "demand"
+  lsf_cores = NULL
 ) {
   router <- crew::crew_router(
     name = name,
@@ -83,11 +82,7 @@ crew_controller_lsf <- function(
     lsf_memory_gigabytes_required = lsf_memory_gigabytes_required,
     lsf_cores = lsf_cores
   )
-  controller <- crew::crew_controller(
-    router = router,
-    launcher = launcher,
-    auto_scale = auto_scale
-  )
+  controller <- crew::crew_controller(router = router, launcher = launcher)
   controller$validate()
   controller
 }
