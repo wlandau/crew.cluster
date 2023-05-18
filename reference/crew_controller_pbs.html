@@ -63,9 +63,9 @@ launch workers on a PBS or TORQUE cluster.</p>
 <span>  workers <span class="op">=</span> <span class="fl">1L</span>,</span>
 <span>  host <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  port <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  seconds_launch <span class="op">=</span> <span class="fl">60</span>,</span>
-<span>  seconds_interval <span class="op">=</span> <span class="fl">0.5</span>,</span>
+<span>  seconds_interval <span class="op">=</span> <span class="fl">0.25</span>,</span>
 <span>  seconds_timeout <span class="op">=</span> <span class="fl">10</span>,</span>
+<span>  seconds_launch <span class="op">=</span> <span class="fl">60</span>,</span>
 <span>  seconds_idle <span class="op">=</span> <span class="cn">Inf</span>,</span>
 <span>  seconds_wall <span class="op">=</span> <span class="cn">Inf</span>,</span>
 <span>  seconds_exit <span class="op">=</span> <span class="fl">1</span>,</span>
@@ -86,8 +86,7 @@ launch workers on a PBS or TORQUE cluster.</p>
 <span>  pbs_log_join <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  pbs_memory_gigabytes_required <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  pbs_cores <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  pbs_walltime_hours <span class="op">=</span> <span class="fl">12</span>,</span>
-<span>  auto_scale <span class="op">=</span> <span class="st">"demand"</span></span>
+<span>  pbs_walltime_hours <span class="op">=</span> <span class="fl">12</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -112,14 +111,6 @@ If <code>NULL</code>, the host defaults to the local IP address.</p></dd>
 then an available ephemeral port is automatically chosen.</p></dd>
 
 
-<dt>seconds_launch</dt>
-<dd><p>Seconds of startup time to allow.
-A worker is unconditionally assumed to be alive
-from the moment of its launch until <code>seconds_launch</code> seconds later.
-After <code>seconds_launch</code> seconds, the worker is only
-considered alive if it is actively connected to its assign websocket.</p></dd>
-
-
 <dt>seconds_interval</dt>
 <dd><p>Number of seconds between
 polling intervals waiting for certain internal
@@ -131,6 +122,14 @@ this is also the minimum number of seconds between calls to
 <dt>seconds_timeout</dt>
 <dd><p>Number of seconds until timing
 out while waiting for certain synchronous operations to complete.</p></dd>
+
+
+<dt>seconds_launch</dt>
+<dd><p>Seconds of startup time to allow.
+A worker is unconditionally assumed to be alive
+from the moment of its launch until <code>seconds_launch</code> seconds later.
+After <code>seconds_launch</code> seconds, the worker is only
+considered alive if it is actively connected to its assign websocket.</p></dd>
 
 
 <dt>seconds_idle</dt>
@@ -294,28 +293,6 @@ to a line of <code>#PBS -l ppn=4</code> in the PBS job script.
 to request for the job. <code>pbs_walltime_hours = 23</code> translates to
 a line of <code>#PBS -l walltime=23:00:00</code> in the job script.
 <code>pbs_walltime_hours = NULL</code> omits this line.</p></dd>
-
-
-<dt>auto_scale</dt>
-<dd><p>Character of length 1, name of the method for
-automatically scaling workers to meet demand. <code>NULL</code> to default to
-<code>"demand"</code>. Possible values include the following:</p><ul><li><p><code>"demand"</code>: just after pushing a new task in <code>push()</code>, launch
-<code>min(n, max(0, t - w))</code> workers, where <code>n</code> is the maximum number of
-workers, <code>t</code> is the number of queued tasks, and <code>w</code> is the current
-number of workers already running. In other words, scale up the
-number of workers to meet the current demand.
-If you trust tasks not to crash workers, this is a good choice.
-But if you think a task may always crash a worker
-(e.g. segmentation fault or maxed out memory) then
-this could be somewhat risky because <code>mirai</code> resubmits
-failed tasks behind the scenes and <code>crew</code> responds by
-re-launching workers. If you are worried about this scenario,
-choose <code>auto_scale = "one"</code> instead, which will only launch
-up to one worker whenever a task is pushed.</p></li>
-<li><p><code>"one"</code>: just after pushing a new task in <code>push()</code>, launch
-a one worker if demand <code>min(n, max(0, t - w))</code> is greater than 0.</p></li>
-<li><p><code>"none"</code>: do not auto-scale at all.</p></li>
-</ul></dd>
 
 </dl></div>
     <div id="attribution">
