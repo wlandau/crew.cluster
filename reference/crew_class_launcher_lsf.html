@@ -127,6 +127,7 @@ source code for additional attribution.</p>
 <li><p><a href="#method-crew_class_launcher_lsf-args_launch"><code>crew_class_launcher_lsf$args_launch()</code></a></p></li>
 <li><p><a href="#method-crew_class_launcher_lsf-args_terminate"><code>crew_class_launcher_lsf$args_terminate()</code></a></p></li>
 </ul></div><p><details><summary>Inherited methods</summary><ul><li><span class="pkg-link" data-pkg="crew" data-topic="crew_class_launcher" data-id="call"><a href="https://wlandau.github.io/crew/reference/crew_class_launcher.html#method-call"><code>crew::crew_class_launcher$call()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="crew" data-topic="crew_class_launcher" data-id="expected"><a href="https://wlandau.github.io/crew/reference/crew_class_launcher.html#method-expected"><code>crew::crew_class_launcher$expected()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="crew" data-topic="crew_class_launcher" data-id="launch"><a href="https://wlandau.github.io/crew/reference/crew_class_launcher.html#method-launch"><code>crew::crew_class_launcher$launch()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="crew" data-topic="crew_class_launcher" data-id="launching"><a href="https://wlandau.github.io/crew/reference/crew_class_launcher.html#method-launching"><code>crew::crew_class_launcher$launching()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="crew" data-topic="crew_class_launcher" data-id="settings"><a href="https://wlandau.github.io/crew/reference/crew_class_launcher.html#method-settings"><code>crew::crew_class_launcher$settings()</code></a></span></li>
@@ -374,9 +375,12 @@ terminates a worker.</p>
 <span class="r-in"><span>  lsf_log_error <span class="op">=</span> <span class="cn">NULL</span>,</span></span>
 <span class="r-in"><span>  lsf_memory_gigabytes_limit <span class="op">=</span> <span class="fl">4</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> all(is.numeric(.)) &amp;&amp; all(. &gt;= 0) &amp;&amp; all(length(.) == 1L) &amp;&amp; all(!anyNA(.)) is not true on . = self[[field]]</span>
 <span class="r-in"><span><span class="va">launcher</span><span class="op">$</span><span class="fu">script</span><span class="op">(</span>name <span class="op">=</span> <span class="st">"my_job_name"</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in eval(expr, envir, enclos):</span> object 'launcher' not found</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "#!/bin/sh"                                                            </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [2] "#BSUB -J my_job_name"                                                 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [3] "#BSUB -cwd /home/runner/work/crew.cluster/crew.cluster/docs/reference"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [4] "#BSUB -o log_file_%J.log"                                             </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [5] "#BSUB -M 4G"                                                          </span>
 </code></pre></div>
     </div>
   </div>
