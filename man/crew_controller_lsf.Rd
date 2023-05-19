@@ -49,9 +49,7 @@ then an available ephemeral port is automatically chosen.}
 
 \item{seconds_interval}{Number of seconds between
 polling intervals waiting for certain internal
-synchronous operations to complete. If \code{space_poll} is \code{TRUE}, then
-this is also the minimum number of seconds between calls to
-\code{mirai::daemons()} for the purposes of checking worker status.}
+synchronous operations to complete.}
 
 \item{seconds_timeout}{Number of seconds until timing
 out while waiting for certain synchronous operations to complete.}
@@ -77,8 +75,7 @@ have completed.
 See the \code{walltime} argument of \code{mirai::server()}.}
 
 \item{seconds_exit}{Number of seconds to wait for NNG websockets
-to finish sending large data (when a worker exits after reaching a
-timeout or having completed a certain number of tasks).
+to finish sending large data (in case an exit signal is received).
 See the \code{exitlinger} argument of \code{mirai::server()}.}
 
 \item{tasks_max}{Maximum number of tasks that a worker will do before
@@ -90,7 +87,7 @@ the assignment of tasks to workers, it is recommended to set
 
 \item{tasks_timers}{Number of tasks to do before activating
 the timers for \code{seconds_idle} and \code{seconds_wall}.
-See the \code{timerstart} argument of \code{mirai::server()}.}
+See the \code{timerlaunch} argument of \code{mirai::server()}.}
 
 \item{reset_globals}{\code{TRUE} to reset global environment
 variables between tasks, \code{FALSE} to leave them alone.}

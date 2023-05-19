@@ -153,7 +153,8 @@ crew_class_launcher_cluster <- R6::R6Class(
     #' @description Validate the launcher.
     #' @return `NULL` (invisibly). Throws an error if a field is invalid.
     validate = function() {
-      super$validate()
+      # TODO: after the next {crew} is released uncomment the line below.
+      # super$validate() # nolint
       crew::crew_assert(
         self$verbose,
         isTRUE(.) || isFALSE(.),
