@@ -1,4 +1,4 @@
-# crew.cluster 0.0.2.9000 (development)
+# crew.cluster 0.0.2.9001 (development)
 
 * Submit workers asynchronously (#2).
 * Use `system2()` instead of `processx` to submit workers (#2).
