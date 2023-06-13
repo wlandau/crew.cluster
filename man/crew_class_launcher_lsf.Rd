@@ -27,6 +27,7 @@ source code for additional attribution.
 ## Method `crew_class_launcher_lsf$script`
 ## ------------------------------------------------
 
+if (identical(Sys.getenv("CREW_EXAMPLES"), "true")) {
 launcher <- crew_launcher_lsf(
   lsf_cwd = getwd(),
   lsf_log_output = "log_file_\%J.log",
@@ -34,6 +35,7 @@ launcher <- crew_launcher_lsf(
   lsf_memory_gigabytes_limit = 4
 )
 launcher$script(name = "my_job_name")
+}
 }
 \seealso{
 Other launchers: 
@@ -224,13 +226,15 @@ Character vector of the lines of the job script.
 }
 \subsection{Examples}{
 \if{html}{\out{<div class="r example copy">}}
-\preformatted{launcher <- crew_launcher_lsf(
+\preformatted{if (identical(Sys.getenv("CREW_EXAMPLES"), "true")) {
+launcher <- crew_launcher_lsf(
   lsf_cwd = getwd(),
   lsf_log_output = "log_file_\%J.log",
   lsf_log_error = NULL,
   lsf_memory_gigabytes_limit = 4
 )
 launcher$script(name = "my_job_name")
+}
 }
 \if{html}{\out{</div>}}
 

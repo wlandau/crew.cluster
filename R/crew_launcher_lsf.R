@@ -257,6 +257,7 @@ crew_class_launcher_lsf <- R6::R6Class(
     #' @param name Character of length 1, name of the job. For inspection
     #'   purposes, you can supply a mock job name.
     #' @examples
+    #' if (identical(Sys.getenv("CREW_EXAMPLES"), "true")) {
     #' launcher <- crew_launcher_lsf(
     #'   lsf_cwd = getwd(),
     #'   lsf_log_output = "log_file_%J.log",
@@ -264,6 +265,7 @@ crew_class_launcher_lsf <- R6::R6Class(
     #'   lsf_memory_gigabytes_limit = 4
     #' )
     #' launcher$script(name = "my_job_name")
+    #' }
     script = function(name) {
       c(
         "#!/bin/sh",

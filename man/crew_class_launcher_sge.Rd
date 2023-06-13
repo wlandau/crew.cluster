@@ -27,11 +27,13 @@ source code for additional attribution.
 ## Method `crew_class_launcher_sge$script`
 ## ------------------------------------------------
 
+if (identical(Sys.getenv("CREW_EXAMPLES"), "true")) {
 launcher <- crew_launcher_sge(
   sge_cores = 2,
   sge_memory_gigabytes_required = 4
 )
 launcher$script(name = "my_job_name")
+}
 }
 \seealso{
 Other launchers: 
@@ -237,11 +239,13 @@ Character vector of the lines of the job script.
 }
 \subsection{Examples}{
 \if{html}{\out{<div class="r example copy">}}
-\preformatted{launcher <- crew_launcher_sge(
+\preformatted{if (identical(Sys.getenv("CREW_EXAMPLES"), "true")) {
+launcher <- crew_launcher_sge(
   sge_cores = 2,
   sge_memory_gigabytes_required = 4
 )
 launcher$script(name = "my_job_name")
+}
 }
 \if{html}{\out{</div>}}
 

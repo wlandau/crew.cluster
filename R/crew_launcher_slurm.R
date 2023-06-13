@@ -231,12 +231,14 @@ crew_class_launcher_slurm <- R6::R6Class(
     #' @param name Character of length 1, name of the job. For inspection
     #'   purposes, you can supply a mock job name.
     #' @examples
+    #' if (identical(Sys.getenv("CREW_EXAMPLES"), "true")) {
     #' launcher <- crew_launcher_slurm(
     #'   slurm_log_output = "log_file_%A.log",
     #'   slurm_log_error = NULL,
     #'   slurm_memory_gigabytes_per_cpu = 4096
     #' )
     #' launcher$script(name = "my_job_name")
+    #' }
     script = function(name) {
       c(
         "#!/bin/sh",

@@ -303,11 +303,13 @@ crew_class_launcher_sge <- R6::R6Class(
     #' @param name Character of length 1, name of the job. For inspection
     #'   purposes, you can supply a mock job name.
     #' @examples
+    #' if (identical(Sys.getenv("CREW_EXAMPLES"), "true")) {
     #' launcher <- crew_launcher_sge(
     #'   sge_cores = 2,
     #'   sge_memory_gigabytes_required = 4
     #' )
     #' launcher$script(name = "my_job_name")
+    #' }
     script = function(name) {
       c(
         paste("#$ -N", name),

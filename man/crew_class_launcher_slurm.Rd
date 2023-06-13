@@ -27,12 +27,14 @@ source code for additional attribution.
 ## Method `crew_class_launcher_slurm$script`
 ## ------------------------------------------------
 
+if (identical(Sys.getenv("CREW_EXAMPLES"), "true")) {
 launcher <- crew_launcher_slurm(
   slurm_log_output = "log_file_\%A.log",
   slurm_log_error = NULL,
   slurm_memory_gigabytes_per_cpu = 4096
 )
 launcher$script(name = "my_job_name")
+}
 }
 \seealso{
 Other launchers: 
@@ -213,12 +215,14 @@ Character vector of the lines of the job script.
 }
 \subsection{Examples}{
 \if{html}{\out{<div class="r example copy">}}
-\preformatted{launcher <- crew_launcher_slurm(
+\preformatted{if (identical(Sys.getenv("CREW_EXAMPLES"), "true")) {
+launcher <- crew_launcher_slurm(
   slurm_log_output = "log_file_\%A.log",
   slurm_log_error = NULL,
   slurm_memory_gigabytes_per_cpu = 4096
 )
 launcher$script(name = "my_job_name")
+}
 }
 \if{html}{\out{</div>}}
 
