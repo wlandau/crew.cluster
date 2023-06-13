@@ -23,4 +23,3 @@ reference:
   - '`crew_class_launcher_pbs`'
   - '`crew_class_launcher_sge`'
   - '`crew_class_launcher_slurm`'
-  
