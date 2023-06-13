@@ -49,7 +49,8 @@ crew_controller_sge <- function(
   sge_cores = NULL,
   sge_gpu = NULL
 ) {
-  client <- crew::crew_client(
+  # TODO: remove eval parse after next crew release.
+  client <- eval(parse(text = "crew::crew_client"))(
     name = name,
     workers = workers,
     host = host,
