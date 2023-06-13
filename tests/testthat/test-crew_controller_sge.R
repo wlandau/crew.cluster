@@ -1,4 +1,5 @@
 test_that("crew_controller_sge() script() all lines", {
+  skip_if_low_dep_versions()
   x <- crew_controller_sge(
     script_lines = c("module load R", "echo 'start'"),
     sge_cwd = TRUE,

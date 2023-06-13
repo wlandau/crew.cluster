@@ -33,7 +33,8 @@
 #'   supports R through an environment module.
 crew_launcher_cluster <- function(
   name = NULL,
-  seconds_launch = 60,
+  seconds_interval = 0.25,
+  seconds_launch = 600,
   seconds_idle = Inf,
   seconds_wall = Inf,
   seconds_exit = 1,
@@ -52,6 +53,7 @@ crew_launcher_cluster <- function(
   name <- as.character(name %|||% crew::crew_random_name())
   launcher <- crew_class_launcher_cluster$new(
     name = name,
+    seconds_interval = seconds_interval,
     seconds_launch = seconds_launch,
     seconds_idle = seconds_idle,
     seconds_wall = seconds_wall,
@@ -98,6 +100,7 @@ crew_class_launcher_cluster <- R6::R6Class(
     #' @description Abstract launcher constructor.
     #' @return An abstract launcher object.
     #' @param name See [crew_launcher_cluster()].
+    #' @param seconds_interval See [crew_launcher_cluster()].
     #' @param seconds_launch See [crew_launcher_cluster()].
     #' @param seconds_idle See [crew_launcher_cluster()].
     #' @param seconds_wall See [crew_launcher_cluster()].
@@ -115,6 +118,7 @@ crew_class_launcher_cluster <- R6::R6Class(
     #' @param script_lines See [crew_launcher_cluster()].
     initialize = function(
       name = NULL,
+      seconds_interval = NULL,
       seconds_launch = NULL,
       seconds_idle = NULL,
       seconds_wall = NULL,
@@ -133,6 +137,7 @@ crew_class_launcher_cluster <- R6::R6Class(
     ) {
       super$initialize(
         name = name,
+        seconds_interval = seconds_interval,
         seconds_launch = seconds_launch,
         seconds_idle = seconds_idle,
         seconds_wall = seconds_wall,
@@ -153,8 +158,7 @@ crew_class_launcher_cluster <- R6::R6Class(
     #' @description Validate the launcher.
     #' @return `NULL` (invisibly). Throws an error if a field is invalid.
     validate = function() {
-      # TODO: after the next {crew} is released uncomment the line below.
-      # super$validate() # nolint
+      super$validate() # nolint
       crew::crew_assert(
         self$verbose,
         isTRUE(.) || isFALSE(.),
@@ -183,13 +187,12 @@ crew_class_launcher_cluster <- R6::R6Class(
     #' @description Launch a local process worker which will
     #'   dial into a socket.
     #' @details The `call` argument is R code that will run to
-    #'   initiate the worker. Together, the `launcher`, `worker`,
-    #'   and `instance` arguments are useful for
-    #'   constructing informative job names.
+    #'   initiate the worker.
     #' @return A handle object to allow the termination of the worker
     #'   later on.
-    #' @param call Text string with a namespaced call to [crew_worker()]
+    #' @param call Character of length 1, a namespaced call to [crew_worker()]
     #'   which will run in the worker and accept tasks.
+    #' @param name Character of length 1, an informative worker name.
     #' @param launcher Character of length 1, name of the launcher.
     #' @param worker Positive integer of length 1, index of the worker.
     #'   This worker index remains the same even when the current instance
@@ -197,12 +200,7 @@ crew_class_launcher_cluster <- R6::R6Class(
     #'   It is always between 1 and the maximum number of concurrent workers.
     #' @param instance Character of length 1 to uniquely identify
     #'   the current instance of the worker.
-    launch_worker = function(call, launcher, worker, instance) {
-      name <- name_job(
-        launcher = launcher,
-        worker = worker,
-        instance = instance
-      )
+    launch_worker = function(call, name, launcher, worker, instance) {
       lines <- c(self$script(name = name), paste("R -e", shQuote(call)))
       if (is.null(self$prefix)) {
         if (!file.exists(self$script_directory)) {
@@ -217,7 +215,6 @@ crew_class_launcher_cluster <- R6::R6Class(
         worker = worker
       )
       writeLines(text = lines, con = script)
-
       system2(
         command = self$command_submit,
         args = self$args_launch(script = script),
@@ -225,25 +222,18 @@ crew_class_launcher_cluster <- R6::R6Class(
         stderr = if_any(self$verbose, "", FALSE),
         wait = FALSE
       )
-      list(launcher = launcher, worker = worker, instance = instance)
+      list(name = name, script = script)
     },
     #' @description Terminate a local process worker.
     #' @return `NULL` (invisibly).
     #' @param handle A process handle object previously
     #'   returned by `launch_worker()`.
     terminate_worker = function(handle) {
-      script <- path_script(
-        dir = self$script_directory,
-        prefix = self$prefix,
-        launcher = handle$launcher,
-        worker = handle$worker
-      )
-      unlink(script)
-      name <- do.call(what = name_job, args = handle)
+      unlink(handle$script)
       if (nzchar(self$command_delete)) {
         system2(
           command = self$command_delete,
-          args = self$args_terminate(name = name),
+          args = self$args_terminate(name = handle$name),
           stdout = if_any(self$verbose, "", FALSE),
           stderr = if_any(self$verbose, "", FALSE),
           wait = FALSE

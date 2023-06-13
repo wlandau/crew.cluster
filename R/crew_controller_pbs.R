@@ -5,7 +5,7 @@
 #' @description Create an `R6` object to submit tasks and
 #'   launch workers on a PBS or TORQUE cluster.
 #' @inheritSection crew.cluster-package Attribution
-#' @inheritParams crew::crew_router
+#' @inheritParams crew::crew_client
 #' @inheritParams crew_launcher_pbs
 #' @inheritParams crew::crew_controller
 #' @examples
@@ -24,7 +24,7 @@ crew_controller_pbs <- function(
   port = NULL,
   seconds_interval = 0.25,
   seconds_timeout = 10,
-  seconds_launch = 60,
+  seconds_launch = 600,
   seconds_idle = Inf,
   seconds_wall = Inf,
   seconds_exit = 1,
@@ -47,7 +47,7 @@ crew_controller_pbs <- function(
   pbs_cores = NULL,
   pbs_walltime_hours = 12
 ) {
-  router <- crew::crew_router(
+  client <- crew::crew_client(
     name = name,
     workers = workers,
     host = host,
@@ -57,6 +57,7 @@ crew_controller_pbs <- function(
   )
   launcher <- crew_launcher_pbs(
     name = name,
+    seconds_interval = seconds_interval,
     seconds_launch = seconds_launch,
     seconds_idle = seconds_idle,
     seconds_wall = seconds_wall,
@@ -80,7 +81,7 @@ crew_controller_pbs <- function(
     pbs_cores = pbs_cores,
     pbs_walltime_hours = pbs_walltime_hours
   )
-  controller <- crew::crew_controller(router = router, launcher = launcher)
+  controller <- crew::crew_controller(client = client, launcher = launcher)
   controller$validate()
   controller
 }

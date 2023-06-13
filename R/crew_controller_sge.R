@@ -5,7 +5,7 @@
 #' @description Create an `R6` object to submit tasks and
 #'   launch workers on Sun Grid Engine (SGE) workers.
 #' @inheritSection crew.cluster-package Attribution
-#' @inheritParams crew::crew_router
+#' @inheritParams crew::crew_client
 #' @inheritParams crew_launcher_sge
 #' @inheritParams crew::crew_controller
 #' @examples
@@ -24,7 +24,7 @@ crew_controller_sge <- function(
   port = NULL,
   seconds_interval = 0.25,
   seconds_timeout = 10,
-  seconds_launch = 60,
+  seconds_launch = 600,
   seconds_idle = Inf,
   seconds_wall = Inf,
   seconds_exit = 1,
@@ -49,7 +49,7 @@ crew_controller_sge <- function(
   sge_cores = NULL,
   sge_gpu = NULL
 ) {
-  router <- crew::crew_router(
+  client <- crew::crew_client(
     name = name,
     workers = workers,
     host = host,
@@ -59,6 +59,7 @@ crew_controller_sge <- function(
   )
   launcher <- crew_launcher_sge(
     name = name,
+    seconds_interval = seconds_interval,
     seconds_launch = seconds_launch,
     seconds_idle = seconds_idle,
     seconds_wall = seconds_wall,
@@ -84,7 +85,7 @@ crew_controller_sge <- function(
     sge_cores = sge_cores,
     sge_gpu = sge_gpu
   )
-  controller <- crew::crew_controller(router = router, launcher = launcher)
+  controller <- crew::crew_controller(client = client, launcher = launcher)
   controller$validate()
   controller
 }

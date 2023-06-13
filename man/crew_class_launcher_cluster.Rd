@@ -69,12 +69,13 @@ Other launchers:
 <details><summary>Inherited methods</summary>
 <ul>
 <li><span class="pkg-link" data-pkg="crew" data-topic="crew_class_launcher" data-id="call"><a href='../../crew/html/crew_class_launcher.html#method-crew_class_launcher-call'><code>crew::crew_class_launcher$call()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="crew" data-topic="crew_class_launcher" data-id="expected"><a href='../../crew/html/crew_class_launcher.html#method-crew_class_launcher-expected'><code>crew::crew_class_launcher$expected()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="crew" data-topic="crew_class_launcher" data-id="launch"><a href='../../crew/html/crew_class_launcher.html#method-crew_class_launcher-launch'><code>crew::crew_class_launcher$launch()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="crew" data-topic="crew_class_launcher" data-id="launching"><a href='../../crew/html/crew_class_launcher.html#method-crew_class_launcher-launching'><code>crew::crew_class_launcher$launching()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="crew" data-topic="crew_class_launcher" data-id="poll"><a href='../../crew/html/crew_class_launcher.html#method-crew_class_launcher-poll'><code>crew::crew_class_launcher$poll()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="crew" data-topic="crew_class_launcher" data-id="scale"><a href='../../crew/html/crew_class_launcher.html#method-crew_class_launcher-scale'><code>crew::crew_class_launcher$scale()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="crew" data-topic="crew_class_launcher" data-id="settings"><a href='../../crew/html/crew_class_launcher.html#method-crew_class_launcher-settings'><code>crew::crew_class_launcher$settings()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="crew" data-topic="crew_class_launcher" data-id="start"><a href='../../crew/html/crew_class_launcher.html#method-crew_class_launcher-start'><code>crew::crew_class_launcher$start()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="crew" data-topic="crew_class_launcher" data-id="terminate"><a href='../../crew/html/crew_class_launcher.html#method-crew_class_launcher-terminate'><code>crew::crew_class_launcher$terminate()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="crew" data-topic="crew_class_launcher" data-id="throttle"><a href='../../crew/html/crew_class_launcher.html#method-crew_class_launcher-throttle'><code>crew::crew_class_launcher$throttle()</code></a></span></li>
 </ul>
 </details>
 }}
@@ -86,6 +87,7 @@ Abstract launcher constructor.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{crew_class_launcher_cluster$new(
   name = NULL,
+  seconds_interval = NULL,
   seconds_launch = NULL,
   seconds_idle = NULL,
   seconds_wall = NULL,
@@ -108,6 +110,8 @@ Abstract launcher constructor.
 \if{html}{\out{<div class="arguments">}}
 \describe{
 \item{\code{name}}{See \code{\link[=crew_launcher_cluster]{crew_launcher_cluster()}}.}
+
+\item{\code{seconds_interval}}{See \code{\link[=crew_launcher_cluster]{crew_launcher_cluster()}}.}
 
 \item{\code{seconds_launch}}{See \code{\link[=crew_launcher_cluster]{crew_launcher_cluster()}}.}
 
@@ -165,14 +169,22 @@ Validate the launcher.
 Launch a local process worker which will
 dial into a socket.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{crew_class_launcher_cluster$launch_worker(call, launcher, worker, instance)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{crew_class_launcher_cluster$launch_worker(
+  call,
+  name,
+  launcher,
+  worker,
+  instance
+)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{call}}{Text string with a namespaced call to \code{\link[=crew_worker]{crew_worker()}}
+\item{\code{call}}{Character of length 1, a namespaced call to \code{\link[=crew_worker]{crew_worker()}}
 which will run in the worker and accept tasks.}
+
+\item{\code{name}}{Character of length 1, an informative worker name.}
 
 \item{\code{launcher}}{Character of length 1, name of the launcher.}
 
@@ -188,9 +200,7 @@ the current instance of the worker.}
 }
 \subsection{Details}{
 The \code{call} argument is R code that will run to
-initiate the worker. Together, the \code{launcher}, \code{worker},
-and \code{instance} arguments are useful for
-constructing informative job names.
+initiate the worker.
 }
 
 \subsection{Returns}{

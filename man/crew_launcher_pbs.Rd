@@ -7,7 +7,8 @@ PBS or TORQUE workers.}
 \usage{
 crew_launcher_pbs(
   name = NULL,
-  seconds_launch = 60,
+  seconds_interval = 0.25,
+  seconds_launch = 600,
   seconds_idle = Inf,
   seconds_wall = Inf,
   seconds_exit = 1,
@@ -34,6 +35,8 @@ crew_launcher_pbs(
 \arguments{
 \item{name}{Name of the launcher.}
 
+\item{seconds_interval}{Seconds to wait between asynchronous operations.}
+
 \item{seconds_launch}{Seconds of startup time to allow.
 A worker is unconditionally assumed to be alive
 from the moment of its launch until \code{seconds_launch} seconds later.
@@ -55,7 +58,8 @@ have completed.
 See the \code{walltime} argument of \code{mirai::server()}.}
 
 \item{seconds_exit}{Number of seconds to wait for NNG websockets
-to finish sending large data (in case an exit signal is received).
+to finish sending large data (when a worker exits after reaching a
+timeout or having completed a certain number of tasks).
 See the \code{exitlinger} argument of \code{mirai::server()}.}
 
 \item{tasks_max}{Maximum number of tasks that a worker will do before
@@ -67,7 +71,7 @@ the assignment of tasks to workers, it is recommended to set
 
 \item{tasks_timers}{Number of tasks to do before activating
 the timers for \code{seconds_idle} and \code{seconds_wall}.
-See the \code{timerlaunch} argument of \code{mirai::server()}.}
+See the \code{timerstart} argument of \code{mirai::server()}.}
 
 \item{reset_globals}{\code{TRUE} to reset global environment
 variables between tasks, \code{FALSE} to leave them alone.}

@@ -1,8 +1,10 @@
 test_that("valid simple crew_launcher_slurm()", {
+  skip_if_low_dep_versions()
   expect_silent(crew_launcher_slurm())
 })
 
 test_that("valid populated crew_launcher_slurm()", {
+  skip_if_low_dep_versions()
   expect_silent(
     crew_launcher_slurm(
       script_lines = c("module load R", "echo 'start'"),
@@ -15,19 +17,21 @@ test_that("valid populated crew_launcher_slurm()", {
 })
 
 test_that("invalid crew_launcher_slurm(): SLURM field", {
+  skip_if_low_dep_versions()
   x <- crew_launcher_slurm()
   x$slurm_cpus_per_task <- - 1L
   expect_error(x$validate(), class = "crew_error")
 })
 
 test_that("invalid crew_launcher_slurm(): non-SLURM field", {
-  skip("TODO: add back full validation when the next {crew} is released.")
+  skip_if_low_dep_versions()
   x <- crew_launcher_slurm()
   x$name <- - 1L
   expect_error(x$validate(), class = "crew_error")
 })
 
 test_that("crew_launcher_slurm() script() nearly empty", {
+  skip_if_low_dep_versions()
   x <- crew_launcher_slurm()
   lines <- c(
     "#!/bin/sh",
@@ -39,6 +43,7 @@ test_that("crew_launcher_slurm() script() nearly empty", {
 })
 
 test_that("crew_launcher_slurm() script() all lines", {
+  skip_if_low_dep_versions()
   x <- crew_launcher_slurm(
     script_lines = c("module load R", "echo 'start'"),
     slurm_log_output = "log1",
@@ -61,6 +66,7 @@ test_that("crew_launcher_slurm() script() all lines", {
 })
 
 test_that("args_terminate()", {
+  skip_if_low_dep_versions()
   x <- crew_launcher_slurm()
   expect_equal(
     x$args_terminate(name = "my_job"),

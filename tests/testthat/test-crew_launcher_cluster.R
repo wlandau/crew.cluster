@@ -1,14 +1,17 @@
 test_that("valid abstract cluster launcher object", {
+  skip_if_low_dep_versions()
   expect_silent(crew_launcher_cluster())
 })
 
 test_that("bad field in cluster launcher object", {
+  skip_if_low_dep_versions()
   x <- crew_launcher_cluster()
   x$verbose <- 2L
   expect_error(x$validate(), class = "crew_error")
 })
 
 test_that("SGE subclass mock job creates a tempdir() job script", {
+  skip_if_low_dep_versions()
   skip_on_cran()
   skip_on_os("windows")
   x <- crew_launcher_sge(
@@ -27,7 +30,19 @@ test_that("SGE subclass mock job creates a tempdir() job script", {
   )
   x$start()
   expect_null(x$prefix)
-  x$launch(index = 1L, socket = "my_socket")
+  handle <- x$launch_worker(
+    call = x$call(
+      socket = "my_socket",
+      launcher = x$name,
+      worker = 1L,
+      instance = "instance"
+    ),
+    name = "my_name",
+    launcher = x$name,
+    worker = 1L,
+    instance = "instance"
+  )
+  x$workers$handle[[1L]] <- handle
   expect_false(is.null(x$prefix))
   script <- path_script(
     dir = tempdir(),
@@ -35,15 +50,12 @@ test_that("SGE subclass mock job creates a tempdir() job script", {
     launcher = x$name,
     worker = 1L
   )
-  job <- name_job(
-    launcher = x$name,
-    worker = 1L,
-    instance = x$workers$handle[[1]]$instance
-  )
+  expect_equal(handle$name, "my_name")
+  expect_equal(handle$script, script)
   expect_true(file.exists(script))
   out <- readLines(script)
   exp <- c(
-    paste("#$ -N", job),
+    "#$ -N my_name",
     "#$ -cwd",
     "#$ -V",
     "#$ -o out_dir/",
@@ -62,6 +74,7 @@ test_that("SGE subclass mock job creates a tempdir() job script", {
 })
 
 test_that("SGE subclass mock job creates a custom job script", {
+  skip_if_low_dep_versions()
   skip_on_cran()
   skip_on_os("windows")
   dir <- file.path(tempfile(), basename(tempfile()), basename(tempfile()))
@@ -82,7 +95,19 @@ test_that("SGE subclass mock job creates a custom job script", {
   )
   x$start()
   expect_null(x$prefix)
-  x$launch(index = 1L, socket = "my_socket")
+  handle <- x$launch_worker(
+    call = x$call(
+      socket = "my_socket",
+      launcher = x$name,
+      worker = 1L,
+      instance = "instance"
+    ),
+    name = "my_name",
+    launcher = x$name,
+    worker = 1L,
+    instance = "instance"
+  )
+  x$workers$handle[[1L]] <- handle
   expect_false(is.null(x$prefix))
   script <- path_script(
     dir = dir,
@@ -90,15 +115,12 @@ test_that("SGE subclass mock job creates a custom job script", {
     launcher = x$name,
     worker = 1L
   )
-  job <- name_job(
-    launcher = x$name,
-    worker = 1L,
-    instance = x$workers$handle[[1]]$instance
-  )
+  expect_equal(handle$name, "my_name")
+  expect_equal(handle$script, script)
   expect_true(file.exists(script))
   out <- readLines(script)
   exp <- c(
-    paste("#$ -N", job),
+    "#$ -N my_name",
     "#$ -cwd",
     "#$ -V",
     "#$ -o out_dir/",

@@ -9,7 +9,7 @@
 #'   with caution and report bugs to
 #'   <https://github.com/wlandau/crew.cluster>.
 #' @inheritSection crew.cluster-package Attribution
-#' @inheritParams crew::crew_router
+#' @inheritParams crew::crew_client
 #' @inheritParams crew_launcher_lsf
 #' @inheritParams crew::crew_controller
 #' @examples
@@ -28,7 +28,7 @@ crew_controller_lsf <- function(
   port = NULL,
   seconds_interval = 0.25,
   seconds_timeout = 10,
-  seconds_launch = 60,
+  seconds_launch = 600,
   seconds_idle = Inf,
   seconds_wall = Inf,
   seconds_exit = 1,
@@ -50,7 +50,7 @@ crew_controller_lsf <- function(
   lsf_memory_gigabytes_required = NULL,
   lsf_cores = NULL
 ) {
-  router <- crew::crew_router(
+  client <- crew::crew_client(
     name = name,
     workers = workers,
     host = host,
@@ -60,6 +60,7 @@ crew_controller_lsf <- function(
   )
   launcher <- crew_launcher_lsf(
     name = name,
+    seconds_interval = seconds_interval,
     seconds_launch = seconds_launch,
     seconds_idle = seconds_idle,
     seconds_wall = seconds_wall,
@@ -82,7 +83,7 @@ crew_controller_lsf <- function(
     lsf_memory_gigabytes_required = lsf_memory_gigabytes_required,
     lsf_cores = lsf_cores
   )
-  controller <- crew::crew_controller(router = router, launcher = launcher)
+  controller <- crew::crew_controller(client = client, launcher = launcher)
   controller$validate()
   controller
 }

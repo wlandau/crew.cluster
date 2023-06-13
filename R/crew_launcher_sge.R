@@ -64,7 +64,8 @@
 #'   `"#$ -l gpu=1"` in the SGE job script. `sge_gpu = NULL` omits this line.
 crew_launcher_sge <- function(
   name = NULL,
-  seconds_launch = 60,
+  seconds_interval = 0.25,
+  seconds_launch = 600,
   seconds_idle = Inf,
   seconds_wall = Inf,
   seconds_exit = 1,
@@ -92,6 +93,7 @@ crew_launcher_sge <- function(
   name <- as.character(name %|||% crew::crew_random_name())
   launcher <- crew_class_launcher_sge$new(
     name = name,
+    seconds_interval = seconds_interval,
     seconds_launch = seconds_launch,
     seconds_idle = seconds_idle,
     seconds_wall = seconds_wall,
@@ -153,6 +155,7 @@ crew_class_launcher_sge <- R6::R6Class(
     #' @description SGE launcher constructor.
     #' @return an SGE launcher object.
     #' @param name See [crew_launcher_sge()].
+    #' @param seconds_interval See [crew_launcher_sge()].
     #' @param seconds_launch See [crew_launcher_sge()].
     #' @param seconds_idle See [crew_launcher_sge()].
     #' @param seconds_wall See [crew_launcher_sge()].
@@ -179,6 +182,7 @@ crew_class_launcher_sge <- R6::R6Class(
     #' @param sge_gpu See [crew_launcher_sge()].
     initialize = function(
       name = NULL,
+      seconds_interval = NULL,
       seconds_launch = NULL,
       seconds_idle = NULL,
       seconds_wall = NULL,
@@ -206,6 +210,7 @@ crew_class_launcher_sge <- R6::R6Class(
     ) {
       super$initialize(
         name = name,
+        seconds_interval = seconds_interval,
         seconds_launch = seconds_launch,
         seconds_idle = seconds_idle,
         seconds_wall = seconds_wall,

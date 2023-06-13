@@ -1,8 +1,10 @@
 test_that("valid simple crew_launcher_pbs()", {
+  skip_if_low_dep_versions()
   expect_silent(crew_launcher_pbs())
 })
 
 test_that("valid populated crew_launcher_pbs()", {
+  skip_if_low_dep_versions()
   expect_silent(
     crew_launcher_pbs(
       script_lines = c("module load R", "echo 'start'"),
@@ -17,19 +19,21 @@ test_that("valid populated crew_launcher_pbs()", {
 })
 
 test_that("invalid crew_launcher_pbs(): pbs field", {
+  skip_if_low_dep_versions()
   x <- crew_launcher_pbs()
   x$pbs_cores <- - 1L
   expect_error(x$validate(), class = "crew_error")
 })
 
 test_that("invalid crew_launcher_pbs(): non-pbs field", {
-  skip("TODO: add back full validation when the next {crew} is released.")
+  skip_if_low_dep_versions()
   x <- crew_launcher_pbs()
   x$name <- - 1L
   expect_error(x$validate(), class = "crew_error")
 })
 
 test_that("crew_launcher_pbs() script() nearly empty", {
+  skip_if_low_dep_versions()
   x <- crew_launcher_pbs(
     pbs_cwd = FALSE,
     pbs_log_output = "log_file",
@@ -43,6 +47,7 @@ test_that("crew_launcher_pbs() script() nearly empty", {
 })
 
 test_that("crew_launcher_pbs() script() all lines", {
+  skip_if_low_dep_versions()
   x <- crew_launcher_pbs(
     script_lines = c("module load R", "echo 'start'"),
     pbs_log_output = "out_dir/",
