@@ -45,6 +45,7 @@ Imports:
   crew (>= 0.1.0),
   lifecycle,
   R6,
+  rlang,
   utils
 Suggests:
   knitr (>= 1.30),

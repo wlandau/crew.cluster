@@ -1,6 +1,7 @@
-# crew.cluster 0.1.0.9000 (development)
+# crew.cluster 0.1.1
 
-
+* Align with breaking changes in `crew` 0.3.0.
+* Increase `seconds_launch` to 600.
 
 # crew.cluster 0.1.0
 

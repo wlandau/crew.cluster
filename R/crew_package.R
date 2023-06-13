@@ -31,6 +31,7 @@
 #'   crew_random_name
 #' @importFrom lifecycle badge
 #' @importFrom R6 R6Class
+#' @importFrom rlang is_installed
 #' @importFrom utils globalVariables
 NULL
 
