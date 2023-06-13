@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">crew.cluster</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.1</span>
       </span>
     </div>
 
@@ -128,18 +128,20 @@ source code for additional attribution.</p>
 <li><p><a href="#method-crew_class_launcher_cluster-args_launch"><code>crew_class_launcher_cluster$args_launch()</code></a></p></li>
 <li><p><a href="#method-crew_class_launcher_cluster-args_terminate"><code>crew_class_launcher_cluster$args_terminate()</code></a></p></li>
 </ul></div><p><details><summary>Inherited methods</summary><ul><li><span class="pkg-link" data-pkg="crew" data-topic="crew_class_launcher" data-id="call"><a href="https://wlandau.github.io/crew/reference/crew_class_launcher.html#method-call"><code>crew::crew_class_launcher$call()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="crew" data-topic="crew_class_launcher" data-id="expected"><a href="https://wlandau.github.io/crew/reference/crew_class_launcher.html#method-expected"><code>crew::crew_class_launcher$expected()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="crew" data-topic="crew_class_launcher" data-id="launch"><a href="https://wlandau.github.io/crew/reference/crew_class_launcher.html#method-launch"><code>crew::crew_class_launcher$launch()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="crew" data-topic="crew_class_launcher" data-id="launching"><a href="https://wlandau.github.io/crew/reference/crew_class_launcher.html#method-launching"><code>crew::crew_class_launcher$launching()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="crew" data-topic="crew_class_launcher" data-id="poll"><a href="https://wlandau.github.io/crew/reference/crew_class_launcher.html#method-poll"><code>crew::crew_class_launcher$poll()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="crew" data-topic="crew_class_launcher" data-id="scale"><a href="https://wlandau.github.io/crew/reference/crew_class_launcher.html#method-scale"><code>crew::crew_class_launcher$scale()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="crew" data-topic="crew_class_launcher" data-id="settings"><a href="https://wlandau.github.io/crew/reference/crew_class_launcher.html#method-settings"><code>crew::crew_class_launcher$settings()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="crew" data-topic="crew_class_launcher" data-id="start"><a href="https://wlandau.github.io/crew/reference/crew_class_launcher.html#method-start"><code>crew::crew_class_launcher$start()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="crew" data-topic="crew_class_launcher" data-id="terminate"><a href="https://wlandau.github.io/crew/reference/crew_class_launcher.html#method-terminate"><code>crew::crew_class_launcher$terminate()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="crew" data-topic="crew_class_launcher" data-id="throttle"><a href="https://wlandau.github.io/crew/reference/crew_class_launcher.html#method-throttle"><code>crew::crew_class_launcher$throttle()</code></a></span></li>
 </ul></details></p><hr><a id="method-crew_class_launcher_cluster-new"></a><div class="section">
 <h3 id="method-new-">Method <code>new()</code><a class="anchor" aria-label="anchor" href="#method-new-"></a></h3>
 <p>Abstract launcher constructor.</p><div class="section">
 <h4 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va"><a href="../reference/crew_class_launcher_cluster.html">crew_class_launcher_cluster</a></span><span class="op">$</span><span class="fu">new</span><span class="op">(</span></span>
 <span>  name <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  seconds_interval <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  seconds_launch <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  seconds_idle <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  seconds_wall <span class="op">=</span> <span class="cn">NULL</span>,</span>
@@ -161,6 +163,10 @@ source code for additional attribution.</p>
 <div class="section">
 <h4 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>name</code></dt>
+<dd><p>See <code><a href="crew_launcher_cluster.html">crew_launcher_cluster()</a></code>.</p></dd>
+
+
+<dt><code>seconds_interval</code></dt>
 <dd><p>See <code><a href="crew_launcher_cluster.html">crew_launcher_cluster()</a></code>.</p></dd>
 
 
@@ -248,14 +254,24 @@ source code for additional attribution.</p>
 <p>Launch a local process worker which will
 dial into a socket.</p><div class="section">
 <h4 id="usage-2">Usage<a class="anchor" aria-label="anchor" href="#usage-2"></a></h4>
-<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">crew_class_launcher_cluster</span><span class="op">$</span><span class="fu">launch_worker</span><span class="op">(</span><span class="va">call</span>, <span class="va">launcher</span>, <span class="va">worker</span>, <span class="va">instance</span><span class="op">)</span></span></code></pre></div><p></p></div>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">crew_class_launcher_cluster</span><span class="op">$</span><span class="fu">launch_worker</span><span class="op">(</span></span>
+<span>  <span class="va">call</span>,</span>
+<span>  <span class="va">name</span>,</span>
+<span>  <span class="va">launcher</span>,</span>
+<span>  <span class="va">worker</span>,</span>
+<span>  <span class="va">instance</span></span>
+<span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
 <h4 id="arguments-1">Arguments<a class="anchor" aria-label="anchor" href="#arguments-1"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>call</code></dt>
-<dd><p>Text string with a namespaced call to <code>crew_worker()</code>
+<dd><p>Character of length 1, a namespaced call to <code>crew_worker()</code>
 which will run in the worker and accept tasks.</p></dd>
+
+
+<dt><code>name</code></dt>
+<dd><p>Character of length 1, an informative worker name.</p></dd>
 
 
 <dt><code>launcher</code></dt>
@@ -279,9 +295,7 @@ the current instance of the worker.</p></dd>
 <div class="section">
 <h4 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h4>
 <p>The <code>call</code> argument is R code that will run to
-initiate the worker. Together, the <code>launcher</code>, <code>worker</code>,
-and <code>instance</code> arguments are useful for
-constructing informative job names.</p>
+initiate the worker.</p>
 </div>
 
 <div class="section">

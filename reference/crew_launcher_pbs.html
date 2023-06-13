@@ -20,7 +20,7 @@ workers as jobs on a PBS or TORQUE cluster."><meta property="og:image" content="
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">crew.cluster</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.1</span>
       </span>
     </div>
 
@@ -60,7 +60,8 @@ workers as jobs on a PBS or TORQUE cluster.</p>
     <div id="ref-usage">
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">crew_launcher_pbs</span><span class="op">(</span></span>
 <span>  name <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  seconds_launch <span class="op">=</span> <span class="fl">60</span>,</span>
+<span>  seconds_interval <span class="op">=</span> <span class="fl">0.25</span>,</span>
+<span>  seconds_launch <span class="op">=</span> <span class="fl">600</span>,</span>
 <span>  seconds_idle <span class="op">=</span> <span class="cn">Inf</span>,</span>
 <span>  seconds_wall <span class="op">=</span> <span class="cn">Inf</span>,</span>
 <span>  seconds_exit <span class="op">=</span> <span class="fl">1</span>,</span>
@@ -91,6 +92,10 @@ workers as jobs on a PBS or TORQUE cluster.</p>
 <dd><p>Name of the launcher.</p></dd>
 
 
+<dt>seconds_interval</dt>
+<dd><p>Seconds to wait between asynchronous operations.</p></dd>
+
+
 <dt>seconds_launch</dt>
 <dd><p>Seconds of startup time to allow.
 A worker is unconditionally assumed to be alive
@@ -119,7 +124,8 @@ See the <code>walltime</code> argument of <code><a href="https://shikokuchuo.net
 
 <dt>seconds_exit</dt>
 <dd><p>Number of seconds to wait for NNG websockets
-to finish sending large data (in case an exit signal is received).
+to finish sending large data (when a worker exits after reaching a
+timeout or having completed a certain number of tasks).
 See the <code>exitlinger</code> argument of <code><a href="https://shikokuchuo.net/mirai/reference/server.html" class="external-link">mirai::server()</a></code>.</p></dd>
 
 
@@ -135,7 +141,7 @@ the assignment of tasks to workers, it is recommended to set
 <dt>tasks_timers</dt>
 <dd><p>Number of tasks to do before activating
 the timers for <code>seconds_idle</code> and <code>seconds_wall</code>.
-See the <code>timerlaunch</code> argument of <code><a href="https://shikokuchuo.net/mirai/reference/server.html" class="external-link">mirai::server()</a></code>.</p></dd>
+See the <code>timerstart</code> argument of <code><a href="https://shikokuchuo.net/mirai/reference/server.html" class="external-link">mirai::server()</a></code>.</p></dd>
 
 
 <dt>reset_globals</dt>

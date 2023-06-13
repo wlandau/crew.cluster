@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">crew.cluster</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.1</span>
       </span>
     </div>
 
@@ -129,12 +129,13 @@ source code for additional attribution.</p>
 <li><p><a href="#method-crew_class_launcher_pbs-validate"><code>crew_class_launcher_pbs$validate()</code></a></p></li>
 <li><p><a href="#method-crew_class_launcher_pbs-script"><code>crew_class_launcher_pbs$script()</code></a></p></li>
 </ul></div><p><details><summary>Inherited methods</summary><ul><li><span class="pkg-link" data-pkg="crew" data-topic="crew_class_launcher" data-id="call"><a href="https://wlandau.github.io/crew/reference/crew_class_launcher.html#method-call"><code>crew::crew_class_launcher$call()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="crew" data-topic="crew_class_launcher" data-id="expected"><a href="https://wlandau.github.io/crew/reference/crew_class_launcher.html#method-expected"><code>crew::crew_class_launcher$expected()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="crew" data-topic="crew_class_launcher" data-id="launch"><a href="https://wlandau.github.io/crew/reference/crew_class_launcher.html#method-launch"><code>crew::crew_class_launcher$launch()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="crew" data-topic="crew_class_launcher" data-id="launching"><a href="https://wlandau.github.io/crew/reference/crew_class_launcher.html#method-launching"><code>crew::crew_class_launcher$launching()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="crew" data-topic="crew_class_launcher" data-id="poll"><a href="https://wlandau.github.io/crew/reference/crew_class_launcher.html#method-poll"><code>crew::crew_class_launcher$poll()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="crew" data-topic="crew_class_launcher" data-id="scale"><a href="https://wlandau.github.io/crew/reference/crew_class_launcher.html#method-scale"><code>crew::crew_class_launcher$scale()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="crew" data-topic="crew_class_launcher" data-id="settings"><a href="https://wlandau.github.io/crew/reference/crew_class_launcher.html#method-settings"><code>crew::crew_class_launcher$settings()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="crew" data-topic="crew_class_launcher" data-id="start"><a href="https://wlandau.github.io/crew/reference/crew_class_launcher.html#method-start"><code>crew::crew_class_launcher$start()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="crew" data-topic="crew_class_launcher" data-id="terminate"><a href="https://wlandau.github.io/crew/reference/crew_class_launcher.html#method-terminate"><code>crew::crew_class_launcher$terminate()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="crew" data-topic="crew_class_launcher" data-id="throttle"><a href="https://wlandau.github.io/crew/reference/crew_class_launcher.html#method-throttle"><code>crew::crew_class_launcher$throttle()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="crew.cluster" data-topic="crew_class_launcher_cluster" data-id="args_launch"><a href="crew_class_launcher_cluster.html#method-args_launch"><code>crew.cluster::crew_class_launcher_cluster$args_launch()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="crew.cluster" data-topic="crew_class_launcher_cluster" data-id="args_terminate"><a href="crew_class_launcher_cluster.html#method-args_terminate"><code>crew.cluster::crew_class_launcher_cluster$args_terminate()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="crew.cluster" data-topic="crew_class_launcher_cluster" data-id="launch_worker"><a href="crew_class_launcher_cluster.html#method-launch_worker"><code>crew.cluster::crew_class_launcher_cluster$launch_worker()</code></a></span></li>
@@ -145,6 +146,7 @@ source code for additional attribution.</p>
 <h4 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va"><a href="../reference/crew_class_launcher_pbs.html">crew_class_launcher_pbs</a></span><span class="op">$</span><span class="fu">new</span><span class="op">(</span></span>
 <span>  name <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  seconds_interval <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  seconds_launch <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  seconds_idle <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  seconds_wall <span class="op">=</span> <span class="cn">NULL</span>,</span>
@@ -173,6 +175,10 @@ source code for additional attribution.</p>
 <div class="section">
 <h4 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>name</code></dt>
+<dd><p>See <code><a href="crew_launcher_pbs.html">crew_launcher_pbs()</a></code>.</p></dd>
+
+
+<dt><code>seconds_interval</code></dt>
 <dd><p>See <code><a href="crew_launcher_pbs.html">crew_launcher_pbs()</a></code>.</p></dd>
 
 
@@ -313,11 +319,13 @@ the bottom of the script at launch time.</p>
 </div>
 <div class="section">
 <h4 id="examples">Examples<a class="anchor" aria-label="anchor" href="#examples"></a></h4>
-<p></p><div class="r example copy"><div class="sourceCode"><pre><code><span><span class="va">launcher</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/crew_launcher_pbs.html">crew_launcher_pbs</a></span><span class="op">(</span></span>
+<p></p><div class="r example copy"><div class="sourceCode"><pre><code><span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/identical.html" class="external-link">identical</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Sys.getenv.html" class="external-link">Sys.getenv</a></span><span class="op">(</span><span class="st">"CREW_EXAMPLES"</span><span class="op">)</span>, <span class="st">"true"</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span><span class="va">launcher</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/crew_launcher_pbs.html">crew_launcher_pbs</a></span><span class="op">(</span></span>
 <span>  pbs_cores <span class="op">=</span> <span class="fl">2</span>,</span>
 <span>  pbs_memory_gigabytes_required <span class="op">=</span> <span class="fl">4</span></span>
 <span><span class="op">)</span></span>
-<span><span class="va">launcher</span><span class="op">$</span><span class="fu">script</span><span class="op">(</span>name <span class="op">=</span> <span class="st">"my_job_name"</span><span class="op">)</span></span></code></pre></div><p></p></div>
+<span><span class="va">launcher</span><span class="op">$</span><span class="fu">script</span><span class="op">(</span>name <span class="op">=</span> <span class="st">"my_job_name"</span><span class="op">)</span></span>
+<span><span class="op">}</span></span></code></pre></div><p></p></div>
 </div>
 
 
@@ -332,15 +340,13 @@ the bottom of the script at launch time.</p>
 <span class="r-in"><span><span class="co">## Method `crew_class_launcher_pbs$script`</span></span></span>
 <span class="r-in"><span><span class="co">## ------------------------------------------------</span></span></span>
 <span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/identical.html" class="external-link">identical</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Sys.getenv.html" class="external-link">Sys.getenv</a></span><span class="op">(</span><span class="st">"CREW_EXAMPLES"</span><span class="op">)</span>, <span class="st">"true"</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
 <span class="r-in"><span><span class="va">launcher</span> <span class="op">&lt;-</span> <span class="fu"><a href="crew_launcher_pbs.html">crew_launcher_pbs</a></span><span class="op">(</span></span></span>
 <span class="r-in"><span>  pbs_cores <span class="op">=</span> <span class="fl">2</span>,</span></span>
 <span class="r-in"><span>  pbs_memory_gigabytes_required <span class="op">=</span> <span class="fl">4</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">launcher</span><span class="op">$</span><span class="fu">script</span><span class="op">(</span>name <span class="op">=</span> <span class="st">"my_job_name"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "#PBS -N my_job_name"       "#PBS -o /dev/null"        </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [3] "#PBS -j oe"                "#PBS -l mem=4gb"          </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [5] "#PBS -l ppn=2"             "#PBS -l walltime=12:00:00"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [7] "cd \"$PBS_O_WORKDIR\""    </span>
+<span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>
     </div>
   </div>
