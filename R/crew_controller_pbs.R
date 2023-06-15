@@ -24,7 +24,7 @@ crew_controller_pbs <- function(
   port = NULL,
   seconds_interval = 0.25,
   seconds_timeout = 10,
-  seconds_launch = 600,
+  seconds_launch = 86400,
   seconds_idle = Inf,
   seconds_wall = Inf,
   seconds_exit = 1,

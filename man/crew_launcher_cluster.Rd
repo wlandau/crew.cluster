@@ -8,7 +8,7 @@ launcher object.}
 crew_launcher_cluster(
   name = NULL,
   seconds_interval = 0.25,
-  seconds_launch = 600,
+  seconds_launch = 86400,
   seconds_idle = Inf,
   seconds_wall = Inf,
   seconds_exit = 1,
