@@ -28,7 +28,7 @@ test_that("SGE subclass mock job creates a tempdir() job script", {
     sge_cores = 2L,
     sge_gpu = 1L
   )
-  x$start()
+  x$start(sockets = "my_socket")
   expect_null(x$prefix)
   handle <- x$launch_worker(
     call = x$call(
@@ -93,7 +93,7 @@ test_that("SGE subclass mock job creates a custom job script", {
     sge_cores = 2L,
     sge_gpu = 1L
   )
-  x$start()
+  x$start(sockets = "my_socket")
   expect_null(x$prefix)
   handle <- x$launch_worker(
     call = x$call(
