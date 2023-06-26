@@ -1,5 +1,4 @@
 test_that("crew_controller_pbs() script() all lines", {
-  skip_if_low_dep_versions()
   x <- crew_controller_pbs(
     script_lines = c("module load R", "echo 'start'"),
     pbs_cwd = TRUE,

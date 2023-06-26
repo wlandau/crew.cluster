@@ -1,10 +1,8 @@
 test_that("valid simple crew_launcher_sge()", {
-  skip_if_low_dep_versions()
   expect_silent(crew_launcher_sge())
 })
 
 test_that("valid populated crew_launcher_sge()", {
-  skip_if_low_dep_versions()
   expect_silent(
     crew_launcher_sge(
       script_lines = c("module load R", "echo 'start'"),
@@ -22,21 +20,18 @@ test_that("valid populated crew_launcher_sge()", {
 })
 
 test_that("invalid crew_launcher_sge(): SGE field", {
-  skip_if_low_dep_versions()
   x <- crew_launcher_sge()
   x$sge_cores <- - 1L
   expect_error(x$validate(), class = "crew_error")
 })
 
 test_that("invalid crew_launcher_sge(): non-SGE field", {
-  skip_if_low_dep_versions()
   x <- crew_launcher_sge()
   x$name <- - 1L
   expect_error(x$validate(), class = "crew_error")
 })
 
 test_that("crew_launcher_sge() script() nearly empty", {
-  skip_if_low_dep_versions()
   x <- crew_launcher_sge(
     sge_cwd = FALSE,
     sge_envvars = FALSE,
@@ -50,7 +45,6 @@ test_that("crew_launcher_sge() script() nearly empty", {
 })
 
 test_that("crew_launcher_sge() script() all lines", {
-  skip_if_low_dep_versions()
   x <- crew_launcher_sge(
     script_lines = c("module load R", "echo 'start'"),
     sge_cwd = TRUE,

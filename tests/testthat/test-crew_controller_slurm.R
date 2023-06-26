@@ -1,5 +1,4 @@
 test_that("crew_controller_slurm() script() nearly empty", {
-  skip_if_low_dep_versions()
   x <- crew_controller_slurm()
   lines <- c(
     "#!/bin/sh",
@@ -11,7 +10,6 @@ test_that("crew_controller_slurm() script() nearly empty", {
 })
 
 test_that("crew_controller_slurm() script() all lines", {
-  skip_if_low_dep_versions()
   x <- crew_controller_slurm(
     script_lines = c("module load R", "echo 'start'"),
     slurm_log_output = "log1",

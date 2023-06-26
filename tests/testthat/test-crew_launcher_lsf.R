@@ -1,10 +1,8 @@
 test_that("valid simple crew_launcher_lsf()", {
-  skip_if_low_dep_versions()
   expect_silent(crew_launcher_lsf())
 })
 
 test_that("valid populated crew_launcher_lsf()", {
-  skip_if_low_dep_versions()
   expect_silent(
     crew_launcher_lsf(
       script_lines = c("module load R", "echo 'start'"),
@@ -19,21 +17,18 @@ test_that("valid populated crew_launcher_lsf()", {
 })
 
 test_that("invalid crew_launcher_lsf(): lsf field", {
-  skip_if_low_dep_versions()
   x <- crew_launcher_lsf()
   x$lsf_cores <- - 1L
   expect_error(x$validate(), class = "crew_error")
 })
 
 test_that("invalid crew_launcher_lsf(): non-lsf field", {
-  skip_if_low_dep_versions()
   x <- crew_launcher_lsf()
   x$name <- - 1L
   expect_error(x$validate(), class = "crew_error")
 })
 
 test_that("crew_launcher_lsf() script() nearly empty", {
-  skip_if_low_dep_versions()
   x <- crew_launcher_lsf(
     lsf_cwd = "/home"
   )
@@ -48,7 +43,6 @@ test_that("crew_launcher_lsf() script() nearly empty", {
 })
 
 test_that("crew_launcher_lsf() script() all lines", {
-  skip_if_low_dep_versions()
   x <- crew_launcher_lsf(
     script_lines = c("module load R", "echo 'start'"),
     lsf_cwd = "/home",
@@ -75,7 +69,6 @@ test_that("crew_launcher_lsf() script() all lines", {
 })
 
 test_that("crew_launcher_lsf() args_launch()", {
-  skip_if_low_dep_versions()
   x <- crew_launcher_lsf()
   expect_equal(
     x$args_launch(script = "this_script"),
@@ -84,7 +77,6 @@ test_that("crew_launcher_lsf() args_launch()", {
 })
 
 test_that("crew_launcher_lsf() args_terminate()", {
-  skip_if_low_dep_versions()
   x <- crew_launcher_lsf()
   expect_equal(
     x$args_terminate(name = "this_name"),

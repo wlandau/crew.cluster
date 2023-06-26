@@ -1,6 +1,6 @@
-# crew.cluster 0.1.1.9000 (development)
+# crew.cluster 0.1.1.9001 (development)
 
-
+* Require `crew` >= 0.3.0.
 
 # crew.cluster 0.1.1
 
