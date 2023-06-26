@@ -47,8 +47,7 @@ crew_controller_pbs <- function(
   pbs_cores = NULL,
   pbs_walltime_hours = 12
 ) {
-  # TODO: remove eval parse after next crew release.
-  client <- eval(parse(text = "crew::crew_client"))(
+  client <- crew::crew_client(
     name = name,
     workers = workers,
     host = host,

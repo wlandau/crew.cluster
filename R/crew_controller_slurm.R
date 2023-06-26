@@ -48,8 +48,7 @@ crew_controller_slurm <- function(
   slurm_memory_gigabytes_per_cpu = NULL,
   slurm_cpus_per_task = NULL
 ) {
-  # TODO: remove eval parse after next crew release.
-  client <- eval(parse(text = "crew::crew_client"))(
+  client <- crew::crew_client(
     name = name,
     workers = workers,
     host = host,

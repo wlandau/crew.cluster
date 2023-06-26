@@ -50,8 +50,7 @@ crew_controller_lsf <- function(
   lsf_memory_gigabytes_required = NULL,
   lsf_cores = NULL
 ) {
-  # TODO: remove eval parse after next crew release.
-  client <- eval(parse(text = "crew::crew_client"))(
+  client <- crew::crew_client(
     name = name,
     workers = workers,
     host = host,
