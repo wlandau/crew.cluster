@@ -44,6 +44,11 @@
 #'   `slurm_cpus_per_task = 4` translates
 #'   to a line of `#SBATCH --cpus-per-task=4` in the SLURM job script.
 #'   `slurm_cpus_per_task = NULL` omits this line.
+#' @param slurm_time_minutes Numeric of length 1, number of minutes to
+#'   designate as the wall time of `crew` each worker instance on the
+#'   SLURM cluster. `slurm_time_minutes = 60` translates to a line of
+#'   `#SBATCH --time=60` in the SLURM job script. `slurm_time_minutes = NULL`
+#'   omits this line.
 crew_launcher_slurm <- function(
   name = NULL,
   seconds_interval = 0.25,
@@ -65,7 +70,8 @@ crew_launcher_slurm <- function(
   slurm_log_output = "/dev/null",
   slurm_log_error = "/dev/null",
   slurm_memory_gigabytes_per_cpu = NULL,
-  slurm_cpus_per_task = NULL
+  slurm_cpus_per_task = NULL,
+  slurm_time_minutes = 1440
 ) {
   name <- as.character(name %|||% crew::crew_random_name())
   launcher <- crew_class_launcher_slurm$new(
@@ -89,7 +95,8 @@ crew_launcher_slurm <- function(
     slurm_log_output = slurm_log_output,
     slurm_log_error = slurm_log_error,
     slurm_memory_gigabytes_per_cpu = slurm_memory_gigabytes_per_cpu,
-    slurm_cpus_per_task = slurm_cpus_per_task
+    slurm_cpus_per_task = slurm_cpus_per_task,
+    slurm_time_minutes = slurm_time_minutes
   )
   launcher$validate()
   launcher
@@ -114,6 +121,8 @@ crew_class_launcher_slurm <- R6::R6Class(
     slurm_memory_gigabytes_per_cpu = NULL,
     #' @field slurm_cpus_per_task See [crew_launcher_slurm()].
     slurm_cpus_per_task = NULL,
+    #' @field slurm_time_minutes See [crew_launcher_slurm()].
+    slurm_time_minutes = NULL,
     #' @description SLURM launcher constructor.
     #' @return an SLURM launcher object.
     #' @param name See [crew_launcher_slurm()].
@@ -137,6 +146,7 @@ crew_class_launcher_slurm <- R6::R6Class(
     #' @param slurm_log_error See [crew_launcher_slurm()].
     #' @param slurm_memory_gigabytes_per_cpu See [crew_launcher_slurm()].
     #' @param slurm_cpus_per_task See [crew_launcher_slurm()].
+    #' @param slurm_time_minutes See [crew_launcher_slurm()].
     initialize = function(
       name = NULL,
       seconds_interval = NULL,
@@ -158,7 +168,8 @@ crew_class_launcher_slurm <- R6::R6Class(
       slurm_log_output = NULL,
       slurm_log_error = NULL,
       slurm_memory_gigabytes_per_cpu = NULL,
-      slurm_cpus_per_task = NULL
+      slurm_cpus_per_task = NULL,
+      slurm_time_minutes = NULL
     ) {
       super$initialize(
         name = name,
@@ -183,6 +194,7 @@ crew_class_launcher_slurm <- R6::R6Class(
       self$slurm_log_error <- slurm_log_error
       self$slurm_memory_gigabytes_per_cpu <- slurm_memory_gigabytes_per_cpu
       self$slurm_cpus_per_task <- slurm_cpus_per_task
+      self$slurm_time_minutes <- slurm_time_minutes
     },
     #' @description Validate the launcher.
     #' @return `NULL` (invisibly). Throws an error if a field is invalid.
@@ -206,7 +218,8 @@ crew_class_launcher_slurm <- R6::R6Class(
       }
       fields <- c(
         "slurm_memory_gigabytes_per_cpu",
-        "slurm_cpus_per_task"
+        "slurm_cpus_per_task",
+        "slurm_time_minutes"
       )
       for (field in fields) {
         if (!is.null(self[[field]])) {
@@ -265,6 +278,11 @@ crew_class_launcher_slurm <- R6::R6Class(
           is.null(self$slurm_cpus_per_task),
           character(0L),
           paste0("#SBATCH --cpus-per-task=", self$slurm_cpus_per_task)
+        ),
+        if_any(
+          is.null(self$slurm_time_minutes),
+          character(0L),
+          paste0("#SBATCH --time=", self$slurm_time_minutes)
         ),
         self$script_lines
       )

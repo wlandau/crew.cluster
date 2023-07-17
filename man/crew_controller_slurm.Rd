@@ -30,7 +30,8 @@ crew_controller_slurm(
   slurm_log_output = "/dev/null",
   slurm_log_error = "/dev/null",
   slurm_memory_gigabytes_per_cpu = NULL,
-  slurm_cpus_per_task = NULL
+  slurm_cpus_per_task = NULL,
+  slurm_time_minutes = 1440
 )
 }
 \arguments{
@@ -161,6 +162,12 @@ number of CPUs for the worker.
 \code{slurm_cpus_per_task = 4} translates
 to a line of \verb{#SBATCH --cpus-per-task=4} in the SLURM job script.
 \code{slurm_cpus_per_task = NULL} omits this line.}
+
+\item{slurm_time_minutes}{Numeric of length 1, number of minutes to
+designate as the wall time of \code{crew} each worker instance on the
+SLURM cluster. \code{slurm_time_minutes = 60} translates to a line of
+\verb{#SBATCH --time=60} in the SLURM job script. \code{slurm_time_minutes = NULL}
+omits this line.}
 }
 \description{
 Create an \code{R6} object to submit tasks and

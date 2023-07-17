@@ -1,6 +1,7 @@
 # crew.cluster 0.1.1.9001 (development)
 
 * Require `crew` >= 0.3.0.
+* Add a new `slurm_time_minutes` for SLURM wall time (#1, @cfljam).
 
 # crew.cluster 0.1.1
 

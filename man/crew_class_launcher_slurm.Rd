@@ -62,6 +62,8 @@ Other launchers:
 \item{\code{slurm_memory_gigabytes_per_cpu}}{See \code{\link[=crew_launcher_slurm]{crew_launcher_slurm()}}.}
 
 \item{\code{slurm_cpus_per_task}}{See \code{\link[=crew_launcher_slurm]{crew_launcher_slurm()}}.}
+
+\item{\code{slurm_time_minutes}}{See \code{\link[=crew_launcher_slurm]{crew_launcher_slurm()}}.}
 }
 \if{html}{\out{</div>}}
 }
@@ -124,7 +126,8 @@ SLURM launcher constructor.
   slurm_log_output = NULL,
   slurm_log_error = NULL,
   slurm_memory_gigabytes_per_cpu = NULL,
-  slurm_cpus_per_task = NULL
+  slurm_cpus_per_task = NULL,
+  slurm_time_minutes = NULL
 )}\if{html}{\out{</div>}}
 }
 
@@ -172,6 +175,8 @@ SLURM launcher constructor.
 \item{\code{slurm_memory_gigabytes_per_cpu}}{See \code{\link[=crew_launcher_slurm]{crew_launcher_slurm()}}.}
 
 \item{\code{slurm_cpus_per_task}}{See \code{\link[=crew_launcher_slurm]{crew_launcher_slurm()}}.}
+
+\item{\code{slurm_time_minutes}}{See \code{\link[=crew_launcher_slurm]{crew_launcher_slurm()}}.}
 }
 \if{html}{\out{</div>}}
 }
