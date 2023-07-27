@@ -10,7 +10,7 @@ crew_controller_sge(
   workers = 1L,
   host = NULL,
   port = NULL,
-  tls_enable = TRUE,
+  tls_enable = FALSE,
   tls_config = NULL,
   seconds_interval = 0.25,
   seconds_timeout = 10,
