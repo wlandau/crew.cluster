@@ -1,7 +1,8 @@
 # crew.cluster 0.1.1.9001 (development)
 
-* Require `crew` >= 0.3.0.
+* Require `crew` >= 0.4.0.
 * Add a new `slurm_time_minutes` for SLURM wall time (#1, @cfljam).
+* Enable TLS.
 
 # crew.cluster 0.1.1
 

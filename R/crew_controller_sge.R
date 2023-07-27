@@ -22,6 +22,8 @@ crew_controller_sge <- function(
   workers = 1L,
   host = NULL,
   port = NULL,
+  tls_enable = TRUE,
+  tls_config = NULL,
   seconds_interval = 0.25,
   seconds_timeout = 10,
   seconds_launch = 86400,
@@ -54,6 +56,8 @@ crew_controller_sge <- function(
     workers = workers,
     host = host,
     port = port,
+    tls_enable = tls_enable,
+    tls_config = tls_config,
     seconds_interval = seconds_interval,
     seconds_timeout = seconds_timeout
   )

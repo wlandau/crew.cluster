@@ -23,6 +23,8 @@ walkthrough
 writeable
 YAML
 RJ
+PEM
+TLS
 crew’
 ZeroMQ
 globals

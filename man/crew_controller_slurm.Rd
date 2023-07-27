@@ -10,6 +10,8 @@ crew_controller_slurm(
   workers = 1L,
   host = NULL,
   port = NULL,
+  tls_enable = TRUE,
+  tls_config = NULL,
   seconds_interval = 0.25,
   seconds_timeout = 10,
   seconds_launch = 86400,
@@ -46,6 +48,33 @@ If \code{NULL}, the host defaults to the local IP address.}
 \item{port}{TCP port to listen for the workers. If \code{NULL},
 then an available ephemeral port is automatically chosen.}
 
+\item{tls_enable}{Logical of length 1, whether to use transport layer
+security (TLS) to secure connections between the client and workers.
+Only supported for \code{mirai} version 0.9.0.9020 and above and
+\code{nanonext} version 0.9.0.9034 and above.
+Uses an automatically generated one-time self-signed certificate by
+default. To guard against man-in-the-middle attacks, consider
+generating a one-time certificate yourself, requesting a trusted
+certificate authority (CA) to sign it, and then supplying the
+keys to the \code{tls_config} argument. Enabling TLS requires \code{mirai}
+version 0.9.0.9027 or above, and a \code{NULL} value for \code{tls_enable}
+will enable TLS if and only if the \code{mirai} version is sufficient.}
+
+\item{tls_config}{Optional and only relevant if TLS is enabled
+(see the \code{tls_config} argument). The \code{tls_config} argument
+controls how transport layer security (TLS) is configured,
+and it is directly forwarded to the \code{tls} argument of
+\code{mirai::daemons()}. If \code{tls_config} is \code{NULL},
+then \code{mirai} will generate a one-time
+self-signed certificate. This default approach is protects against
+the simplest attempts at packet sniffing, but it is still vulnerable
+to man-in-the-middle attacks. When greater security is required,
+consider generating a PEM-encoded certificate and associated
+private key yourself and using a trusted certificate authority (CA)
+to sign the former. The documentation of \code{mirai}, including the
+\code{tls} arguments of the \code{mirai::daemons()} and \code{mirai::daemon()}
+functions, has more details.}
+
 \item{seconds_interval}{Number of seconds between
 polling intervals waiting for certain internal
 synchronous operations to complete. If \code{space_poll} is \code{TRUE}, then
@@ -65,7 +94,7 @@ considered alive if it is actively connected to its assign websocket.}
 since the completion of the last task. If exceeded, the worker exits.
 But the timer does not launch until \code{tasks_timers} tasks
 have completed.
-See the \code{idletime} argument of \code{mirai::server()}. \code{crew} does not
+See the \code{idletime} argument of \code{mirai::daemon()}. \code{crew} does not
 excel with perfectly transient workers because it does not micromanage
 the assignment of tasks to workers, so please allow enough idle
 time for a new worker to be delegated a new task.}
@@ -73,15 +102,15 @@ time for a new worker to be delegated a new task.}
 \item{seconds_wall}{Soft wall time in seconds.
 The timer does not launch until \code{tasks_timers} tasks
 have completed.
-See the \code{walltime} argument of \code{mirai::server()}.}
+See the \code{walltime} argument of \code{mirai::daemon()}.}
 
 \item{seconds_exit}{Number of seconds to wait for NNG websockets
 to finish sending large data (when a worker exits after reaching a
 timeout or having completed a certain number of tasks).
-See the \code{exitlinger} argument of \code{mirai::server()}.}
+See the \code{exitlinger} argument of \code{mirai::daemon()}.}
 
 \item{tasks_max}{Maximum number of tasks that a worker will do before
-exiting. See the \code{maxtasks} argument of \code{mirai::server()}.
+exiting. See the \code{maxtasks} argument of \code{mirai::daemon()}.
 \code{crew} does not
 excel with perfectly transient workers because it does not micromanage
 the assignment of tasks to workers, it is recommended to set
@@ -89,7 +118,7 @@ the assignment of tasks to workers, it is recommended to set
 
 \item{tasks_timers}{Number of tasks to do before activating
 the timers for \code{seconds_idle} and \code{seconds_wall}.
-See the \code{timerstart} argument of \code{mirai::server()}.}
+See the \code{timerstart} argument of \code{mirai::daemon()}.}
 
 \item{reset_globals}{\code{TRUE} to reset global environment
 variables between tasks, \code{FALSE} to leave them alone.}
