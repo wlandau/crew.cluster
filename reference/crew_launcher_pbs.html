@@ -109,7 +109,7 @@ considered alive if it is actively connected to its assign websocket.</p></dd>
 since the completion of the last task. If exceeded, the worker exits.
 But the timer does not launch until <code>tasks_timers</code> tasks
 have completed.
-See the <code>idletime</code> argument of <code><a href="https://shikokuchuo.net/mirai/reference/server.html" class="external-link">mirai::server()</a></code>. <code>crew</code> does not
+See the <code>idletime</code> argument of <code><a href="https://shikokuchuo.net/mirai/reference/daemon.html" class="external-link">mirai::daemon()</a></code>. <code>crew</code> does not
 excel with perfectly transient workers because it does not micromanage
 the assignment of tasks to workers, so please allow enough idle
 time for a new worker to be delegated a new task.</p></dd>
@@ -119,19 +119,19 @@ time for a new worker to be delegated a new task.</p></dd>
 <dd><p>Soft wall time in seconds.
 The timer does not launch until <code>tasks_timers</code> tasks
 have completed.
-See the <code>walltime</code> argument of <code><a href="https://shikokuchuo.net/mirai/reference/server.html" class="external-link">mirai::server()</a></code>.</p></dd>
+See the <code>walltime</code> argument of <code><a href="https://shikokuchuo.net/mirai/reference/daemon.html" class="external-link">mirai::daemon()</a></code>.</p></dd>
 
 
 <dt>seconds_exit</dt>
 <dd><p>Number of seconds to wait for NNG websockets
 to finish sending large data (when a worker exits after reaching a
 timeout or having completed a certain number of tasks).
-See the <code>exitlinger</code> argument of <code><a href="https://shikokuchuo.net/mirai/reference/server.html" class="external-link">mirai::server()</a></code>.</p></dd>
+See the <code>exitlinger</code> argument of <code><a href="https://shikokuchuo.net/mirai/reference/daemon.html" class="external-link">mirai::daemon()</a></code>.</p></dd>
 
 
 <dt>tasks_max</dt>
 <dd><p>Maximum number of tasks that a worker will do before
-exiting. See the <code>maxtasks</code> argument of <code><a href="https://shikokuchuo.net/mirai/reference/server.html" class="external-link">mirai::server()</a></code>.
+exiting. See the <code>maxtasks</code> argument of <code><a href="https://shikokuchuo.net/mirai/reference/daemon.html" class="external-link">mirai::daemon()</a></code>.
 <code>crew</code> does not
 excel with perfectly transient workers because it does not micromanage
 the assignment of tasks to workers, it is recommended to set
@@ -141,7 +141,7 @@ the assignment of tasks to workers, it is recommended to set
 <dt>tasks_timers</dt>
 <dd><p>Number of tasks to do before activating
 the timers for <code>seconds_idle</code> and <code>seconds_wall</code>.
-See the <code>timerstart</code> argument of <code><a href="https://shikokuchuo.net/mirai/reference/server.html" class="external-link">mirai::server()</a></code>.</p></dd>
+See the <code>timerstart</code> argument of <code><a href="https://shikokuchuo.net/mirai/reference/daemon.html" class="external-link">mirai::daemon()</a></code>.</p></dd>
 
 
 <dt>reset_globals</dt>

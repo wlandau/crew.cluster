@@ -63,6 +63,8 @@ launch workers on SLURM workers.</p>
 <span>  workers <span class="op">=</span> <span class="fl">1L</span>,</span>
 <span>  host <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  port <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  tls_enable <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  tls_config <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  seconds_interval <span class="op">=</span> <span class="fl">0.25</span>,</span>
 <span>  seconds_timeout <span class="op">=</span> <span class="fl">10</span>,</span>
 <span>  seconds_launch <span class="op">=</span> <span class="fl">86400</span>,</span>
@@ -109,6 +111,37 @@ If <code>NULL</code>, the host defaults to the local IP address.</p></dd>
 then an available ephemeral port is automatically chosen.</p></dd>
 
 
+<dt>tls_enable</dt>
+<dd><p>Logical of length 1, whether to use transport layer
+security (TLS) to secure connections between the client and workers.
+Only supported for <code>mirai</code> version 0.9.0.9020 and above and
+<code>nanonext</code> version 0.9.0.9034 and above.
+Uses an automatically generated one-time self-signed certificate by
+default. To guard against man-in-the-middle attacks, consider
+generating a one-time certificate yourself, requesting a trusted
+certificate authority (CA) to sign it, and then supplying the
+keys to the <code>tls_config</code> argument. Enabling TLS requires <code>mirai</code>
+version 0.9.0.9027 or above, and a <code>NULL</code> value for <code>tls_enable</code>
+will enable TLS if and only if the <code>mirai</code> version is sufficient.</p></dd>
+
+
+<dt>tls_config</dt>
+<dd><p>Optional and only relevant if TLS is enabled
+(see the <code>tls_config</code> argument). The <code>tls_config</code> argument
+controls how transport layer security (TLS) is configured,
+and it is directly forwarded to the <code>tls</code> argument of
+<code><a href="https://shikokuchuo.net/mirai/reference/daemons.html" class="external-link">mirai::daemons()</a></code>. If <code>tls_config</code> is <code>NULL</code>,
+then <code>mirai</code> will generate a one-time
+self-signed certificate. This default approach is protects against
+the simplest attempts at packet sniffing, but it is still vulnerable
+to man-in-the-middle attacks. When greater security is required,
+consider generating a PEM-encoded certificate and associated
+private key yourself and using a trusted certificate authority (CA)
+to sign the former. The documentation of <code>mirai</code>, including the
+<code>tls</code> arguments of the <code><a href="https://shikokuchuo.net/mirai/reference/daemons.html" class="external-link">mirai::daemons()</a></code> and <code><a href="https://shikokuchuo.net/mirai/reference/daemon.html" class="external-link">mirai::daemon()</a></code>
+functions, has more details.</p></dd>
+
+
 <dt>seconds_interval</dt>
 <dd><p>Number of seconds between
 polling intervals waiting for certain internal
@@ -135,7 +168,7 @@ considered alive if it is actively connected to its assign websocket.</p></dd>
 since the completion of the last task. If exceeded, the worker exits.
 But the timer does not launch until <code>tasks_timers</code> tasks
 have completed.
-See the <code>idletime</code> argument of <code><a href="https://shikokuchuo.net/mirai/reference/server.html" class="external-link">mirai::server()</a></code>. <code>crew</code> does not
+See the <code>idletime</code> argument of <code><a href="https://shikokuchuo.net/mirai/reference/daemon.html" class="external-link">mirai::daemon()</a></code>. <code>crew</code> does not
 excel with perfectly transient workers because it does not micromanage
 the assignment of tasks to workers, so please allow enough idle
 time for a new worker to be delegated a new task.</p></dd>
@@ -145,19 +178,19 @@ time for a new worker to be delegated a new task.</p></dd>
 <dd><p>Soft wall time in seconds.
 The timer does not launch until <code>tasks_timers</code> tasks
 have completed.
-See the <code>walltime</code> argument of <code><a href="https://shikokuchuo.net/mirai/reference/server.html" class="external-link">mirai::server()</a></code>.</p></dd>
+See the <code>walltime</code> argument of <code><a href="https://shikokuchuo.net/mirai/reference/daemon.html" class="external-link">mirai::daemon()</a></code>.</p></dd>
 
 
 <dt>seconds_exit</dt>
 <dd><p>Number of seconds to wait for NNG websockets
 to finish sending large data (when a worker exits after reaching a
 timeout or having completed a certain number of tasks).
-See the <code>exitlinger</code> argument of <code><a href="https://shikokuchuo.net/mirai/reference/server.html" class="external-link">mirai::server()</a></code>.</p></dd>
+See the <code>exitlinger</code> argument of <code><a href="https://shikokuchuo.net/mirai/reference/daemon.html" class="external-link">mirai::daemon()</a></code>.</p></dd>
 
 
 <dt>tasks_max</dt>
 <dd><p>Maximum number of tasks that a worker will do before
-exiting. See the <code>maxtasks</code> argument of <code><a href="https://shikokuchuo.net/mirai/reference/server.html" class="external-link">mirai::server()</a></code>.
+exiting. See the <code>maxtasks</code> argument of <code><a href="https://shikokuchuo.net/mirai/reference/daemon.html" class="external-link">mirai::daemon()</a></code>.
 <code>crew</code> does not
 excel with perfectly transient workers because it does not micromanage
 the assignment of tasks to workers, it is recommended to set
@@ -167,7 +200,7 @@ the assignment of tasks to workers, it is recommended to set
 <dt>tasks_timers</dt>
 <dd><p>Number of tasks to do before activating
 the timers for <code>seconds_idle</code> and <code>seconds_wall</code>.
-See the <code>timerstart</code> argument of <code><a href="https://shikokuchuo.net/mirai/reference/server.html" class="external-link">mirai::server()</a></code>.</p></dd>
+See the <code>timerstart</code> argument of <code><a href="https://shikokuchuo.net/mirai/reference/daemon.html" class="external-link">mirai::daemon()</a></code>.</p></dd>
 
 
 <dt>reset_globals</dt>
