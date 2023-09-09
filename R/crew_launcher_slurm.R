@@ -271,7 +271,7 @@ crew_class_launcher_slurm <- R6::R6Class(
           character(0L),
           sprintf(
             "#SBATCH --mem-per-cpu=%sM",
-            as.integer(1024L * self$slurm_memory_gigabytes_per_cpu)
+            as.integer(round(x = 1024 * self$slurm_memory_gigabytes_per_cpu, digits = 0L))
           )
         ),
         if_any(
