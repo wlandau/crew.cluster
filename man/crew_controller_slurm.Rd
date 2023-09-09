@@ -181,8 +181,8 @@ Set \code{slurm_log_error = NULL} to omit this line from the job script.}
 
 \item{slurm_memory_gigabytes_per_cpu}{Positive numeric of length 1
 with the gigabytes of memory required per CPU.
-\code{slurm_memory_gigabytes_per_cpu = 2.4}
-translates to a line of \verb{#SBATCH --mem-per-cpu=2.4G}
+\code{slurm_memory_gigabytes_per_cpu = 2.40123}
+translates to a line of \verb{#SBATCH --mem-per-cpu=2041M}
 in the SLURM job script.
 \code{slurm_memory_gigabytes_per_cpu = NULL} omits this line.}
 

@@ -35,8 +35,8 @@
 #'   Set `slurm_log_error = NULL` to omit this line from the job script.
 #' @param slurm_memory_gigabytes_per_cpu Positive numeric of length 1
 #'   with the gigabytes of memory required per CPU.
-#'   `slurm_memory_gigabytes_per_cpu = 2.4`
-#'   translates to a line of `#SBATCH --mem-per-cpu=2.4G`
+#'   `slurm_memory_gigabytes_per_cpu = 2.40123`
+#'   translates to a line of `#SBATCH --mem-per-cpu=2041M`
 #'   in the SLURM job script.
 #'   `slurm_memory_gigabytes_per_cpu = NULL` omits this line.
 #' @param slurm_cpus_per_task Optional positive integer of length 1,
@@ -270,8 +270,8 @@ crew_class_launcher_slurm <- R6::R6Class(
           is.null(self$slurm_memory_gigabytes_per_cpu),
           character(0L),
           sprintf(
-            "#SBATCH --mem-per-cpu=%sG",
-            self$slurm_memory_gigabytes_per_cpu
+            "#SBATCH --mem-per-cpu=%sM",
+            as.integer(1e3 * self$slurm_memory_gigabytes_per_cpu)
           )
         ),
         if_any(

@@ -52,7 +52,7 @@ test_that("crew_launcher_slurm() script() all lines", {
     "#SBATCH --job-name=this_job",
     "#SBATCH --output=log1",
     "#SBATCH --error=log2",
-    "#SBATCH --mem-per-cpu=2.096G",
+    "#SBATCH --mem-per-cpu=2096M",
     "#SBATCH --cpus-per-task=2",
     "#SBATCH --time=57",
     "module load R",

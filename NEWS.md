@@ -3,6 +3,7 @@
 * Require `crew` >= 0.4.0.
 * Add a new `slurm_time_minutes` for SLURM wall time (#1, @cfljam).
 * Enable TLS.
+* Use MB format for memory in SLURM launcher (#22, @kendonB). 
 
 # crew.cluster 0.1.1
 

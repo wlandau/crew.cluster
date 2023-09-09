@@ -24,7 +24,7 @@ test_that("crew_controller_slurm() script() all lines", {
     "#SBATCH --job-name=my_name",
     "#SBATCH --output=log1",
     "#SBATCH --error=log2",
-    "#SBATCH --mem-per-cpu=4.07G",
+    "#SBATCH --mem-per-cpu=4070M",
     "#SBATCH --cpus-per-task=2",
     "#SBATCH --time=57",
     "module load R",
