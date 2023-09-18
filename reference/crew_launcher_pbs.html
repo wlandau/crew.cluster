@@ -20,7 +20,7 @@ workers as jobs on a PBS or TORQUE cluster."><meta property="og:image" content="
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">crew.cluster</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.1.9001</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.2</span>
       </span>
     </div>
 
@@ -71,6 +71,8 @@ workers as jobs on a PBS or TORQUE cluster.</p>
 <span>  reset_packages <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  reset_options <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  garbage_collection <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  launch_max <span class="op">=</span> <span class="fl">5L</span>,</span>
+<span>  tls <span class="op">=</span> <span class="fu">crew</span><span class="fu">::</span><span class="fu"><a href="https://wlandau.github.io/crew/reference/crew_tls.html" class="external-link">crew_tls</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  verbose <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  command_submit <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Sys.which.html" class="external-link">Sys.which</a></span><span class="op">(</span><span class="st">"qsub"</span><span class="op">)</span><span class="op">)</span>,</span>
 <span>  command_delete <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Sys.which.html" class="external-link">Sys.which</a></span><span class="op">(</span><span class="st">"qdel"</span><span class="op">)</span><span class="op">)</span>,</span>
@@ -164,6 +166,22 @@ because packages sometimes rely on options they set at loading time.</p></dd>
 <dt>garbage_collection</dt>
 <dd><p><code>TRUE</code> to run garbage collection between
 tasks, <code>FALSE</code> to skip.</p></dd>
+
+
+<dt>launch_max</dt>
+<dd><p>Positive integer of length 1, maximum allowed
+consecutive launch attempts which do not complete any tasks.
+Enforced on a worker-by-worker basis.
+The futile launch count resets to back 0
+for each worker that completes a task.
+It is recommended to set <code>launch_max</code> above 0
+because sometimes workers are unproductive under perfectly ordinary
+circumstances. But <code>launch_max</code> should still be small enough
+to detect errors in the underlying platform.</p></dd>
+
+
+<dt>tls</dt>
+<dd><p>A TLS configuration object from <code><a href="https://wlandau.github.io/crew/reference/crew_tls.html" class="external-link">crew_tls()</a></code>.</p></dd>
 
 
 <dt>verbose</dt>

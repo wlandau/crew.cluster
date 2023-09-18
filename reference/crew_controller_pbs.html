@@ -20,7 +20,7 @@ launch workers on a PBS or TORQUE cluster."><meta property="og:image" content="/
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">crew.cluster</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.1.9001</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.2</span>
       </span>
     </div>
 
@@ -63,7 +63,8 @@ launch workers on a PBS or TORQUE cluster.</p>
 <span>  workers <span class="op">=</span> <span class="fl">1L</span>,</span>
 <span>  host <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  port <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  tls_enable <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  tls <span class="op">=</span> <span class="fu">crew</span><span class="fu">::</span><span class="fu"><a href="https://wlandau.github.io/crew/reference/crew_tls.html" class="external-link">crew_tls</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  tls_enable <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  tls_config <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  seconds_interval <span class="op">=</span> <span class="fl">0.25</span>,</span>
 <span>  seconds_timeout <span class="op">=</span> <span class="fl">10</span>,</span>
@@ -77,6 +78,7 @@ launch workers on a PBS or TORQUE cluster.</p>
 <span>  reset_packages <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  reset_options <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  garbage_collection <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  launch_max <span class="op">=</span> <span class="fl">5L</span>,</span>
 <span>  verbose <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  command_submit <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Sys.which.html" class="external-link">Sys.which</a></span><span class="op">(</span><span class="st">"qsub"</span><span class="op">)</span><span class="op">)</span>,</span>
 <span>  command_delete <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Sys.which.html" class="external-link">Sys.which</a></span><span class="op">(</span><span class="st">"qdel"</span><span class="op">)</span><span class="op">)</span>,</span>
@@ -113,35 +115,18 @@ If <code>NULL</code>, the host defaults to the local IP address.</p></dd>
 then an available ephemeral port is automatically chosen.</p></dd>
 
 
+<dt>tls</dt>
+<dd><p>A TLS configuration object from <code><a href="https://wlandau.github.io/crew/reference/crew_tls.html" class="external-link">crew_tls()</a></code>.</p></dd>
+
+
 <dt>tls_enable</dt>
-<dd><p>Logical of length 1, whether to use transport layer
-security (TLS) to secure connections between the client and workers.
-Only supported for <code>mirai</code> version 0.9.0.9020 and above and
-<code>nanonext</code> version 0.9.0.9034 and above.
-Uses an automatically generated one-time self-signed certificate by
-default. To guard against man-in-the-middle attacks, consider
-generating a one-time certificate yourself, requesting a trusted
-certificate authority (CA) to sign it, and then supplying the
-keys to the <code>tls_config</code> argument. Enabling TLS requires <code>mirai</code>
-version 0.9.0.9027 or above, and a <code>NULL</code> value for <code>tls_enable</code>
-will enable TLS if and only if the <code>mirai</code> version is sufficient.</p></dd>
+<dd><p>Deprecated on 2023-09-15 in version 0.4.1.
+Use argument <code>tls</code> instead.</p></dd>
 
 
 <dt>tls_config</dt>
-<dd><p>Optional and only relevant if TLS is enabled
-(see the <code>tls_config</code> argument). The <code>tls_config</code> argument
-controls how transport layer security (TLS) is configured,
-and it is directly forwarded to the <code>tls</code> argument of
-<code><a href="https://shikokuchuo.net/mirai/reference/daemons.html" class="external-link">mirai::daemons()</a></code>. If <code>tls_config</code> is <code>NULL</code>,
-then <code>mirai</code> will generate a one-time
-self-signed certificate. This default approach is protects against
-the simplest attempts at packet sniffing, but it is still vulnerable
-to man-in-the-middle attacks. When greater security is required,
-consider generating a PEM-encoded certificate and associated
-private key yourself and using a trusted certificate authority (CA)
-to sign the former. The documentation of <code>mirai</code>, including the
-<code>tls</code> arguments of the <code><a href="https://shikokuchuo.net/mirai/reference/daemons.html" class="external-link">mirai::daemons()</a></code> and <code><a href="https://shikokuchuo.net/mirai/reference/daemon.html" class="external-link">mirai::daemon()</a></code>
-functions, has more details.</p></dd>
+<dd><p>Deprecated on 2023-09-15 in version 0.4.1.
+Use argument <code>tls</code> instead.</p></dd>
 
 
 <dt>seconds_interval</dt>
@@ -225,6 +210,18 @@ because packages sometimes rely on options they set at loading time.</p></dd>
 <dt>garbage_collection</dt>
 <dd><p><code>TRUE</code> to run garbage collection between
 tasks, <code>FALSE</code> to skip.</p></dd>
+
+
+<dt>launch_max</dt>
+<dd><p>Positive integer of length 1, maximum allowed
+consecutive launch attempts which do not complete any tasks.
+Enforced on a worker-by-worker basis.
+The futile launch count resets to back 0
+for each worker that completes a task.
+It is recommended to set <code>launch_max</code> above 0
+because sometimes workers are unproductive under perfectly ordinary
+circumstances. But <code>launch_max</code> should still be small enough
+to detect errors in the underlying platform.</p></dd>
 
 
 <dt>verbose</dt>
