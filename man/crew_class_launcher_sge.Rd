@@ -125,6 +125,8 @@ SGE launcher constructor.
   reset_packages = NULL,
   reset_options = NULL,
   garbage_collection = NULL,
+  launch_max = NULL,
+  tls = NULL,
   verbose = NULL,
   command_submit = NULL,
   command_delete = NULL,
@@ -168,6 +170,10 @@ SGE launcher constructor.
 \item{\code{reset_options}}{See \code{\link[=crew_launcher_sge]{crew_launcher_sge()}}.}
 
 \item{\code{garbage_collection}}{See \code{\link[=crew_launcher_sge]{crew_launcher_sge()}}.}
+
+\item{\code{launch_max}}{See \code{\link[=crew_launcher_sge]{crew_launcher_sge()}}.}
+
+\item{\code{tls}}{See \code{\link[=crew_launcher_sge]{crew_launcher_sge()}}.}
 
 \item{\code{verbose}}{See \code{\link[=crew_launcher_sge]{crew_launcher_sge()}}.}
 

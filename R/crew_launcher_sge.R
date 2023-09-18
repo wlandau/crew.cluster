@@ -75,6 +75,8 @@ crew_launcher_sge <- function(
   reset_packages = FALSE,
   reset_options = FALSE,
   garbage_collection = FALSE,
+  launch_max = 5L,
+  tls = crew::crew_tls(),
   verbose = FALSE,
   command_submit = as.character(Sys.which("qsub")),
   command_delete = as.character(Sys.which("qdel")),
@@ -104,6 +106,8 @@ crew_launcher_sge <- function(
     reset_packages = reset_packages,
     reset_options = reset_options,
     garbage_collection = garbage_collection,
+    launch_max = launch_max,
+    tls = tls,
     verbose = verbose,
     command_submit = command_submit,
     command_delete = command_delete,
@@ -166,6 +170,8 @@ crew_class_launcher_sge <- R6::R6Class(
     #' @param reset_packages See [crew_launcher_sge()].
     #' @param reset_options See [crew_launcher_sge()].
     #' @param garbage_collection See [crew_launcher_sge()].
+    #' @param launch_max See [crew_launcher_sge()].
+    #' @param tls See [crew_launcher_sge()].
     #' @param verbose See [crew_launcher_sge()].
     #' @param command_submit See [crew_launcher_sge()].
     #' @param command_delete See [crew_launcher_sge()].
@@ -193,6 +199,8 @@ crew_class_launcher_sge <- R6::R6Class(
       reset_packages = NULL,
       reset_options = NULL,
       garbage_collection = NULL,
+      launch_max = NULL,
+      tls = NULL,
       verbose = NULL,
       command_submit = NULL,
       command_delete = NULL,
@@ -221,6 +229,8 @@ crew_class_launcher_sge <- R6::R6Class(
         reset_packages = reset_packages,
         reset_options = reset_options,
         garbage_collection = garbage_collection,
+        launch_max = launch_max,
+        tls = tls,
         verbose = verbose,
         command_submit = command_submit,
         command_delete = command_delete,

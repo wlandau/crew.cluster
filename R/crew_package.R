@@ -28,7 +28,7 @@
 #'   See the `NOTICE` and `README.md` files in the `crew.cluster`
 #'   source code for additional attribution.
 #' @importFrom crew crew_assert crew_class_launcher crew_launcher
-#'   crew_random_name
+#'   crew_random_name crew_tls
 #' @importFrom lifecycle badge
 #' @importFrom R6 R6Class
 #' @importFrom rlang is_installed

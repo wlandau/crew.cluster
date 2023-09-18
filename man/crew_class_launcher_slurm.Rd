@@ -118,6 +118,8 @@ SLURM launcher constructor.
   reset_packages = NULL,
   reset_options = NULL,
   garbage_collection = NULL,
+  launch_max = NULL,
+  tls = NULL,
   verbose = NULL,
   command_submit = NULL,
   command_delete = NULL,
@@ -157,6 +159,10 @@ SLURM launcher constructor.
 \item{\code{reset_options}}{See \code{\link[=crew_launcher_slurm]{crew_launcher_slurm()}}.}
 
 \item{\code{garbage_collection}}{See \code{\link[=crew_launcher_slurm]{crew_launcher_slurm()}}.}
+
+\item{\code{launch_max}}{See \code{\link[=crew_launcher_slurm]{crew_launcher_slurm()}}.}
+
+\item{\code{tls}}{See \code{\link[=crew_launcher_slurm]{crew_launcher_slurm()}}.}
 
 \item{\code{verbose}}{See \code{\link[=crew_launcher_slurm]{crew_launcher_slurm()}}.}
 
