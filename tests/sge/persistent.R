@@ -3,6 +3,7 @@ library(testthat)
 x <- crew_controller_sge(
   name = "123",
   workers = 1L,
+  seconds_launch = 604800,
   seconds_idle = 300,
   script_lines = paste0("module load R/", getRversion())
 )
