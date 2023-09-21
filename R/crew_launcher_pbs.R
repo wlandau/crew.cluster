@@ -66,7 +66,6 @@ crew_launcher_pbs <- function(
   seconds_launch = 86400,
   seconds_idle = Inf,
   seconds_wall = Inf,
-  seconds_exit = 1,
   tasks_max = Inf,
   tasks_timers = 0L,
   reset_globals = TRUE,
@@ -95,7 +94,6 @@ crew_launcher_pbs <- function(
     seconds_launch = seconds_launch,
     seconds_idle = seconds_idle,
     seconds_wall = seconds_wall,
-    seconds_exit = seconds_exit,
     tasks_max = tasks_max,
     tasks_timers = tasks_timers,
     reset_globals = reset_globals,
@@ -153,7 +151,6 @@ crew_class_launcher_pbs <- R6::R6Class(
     #' @param seconds_launch See [crew_launcher_pbs()].
     #' @param seconds_idle See [crew_launcher_pbs()].
     #' @param seconds_wall See [crew_launcher_pbs()].
-    #' @param seconds_exit See [crew_launcher_pbs()].
     #' @param tasks_max See [crew_launcher_pbs()].
     #' @param tasks_timers See [crew_launcher_pbs()].
     #' @param reset_globals See [crew_launcher_pbs()].
@@ -180,7 +177,6 @@ crew_class_launcher_pbs <- R6::R6Class(
       seconds_launch = NULL,
       seconds_idle = NULL,
       seconds_wall = NULL,
-      seconds_exit = NULL,
       tasks_max = NULL,
       tasks_timers = NULL,
       reset_globals = NULL,
@@ -208,7 +204,6 @@ crew_class_launcher_pbs <- R6::R6Class(
         seconds_launch = seconds_launch,
         seconds_idle = seconds_idle,
         seconds_wall = seconds_wall,
-        seconds_exit = seconds_exit,
         tasks_max = tasks_max,
         tasks_timers = tasks_timers,
         reset_globals = reset_globals,

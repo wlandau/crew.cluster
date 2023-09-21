@@ -37,3 +37,10 @@ test_that("crew_controller_lsf() script() all lines", {
   )
   expect_equal(out, exp)
 })
+
+test_that("deprecate seconds_exit", {
+  expect_warning(
+    x <- crew_controller_lsf(seconds_exit = 1),
+    class = "crew_deprecate"
+  )
+})

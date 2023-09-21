@@ -1,6 +1,6 @@
 # crew.cluster 0.1.2.9000 (development)
 
-
+* Deprecate `seconds_exit` (https://github.com/wlandau/crew/issues/125, @shikokuchuo).
 
 # crew.cluster 0.1.2
 

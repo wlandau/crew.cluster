@@ -68,11 +68,9 @@ Other launchers:
 \if{html}{\out{
 <details><summary>Inherited methods</summary>
 <ul>
-<li><span class="pkg-link" data-pkg="crew" data-topic="crew_class_launcher" data-id="backlogged"><a href='../../crew/html/crew_class_launcher.html#method-crew_class_launcher-backlogged'><code>crew::crew_class_launcher$backlogged()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="crew" data-topic="crew_class_launcher" data-id="call"><a href='../../crew/html/crew_class_launcher.html#method-crew_class_launcher-call'><code>crew::crew_class_launcher$call()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="crew" data-topic="crew_class_launcher" data-id="done"><a href='../../crew/html/crew_class_launcher.html#method-crew_class_launcher-done'><code>crew::crew_class_launcher$done()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="crew" data-topic="crew_class_launcher" data-id="launch"><a href='../../crew/html/crew_class_launcher.html#method-crew_class_launcher-launch'><code>crew::crew_class_launcher$launch()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="crew" data-topic="crew_class_launcher" data-id="resolved"><a href='../../crew/html/crew_class_launcher.html#method-crew_class_launcher-resolved'><code>crew::crew_class_launcher$resolved()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="crew" data-topic="crew_class_launcher" data-id="rotate"><a href='../../crew/html/crew_class_launcher.html#method-crew_class_launcher-rotate'><code>crew::crew_class_launcher$rotate()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="crew" data-topic="crew_class_launcher" data-id="scale"><a href='../../crew/html/crew_class_launcher.html#method-crew_class_launcher-scale'><code>crew::crew_class_launcher$scale()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="crew" data-topic="crew_class_launcher" data-id="settings"><a href='../../crew/html/crew_class_launcher.html#method-crew_class_launcher-settings'><code>crew::crew_class_launcher$settings()</code></a></span></li>
@@ -97,7 +95,6 @@ Abstract launcher constructor.
   seconds_launch = NULL,
   seconds_idle = NULL,
   seconds_wall = NULL,
-  seconds_exit = NULL,
   tasks_max = NULL,
   tasks_timers = NULL,
   reset_globals = NULL,
@@ -126,8 +123,6 @@ Abstract launcher constructor.
 \item{\code{seconds_idle}}{See \code{\link[=crew_launcher_cluster]{crew_launcher_cluster()}}.}
 
 \item{\code{seconds_wall}}{See \code{\link[=crew_launcher_cluster]{crew_launcher_cluster()}}.}
-
-\item{\code{seconds_exit}}{See \code{\link[=crew_launcher_cluster]{crew_launcher_cluster()}}.}
 
 \item{\code{tasks_max}}{See \code{\link[=crew_launcher_cluster]{crew_launcher_cluster()}}.}
 
