@@ -62,7 +62,6 @@ launcher object.</h1>
 <span>  seconds_launch <span class="op">=</span> <span class="fl">86400</span>,</span>
 <span>  seconds_idle <span class="op">=</span> <span class="cn">Inf</span>,</span>
 <span>  seconds_wall <span class="op">=</span> <span class="cn">Inf</span>,</span>
-<span>  seconds_exit <span class="op">=</span> <span class="fl">1</span>,</span>
 <span>  tasks_max <span class="op">=</span> <span class="cn">Inf</span>,</span>
 <span>  tasks_timers <span class="op">=</span> <span class="fl">0L</span>,</span>
 <span>  reset_globals <span class="op">=</span> <span class="cn">TRUE</span>,</span>
@@ -113,13 +112,6 @@ time for a new worker to be delegated a new task.</p></dd>
 The timer does not launch until <code>tasks_timers</code> tasks
 have completed.
 See the <code>walltime</code> argument of <code><a href="https://shikokuchuo.net/mirai/reference/daemon.html" class="external-link">mirai::daemon()</a></code>.</p></dd>
-
-
-<dt>seconds_exit</dt>
-<dd><p>Number of seconds to wait for NNG websockets
-to finish sending large data (when a worker exits after reaching a
-timeout or having completed a certain number of tasks).
-See the <code>exitlinger</code> argument of <code><a href="https://shikokuchuo.net/mirai/reference/daemon.html" class="external-link">mirai::daemon()</a></code>.</p></dd>
 
 
 <dt>tasks_max</dt>
