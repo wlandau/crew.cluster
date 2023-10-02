@@ -1,6 +1,7 @@
 # crew.cluster 0.1.2.9000 (development)
 
 * Deprecate `seconds_exit` (https://github.com/wlandau/crew/issues/125, @shikokuchuo).
+* Deprecate `seconds_interval` (https://github.com/wlandau/crew/issues/131).
 
 # crew.cluster 0.1.2
 

@@ -7,7 +7,7 @@ LSF workers.}
 \usage{
 crew_launcher_lsf(
   name = NULL,
-  seconds_interval = 0.25,
+  seconds_interval = NULL,
   seconds_launch = 86400,
   seconds_idle = Inf,
   seconds_wall = Inf,
@@ -35,7 +35,8 @@ crew_launcher_lsf(
 \arguments{
 \item{name}{Name of the launcher.}
 
-\item{seconds_interval}{Seconds to wait between asynchronous operations.}
+\item{seconds_interval}{Deprecated in version 0.5.0.9003 (2023-10-02)
+no longer used.}
 
 \item{seconds_launch}{Seconds of startup time to allow.
 A worker is unconditionally assumed to be alive

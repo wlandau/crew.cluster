@@ -29,7 +29,8 @@ crew_launcher_cluster(
 \arguments{
 \item{name}{Name of the launcher.}
 
-\item{seconds_interval}{Seconds to wait between asynchronous operations.}
+\item{seconds_interval}{Deprecated in version 0.5.0.9003 (2023-10-02)
+no longer used.}
 
 \item{seconds_launch}{Seconds of startup time to allow.
 A worker is unconditionally assumed to be alive

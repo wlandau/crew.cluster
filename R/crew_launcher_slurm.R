@@ -51,7 +51,7 @@
 #'   omits this line.
 crew_launcher_slurm <- function(
   name = NULL,
-  seconds_interval = 0.25,
+  seconds_interval = NULL,
   seconds_launch = 86400,
   seconds_idle = Inf,
   seconds_wall = Inf,
@@ -74,10 +74,18 @@ crew_launcher_slurm <- function(
   slurm_cpus_per_task = NULL,
   slurm_time_minutes = 1440
 ) {
+  crew_deprecate(
+    name = "seconds_interval",
+    date = "2023-10-02",
+    version = "0.5.0.9003",
+    alternative = "none (no longer necessary)",
+    condition = "message",
+    value = seconds_interval,
+    frequency = "once"
+  )
   name <- as.character(name %|||% crew::crew_random_name())
   launcher <- crew_class_launcher_slurm$new(
     name = name,
-    seconds_interval = seconds_interval,
     seconds_launch = seconds_launch,
     seconds_idle = seconds_idle,
     seconds_wall = seconds_wall,
@@ -128,7 +136,6 @@ crew_class_launcher_slurm <- R6::R6Class(
     #' @description SLURM launcher constructor.
     #' @return an SLURM launcher object.
     #' @param name See [crew_launcher_slurm()].
-    #' @param seconds_interval See [crew_launcher_slurm()].
     #' @param seconds_launch See [crew_launcher_slurm()].
     #' @param seconds_idle See [crew_launcher_slurm()].
     #' @param seconds_wall See [crew_launcher_slurm()].
@@ -152,7 +159,6 @@ crew_class_launcher_slurm <- R6::R6Class(
     #' @param slurm_time_minutes See [crew_launcher_slurm()].
     initialize = function(
       name = NULL,
-      seconds_interval = NULL,
       seconds_launch = NULL,
       seconds_idle = NULL,
       seconds_wall = NULL,
@@ -177,7 +183,6 @@ crew_class_launcher_slurm <- R6::R6Class(
     ) {
       super$initialize(
         name = name,
-        seconds_interval = seconds_interval,
         seconds_launch = seconds_launch,
         seconds_idle = seconds_idle,
         seconds_wall = seconds_wall,
