@@ -60,7 +60,7 @@ workers as LSF jobs.</p>
     <div id="ref-usage">
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">crew_launcher_lsf</span><span class="op">(</span></span>
 <span>  name <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  seconds_interval <span class="op">=</span> <span class="fl">0.25</span>,</span>
+<span>  seconds_interval <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  seconds_launch <span class="op">=</span> <span class="fl">86400</span>,</span>
 <span>  seconds_idle <span class="op">=</span> <span class="cn">Inf</span>,</span>
 <span>  seconds_wall <span class="op">=</span> <span class="cn">Inf</span>,</span>
@@ -93,7 +93,8 @@ workers as LSF jobs.</p>
 
 
 <dt>seconds_interval</dt>
-<dd><p>Seconds to wait between asynchronous operations.</p></dd>
+<dd><p>Deprecated in version 0.5.0.9003 (2023-10-02)
+no longer used.</p></dd>
 
 
 <dt>seconds_launch</dt>
