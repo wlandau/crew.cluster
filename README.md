@@ -26,7 +26,7 @@ systems. Inspiration also comes from packages
 |-------------|------------|---------------------------------------------------------------------------|
 | Release     | CRAN       | `install.packages("crew.cluster")`                                        |
 | Development | GitHub     | `remotes::install_github("wlandau/crew.cluster")`                         |
-| Development | R-universe | `install.packages("crew", repos = "https://wlandau.r-universe.dev")` |
+| Development | R-universe | `install.packages("crew.cluster", repos = "https://wlandau.r-universe.dev")` |
 
 # Documentation
 
