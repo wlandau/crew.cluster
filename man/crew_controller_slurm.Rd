@@ -35,7 +35,8 @@ crew_controller_slurm(
   slurm_log_error = "/dev/null",
   slurm_memory_gigabytes_per_cpu = NULL,
   slurm_cpus_per_task = NULL,
-  slurm_time_minutes = 1440
+  slurm_time_minutes = 1440,
+  slurm_partition = NULL
 )
 }
 \arguments{
@@ -187,6 +188,12 @@ to a line of \verb{#SBATCH --cpus-per-task=4} in the SLURM job script.
 designate as the wall time of \code{crew} each worker instance on the
 SLURM cluster. \code{slurm_time_minutes = 60} translates to a line of
 \verb{#SBATCH --time=60} in the SLURM job script. \code{slurm_time_minutes = NULL}
+omits this line.}
+
+\item{slurm_partition}{Character of length 1, name of the SLURM partition to
+create workers on. \code{slurm_partition = "partition1,partition2"}
+translates to a line of \verb{#SBATCH --partition=partition1,partition2}
+in the SLURM job script. \code{slurm_partition = NULL}
 omits this line.}
 }
 \description{
