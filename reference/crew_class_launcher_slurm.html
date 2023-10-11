@@ -109,6 +109,10 @@ source code for additional attribution.</p>
 <dd><p>See <code><a href="crew_launcher_slurm.html">crew_launcher_slurm()</a></code>.</p></dd>
 
 
+<dt><code>slurm_partition</code></dt>
+<dd><p>See See <code><a href="crew_launcher_slurm.html">crew_launcher_slurm()</a></code>.</p></dd>
+
+
 </dl><p></p></div>
     </div>
     <div id="methods">
@@ -125,6 +129,8 @@ source code for additional attribution.</p>
 <li><span class="pkg-link" data-pkg="crew" data-topic="crew_class_launcher" data-id="booting"><a href="https://wlandau.github.io/crew/reference/crew_class_launcher.html#method-booting"><code>crew::crew_class_launcher$booting()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="crew" data-topic="crew_class_launcher" data-id="call"><a href="https://wlandau.github.io/crew/reference/crew_class_launcher.html#method-call"><code>crew::crew_class_launcher$call()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="crew" data-topic="crew_class_launcher" data-id="done"><a href="https://wlandau.github.io/crew/reference/crew_class_launcher.html#method-done"><code>crew::crew_class_launcher$done()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="crew" data-topic="crew_class_launcher" data-id="errors"><a href="https://wlandau.github.io/crew/reference/crew_class_launcher.html#method-errors"><code>crew::crew_class_launcher$errors()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="crew" data-topic="crew_class_launcher" data-id="forward"><a href="https://wlandau.github.io/crew/reference/crew_class_launcher.html#method-forward"><code>crew::crew_class_launcher$forward()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="crew" data-topic="crew_class_launcher" data-id="launch"><a href="https://wlandau.github.io/crew/reference/crew_class_launcher.html#method-launch"><code>crew::crew_class_launcher$launch()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="crew" data-topic="crew_class_launcher" data-id="rotate"><a href="https://wlandau.github.io/crew/reference/crew_class_launcher.html#method-rotate"><code>crew::crew_class_launcher$rotate()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="crew" data-topic="crew_class_launcher" data-id="scale"><a href="https://wlandau.github.io/crew/reference/crew_class_launcher.html#method-scale"><code>crew::crew_class_launcher$scale()</code></a></span></li>
@@ -133,8 +139,10 @@ source code for additional attribution.</p>
 <li><span class="pkg-link" data-pkg="crew" data-topic="crew_class_launcher" data-id="summary"><a href="https://wlandau.github.io/crew/reference/crew_class_launcher.html#method-summary"><code>crew::crew_class_launcher$summary()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="crew" data-topic="crew_class_launcher" data-id="tally"><a href="https://wlandau.github.io/crew/reference/crew_class_launcher.html#method-tally"><code>crew::crew_class_launcher$tally()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="crew" data-topic="crew_class_launcher" data-id="terminate"><a href="https://wlandau.github.io/crew/reference/crew_class_launcher.html#method-terminate"><code>crew::crew_class_launcher$terminate()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="crew" data-topic="crew_class_launcher" data-id="terminate_workers"><a href="https://wlandau.github.io/crew/reference/crew_class_launcher.html#method-terminate_workers"><code>crew::crew_class_launcher$terminate_workers()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="crew" data-topic="crew_class_launcher" data-id="throttle"><a href="https://wlandau.github.io/crew/reference/crew_class_launcher.html#method-throttle"><code>crew::crew_class_launcher$throttle()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="crew" data-topic="crew_class_launcher" data-id="unlaunched"><a href="https://wlandau.github.io/crew/reference/crew_class_launcher.html#method-unlaunched"><code>crew::crew_class_launcher$unlaunched()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="crew" data-topic="crew_class_launcher" data-id="wait"><a href="https://wlandau.github.io/crew/reference/crew_class_launcher.html#method-wait"><code>crew::crew_class_launcher$wait()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="crew.cluster" data-topic="crew_class_launcher_cluster" data-id="args_launch"><a href="crew_class_launcher_cluster.html#method-args_launch"><code>crew.cluster::crew_class_launcher_cluster$args_launch()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="crew.cluster" data-topic="crew_class_launcher_cluster" data-id="launch_worker"><a href="crew_class_launcher_cluster.html#method-launch_worker"><code>crew.cluster::crew_class_launcher_cluster$launch_worker()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="crew.cluster" data-topic="crew_class_launcher_cluster" data-id="terminate_worker"><a href="crew_class_launcher_cluster.html#method-terminate_worker"><code>crew.cluster::crew_class_launcher_cluster$terminate_worker()</code></a></span></li>
@@ -164,7 +172,8 @@ source code for additional attribution.</p>
 <span>  slurm_log_error <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  slurm_memory_gigabytes_per_cpu <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  slurm_cpus_per_task <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  slurm_time_minutes <span class="op">=</span> <span class="cn">NULL</span></span>
+<span>  slurm_time_minutes <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  slurm_partition <span class="op">=</span> <span class="cn">NULL</span></span>
 <span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
@@ -255,6 +264,10 @@ source code for additional attribution.</p>
 
 
 <dt><code>slurm_time_minutes</code></dt>
+<dd><p>See <code><a href="crew_launcher_slurm.html">crew_launcher_slurm()</a></code>.</p></dd>
+
+
+<dt><code>slurm_partition</code></dt>
 <dd><p>See <code><a href="crew_launcher_slurm.html">crew_launcher_slurm()</a></code>.</p></dd>
 
 
