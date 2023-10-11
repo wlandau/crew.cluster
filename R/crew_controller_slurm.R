@@ -53,7 +53,8 @@ crew_controller_slurm <- function(
   slurm_log_error = "/dev/null",
   slurm_memory_gigabytes_per_cpu = NULL,
   slurm_cpus_per_task = NULL,
-  slurm_time_minutes = 1440
+  slurm_time_minutes = 1440,
+  slurm_partition = NULL
 ) {
   if (!is.null(seconds_exit)) {
     crew::crew_deprecate(
@@ -96,7 +97,8 @@ crew_controller_slurm <- function(
     slurm_log_error = slurm_log_error,
     slurm_memory_gigabytes_per_cpu = slurm_memory_gigabytes_per_cpu,
     slurm_cpus_per_task = slurm_cpus_per_task,
-    slurm_time_minutes = slurm_time_minutes
+    slurm_time_minutes = slurm_time_minutes,
+    slurm_partition = slurm_partition
   )
   controller <- crew::crew_controller(client = client, launcher = launcher)
   controller$validate()

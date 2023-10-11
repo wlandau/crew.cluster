@@ -49,6 +49,8 @@
 #'   SLURM cluster. `slurm_time_minutes = 60` translates to a line of
 #'   `#SBATCH --time=60` in the SLURM job script. `slurm_time_minutes = NULL`
 #'   omits this line.
+#' @param slurm_partition Character of length 1, name of the slurm partition to
+#'   create workers on.
 crew_launcher_slurm <- function(
   name = NULL,
   seconds_interval = NULL,
@@ -72,7 +74,8 @@ crew_launcher_slurm <- function(
   slurm_log_error = "/dev/null",
   slurm_memory_gigabytes_per_cpu = NULL,
   slurm_cpus_per_task = NULL,
-  slurm_time_minutes = 1440
+  slurm_time_minutes = 1440,
+  slurm_partition = NULL
 ) {
   crew_deprecate(
     name = "seconds_interval",
@@ -106,7 +109,8 @@ crew_launcher_slurm <- function(
     slurm_log_error = slurm_log_error,
     slurm_memory_gigabytes_per_cpu = slurm_memory_gigabytes_per_cpu,
     slurm_cpus_per_task = slurm_cpus_per_task,
-    slurm_time_minutes = slurm_time_minutes
+    slurm_time_minutes = slurm_time_minutes,
+    slurm_partition = slurm_partition
   )
   launcher$validate()
   launcher
@@ -133,6 +137,8 @@ crew_class_launcher_slurm <- R6::R6Class(
     slurm_cpus_per_task = NULL,
     #' @field slurm_time_minutes See [crew_launcher_slurm()].
     slurm_time_minutes = NULL,
+    #' @field slurm_partition See See [crew_launcher_slurm()].
+    slurm_partition = NULL,
     #' @description SLURM launcher constructor.
     #' @return an SLURM launcher object.
     #' @param name See [crew_launcher_slurm()].
@@ -157,6 +163,7 @@ crew_class_launcher_slurm <- R6::R6Class(
     #' @param slurm_memory_gigabytes_per_cpu See [crew_launcher_slurm()].
     #' @param slurm_cpus_per_task See [crew_launcher_slurm()].
     #' @param slurm_time_minutes See [crew_launcher_slurm()].
+    #' @param slurm_partition See [crew_launcher_slurm()].
     initialize = function(
       name = NULL,
       seconds_launch = NULL,
@@ -179,7 +186,8 @@ crew_class_launcher_slurm <- R6::R6Class(
       slurm_log_error = NULL,
       slurm_memory_gigabytes_per_cpu = NULL,
       slurm_cpus_per_task = NULL,
-      slurm_time_minutes = NULL
+      slurm_time_minutes = NULL,
+      slurm_partition = NULL
     ) {
       super$initialize(
         name = name,
@@ -205,12 +213,13 @@ crew_class_launcher_slurm <- R6::R6Class(
       self$slurm_memory_gigabytes_per_cpu <- slurm_memory_gigabytes_per_cpu
       self$slurm_cpus_per_task <- slurm_cpus_per_task
       self$slurm_time_minutes <- slurm_time_minutes
+      self$slurm_partition <- slurm_partition
     },
     #' @description Validate the launcher.
     #' @return `NULL` (invisibly). Throws an error if a field is invalid.
     validate = function() {
       super$validate()
-      fields <- c("slurm_log_output", "slurm_log_error")
+      fields <- c("slurm_log_output", "slurm_log_error", "slurm_partition")
       for (field in fields) {
         if (!is.null(self[[field]])) {
           crew::crew_assert(
@@ -298,6 +307,11 @@ crew_class_launcher_slurm <- R6::R6Class(
           is.null(self$slurm_time_minutes),
           character(0L),
           paste0("#SBATCH --time=", self$slurm_time_minutes)
+        ),
+        if_any(
+          is.null(self$slurm_partition),
+          character(0L),
+          paste0("#SBATCH --partition=", self$slurm_partition)
         ),
         self$script_lines
       )
