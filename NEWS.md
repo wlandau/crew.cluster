@@ -1,7 +1,8 @@
-# crew.cluster 0.1.2.9000 (development)
+# crew.cluster 0.1.3
 
 * Deprecate `seconds_exit` (https://github.com/wlandau/crew/issues/125, @shikokuchuo).
 * Deprecate `seconds_interval` (https://github.com/wlandau/crew/issues/131).
+* Add a new `slurm_partition` argument the SLURM controller and launcher (#24, @kkmann).
 
 # crew.cluster 0.1.2
 

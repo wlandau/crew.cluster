@@ -49,9 +49,10 @@
 #'   SLURM cluster. `slurm_time_minutes = 60` translates to a line of
 #'   `#SBATCH --time=60` in the SLURM job script. `slurm_time_minutes = NULL`
 #'   omits this line.
-#' @param slurm_partition Character of length 1, name of the slurm partition to
-#'   create workers on. `slurm_partition = "default"` translates to a line of
-#'   `#SBATCH --partition=default` in the SLURM job script. `slurm_partition = NULL`
+#' @param slurm_partition Character of length 1, name of the SLURM partition to
+#'   create workers on. `slurm_partition = "partition1,partition2"`
+#'   translates to a line of `#SBATCH --partition=partition1,partition2`
+#'   in the SLURM job script. `slurm_partition = NULL`
 #'   omits this line.
 crew_launcher_slurm <- function(
   name = NULL,

@@ -159,9 +159,10 @@ SLURM cluster. \code{slurm_time_minutes = 60} translates to a line of
 \verb{#SBATCH --time=60} in the SLURM job script. \code{slurm_time_minutes = NULL}
 omits this line.}
 
-\item{slurm_partition}{Character of length 1, name of the slurm partition to
-create workers on. \code{slurm_partition = "default"} translates to a line of
-\verb{#SBATCH --partition=default} in the SLURM job script. \code{slurm_partition = NULL}
+\item{slurm_partition}{Character of length 1, name of the SLURM partition to
+create workers on. \code{slurm_partition = "partition1,partition2"}
+translates to a line of \verb{#SBATCH --partition=partition1,partition2}
+in the SLURM job script. \code{slurm_partition = NULL}
 omits this line.}
 }
 \description{
