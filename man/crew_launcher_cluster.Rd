@@ -18,7 +18,7 @@ crew_launcher_cluster(
   reset_options = FALSE,
   garbage_collection = FALSE,
   launch_max = 5L,
-  tls = crew::crew_tls(),
+  tls = crew::crew_tls(mode = "automatic"),
   verbose = FALSE,
   command_submit = "",
   command_delete = "",

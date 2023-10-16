@@ -10,7 +10,7 @@ crew_controller_lsf(
   workers = 1L,
   host = NULL,
   port = NULL,
-  tls = crew::crew_tls(),
+  tls = crew::crew_tls(mode = "automatic"),
   tls_enable = NULL,
   tls_config = NULL,
   seconds_interval = 0.25,
