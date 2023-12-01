@@ -352,7 +352,7 @@ crew_class_launcher_sge <- R6::R6Class(
           character(0L),
           paste0("#$ -l gpu=", as.character(self$sge_gpu))
         ),
-        self$script_lines
+        private$.script_lines
       )
     }
   )

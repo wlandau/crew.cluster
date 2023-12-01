@@ -86,19 +86,42 @@ crew_class_launcher_cluster <- R6::R6Class(
   classname = "crew_class_launcher_cluster",
   inherit = crew::crew_class_launcher,
   cloneable = FALSE,
-  public = list(
+  private = list(
+    .verbose = NULL,
+    .command_submit = NULL,
+    .command_delete = NULL,
+    .script_directory = NULL,
+    .script_lines = NULL,
+    .prefix = NULL
+  ),
+  active = list(
     #' @field verbose See [crew_launcher_cluster()].
-    verbose = NULL,
+    verbose = function() {
+      .subset2(private, ".verbose")
+    },
     #' @field command_submit See [crew_launcher_cluster()].
-    command_submit = NULL,
+    command_submit = function() {
+      .subset2(private, ".command_submit")
+    },
     #' @field command_delete See [crew_launcher_cluster()].
-    command_delete = NULL,
+    command_delete = function() {
+      .subset2(private, ".command_delete")
+    },
     #' @field script_directory See [crew_launcher_cluster()].
-    script_directory = NULL,
+    script_directory = function() {
+      .subset2(private, ".script_directory")
+    },
     #' @field script_lines See [crew_launcher_cluster()].
-    script_lines = NULL,
-    #' @field prefix See [crew_launcher_cluster()].
-    prefix = NULL,
+    script_lines = function() {
+      .subset2(private, ".script_lines")
+    },
+    #' @field prefix Character of length 1, randomly generated sub-string
+    #'   in job names.
+    prefix = function() {
+      .subset2(private, ".prefix")
+    }
+  ),
+  public = list(
     #' @description Abstract launcher constructor.
     #' @return An abstract launcher object.
     #' @param name See [crew_launcher_cluster()].
@@ -154,18 +177,18 @@ crew_class_launcher_cluster <- R6::R6Class(
         launch_max = launch_max,
         tls = tls
       )
-      self$verbose <- verbose
-      self$command_submit <- command_submit
-      self$command_delete <- command_delete
-      self$script_directory <- script_directory
-      self$script_lines <- script_lines
+      private$.verbose <- verbose
+      private$.command_submit <- command_submit
+      private$.command_delete <- command_delete
+      private$.script_directory <- script_directory
+      private$.script_lines <- script_lines
     },
     #' @description Validate the launcher.
     #' @return `NULL` (invisibly). Throws an error if a field is invalid.
     validate = function() {
       super$validate() # nolint
       crew::crew_assert(
-        self$verbose,
+        private$.verbose,
         isTRUE(.) || isFALSE(.),
         message = "the \"verbose\" field is not a length-1 logical."
       )
@@ -179,9 +202,9 @@ crew_class_launcher_cluster <- R6::R6Class(
           message = paste(field, "must be a valid length-1 character string.")
         )
       }
-      if (!is.null(self$script_lines)) {
+      if (!is.null(private$.script_lines)) {
         crew::crew_assert(
-          self$script_lines,
+          private$.script_lines,
           is.character(.),
           !anyNA(.),
           message = "invalid script_lines field"
@@ -207,24 +230,24 @@ crew_class_launcher_cluster <- R6::R6Class(
     #'   the current instance of the worker.
     launch_worker = function(call, name, launcher, worker, instance) {
       lines <- c(self$script(name = name), paste("R -e", shQuote(call)))
-      if (is.null(self$prefix)) {
-        if (!file.exists(self$script_directory)) {
-          dir.create(self$script_directory, recursive = TRUE)
+      if (is.null(private$.prefix)) {
+        if (!file.exists(private$.script_directory)) {
+          dir.create(private$.script_directory, recursive = TRUE)
         }
-        self$prefix <- crew::crew_random_name()
+        private$.prefix <- crew::crew_random_name()
       }
       script <- path_script(
-        dir = self$script_directory,
-        prefix = self$prefix,
+        dir = private$.script_directory,
+        prefix = private$.prefix,
         launcher = launcher,
         worker = worker
       )
       writeLines(text = lines, con = script)
       system2(
-        command = self$command_submit,
+        command = private$.command_submit,
         args = self$args_launch(script = script),
-        stdout = if_any(self$verbose, "", FALSE),
-        stderr = if_any(self$verbose, "", FALSE),
+        stdout = if_any(private$.verbose, "", FALSE),
+        stderr = if_any(private$.verbose, "", FALSE),
         wait = FALSE
       )
       list(name = name, script = script)
@@ -235,12 +258,12 @@ crew_class_launcher_cluster <- R6::R6Class(
     #'   returned by `launch_worker()`.
     terminate_worker = function(handle) {
       unlink(handle$script)
-      if (nzchar(self$command_delete)) {
+      if (nzchar(private$.command_delete)) {
         system2(
-          command = self$command_delete,
+          command = private$.command_delete,
           args = self$args_terminate(name = handle$name),
-          stdout = if_any(self$verbose, "", FALSE),
-          stderr = if_any(self$verbose, "", FALSE),
+          stdout = if_any(private$.verbose, "", FALSE),
+          stderr = if_any(private$.verbose, "", FALSE),
           wait = FALSE
         )
       }

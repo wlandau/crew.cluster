@@ -37,8 +37,8 @@ Other launchers:
 \section{Super class}{
 \code{\link[crew:crew_class_launcher]{crew::crew_class_launcher}} -> \code{crew_class_launcher_cluster}
 }
-\section{Public fields}{
-\if{html}{\out{<div class="r6-fields">}}
+\section{Active bindings}{
+\if{html}{\out{<div class="r6-active-bindings">}}
 \describe{
 \item{\code{verbose}}{See \code{\link[=crew_launcher_cluster]{crew_launcher_cluster()}}.}
 
@@ -50,7 +50,8 @@ Other launchers:
 
 \item{\code{script_lines}}{See \code{\link[=crew_launcher_cluster]{crew_launcher_cluster()}}.}
 
-\item{\code{prefix}}{See \code{\link[=crew_launcher_cluster]{crew_launcher_cluster()}}.}
+\item{\code{prefix}}{Character of length 1, randomly generated sub-string
+in job names.}
 }
 \if{html}{\out{</div>}}
 }

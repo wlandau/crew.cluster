@@ -313,7 +313,7 @@ crew_class_launcher_lsf <- R6::R6Class(
           character(0L),
           paste("#BSUB -n", self$lsf_cores)
         ),
-        self$script_lines
+        private$.script_lines
       )
     },
     #' @description Worker launch arguments.

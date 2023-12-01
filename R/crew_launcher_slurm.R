@@ -316,7 +316,7 @@ crew_class_launcher_slurm <- R6::R6Class(
           character(0L),
           paste0("#SBATCH --partition=", self$slurm_partition)
         ),
-        self$script_lines
+        private$.script_lines
       )
     },
     #' @description Worker termination arguments.

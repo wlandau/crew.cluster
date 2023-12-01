@@ -333,7 +333,7 @@ crew_class_launcher_pbs <- R6::R6Class(
             as.character(self$pbs_walltime_hours)
           )
         ),
-        self$script_lines,
+        private$.script_lines,
         if_any(self$pbs_cwd, "cd \"$PBS_O_WORKDIR\"", character(0L))
       )
     }
