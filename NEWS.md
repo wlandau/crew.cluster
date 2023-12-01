@@ -1,6 +1,6 @@
-# crew.clsuter 0.1.3.9000 (development)
+# crew.clsuter 0.1.3.9001 (development)
 
-
+* Refactor methods for development `crew`.
 
 # crew.cluster 0.1.3
 
