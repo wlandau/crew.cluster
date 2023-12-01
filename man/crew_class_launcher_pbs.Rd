@@ -51,8 +51,8 @@ Other launchers:
 \section{Super classes}{
 \code{\link[crew:crew_class_launcher]{crew::crew_class_launcher}} -> \code{\link[crew.cluster:crew_class_launcher_cluster]{crew.cluster::crew_class_launcher_cluster}} -> \code{crew_class_launcher_pbs}
 }
-\section{Public fields}{
-\if{html}{\out{<div class="r6-fields">}}
+\section{Active bindings}{
+\if{html}{\out{<div class="r6-active-bindings">}}
 \describe{
 \item{\code{pbs_cwd}}{See \code{\link[=crew_launcher_pbs]{crew_launcher_pbs()}}.}
 

@@ -143,25 +143,56 @@ crew_class_launcher_sge <- R6::R6Class(
   classname = "crew_class_launcher_sge",
   inherit = crew_class_launcher_cluster,
   cloneable = FALSE,
-  public = list(
+  private = list(
+    .sge_cwd = NULL,
+    .sge_envvars = NULL,
+    .sge_log_output = NULL,
+    .sge_log_error = NULL,
+    .sge_log_join = NULL,
+    .sge_memory_gigabytes_limit = NULL,
+    .sge_memory_gigabytes_required = NULL,
+    .sge_cores = NULL,
+    .sge_gpu = NULL
+  ),
+  active = list(
     #' @field sge_cwd See [crew_launcher_sge()].
-    sge_cwd = NULL,
+    sge_cwd = function() {
+      .subset2(private, ".sge_cwd")
+    },
     #' @field sge_envvars See [crew_launcher_sge()].
-    sge_envvars = NULL,
+    sge_envvars = function() {
+      .subset2(private, ".sge_envvars")
+    },
     #' @field sge_log_output See [crew_launcher_sge()].
-    sge_log_output = NULL,
+    sge_log_output = function() {
+      .subset2(private, ".sge_log_output")
+    },
     #' @field sge_log_error See [crew_launcher_sge()].
-    sge_log_error = NULL,
+    sge_log_error = function() {
+      .subset2(private, ".sge_log_error")
+    },
     #' @field sge_log_join See [crew_launcher_sge()].
-    sge_log_join = NULL,
+    sge_log_join = function() {
+      .subset2(private, ".sge_log_join")
+    },
     #' @field sge_memory_gigabytes_limit See [crew_launcher_sge()].
-    sge_memory_gigabytes_limit = NULL,
+    sge_memory_gigabytes_limit = function() {
+      .subset2(private, ".sge_memory_gigabytes_limit")
+    },
     #' @field sge_memory_gigabytes_required See [crew_launcher_sge()].
-    sge_memory_gigabytes_required = NULL,
+    sge_memory_gigabytes_required = function() {
+      .subset2(private, ".sge_memory_gigabytes_required")
+    },
     #' @field sge_cores See [crew_launcher_sge()].
-    sge_cores = NULL,
+    sge_cores = function() {
+      .subset2(private, ".sge_cores")
+    },
     #' @field sge_gpu See [crew_launcher_sge()].
-    sge_gpu = NULL,
+    sge_gpu = function() {
+      .subset2(private, ".sge_gpu")
+    }
+  ),
+  public = list(
     #' @description SGE launcher constructor.
     #' @return an SGE launcher object.
     #' @param name See [crew_launcher_sge()].
@@ -237,31 +268,31 @@ crew_class_launcher_sge <- R6::R6Class(
         script_directory = script_directory,
         script_lines = script_lines
       )
-      self$sge_cwd <- sge_cwd
-      self$sge_envvars <- sge_envvars
-      self$sge_log_output <- sge_log_output
-      self$sge_log_error <- sge_log_error
-      self$sge_log_join <- sge_log_join
-      self$sge_memory_gigabytes_limit <- sge_memory_gigabytes_limit
-      self$sge_memory_gigabytes_required <- sge_memory_gigabytes_required
-      self$sge_cores <- sge_cores
-      self$sge_gpu <- sge_gpu
+      private$.sge_cwd <- sge_cwd
+      private$.sge_envvars <- sge_envvars
+      private$.sge_log_output <- sge_log_output
+      private$.sge_log_error <- sge_log_error
+      private$.sge_log_join <- sge_log_join
+      private$.sge_memory_gigabytes_limit <- sge_memory_gigabytes_limit
+      private$.sge_memory_gigabytes_required <- sge_memory_gigabytes_required
+      private$.sge_cores <- sge_cores
+      private$.sge_gpu <- sge_gpu
     },
     #' @description Validate the launcher.
     #' @return `NULL` (invisibly). Throws an error if a field is invalid.
     validate = function() {
       super$validate()
       crew::crew_assert(
-        self$sge_log_output,
+        private$.sge_log_output,
         is.character(.),
         length(.) == 1L,
         !anyNA(.),
         nzchar(.),
         message = "sge_log_output must be a nonempty length-1 character string."
       )
-      if (!is.null(self$sge_log_error)) {
+      if (!is.null(private$.sge_log_error)) {
         crew::crew_assert(
-          self$sge_log_error,
+          private$.sge_log_error,
           is.character(.),
           length(.) == 1L,
           !anyNA(.),
@@ -323,34 +354,37 @@ crew_class_launcher_sge <- R6::R6Class(
     script = function(name) {
       c(
         paste("#$ -N", name),
-        if_any(self$sge_cwd, "#$ -cwd", character(0L)),
-        if_any(self$sge_envvars, "#$ -V", character(0L)),
-        paste("#$ -o", self$sge_log_output),
+        if_any(private$.sge_cwd, "#$ -cwd", character(0L)),
+        if_any(private$.sge_envvars, "#$ -V", character(0L)),
+        paste("#$ -o", private$.sge_log_output),
         if_any(
-          is.null(self$sge_log_error),
+          is.null(private$.sge_log_error),
           character(0L),
-          paste("#$ -e", self$sge_log_error)
+          paste("#$ -e", private$.sge_log_error)
         ),
-        if_any(self$sge_log_join, "#$ -j y", "#$ -j n"),
+        if_any(private$.sge_log_join, "#$ -j y", "#$ -j n"),
         if_any(
-          is.null(self$sge_memory_gigabytes_limit),
+          is.null(private$.sge_memory_gigabytes_limit),
           character(0L),
-          sprintf("#$ -l h_rss=%sG", self$sge_memory_gigabytes_limit)
-        ),
-        if_any(
-          is.null(self$sge_memory_gigabytes_required),
-          character(0L),
-          sprintf("#$ -l m_mem_free=%sG", self$sge_memory_gigabytes_required)
+          sprintf("#$ -l h_rss=%sG", private$.sge_memory_gigabytes_limit)
         ),
         if_any(
-          is.null(self$sge_cores),
+          is.null(private$.sge_memory_gigabytes_required),
           character(0L),
-          paste("#$ -pe smp", as.character(self$sge_cores))
+          sprintf(
+            "#$ -l m_mem_free=%sG",
+            private$.sge_memory_gigabytes_required
+          )
         ),
         if_any(
-          is.null(self$sge_gpu),
+          is.null(private$.sge_cores),
           character(0L),
-          paste0("#$ -l gpu=", as.character(self$sge_gpu))
+          paste("#$ -pe smp", as.character(private$.sge_cores))
+        ),
+        if_any(
+          is.null(private$.sge_gpu),
+          character(0L),
+          paste0("#$ -l gpu=", as.character(private$.sge_gpu))
         ),
         private$.script_lines
       )

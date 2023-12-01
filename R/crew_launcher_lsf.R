@@ -130,19 +130,41 @@ crew_class_launcher_lsf <- R6::R6Class(
   classname = "crew_class_launcher_lsf",
   inherit = crew_class_launcher_cluster,
   cloneable = FALSE,
-  public = list(
+  private = list(
+    .lsf_cwd = NULL,
+    .lsf_log_output = NULL,
+    .lsf_log_error = NULL,
+    .lsf_memory_gigabytes_limit = NULL,
+    .lsf_memory_gigabytes_required = NULL,
+    .lsf_cores = NULL
+  ),
+  active = list(
     #' @field lsf_cwd See [crew_launcher_lsf()].
-    lsf_cwd = NULL,
+    lsf_cwd = function() {
+      .subset2(private, ".lsf_cwd")
+    },
     #' @field lsf_log_output See [crew_launcher_lsf()].
-    lsf_log_output = NULL,
+    lsf_log_output = function() {
+      .subset2(private, ".lsf_log_output")
+    },
     #' @field lsf_log_error See [crew_launcher_lsf()].
-    lsf_log_error = NULL,
+    lsf_log_error = function() {
+      .subset2(private, ".lsf_log_error")
+    },
     #' @field lsf_memory_gigabytes_limit See [crew_launcher_lsf()].
-    lsf_memory_gigabytes_limit = NULL,
+    lsf_memory_gigabytes_limit = function() {
+      .subset2(private, ".lsf_memory_gigabytes_limit")
+    },
     #' @field lsf_memory_gigabytes_required See [crew_launcher_lsf()].
-    lsf_memory_gigabytes_required = NULL,
+    lsf_memory_gigabytes_required = function() {
+      .subset2(private, ".lsf_memory_gigabytes_required")
+    },
     #' @field lsf_cores See [crew_launcher_lsf()].
-    lsf_cores = NULL,
+    lsf_cores = function() {
+      .subset2(private, ".lsf_cores")
+    }
+  ),
+  public = list(
     #' @description LSF launcher constructor.
     #' @return an LSF launcher object.
     #' @param name See [crew_launcher_lsf()].
@@ -212,12 +234,12 @@ crew_class_launcher_lsf <- R6::R6Class(
         script_directory = script_directory,
         script_lines = script_lines
       )
-      self$lsf_cwd <- lsf_cwd
-      self$lsf_log_output <- lsf_log_output
-      self$lsf_log_error <- lsf_log_error
-      self$lsf_memory_gigabytes_limit <- lsf_memory_gigabytes_limit
-      self$lsf_memory_gigabytes_required <- lsf_memory_gigabytes_required
-      self$lsf_cores <- lsf_cores
+      private$.lsf_cwd <- lsf_cwd
+      private$.lsf_log_output <- lsf_log_output
+      private$.lsf_log_error <- lsf_log_error
+      private$.lsf_memory_gigabytes_limit <- lsf_memory_gigabytes_limit
+      private$.lsf_memory_gigabytes_required <- lsf_memory_gigabytes_required
+      private$.lsf_cores <- lsf_cores
     },
     #' @description Validate the launcher.
     #' @return `NULL` (invisibly). Throws an error if a field is invalid.
@@ -281,37 +303,37 @@ crew_class_launcher_lsf <- R6::R6Class(
         "#!/bin/sh",
         paste("#BSUB -J", name),
         if_any(
-          is.null(self$lsf_cwd),
+          is.null(private$.lsf_cwd),
           character(0L),
-          paste("#BSUB -cwd", self$lsf_cwd)
+          paste("#BSUB -cwd", private$.lsf_cwd)
         ),
         if_any(
-          is.null(self$lsf_log_output),
+          is.null(private$.lsf_log_output),
           character(0L),
-          paste("#BSUB -o", self$lsf_log_output)
+          paste("#BSUB -o", private$.lsf_log_output)
         ),
         if_any(
-          is.null(self$lsf_log_error),
+          is.null(private$.lsf_log_error),
           character(0L),
-          paste("#BSUB -e", self$lsf_log_error)
+          paste("#BSUB -e", private$.lsf_log_error)
         ),
         if_any(
-          is.null(self$lsf_memory_gigabytes_limit),
+          is.null(private$.lsf_memory_gigabytes_limit),
           character(0L),
-          sprintf("#BSUB -M %sG", self$lsf_memory_gigabytes_limit)
+          sprintf("#BSUB -M %sG", private$.lsf_memory_gigabytes_limit)
         ),
         if_any(
-          is.null(self$lsf_memory_gigabytes_required),
+          is.null(private$.lsf_memory_gigabytes_required),
           character(0L),
           sprintf(
             "#BSUB -R 'rusage[mem=%sG]'",
-            self$lsf_memory_gigabytes_required
+            private$.lsf_memory_gigabytes_required
           )
         ),
         if_any(
-          is.null(self$lsf_cores),
+          is.null(private$.lsf_cores),
           character(0L),
-          paste("#BSUB -n", self$lsf_cores)
+          paste("#BSUB -n", private$.lsf_cores)
         ),
         private$.script_lines
       )

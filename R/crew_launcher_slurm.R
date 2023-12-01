@@ -129,19 +129,41 @@ crew_class_launcher_slurm <- R6::R6Class(
   classname = "crew_class_launcher_slurm",
   inherit = crew_class_launcher_cluster,
   cloneable = FALSE,
-  public = list(
+  private = list(
+    .slurm_log_output = NULL,
+    .slurm_log_error = NULL,
+    .slurm_memory_gigabytes_per_cpu = NULL,
+    .slurm_cpus_per_task = NULL,
+    .slurm_time_minutes = NULL,
+    .slurm_partition = NULL
+  ),
+  active = list(
     #' @field slurm_log_output See [crew_launcher_slurm()].
-    slurm_log_output = NULL,
+    slurm_log_output = function() {
+      .subset2(private, ".slurm_log_output")
+    },
     #' @field slurm_log_error See [crew_launcher_slurm()].
-    slurm_log_error = NULL,
+    slurm_log_error = function() {
+      .subset2(private, ".slurm_log_error")
+    },
     #' @field slurm_memory_gigabytes_per_cpu See [crew_launcher_slurm()].
-    slurm_memory_gigabytes_per_cpu = NULL,
+    slurm_memory_gigabytes_per_cpu = function() {
+      .subset2(private, ".slurm_memory_gigabytes_per_cpu")
+    },
     #' @field slurm_cpus_per_task See [crew_launcher_slurm()].
-    slurm_cpus_per_task = NULL,
+    slurm_cpus_per_task = function() {
+      .subset2(private, ".slurm_cpus_per_task")
+    },
     #' @field slurm_time_minutes See [crew_launcher_slurm()].
-    slurm_time_minutes = NULL,
+    slurm_time_minutes = function() {
+      .subset2(private, ".slurm_time_minutes")
+    },
     #' @field slurm_partition See See [crew_launcher_slurm()].
-    slurm_partition = NULL,
+    slurm_partition = function() {
+      .subset2(private, ".slurm_partition")
+    }
+  ),
+  public = list(
     #' @description SLURM launcher constructor.
     #' @return an SLURM launcher object.
     #' @param name See [crew_launcher_slurm()].
@@ -211,12 +233,12 @@ crew_class_launcher_slurm <- R6::R6Class(
         script_directory = script_directory,
         script_lines = script_lines
       )
-      self$slurm_log_output <- slurm_log_output
-      self$slurm_log_error <- slurm_log_error
-      self$slurm_memory_gigabytes_per_cpu <- slurm_memory_gigabytes_per_cpu
-      self$slurm_cpus_per_task <- slurm_cpus_per_task
-      self$slurm_time_minutes <- slurm_time_minutes
-      self$slurm_partition <- slurm_partition
+      private$.slurm_log_output <- slurm_log_output
+      private$.slurm_log_error <- slurm_log_error
+      private$.slurm_memory_gigabytes_per_cpu <- slurm_memory_gigabytes_per_cpu
+      private$.slurm_cpus_per_task <- slurm_cpus_per_task
+      private$.slurm_time_minutes <- slurm_time_minutes
+      private$.slurm_partition <- slurm_partition
     },
     #' @description Validate the launcher.
     #' @return `NULL` (invisibly). Throws an error if a field is invalid.
@@ -279,42 +301,42 @@ crew_class_launcher_slurm <- R6::R6Class(
         "#!/bin/sh",
         paste0("#SBATCH --job-name=", name),
         if_any(
-          is.null(self$slurm_log_output),
+          is.null(private$.slurm_log_output),
           character(0L),
-          paste0("#SBATCH --output=", self$slurm_log_output)
+          paste0("#SBATCH --output=", private$.slurm_log_output)
         ),
         if_any(
-          is.null(self$slurm_log_error),
+          is.null(private$.slurm_log_error),
           character(0L),
-          paste0("#SBATCH --error=", self$slurm_log_error)
+          paste0("#SBATCH --error=", private$.slurm_log_error)
         ),
         if_any(
-          is.null(self$slurm_memory_gigabytes_per_cpu),
+          is.null(private$.slurm_memory_gigabytes_per_cpu),
           character(0L),
           sprintf(
             "#SBATCH --mem-per-cpu=%sM",
             as.integer(
               round(
-                x = 1024 * self$slurm_memory_gigabytes_per_cpu,
+                x = 1024 * private$.slurm_memory_gigabytes_per_cpu,
                 digits = 0L
               )
             )
           )
         ),
         if_any(
-          is.null(self$slurm_cpus_per_task),
+          is.null(private$.slurm_cpus_per_task),
           character(0L),
-          paste0("#SBATCH --cpus-per-task=", self$slurm_cpus_per_task)
+          paste0("#SBATCH --cpus-per-task=", private$.slurm_cpus_per_task)
         ),
         if_any(
-          is.null(self$slurm_time_minutes),
+          is.null(private$.slurm_time_minutes),
           character(0L),
-          paste0("#SBATCH --time=", self$slurm_time_minutes)
+          paste0("#SBATCH --time=", private$.slurm_time_minutes)
         ),
         if_any(
-          is.null(self$slurm_partition),
+          is.null(private$.slurm_partition),
           character(0L),
-          paste0("#SBATCH --partition=", self$slurm_partition)
+          paste0("#SBATCH --partition=", private$.slurm_partition)
         ),
         private$.script_lines
       )
