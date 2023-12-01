@@ -39,7 +39,8 @@ test_that("SGE subclass mock job creates a tempdir() job script", {
     worker = 1L,
     instance = "instance"
   )
-  x$workers$handle[[1L]] <- handle
+  private <- crew_private(x)
+  private$.workers$handle[[1L]] <- handle
   expect_false(is.null(x$prefix))
   script <- path_script(
     dir = tempdir(),
@@ -103,7 +104,8 @@ test_that("SGE subclass mock job creates a custom job script", {
     worker = 1L,
     instance = "instance"
   )
-  x$workers$handle[[1L]] <- handle
+  private <- crew_private(x)
+  private$.workers$handle[[1L]] <- handle
   expect_false(is.null(x$prefix))
   script <- path_script(
     dir = dir,

@@ -23,8 +23,9 @@ test_that("invalid crew_launcher_pbs(): pbs field", {
 })
 
 test_that("invalid crew_launcher_pbs(): non-pbs field", {
+  skip_on_cran()
   x <- crew_launcher_pbs()
-  x$name <- - 1L
+  x$set_name(- 1L)
   expect_error(x$validate(), class = "crew_error")
 })
 

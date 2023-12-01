@@ -21,8 +21,9 @@ test_that("invalid crew_launcher_slurm(): SLURM field", {
 })
 
 test_that("invalid crew_launcher_slurm(): non-SLURM field", {
+  skip_on_cran()
   x <- crew_launcher_slurm()
-  x$name <- - 1L
+  x$set_name(- 1L)
   expect_error(x$validate(), class = "crew_error")
 })
 

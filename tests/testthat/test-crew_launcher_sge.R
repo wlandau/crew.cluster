@@ -26,8 +26,9 @@ test_that("invalid crew_launcher_sge(): SGE field", {
 })
 
 test_that("invalid crew_launcher_sge(): non-SGE field", {
+  skip_on_cran()
   x <- crew_launcher_sge()
-  x$name <- - 1L
+  x$set_name(- 1L)
   expect_error(x$validate(), class = "crew_error")
 })
 
