@@ -1,4 +1,4 @@
-# crew.cluster 0.1.3.9002 (development)
+# crew.cluster 0.1.4
 
 * Refactor methods for development `crew`.
 * Encapsulate non-function `R6` members in the `private` list.
