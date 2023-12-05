@@ -57,7 +57,8 @@
 #'   `lsf_cores = NULL` omits this line.
 crew_launcher_lsf <- function(
   name = NULL,
-  seconds_interval = NULL,
+  seconds_interval = 0.5,
+  seconds_timeout = 60,
   seconds_launch = 86400,
   seconds_idle = Inf,
   seconds_wall = Inf,
@@ -81,18 +82,11 @@ crew_launcher_lsf <- function(
   lsf_memory_gigabytes_required = NULL,
   lsf_cores = NULL
 ) {
-  crew_deprecate(
-    name = "seconds_interval",
-    date = "2023-10-02",
-    version = "0.5.0.9003",
-    alternative = "none (no longer necessary)",
-    condition = "message",
-    value = seconds_interval,
-    frequency = "once"
-  )
   name <- as.character(name %|||% crew::crew_random_name())
   launcher <- crew_class_launcher_lsf$new(
     name = name,
+    seconds_interval = seconds_interval,
+    seconds_timeout = seconds_timeout,
     seconds_launch = seconds_launch,
     seconds_idle = seconds_idle,
     seconds_wall = seconds_wall,
@@ -168,6 +162,8 @@ crew_class_launcher_lsf <- R6::R6Class(
     #' @description LSF launcher constructor.
     #' @return an LSF launcher object.
     #' @param name See [crew_launcher_lsf()].
+    #' @param seconds_interval See [crew_launcher_lsf()].
+    #' @param seconds_timeout See [crew_launcher_lsf()].
     #' @param seconds_launch See [crew_launcher_lsf()].
     #' @param seconds_idle See [crew_launcher_lsf()].
     #' @param seconds_wall See [crew_launcher_lsf()].
@@ -192,6 +188,8 @@ crew_class_launcher_lsf <- R6::R6Class(
     #' @param lsf_cores See [crew_launcher_lsf()].
     initialize = function(
       name = NULL,
+      seconds_interval = NULL,
+      seconds_timeout = NULL,
       seconds_launch = NULL,
       seconds_idle = NULL,
       seconds_wall = NULL,
@@ -217,6 +215,8 @@ crew_class_launcher_lsf <- R6::R6Class(
     ) {
       super$initialize(
         name = name,
+        seconds_interval = seconds_interval,
+        seconds_timeout = seconds_timeout,
         seconds_launch = seconds_launch,
         seconds_idle = seconds_idle,
         seconds_wall = seconds_wall,

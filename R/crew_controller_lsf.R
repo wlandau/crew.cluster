@@ -77,6 +77,8 @@ crew_controller_lsf <- function(
   )
   launcher <- crew_launcher_lsf(
     name = name,
+    seconds_interval = seconds_interval,
+    seconds_timeout = seconds_timeout,
     seconds_launch = seconds_launch,
     seconds_idle = seconds_idle,
     seconds_wall = seconds_wall,

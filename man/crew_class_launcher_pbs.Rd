@@ -115,6 +115,8 @@ PBS/TORQUE launcher constructor.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{crew_class_launcher_pbs$new(
   name = NULL,
+  seconds_interval = NULL,
+  seconds_timeout = NULL,
   seconds_launch = NULL,
   seconds_idle = NULL,
   seconds_wall = NULL,
@@ -145,6 +147,10 @@ PBS/TORQUE launcher constructor.
 \if{html}{\out{<div class="arguments">}}
 \describe{
 \item{\code{name}}{See \code{\link[=crew_launcher_pbs]{crew_launcher_pbs()}}.}
+
+\item{\code{seconds_interval}}{See \code{\link[=crew_launcher_slurm]{crew_launcher_slurm()}}.}
+
+\item{\code{seconds_timeout}}{See \code{\link[=crew_launcher_slurm]{crew_launcher_slurm()}}.}
 
 \item{\code{seconds_launch}}{See \code{\link[=crew_launcher_pbs]{crew_launcher_pbs()}}.}
 

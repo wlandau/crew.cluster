@@ -33,7 +33,8 @@
 #'   supports R through an environment module.
 crew_launcher_cluster <- function(
   name = NULL,
-  seconds_interval = 0.25,
+  seconds_interval = 0.5,
+  seconds_timeout = 60,
   seconds_launch = 86400,
   seconds_idle = Inf,
   seconds_wall = Inf,
@@ -55,6 +56,7 @@ crew_launcher_cluster <- function(
   launcher <- crew_class_launcher_cluster$new(
     name = name,
     seconds_interval = seconds_interval,
+    seconds_timeout = seconds_timeout,
     seconds_launch = seconds_launch,
     seconds_idle = seconds_idle,
     seconds_wall = seconds_wall,
@@ -126,6 +128,7 @@ crew_class_launcher_cluster <- R6::R6Class(
     #' @return An abstract launcher object.
     #' @param name See [crew_launcher_cluster()].
     #' @param seconds_interval See [crew_launcher_cluster()].
+    #' @param seconds_timeout See [crew_launcher_cluster()].
     #' @param seconds_launch See [crew_launcher_cluster()].
     #' @param seconds_idle See [crew_launcher_cluster()].
     #' @param seconds_wall See [crew_launcher_cluster()].
@@ -145,6 +148,7 @@ crew_class_launcher_cluster <- R6::R6Class(
     initialize = function(
       name = NULL,
       seconds_interval = NULL,
+      seconds_timeout = NULL,
       seconds_launch = NULL,
       seconds_idle = NULL,
       seconds_wall = NULL,
@@ -165,6 +169,7 @@ crew_class_launcher_cluster <- R6::R6Class(
       super$initialize(
         name = name,
         seconds_interval = seconds_interval,
+        seconds_timeout = seconds_timeout,
         seconds_launch = seconds_launch,
         seconds_idle = seconds_idle,
         seconds_wall = seconds_wall,

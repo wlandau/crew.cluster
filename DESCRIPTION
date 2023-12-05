@@ -42,7 +42,7 @@ Authors@R: c(
 Depends:
   R (>= 4.0.0)
 Imports:
-  crew (>= 0.6.0),
+  crew (>= 0.7.0),
   lifecycle,
   R6,
   rlang,

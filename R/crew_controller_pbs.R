@@ -74,6 +74,8 @@ crew_controller_pbs <- function(
   )
   launcher <- crew_launcher_pbs(
     name = name,
+    seconds_interval = seconds_interval,
+    seconds_timeout = seconds_timeout,
     seconds_launch = seconds_launch,
     seconds_idle = seconds_idle,
     seconds_wall = seconds_wall,
