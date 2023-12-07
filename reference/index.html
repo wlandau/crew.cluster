@@ -56,7 +56,7 @@
         <td><p>crew.cluster: crew launcher plugins for traditional high-performance
 computing clusters</p></td>
       </tr></tbody><tbody><tr><th colspan="2">
-          <h2 id="controllers">Controllers <a href="#controllers" class="anchor" aria-hidden="true"></a></h2>
+          <h2 id="lsf-plugin">LSf plugin <a href="#lsf-plugin" class="anchor" aria-hidden="true"></a></h2>
           <p class="section-desc"></p>
         </th>
       </tr></tbody><tbody><tr><td>
@@ -65,22 +65,70 @@ computing clusters</p></td>
         <td><p><a href="https://lifecycle.r-lib.org/articles/stages.html#experimental" class="external-link"><img src="figures/lifecycle-experimental.svg" alt="[Experimental]"></a> Create a controller with a
 LSF launcher.</p></td>
       </tr><tr><td>
+          <p><code><a href="crew_launcher_lsf.html">crew_launcher_lsf()</a></code> </p>
+        </td>
+        <td><p><a href="https://lifecycle.r-lib.org/articles/stages.html#experimental" class="external-link"><img src="figures/lifecycle-experimental.svg" alt="[Experimental]"></a> Create a launcher with
+LSF workers.</p></td>
+      </tr><tr><td>
+          <p><code><a href="crew_class_launcher_lsf.html">crew_class_launcher_lsf</a></code> </p>
+        </td>
+        <td><p><a href="https://lifecycle.r-lib.org/articles/stages.html#experimental" class="external-link"><img src="figures/lifecycle-experimental.svg" alt="[Experimental]"></a> LSF launcher class</p></td>
+      </tr></tbody><tbody><tr><th colspan="2">
+          <h2 id="pbs-plugin">PBS plugin <a href="#pbs-plugin" class="anchor" aria-hidden="true"></a></h2>
+          <p class="section-desc"></p>
+        </th>
+      </tr></tbody><tbody><tr><td>
           <p><code><a href="crew_controller_pbs.html">crew_controller_pbs()</a></code> </p>
         </td>
         <td><p><a href="https://lifecycle.r-lib.org/articles/stages.html#experimental" class="external-link"><img src="figures/lifecycle-experimental.svg" alt="[Experimental]"></a> Create a controller with a
 PBS/TORQUE launcher.</p></td>
       </tr><tr><td>
+          <p><code><a href="crew_launcher_pbs.html">crew_launcher_pbs()</a></code> </p>
+        </td>
+        <td><p><a href="https://lifecycle.r-lib.org/articles/stages.html#experimental" class="external-link"><img src="figures/lifecycle-experimental.svg" alt="[Experimental]"></a> Create a launcher with
+PBS or TORQUE workers.</p></td>
+      </tr><tr><td>
+          <p><code><a href="crew_class_launcher_pbs.html">crew_class_launcher_pbs</a></code> </p>
+        </td>
+        <td><p><a href="https://lifecycle.r-lib.org/articles/stages.html#maturing" class="external-link"><img src="figures/lifecycle-maturing.svg" alt="[Maturing]"></a> PBS/TORQUE launcher class</p></td>
+      </tr></tbody><tbody><tr><th colspan="2">
+          <h2 id="sge-plugin">SGE plugin <a href="#sge-plugin" class="anchor" aria-hidden="true"></a></h2>
+          <p class="section-desc"></p>
+        </th>
+      </tr></tbody><tbody><tr><td>
           <p><code><a href="crew_controller_sge.html">crew_controller_sge()</a></code> </p>
         </td>
         <td><p><a href="https://lifecycle.r-lib.org/articles/stages.html#maturing" class="external-link"><img src="figures/lifecycle-maturing.svg" alt="[Maturing]"></a> Create a controller with a
 Sun Grid Engine (SGE) launcher.</p></td>
       </tr><tr><td>
+          <p><code><a href="crew_launcher_sge.html">crew_launcher_sge()</a></code> </p>
+        </td>
+        <td><p><a href="https://lifecycle.r-lib.org/articles/stages.html#maturing" class="external-link"><img src="figures/lifecycle-maturing.svg" alt="[Maturing]"></a> Create a launcher with
+Sun Grid Engine (SGE) workers.</p></td>
+      </tr><tr><td>
+          <p><code><a href="crew_class_launcher_sge.html">crew_class_launcher_sge</a></code> </p>
+        </td>
+        <td><p><a href="https://lifecycle.r-lib.org/articles/stages.html#maturing" class="external-link"><img src="figures/lifecycle-maturing.svg" alt="[Maturing]"></a> SGE launcher class</p></td>
+      </tr></tbody><tbody><tr><th colspan="2">
+          <h2 id="slurm-plugin">SLURM plugin <a href="#slurm-plugin" class="anchor" aria-hidden="true"></a></h2>
+          <p class="section-desc"></p>
+        </th>
+      </tr></tbody><tbody><tr><td>
           <p><code><a href="crew_controller_slurm.html">crew_controller_slurm()</a></code> </p>
         </td>
         <td><p><a href="https://lifecycle.r-lib.org/articles/stages.html#experimental" class="external-link"><img src="figures/lifecycle-experimental.svg" alt="[Experimental]"></a> Create a controller with a
 SLURM launcher.</p></td>
+      </tr><tr><td>
+          <p><code><a href="crew_launcher_slurm.html">crew_launcher_slurm()</a></code> </p>
+        </td>
+        <td><p><a href="https://lifecycle.r-lib.org/articles/stages.html#experimental" class="external-link"><img src="figures/lifecycle-experimental.svg" alt="[Experimental]"></a> Create a launcher with
+SLURM workers.</p></td>
+      </tr><tr><td>
+          <p><code><a href="crew_class_launcher_slurm.html">crew_class_launcher_slurm</a></code> </p>
+        </td>
+        <td><p><a href="https://lifecycle.r-lib.org/articles/stages.html#experimental" class="external-link"><img src="figures/lifecycle-experimental.svg" alt="[Experimental]"></a> SLURM launcher class</p></td>
       </tr></tbody><tbody><tr><th colspan="2">
-          <h2 id="launchers">Launchers <a href="#launchers" class="anchor" aria-hidden="true"></a></h2>
+          <h2 id="abstract-cluster-plugin">Abstract cluster plugin <a href="#abstract-cluster-plugin" class="anchor" aria-hidden="true"></a></h2>
           <p class="section-desc"></p>
         </th>
       </tr></tbody><tbody><tr><td>
@@ -89,49 +137,9 @@ SLURM launcher.</p></td>
         <td><p><a href="https://lifecycle.r-lib.org/articles/stages.html#maturing" class="external-link"><img src="figures/lifecycle-maturing.svg" alt="[Maturing]"></a> Create an abstract cluster
 launcher object.</p></td>
       </tr><tr><td>
-          <p><code><a href="crew_launcher_lsf.html">crew_launcher_lsf()</a></code> </p>
-        </td>
-        <td><p><a href="https://lifecycle.r-lib.org/articles/stages.html#experimental" class="external-link"><img src="figures/lifecycle-experimental.svg" alt="[Experimental]"></a> Create a launcher with
-LSF workers.</p></td>
-      </tr><tr><td>
-          <p><code><a href="crew_launcher_pbs.html">crew_launcher_pbs()</a></code> </p>
-        </td>
-        <td><p><a href="https://lifecycle.r-lib.org/articles/stages.html#experimental" class="external-link"><img src="figures/lifecycle-experimental.svg" alt="[Experimental]"></a> Create a launcher with
-PBS or TORQUE workers.</p></td>
-      </tr><tr><td>
-          <p><code><a href="crew_launcher_sge.html">crew_launcher_sge()</a></code> </p>
-        </td>
-        <td><p><a href="https://lifecycle.r-lib.org/articles/stages.html#maturing" class="external-link"><img src="figures/lifecycle-maturing.svg" alt="[Maturing]"></a> Create a launcher with
-Sun Grid Engine (SGE) workers.</p></td>
-      </tr><tr><td>
-          <p><code><a href="crew_launcher_slurm.html">crew_launcher_slurm()</a></code> </p>
-        </td>
-        <td><p><a href="https://lifecycle.r-lib.org/articles/stages.html#experimental" class="external-link"><img src="figures/lifecycle-experimental.svg" alt="[Experimental]"></a> Create a launcher with
-SLURM workers.</p></td>
-      </tr></tbody><tbody><tr><th colspan="2">
-          <h2 id="launcher-classes">Launcher classes <a href="#launcher-classes" class="anchor" aria-hidden="true"></a></h2>
-          <p class="section-desc"></p>
-        </th>
-      </tr></tbody><tbody><tr><td>
           <p><code><a href="crew_class_launcher_cluster.html">crew_class_launcher_cluster</a></code> </p>
         </td>
         <td><p><a href="https://lifecycle.r-lib.org/articles/stages.html#maturing" class="external-link"><img src="figures/lifecycle-maturing.svg" alt="[Maturing]"></a> Abstract cluster launcher class</p></td>
-      </tr><tr><td>
-          <p><code><a href="crew_class_launcher_lsf.html">crew_class_launcher_lsf</a></code> </p>
-        </td>
-        <td><p><a href="https://lifecycle.r-lib.org/articles/stages.html#experimental" class="external-link"><img src="figures/lifecycle-experimental.svg" alt="[Experimental]"></a> LSF launcher class</p></td>
-      </tr><tr><td>
-          <p><code><a href="crew_class_launcher_pbs.html">crew_class_launcher_pbs</a></code> </p>
-        </td>
-        <td><p><a href="https://lifecycle.r-lib.org/articles/stages.html#maturing" class="external-link"><img src="figures/lifecycle-maturing.svg" alt="[Maturing]"></a> PBS/TORQUE launcher class</p></td>
-      </tr><tr><td>
-          <p><code><a href="crew_class_launcher_sge.html">crew_class_launcher_sge</a></code> </p>
-        </td>
-        <td><p><a href="https://lifecycle.r-lib.org/articles/stages.html#maturing" class="external-link"><img src="figures/lifecycle-maturing.svg" alt="[Maturing]"></a> SGE launcher class</p></td>
-      </tr><tr><td>
-          <p><code><a href="crew_class_launcher_slurm.html">crew_class_launcher_slurm</a></code> </p>
-        </td>
-        <td><p><a href="https://lifecycle.r-lib.org/articles/stages.html#experimental" class="external-link"><img src="figures/lifecycle-experimental.svg" alt="[Experimental]"></a> SLURM launcher class</p></td>
       </tr></tbody></table></div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
