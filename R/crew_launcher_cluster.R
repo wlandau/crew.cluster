@@ -1,7 +1,7 @@
 #' @title `r lifecycle::badge("maturing")` Create an abstract cluster
 #'   launcher object.
 #' @export
-#' @family launchers
+#' @family plugin_cluster
 #' @description Create an `R6` abstract cluster launcher object.
 #' @details This abstract class is used to develop specific launcher classes
 #'   for specific computing platforms.
@@ -80,7 +80,7 @@ crew_launcher_cluster <- function(
 
 #' @title `r lifecycle::badge("maturing")` Abstract cluster launcher class
 #' @export
-#' @family launchers
+#' @family plugin_cluster
 #' @description `R6` class to help develop specific cluster launcher plugins.
 #' @details See [crew_launcher_cluster()].
 #' @inheritSection crew.cluster-package Attribution

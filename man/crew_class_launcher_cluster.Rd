@@ -22,18 +22,10 @@ source code for additional attribution.
 }
 
 \seealso{
-Other launchers: 
-\code{\link{crew_class_launcher_lsf}},
-\code{\link{crew_class_launcher_pbs}},
-\code{\link{crew_class_launcher_sge}},
-\code{\link{crew_class_launcher_slurm}},
-\code{\link{crew_launcher_cluster}()},
-\code{\link{crew_launcher_lsf}()},
-\code{\link{crew_launcher_pbs}()},
-\code{\link{crew_launcher_sge}()},
-\code{\link{crew_launcher_slurm}()}
+Other plugin_cluster: 
+\code{\link{crew_launcher_cluster}()}
 }
-\concept{launchers}
+\concept{plugin_cluster}
 \section{Super class}{
 \code{\link[crew:crew_class_launcher]{crew::crew_class_launcher}} -> \code{crew_class_launcher_cluster}
 }
@@ -85,7 +77,6 @@ in job names.}
 <li><span class="pkg-link" data-pkg="crew" data-topic="crew_class_launcher" data-id="tally"><a href='../../crew/html/crew_class_launcher.html#method-crew_class_launcher-tally'><code>crew::crew_class_launcher$tally()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="crew" data-topic="crew_class_launcher" data-id="terminate"><a href='../../crew/html/crew_class_launcher.html#method-crew_class_launcher-terminate'><code>crew::crew_class_launcher$terminate()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="crew" data-topic="crew_class_launcher" data-id="terminate_workers"><a href='../../crew/html/crew_class_launcher.html#method-crew_class_launcher-terminate_workers'><code>crew::crew_class_launcher$terminate_workers()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="crew" data-topic="crew_class_launcher" data-id="throttle"><a href='../../crew/html/crew_class_launcher.html#method-crew_class_launcher-throttle'><code>crew::crew_class_launcher$throttle()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="crew" data-topic="crew_class_launcher" data-id="unlaunched"><a href='../../crew/html/crew_class_launcher.html#method-crew_class_launcher-unlaunched'><code>crew::crew_class_launcher$unlaunched()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="crew" data-topic="crew_class_launcher" data-id="wait"><a href='../../crew/html/crew_class_launcher.html#method-crew_class_launcher-wait'><code>crew::crew_class_launcher$wait()</code></a></span></li>
 </ul>

@@ -1,7 +1,7 @@
 #' @title `r lifecycle::badge("experimental")` Create a launcher with
 #'   PBS or TORQUE workers.
 #' @export
-#' @family launchers
+#' @family plugin_pbs
 #' @description Create an `R6` object to launch and maintain
 #'   workers as jobs on a PBS or TORQUE cluster.
 #' @details WARNING: the `crew.cluster` PBS plugin is experimental
@@ -123,7 +123,7 @@ crew_launcher_pbs <- function(
 
 #' @title `r lifecycle::badge("maturing")` PBS/TORQUE launcher class
 #' @export
-#' @family launchers
+#' @family plugin_pbs
 #' @description `R6` class to launch and manage PBS/TORQUE workers.
 #' @details See [crew_launcher_pbs()].
 #' @inheritSection crew.cluster-package Attribution

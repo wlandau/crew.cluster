@@ -212,15 +212,8 @@ source code for additional attribution.
 }
 
 \seealso{
-Other launchers: 
-\code{\link{crew_class_launcher_cluster}},
-\code{\link{crew_class_launcher_lsf}},
+Other plugin_pbs: 
 \code{\link{crew_class_launcher_pbs}},
-\code{\link{crew_class_launcher_sge}},
-\code{\link{crew_class_launcher_slurm}},
-\code{\link{crew_launcher_cluster}()},
-\code{\link{crew_launcher_lsf}()},
-\code{\link{crew_launcher_sge}()},
-\code{\link{crew_launcher_slurm}()}
+\code{\link{crew_controller_pbs}()}
 }
-\concept{launchers}
+\concept{plugin_pbs}

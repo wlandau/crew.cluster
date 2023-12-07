@@ -229,9 +229,8 @@ controller$terminate()
 }
 }
 \seealso{
-Other controllers: 
-\code{\link{crew_controller_lsf}()},
-\code{\link{crew_controller_pbs}()},
-\code{\link{crew_controller_sge}()}
+Other plugin_slurm: 
+\code{\link{crew_class_launcher_slurm}},
+\code{\link{crew_launcher_slurm}()}
 }
-\concept{controllers}
+\concept{plugin_slurm}

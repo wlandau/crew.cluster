@@ -242,9 +242,8 @@ controller$terminate()
 }
 }
 \seealso{
-Other controllers: 
-\code{\link{crew_controller_lsf}()},
-\code{\link{crew_controller_pbs}()},
-\code{\link{crew_controller_slurm}()}
+Other plugin_sge: 
+\code{\link{crew_class_launcher_sge}},
+\code{\link{crew_launcher_sge}()}
 }
-\concept{controllers}
+\concept{plugin_sge}

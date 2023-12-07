@@ -231,9 +231,8 @@ controller$terminate()
 }
 }
 \seealso{
-Other controllers: 
-\code{\link{crew_controller_lsf}()},
-\code{\link{crew_controller_sge}()},
-\code{\link{crew_controller_slurm}()}
+Other plugin_pbs: 
+\code{\link{crew_class_launcher_pbs}},
+\code{\link{crew_launcher_pbs}()}
 }
-\concept{controllers}
+\concept{plugin_pbs}

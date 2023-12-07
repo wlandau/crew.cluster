@@ -1,7 +1,7 @@
 #' @title `r lifecycle::badge('experimental')` Create a launcher with
 #'   SLURM workers.
 #' @export
-#' @family launchers
+#' @family plugin_slurm
 #' @description Create an `R6` object to launch and maintain
 #'   workers as SLURM jobs.
 #' @details WARNING: the `crew.cluster` SLURM plugin is experimental
@@ -115,7 +115,7 @@ crew_launcher_slurm <- function(
 
 #' @title `r lifecycle::badge("experimental")` SLURM launcher class
 #' @export
-#' @family launchers
+#' @family plugin_slurm
 #' @description `R6` class to launch and manage SLURM workers.
 #' @details See [crew_launcher_slurm()].
 #' @inheritSection crew.cluster-package Attribution
