@@ -1,6 +1,6 @@
 destination: docs/
 reference:
-- title: Help
+- title: Package help
   contents:
   - '`crew.cluster-package`'
 - title: LSf plugin
