@@ -80,7 +80,7 @@ controller$terminate()
 
 # Risks
 
-The risks of `crew.cluster` are the same as [those of `crew`](https://wlandau.github.io/crew/#risks), plus the risks of traditional high-performance computing environments. These distributed systems typically operate inside a firewall and trust the local network. It is your responsibility to assess the security of these systems and use `crew.cluster` in a safe manner. In addition, `crew.cluster` automatically launches jobs on the cluster scheduler, and it may not always be able to terminate leftover jobs. It is your responsibility to monitor your jobs an manually terminate jobs that `crew.cluster` may not be able to.
+The risks of `crew.cluster` are the same as [those of `crew`](https://wlandau.github.io/crew/#risks), plus the risks of traditional high-performance computing environments. These distributed systems typically operate inside a firewall and trust the local network. It is your responsibility to assess the security of these systems and use `crew.cluster` in a safe manner. In addition, `crew.cluster` automatically launches jobs on the cluster scheduler, and it may not always be able to terminate leftover jobs. It is your responsibility to monitor your jobs and manually terminate jobs that `crew.cluster` may not be able to.
 
 # Thanks
 
