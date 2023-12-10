@@ -1,3 +1,8 @@
+# crew.cluster 0.1.4.9000
+
+* Re-enable unit tests.
+* Require `crew` >= 0.7.0.
+
 # crew.cluster 0.1.4
 
 * Refactor methods for development `crew`.

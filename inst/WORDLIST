@@ -8,6 +8,10 @@ hpc
 http
 joss
 LFS
+lsf
+pbs
+sge
+slurm
 ’
 README
 reproducibly
