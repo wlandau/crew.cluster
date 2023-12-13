@@ -22,10 +22,10 @@ systems. Inspiration also comes from packages
 
 # Installation
 
-| Type        | Source     | Command                                                                   |
-|-------------|------------|---------------------------------------------------------------------------|
-| Release     | CRAN       | `install.packages("crew.cluster")`                                        |
-| Development | GitHub     | `remotes::install_github("wlandau/crew.cluster")`                         |
+| Type        | Source     | Command                                                                      |
+|-------------|------------|------------------------------------------------------------------------------|
+| Release     | CRAN       | `install.packages("crew.cluster")`                                           |
+| Development | GitHub     | `remotes::install_github("wlandau/crew.cluster")`                            |
 | Development | R-universe | `install.packages("crew.cluster", repos = "https://wlandau.r-universe.dev")` |
 
 # Documentation
@@ -99,8 +99,8 @@ It is your responsibility to assess the security of these systems and
 use `crew.cluster` in a safe manner. In addition, `crew.cluster`
 automatically launches jobs on the cluster scheduler, and it may not
 always be able to terminate leftover jobs. It is your responsibility to
-monitor your jobs an manually terminate jobs that `crew.cluster` may not
-be able to.
+monitor your jobs and manually terminate jobs that `crew.cluster` may
+not be able to.
 
 # Thanks
 
@@ -112,7 +112,7 @@ be able to.
 - Thanks to [Michael Schubert](https://github.com/mschubert) for sharing
   the [template
   files](https://github.com/mschubert/clustermq/tree/master/inst) in
-  [`clustermq`](https://github.com/mschubert/clustermq) with the
+  [`clustermq`](https://github.com/mschubert/clustermq) under the
   permissive [Apache License
   2.0](https://github.com/mschubert/clustermq/blob/master/LICENSE).
   These scripts helped construct launcher plugins to clusters where
