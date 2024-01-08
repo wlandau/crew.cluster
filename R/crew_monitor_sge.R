@@ -98,15 +98,21 @@ crew_class_monitor_sge <- R6::R6Class(
       )
       text <- system2(
         "qstat",
-        args = c("-u", user, "-xml", args),
+        args = shQuote(c("-u", user, "-xml")),
         stdout = TRUE,
         stderr = if_any(private$.verbose, "", FALSE),
         wait = TRUE
       )
       xml <- xml2::read_xml(paste(text, collapse = "\n"))
-      jobs <- xml2::xml_find_all(xml, "//job_list")
-      job_list <- map(xml2::as_list(jobs), ~ map(.x, unlist))
-      vctrs::vec_rbind(job_list)
+      jobs <- xml2::as_list(xml2::xml_find_all(xml, "//job_list"))
+      job_list <- map(
+        jobs,
+        ~ tibble::new_tibble(map(.x, ~ unlist(.x) %||% NA), nrow = 1L)
+      )
+      out <- do.call(vctrs::vec_rbind, job_list)
+      names(out) <- tolower(names(out))
+      names(out) <- gsub("^jb_|^jat_", "", names(out))
+      out
       # nocov end
     },
     #' @description Terminate one or more SGE jobs.
