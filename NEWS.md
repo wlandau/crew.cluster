@@ -1,7 +1,9 @@
-# crew.cluster 0.1.4.9000
+# crew.cluster 0.1.4.9001
 
 * Re-enable unit tests.
 * Require `crew` >= 0.7.0.
+* Add a "monitor" class for SGE clusters to conveniently list and terminate jobs.
+* Deprecate `command_delete` in favor of `command_terminate`.
 
 # crew.cluster 0.1.4
 

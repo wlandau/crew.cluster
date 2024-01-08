@@ -71,3 +71,12 @@ test_that(".args_terminate()", {
     c("--name", shQuote("my_job"))
   )
 })
+
+test_that("deprecate command_delete", {
+  skip_on_cran()
+  expect_warning(
+    x <- crew_launcher_slurm(command_delete = "user_del"),
+    class = "crew_deprecate"
+  )
+  expect_equal(x$command_terminate, "user_del")
+})

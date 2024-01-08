@@ -120,7 +120,7 @@ LSF launcher constructor.
   tls = NULL,
   verbose = NULL,
   command_submit = NULL,
-  command_delete = NULL,
+  command_terminate = NULL,
   script_directory = NULL,
   script_lines = NULL,
   lsf_cwd = NULL,
@@ -167,7 +167,7 @@ LSF launcher constructor.
 
 \item{\code{command_submit}}{See \code{\link[=crew_launcher_lsf]{crew_launcher_lsf()}}.}
 
-\item{\code{command_delete}}{See \code{\link[=crew_launcher_lsf]{crew_launcher_lsf()}}.}
+\item{\code{command_terminate}}{See \code{\link[=crew_launcher_lsf]{crew_launcher_lsf()}}.}
 
 \item{\code{script_directory}}{See \code{\link[=crew_launcher_lsf]{crew_launcher_lsf()}}.}
 

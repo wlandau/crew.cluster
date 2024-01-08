@@ -36,7 +36,7 @@ Other plugin_cluster:
 
 \item{\code{command_submit}}{See \code{\link[=crew_launcher_cluster]{crew_launcher_cluster()}}.}
 
-\item{\code{command_delete}}{See \code{\link[=crew_launcher_cluster]{crew_launcher_cluster()}}.}
+\item{\code{command_terminate}}{See \code{\link[=crew_launcher_cluster]{crew_launcher_cluster()}}.}
 
 \item{\code{script_directory}}{See \code{\link[=crew_launcher_cluster]{crew_launcher_cluster()}}.}
 
@@ -103,7 +103,7 @@ Abstract launcher constructor.
   tls = NULL,
   verbose = NULL,
   command_submit = NULL,
-  command_delete = NULL,
+  command_terminate = NULL,
   script_directory = NULL,
   script_lines = NULL
 )}\if{html}{\out{</div>}}
@@ -144,7 +144,7 @@ Abstract launcher constructor.
 
 \item{\code{command_submit}}{See \code{\link[=crew_launcher_cluster]{crew_launcher_cluster()}}.}
 
-\item{\code{command_delete}}{See \code{\link[=crew_launcher_cluster]{crew_launcher_cluster()}}.}
+\item{\code{command_terminate}}{See \code{\link[=crew_launcher_cluster]{crew_launcher_cluster()}}.}
 
 \item{\code{script_directory}}{See \code{\link[=crew_launcher_cluster]{crew_launcher_cluster()}}.}
 

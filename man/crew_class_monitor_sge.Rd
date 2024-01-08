@@ -21,7 +21,7 @@ Other monitor:
 
 \item{\code{command_list}}{See \code{\link[=crew_monitor_sge]{crew_monitor_sge()}}.}
 
-\item{\code{command_delete}}{See \code{\link[=crew_monitor_sge]{crew_monitor_sge()}}.}
+\item{\code{command_terminate}}{See \code{\link[=crew_monitor_sge]{crew_monitor_sge()}}.}
 }
 \if{html}{\out{</div>}}
 }
@@ -43,7 +43,7 @@ SGE monitor constructor.
 \if{html}{\out{<div class="r">}}\preformatted{crew_class_monitor_sge$new(
   verbose = NULL,
   command_list = NULL,
-  command_delete = NULL
+  command_terminate = NULL
 )}\if{html}{\out{</div>}}
 }
 
@@ -54,7 +54,7 @@ SGE monitor constructor.
 
 \item{\code{command_list}}{See \code{\link[=crew_monitor_sge]{crew_monitor_sge()}}.}
 
-\item{\code{command_delete}}{See \code{\link[=crew_monitor_sge]{crew_monitor_sge()}}.}
+\item{\code{command_terminate}}{See \code{\link[=crew_monitor_sge]{crew_monitor_sge()}}.}
 }
 \if{html}{\out{</div>}}
 }

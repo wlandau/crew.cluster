@@ -119,7 +119,7 @@ SLURM launcher constructor.
   tls = NULL,
   verbose = NULL,
   command_submit = NULL,
-  command_delete = NULL,
+  command_terminate = NULL,
   script_directory = NULL,
   script_lines = NULL,
   slurm_log_output = NULL,
@@ -166,7 +166,7 @@ SLURM launcher constructor.
 
 \item{\code{command_submit}}{See \code{\link[=crew_launcher_sge]{crew_launcher_sge()}}.}
 
-\item{\code{command_delete}}{See \code{\link[=crew_launcher_sge]{crew_launcher_sge()}}.}
+\item{\code{command_terminate}}{See \code{\link[=crew_launcher_sge]{crew_launcher_sge()}}.}
 
 \item{\code{script_directory}}{See \code{\link[=crew_launcher_sge]{crew_launcher_sge()}}.}
 

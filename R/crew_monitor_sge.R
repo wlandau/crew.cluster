@@ -8,12 +8,12 @@
 crew_monitor_sge <- function(
   verbose = TRUE,
   command_list = as.character(Sys.which("qstat")),
-  command_delete = as.character(Sys.which("qdel"))
+  command_terminate = as.character(Sys.which("qdel"))
 ) {
   out <- crew_class_monitor_sge$new(
     verbose = verbose,
     command_list = command_list,
-    command_delete = command_delete
+    command_terminate = command_terminate
   )
   out$validate()
   out
@@ -30,7 +30,7 @@ crew_class_monitor_sge <- R6::R6Class(
   private = list(
     .verbose = NULL,
     .command_list = NULL,
-    .command_delete = NULL
+    .command_terminate = NULL
   ),
   active = list(
     #' @field verbose See [crew_monitor_sge()].
@@ -41,9 +41,9 @@ crew_class_monitor_sge <- R6::R6Class(
     command_list = function() {
       .subset2(private, ".command_list")
     },
-    #' @field command_delete See [crew_monitor_sge()].
-    command_delete = function() {
-      .subset2(private, ".command_delete")
+    #' @field command_terminate See [crew_monitor_sge()].
+    command_terminate = function() {
+      .subset2(private, ".command_terminate")
     }
   ),
   public = list(
@@ -51,15 +51,15 @@ crew_class_monitor_sge <- R6::R6Class(
     #' @return an SGE monitor object.
     #' @param verbose See [crew_monitor_sge()].
     #' @param command_list See [crew_monitor_sge()].
-    #' @param command_delete See [crew_monitor_sge()].
+    #' @param command_terminate See [crew_monitor_sge()].
     initialize = function(
       verbose = NULL,
       command_list = NULL,
-      command_delete = NULL
+      command_terminate = NULL
     ) {
       private$.verbose <- verbose
       private$.command_list <- command_list
-      private$.command_delete <- command_delete
+      private$.command_terminate <- command_terminate
     },
     #' @description Validate the monitor.
     #' @return `NULL` (invisibly).
@@ -69,7 +69,7 @@ crew_class_monitor_sge <- R6::R6Class(
         isTRUE(.) || isFALSE(.),
         message = "'verbose' must be TRUE or FALSE."
       )
-      for (field in c(".command_delete", ".command_list")) {
+      for (field in c(".command_terminate", ".command_list")) {
         crew::crew_assert(
           private[[field]],
           is.character(.),
@@ -137,7 +137,7 @@ crew_class_monitor_sge <- R6::R6Class(
       args <- shQuote(if_any(all, c("-u", ps::ps_username()), jobs))
       stream <- if_any(private$.verbose, "", FALSE)
       system2(
-        command = private$.command_delete,
+        command = private$.command_terminate,
         args = args,
         stdout = stream,
         stderr = stream,

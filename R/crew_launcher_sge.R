@@ -79,7 +79,8 @@ crew_launcher_sge <- function(
   tls = crew::crew_tls(mode = "automatic"),
   verbose = FALSE,
   command_submit = as.character(Sys.which("qsub")),
-  command_delete = as.character(Sys.which("qdel")),
+  command_terminate = as.character(Sys.which("qdel")),
+  command_delete = NULL,
   script_directory = tempdir(),
   script_lines = character(0L),
   sge_cwd = TRUE,
@@ -93,6 +94,15 @@ crew_launcher_sge <- function(
   sge_gpu = NULL
 ) {
   name <- as.character(name %|||% crew::crew_random_name())
+  if (!is.null(command_delete)) {
+    crew::crew_deprecate(
+      name = "command_delete",
+      date = "2023-01-08",
+      version = "0.1.4.9001",
+      alternative = "command_terminate"
+    )
+    command_terminate <- command_delete
+  }
   launcher <- crew_class_launcher_sge$new(
     name = name,
     seconds_interval = seconds_interval,
@@ -110,7 +120,7 @@ crew_launcher_sge <- function(
     tls = tls,
     verbose = verbose,
     command_submit = command_submit,
-    command_delete = command_delete,
+    command_terminate = command_terminate,
     script_directory = script_directory,
     script_lines = script_lines,
     sge_cwd = sge_cwd,
@@ -205,7 +215,7 @@ crew_class_launcher_sge <- R6::R6Class(
     #' @param tls See [crew_launcher_sge()].
     #' @param verbose See [crew_launcher_sge()].
     #' @param command_submit See [crew_launcher_sge()].
-    #' @param command_delete See [crew_launcher_sge()].
+    #' @param command_terminate See [crew_launcher_sge()].
     #' @param script_directory See [crew_launcher_sge()].
     #' @param script_lines See [crew_launcher_sge()].
     #' @param sge_cwd See [crew_launcher_sge()].
@@ -234,7 +244,7 @@ crew_class_launcher_sge <- R6::R6Class(
       tls = NULL,
       verbose = NULL,
       command_submit = NULL,
-      command_delete = NULL,
+      command_terminate = NULL,
       script_directory = NULL,
       script_lines = NULL,
       sge_cwd = NULL,
@@ -264,7 +274,7 @@ crew_class_launcher_sge <- R6::R6Class(
         tls = tls,
         verbose = verbose,
         command_submit = command_submit,
-        command_delete = command_delete,
+        command_terminate = command_terminate,
         script_directory = script_directory,
         script_lines = script_lines
       )

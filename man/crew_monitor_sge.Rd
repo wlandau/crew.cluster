@@ -7,7 +7,7 @@
 crew_monitor_sge(
   verbose = TRUE,
   command_list = as.character(Sys.which("qstat")),
-  command_delete = as.character(Sys.which("qdel"))
+  command_terminate = as.character(Sys.which("qdel"))
 )
 }
 \arguments{
@@ -17,12 +17,12 @@ when submitting worker.}
 \item{command_list}{Character of length 1,
 file path to the executable to list jobs.}
 
-\item{command_delete}{Character of length 1,
-file path to the executable to delete a worker job.
+\item{command_terminate}{Character of length 1,
+file path to the executable to terminate a worker job.
 Set to \code{""} to skip manually terminating the worker.
 Unless there is an issue with the platform,
 the job should still exit thanks to the NNG-powered network programming
-capabilities of \code{mirai}. Still, if you set \code{command_delete = ""},
+capabilities of \code{mirai}. Still, if you set \code{command_terminate = ""},
 you are assuming extra responsibility for manually monitoring
 your jobs on the cluster and manually terminating jobs as appropriate.}
 }

@@ -11,14 +11,16 @@
 #'   when submitting worker.
 #' @param command_submit Character of length 1,
 #'   file path to the executable to submit a worker job.
-#' @param command_delete Character of length 1,
-#'   file path to the executable to delete a worker job.
+#' @param command_terminate Character of length 1,
+#'   file path to the executable to terminate a worker job.
 #'   Set to `""` to skip manually terminating the worker.
 #'   Unless there is an issue with the platform,
 #'   the job should still exit thanks to the NNG-powered network programming
-#'   capabilities of `mirai`. Still, if you set `command_delete = ""`,
+#'   capabilities of `mirai`. Still, if you set `command_terminate = ""`,
 #'   you are assuming extra responsibility for manually monitoring
 #'   your jobs on the cluster and manually terminating jobs as appropriate.
+#' @param command_delete Deprecated on 2024-01-08 (version 0.1.4.9001).
+#'   Use `command_terminate` instead.
 #' @param script_directory Character of length 1, directory path to the
 #'   job scripts. Just before each job submission, a job script
 #'   is created in this folder. Script base names are unique to each
@@ -48,11 +50,21 @@ crew_launcher_cluster <- function(
   tls = crew::crew_tls(mode = "automatic"),
   verbose = FALSE,
   command_submit = "",
-  command_delete = "",
+  command_terminate = "",
+  command_delete = NULL,
   script_directory = tempdir(),
   script_lines = character(0L)
 ) {
   name <- as.character(name %|||% crew::crew_random_name())
+  if (!is.null(command_delete)) {
+    crew::crew_deprecate(
+      name = "command_delete",
+      date = "2023-01-08",
+      version = "0.1.4.9001",
+      alternative = "command_terminate"
+    )
+    command_terminate <- command_delete
+  }
   launcher <- crew_class_launcher_cluster$new(
     name = name,
     seconds_interval = seconds_interval,
@@ -70,7 +82,7 @@ crew_launcher_cluster <- function(
     tls = tls,
     verbose = verbose,
     command_submit = command_submit,
-    command_delete = command_delete,
+    command_terminate = command_terminate,
     script_directory = script_directory,
     script_lines = script_lines
   )
@@ -91,7 +103,7 @@ crew_class_launcher_cluster <- R6::R6Class(
   private = list(
     .verbose = NULL,
     .command_submit = NULL,
-    .command_delete = NULL,
+    .command_terminate = NULL,
     .script_directory = NULL,
     .script_lines = NULL,
     .prefix = NULL,
@@ -111,9 +123,9 @@ crew_class_launcher_cluster <- R6::R6Class(
     command_submit = function() {
       .subset2(private, ".command_submit")
     },
-    #' @field command_delete See [crew_launcher_cluster()].
-    command_delete = function() {
-      .subset2(private, ".command_delete")
+    #' @field command_terminate See [crew_launcher_cluster()].
+    command_terminate = function() {
+      .subset2(private, ".command_terminate")
     },
     #' @field script_directory See [crew_launcher_cluster()].
     script_directory = function() {
@@ -148,7 +160,7 @@ crew_class_launcher_cluster <- R6::R6Class(
     #' @param tls See [crew_launcher_cluster()].
     #' @param verbose See [crew_launcher_cluster()].
     #' @param command_submit See [crew_launcher_cluster()].
-    #' @param command_delete See [crew_launcher_cluster()].
+    #' @param command_terminate See [crew_launcher_cluster()].
     #' @param script_directory See [crew_launcher_cluster()].
     #' @param script_lines See [crew_launcher_cluster()].
     initialize = function(
@@ -168,7 +180,7 @@ crew_class_launcher_cluster <- R6::R6Class(
       tls = NULL,
       verbose = NULL,
       command_submit = NULL,
-      command_delete = NULL,
+      command_terminate = NULL,
       script_directory = NULL,
       script_lines = NULL
     ) {
@@ -190,7 +202,7 @@ crew_class_launcher_cluster <- R6::R6Class(
       )
       private$.verbose <- verbose
       private$.command_submit <- command_submit
-      private$.command_delete <- command_delete
+      private$.command_terminate <- command_terminate
       private$.script_directory <- script_directory
       private$.script_lines <- script_lines
     },
@@ -269,9 +281,9 @@ crew_class_launcher_cluster <- R6::R6Class(
     #'   returned by `launch_worker()`.
     terminate_worker = function(handle) {
       unlink(handle$script)
-      if (nzchar(private$.command_delete)) {
+      if (nzchar(private$.command_terminate)) {
         system2(
-          command = private$.command_delete,
+          command = private$.command_terminate,
           args = private$.args_terminate(name = handle$name),
           stdout = if_any(private$.verbose, "", FALSE),
           stderr = if_any(private$.verbose, "", FALSE),

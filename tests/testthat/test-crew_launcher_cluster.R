@@ -13,7 +13,7 @@ test_that("bad field in cluster launcher object", {
 test_that("active bindings", {
   x <- crew_launcher_cluster()
   expect_false(x$verbose)
-  expect_equal(x$command_delete, "")
+  expect_equal(x$command_terminate, "")
   expect_equal(x$script_lines, character(0L))
 })
 
@@ -22,7 +22,7 @@ test_that("SGE subclass mock job creates a tempdir() job script", {
   skip_on_os("windows")
   x <- crew_launcher_sge(
     command_submit = "cat",
-    command_delete = "echo",
+    command_terminate = "echo",
     script_lines = c("module load R", "echo 'start'"),
     sge_cwd = TRUE,
     sge_envvars = TRUE,
@@ -86,7 +86,7 @@ test_that("SGE subclass mock job creates a custom job script", {
   dir <- file.path(tempfile(), basename(tempfile()), basename(tempfile()))
   x <- crew_launcher_sge(
     command_submit = "cat",
-    command_delete = "echo",
+    command_terminate = "echo",
     script_directory = dir,
     script_lines = c("module load R", "echo 'start'"),
     sge_cwd = TRUE,
@@ -143,4 +143,13 @@ test_that("SGE subclass mock job creates a custom job script", {
   expect_equal(out[seq_along(exp)], exp)
   x$terminate_worker(x$workers$handle[[1L]])
   expect_false(file.exists(script))
+})
+
+test_that("deprecate command_delete", {
+  skip_on_cran()
+  expect_warning(
+    x <- crew_launcher_cluster(command_delete = "user_del"),
+    class = "crew_deprecate"
+  )
+  expect_equal(x$command_terminate, "user_del")
 })

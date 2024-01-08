@@ -82,3 +82,12 @@ test_that("crew_launcher_sge() script() all lines", {
   )
   expect_equal(out, exp)
 })
+
+test_that("deprecate command_delete", {
+  skip_on_cran()
+  expect_warning(
+    x <- crew_launcher_sge(command_delete = "user_del"),
+    class = "crew_deprecate"
+  )
+  expect_equal(x$command_terminate, "user_del")
+})
