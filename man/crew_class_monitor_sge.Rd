@@ -112,7 +112,9 @@ Terminate one or more SGE jobs.
 Ignored if \code{all} is set to \code{TRUE}.}
 
 \item{\code{all}}{Logical of length 1, whether to terminate all the jobs
-under your user name. If \code{TRUE}, the \code{jobs} argument is ignored.}
+under your user name. This terminates ALL your SGE jobs,
+regardless of whether \code{crew.cluster} launched them,
+so use with caution!}
 }
 \if{html}{\out{</div>}}
 }

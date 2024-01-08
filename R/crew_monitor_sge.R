@@ -120,7 +120,9 @@ crew_class_monitor_sge <- R6::R6Class(
     #' @param jobs Character vector of job names or job IDs to terminate.
     #'   Ignored if `all` is set to `TRUE`.
     #' @param all Logical of length 1, whether to terminate all the jobs
-    #'   under your user name. If `TRUE`, the `jobs` argument is ignored.
+    #'   under your user name. This terminates ALL your SGE jobs,
+    #'   regardless of whether `crew.cluster` launched them,
+    #'   so use with caution!
     terminate = function(jobs = NULL, all = FALSE) {
       # Cannot be tested with automated tests.
       # Tested in tests/sge/monitor.R.

@@ -73,6 +73,28 @@ Remember to terminate the controller when you are done.
 controller$terminate()
 ```
 
+# Monitoring
+
+To manage resource usage, you may choose to list and manually terminate cluster jobs using `crew_monitor_sge()` and other supported monitors. Example for SGE:
+
+```{r}
+monitor <- crew_monitor_sge()
+job_list <- monitor$jobs()
+job_list
+#> # A tibble: 2 × 9
+#>   job_number prio    name    owner state start_time queue_name jclass_name slots
+#>   <chr>      <chr>   <chr>   <chr> <chr> <chr>      <chr>      <lgl>       <chr>
+#> 1 131853812  0.05000 crew-m… USER… r     2024-01-0… all.norma… NA          1    
+#> 2 131853813  0.05000 crew-m… USER… r     2024-01-0… all.norma… NA          1
+monitor$terminate(jobs = job_list$job_number)
+#> USER has registered the job 131853812 for deletion
+#> USER has registered the job 131853813 for deletion
+monitor$jobs()
+#> data frame with 0 columns and 0 rows
+```
+
+`monitor$terminate(all = TRUE)` terminates all your SGE jobs, regardless of whether `crew.cluster` created them.
+
 # Tips
 
 * `crew.cluster` submits jobs over the local network using system calls to the resource manager (e.g SGE or SLURM). Please invoke `crew.cluster` on a node of the cluster, either a login node (head node) or a compute node.
