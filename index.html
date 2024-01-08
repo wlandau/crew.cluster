@@ -55,7 +55,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">crew.cluster</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.4.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.4.9001</span>
       </span>
     </div>
 
@@ -162,6 +162,26 @@
 <code class="sourceCode R"><span><span class="va">controller</span><span class="op">$</span><span class="fu">terminate</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level1">
+<h1 id="monitoring">Monitoring<a class="anchor" aria-label="anchor" href="#monitoring"></a>
+</h1>
+<p>To manage resource usage, you may choose to list and manually terminate cluster jobs using <code><a href="reference/crew_monitor_sge.html">crew_monitor_sge()</a></code> and other supported monitors. Example for SGE:</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">monitor</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/crew_monitor_sge.html">crew_monitor_sge</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="va">job_list</span> <span class="op">&lt;-</span> <span class="va">monitor</span><span class="op">$</span><span class="fu">jobs</span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="va">job_list</span></span>
+<span><span class="co">#&gt; # A tibble: 2 × 9</span></span>
+<span><span class="co">#&gt;   job_number prio    name    owner state start_time queue_name jclass_name slots</span></span>
+<span><span class="co">#&gt;   &lt;chr&gt;      &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;lgl&gt;       &lt;chr&gt;</span></span>
+<span><span class="co">#&gt; 1 131853812  0.05000 crew-m… USER… r     2024-01-0… all.norma… NA          1    </span></span>
+<span><span class="co">#&gt; 2 131853813  0.05000 crew-m… USER… r     2024-01-0… all.norma… NA          1</span></span>
+<span><span class="va">monitor</span><span class="op">$</span><span class="fu">terminate</span><span class="op">(</span>jobs <span class="op">=</span> <span class="va">job_list</span><span class="op">$</span><span class="va">job_number</span><span class="op">)</span></span>
+<span><span class="co">#&gt; USER has registered the job 131853812 for deletion</span></span>
+<span><span class="co">#&gt; USER has registered the job 131853813 for deletion</span></span>
+<span><span class="va">monitor</span><span class="op">$</span><span class="fu">jobs</span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; data frame with 0 columns and 0 rows</span></span></code></pre></div>
+<p><code>monitor$terminate(all = TRUE)</code> terminates all your SGE jobs, regardless of whether <code>crew.cluster</code> created them.</p>
+</div>
+<div class="section level1">
 <h1 id="tips">Tips<a class="anchor" aria-label="anchor" href="#tips"></a>
 </h1>
 <ul>
@@ -192,7 +212,7 @@
 <div class="section level1">
 <h1 id="citation">Citation<a class="anchor" aria-label="anchor" href="#citation"></a>
 </h1>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/citation.html" class="external-link">citation</a></span><span class="op">(</span><span class="st">"crew.cluster"</span><span class="op">)</span></span></code></pre></div>
 </div>
 
