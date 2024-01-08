@@ -94,7 +94,13 @@ crew_class_launcher_cluster <- R6::R6Class(
     .command_delete = NULL,
     .script_directory = NULL,
     .script_lines = NULL,
-    .prefix = NULL
+    .prefix = NULL,
+    .args_launch = function(script) {
+      shQuote(script)
+    },
+    .args_terminate = function(name) {
+      shQuote(name)
+    }
   ),
   active = list(
     #' @field verbose See [crew_launcher_cluster()].
@@ -250,7 +256,7 @@ crew_class_launcher_cluster <- R6::R6Class(
       writeLines(text = lines, con = script)
       system2(
         command = private$.command_submit,
-        args = self$args_launch(script = script),
+        args = private$.args_launch(script = script),
         stdout = if_any(private$.verbose, "", FALSE),
         stderr = if_any(private$.verbose, "", FALSE),
         wait = FALSE
@@ -266,29 +272,13 @@ crew_class_launcher_cluster <- R6::R6Class(
       if (nzchar(private$.command_delete)) {
         system2(
           command = private$.command_delete,
-          args = self$args_terminate(name = handle$name),
+          args = private$.args_terminate(name = handle$name),
           stdout = if_any(private$.verbose, "", FALSE),
           stderr = if_any(private$.verbose, "", FALSE),
           wait = FALSE
         )
       }
       invisible()
-    },
-    #' @description Worker launch arguments.
-    #' @return Character vector of arguments to the command that
-    #'   launches a worker.
-    #' @param script Character of length 1, path to the job script for
-    #'   the scheduler.
-    args_launch = function(script) {
-      shQuote(script)
-    },
-    #' @description Worker termination arguments.
-    #' @return Character vector of arguments to the command that
-    #'   terminates a worker.
-    #' @param name Character of length 1, name of the job of the worker
-    #'   on the scheduler.
-    args_terminate = function(name) {
-      shQuote(name)
     }
   )
 )

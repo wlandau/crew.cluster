@@ -6,7 +6,8 @@
 # crew.cluster 0.1.4
 
 * Refactor methods for development `crew`.
-* Encapsulate non-function `R6` members in the `private` list.
+* Encapsulate non-function `R6` members inside the `private` list.
+* Encapsulate functions for launch/termination commands inside the `R6` `private` list.
 
 # crew.cluster 0.1.3
 

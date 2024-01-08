@@ -63,10 +63,11 @@ test_that("crew_launcher_slurm() script() all lines", {
   expect_equal(out, exp)
 })
 
-test_that("args_terminate()", {
+test_that(".args_terminate()", {
   x <- crew_launcher_slurm()
+  private <- crew_private(x)
   expect_equal(
-    x$args_terminate(name = "my_job"),
+    private$.args_terminate(name = "my_job"),
     c("--name", shQuote("my_job"))
   )
 })

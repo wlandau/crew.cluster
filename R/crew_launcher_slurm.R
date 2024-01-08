@@ -129,7 +129,10 @@ crew_class_launcher_slurm <- R6::R6Class(
     .slurm_memory_gigabytes_per_cpu = NULL,
     .slurm_cpus_per_task = NULL,
     .slurm_time_minutes = NULL,
-    .slurm_partition = NULL
+    .slurm_partition = NULL,
+    .args_terminate = function(name) {
+      c("--name", shQuote(name))
+    }
   ),
   active = list(
     #' @field slurm_log_output See [crew_launcher_slurm()].
@@ -340,14 +343,6 @@ crew_class_launcher_slurm <- R6::R6Class(
         ),
         private$.script_lines
       )
-    },
-    #' @description Worker termination arguments.
-    #' @return Character vector of arguments to the command that
-    #'   terminates a worker.
-    #' @param name Character of length 1, name of the job of the worker
-    #'   on the scheduler.
-    args_terminate = function(name) {
-      c("--name", shQuote(name))
     }
   )
 )

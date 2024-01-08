@@ -68,7 +68,6 @@ Other plugin_slurm:
 \item \href{#method-crew_class_launcher_slurm-new}{\code{crew_class_launcher_slurm$new()}}
 \item \href{#method-crew_class_launcher_slurm-validate}{\code{crew_class_launcher_slurm$validate()}}
 \item \href{#method-crew_class_launcher_slurm-script}{\code{crew_class_launcher_slurm$script()}}
-\item \href{#method-crew_class_launcher_slurm-args_terminate}{\code{crew_class_launcher_slurm$args_terminate()}}
 }
 }
 \if{html}{\out{
@@ -92,7 +91,6 @@ Other plugin_slurm:
 <li><span class="pkg-link" data-pkg="crew" data-topic="crew_class_launcher" data-id="terminate_workers"><a href='../../crew/html/crew_class_launcher.html#method-crew_class_launcher-terminate_workers'><code>crew::crew_class_launcher$terminate_workers()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="crew" data-topic="crew_class_launcher" data-id="unlaunched"><a href='../../crew/html/crew_class_launcher.html#method-crew_class_launcher-unlaunched'><code>crew::crew_class_launcher$unlaunched()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="crew" data-topic="crew_class_launcher" data-id="wait"><a href='../../crew/html/crew_class_launcher.html#method-crew_class_launcher-wait'><code>crew::crew_class_launcher$wait()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="crew.cluster" data-topic="crew_class_launcher_cluster" data-id="args_launch"><a href='../../crew.cluster/html/crew_class_launcher_cluster.html#method-crew_class_launcher_cluster-args_launch'><code>crew.cluster::crew_class_launcher_cluster$args_launch()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="crew.cluster" data-topic="crew_class_launcher_cluster" data-id="launch_worker"><a href='../../crew.cluster/html/crew_class_launcher_cluster.html#method-crew_class_launcher_cluster-launch_worker'><code>crew.cluster::crew_class_launcher_cluster$launch_worker()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="crew.cluster" data-topic="crew_class_launcher_cluster" data-id="terminate_worker"><a href='../../crew.cluster/html/crew_class_launcher_cluster.html#method-crew_class_launcher_cluster-terminate_worker'><code>crew.cluster::crew_class_launcher_cluster$terminate_worker()</code></a></span></li>
 </ul>
@@ -247,27 +245,5 @@ launcher$script(name = "my_job_name")
 
 }
 
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-crew_class_launcher_slurm-args_terminate"></a>}}
-\if{latex}{\out{\hypertarget{method-crew_class_launcher_slurm-args_terminate}{}}}
-\subsection{Method \code{args_terminate()}}{
-Worker termination arguments.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{crew_class_launcher_slurm$args_terminate(name)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{name}}{Character of length 1, name of the job of the worker
-on the scheduler.}
-}
-\if{html}{\out{</div>}}
-}
-\subsection{Returns}{
-Character vector of arguments to the command that
-terminates a worker.
-}
 }
 }

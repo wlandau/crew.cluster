@@ -130,7 +130,13 @@ crew_class_launcher_lsf <- R6::R6Class(
     .lsf_log_error = NULL,
     .lsf_memory_gigabytes_limit = NULL,
     .lsf_memory_gigabytes_required = NULL,
-    .lsf_cores = NULL
+    .lsf_cores = NULL,
+    .args_launch = function(script) {
+      c("<", shQuote(script))
+    },
+    .args_terminate = function(name) {
+      c("-J", shQuote(name))
+    }
   ),
   active = list(
     #' @field lsf_cwd See [crew_launcher_lsf()].
@@ -337,22 +343,6 @@ crew_class_launcher_lsf <- R6::R6Class(
         ),
         private$.script_lines
       )
-    },
-    #' @description Worker launch arguments.
-    #' @return Character vector of arguments to the command that
-    #'   launches a worker.
-    #' @param script Character of length 1, path to the job script for
-    #'   the scheduler.
-    args_launch = function(script) {
-      c("<", shQuote(script))
-    },
-    #' @description Termination arguments.
-    #' @return Character vector of arguments to the command that
-    #'   terminates a worker.
-    #' @param name Character of length 1, name of the job of the worker
-    #'   on the scheduler.
-    args_terminate = function(name) {
-      c("-J", shQuote(name))
     }
   )
 )
