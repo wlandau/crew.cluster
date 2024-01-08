@@ -43,10 +43,13 @@ Depends:
   R (>= 4.0.0)
 Imports:
   crew (>= 0.7.0),
+  ps,
   lifecycle,
   R6,
   rlang,
-  utils
+  utils,
+  vctrs,
+  xml2
 Suggests:
   knitr (>= 1.30),
   markdown (>= 1.1),

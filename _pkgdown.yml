@@ -3,27 +3,29 @@ reference:
 - title: Package help
   contents:
   - '`crew.cluster-package`'
-- title: LSf plugin
+- title: LSf
   contents:
   - '`crew_controller_lsf`'
   - '`crew_launcher_lsf`'
   - '`crew_class_launcher_lsf`'
-- title: PBS plugin
+- title: PBS
   contents:
   - '`crew_controller_pbs`'
   - '`crew_launcher_pbs`'
   - '`crew_class_launcher_pbs`'
-- title: SGE plugin
+- title: SGE
   contents:
   - '`crew_controller_sge`'
   - '`crew_launcher_sge`'
   - '`crew_class_launcher_sge`'
-- title: SLURM plugin
+  - '`crew_monitor_sge`'
+  - '`crew_class_monitor_sge`'
+- title: SLURM
   contents:
   - '`crew_controller_slurm`'
   - '`crew_launcher_slurm`'
   - '`crew_class_launcher_slurm`'
-- title: Abstract cluster plugin
+- title: Abstract cluster launcher
   contents:
   - '`crew_launcher_cluster`'
   - '`crew_class_launcher_cluster`'

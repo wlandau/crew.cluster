@@ -30,9 +30,12 @@
 #' @importFrom crew crew_assert crew_class_launcher crew_deprecate
 #'   crew_launcher crew_random_name crew_tls
 #' @importFrom lifecycle badge
+#' @importFrom ps ps_username
 #' @importFrom R6 R6Class
-#' @importFrom rlang is_installed
+#' @importFrom rlang as_function is_installed
+#' @importFrom vctrs vec_rbind
 #' @importFrom utils globalVariables
+#' @importFrom xml2 as_list xml_find_all
 NULL
 
 utils::globalVariables(".")
