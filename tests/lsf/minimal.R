@@ -16,4 +16,3 @@ test_that("LSF minimal", {
   task <- controller$pop()
   expect_false(task$result[[1L]] == as.character(Sys.info()["nodename"]))
 })
-
