@@ -117,7 +117,6 @@ source code for additional attribution.</p>
 <ul><li><p><a href="#method-crew_class_launcher_slurm-new"><code>crew_class_launcher_slurm$new()</code></a></p></li>
 <li><p><a href="#method-crew_class_launcher_slurm-validate"><code>crew_class_launcher_slurm$validate()</code></a></p></li>
 <li><p><a href="#method-crew_class_launcher_slurm-script"><code>crew_class_launcher_slurm$script()</code></a></p></li>
-<li><p><a href="#method-crew_class_launcher_slurm-args_terminate"><code>crew_class_launcher_slurm$args_terminate()</code></a></p></li>
 </ul></div><p><details><summary>Inherited methods</summary><ul><li><span class="pkg-link" data-pkg="crew" data-topic="crew_class_launcher" data-id="active"><a href="https://wlandau.github.io/crew/reference/crew_class_launcher.html#method-active"><code>crew::crew_class_launcher$active()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="crew" data-topic="crew_class_launcher" data-id="booting"><a href="https://wlandau.github.io/crew/reference/crew_class_launcher.html#method-booting"><code>crew::crew_class_launcher$booting()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="crew" data-topic="crew_class_launcher" data-id="call"><a href="https://wlandau.github.io/crew/reference/crew_class_launcher.html#method-call"><code>crew::crew_class_launcher$call()</code></a></span></li>
@@ -136,7 +135,6 @@ source code for additional attribution.</p>
 <li><span class="pkg-link" data-pkg="crew" data-topic="crew_class_launcher" data-id="terminate_workers"><a href="https://wlandau.github.io/crew/reference/crew_class_launcher.html#method-terminate_workers"><code>crew::crew_class_launcher$terminate_workers()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="crew" data-topic="crew_class_launcher" data-id="unlaunched"><a href="https://wlandau.github.io/crew/reference/crew_class_launcher.html#method-unlaunched"><code>crew::crew_class_launcher$unlaunched()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="crew" data-topic="crew_class_launcher" data-id="wait"><a href="https://wlandau.github.io/crew/reference/crew_class_launcher.html#method-wait"><code>crew::crew_class_launcher$wait()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="crew.cluster" data-topic="crew_class_launcher_cluster" data-id="args_launch"><a href="crew_class_launcher_cluster.html#method-args_launch"><code>crew.cluster::crew_class_launcher_cluster$args_launch()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="crew.cluster" data-topic="crew_class_launcher_cluster" data-id="launch_worker"><a href="crew_class_launcher_cluster.html#method-launch_worker"><code>crew.cluster::crew_class_launcher_cluster$launch_worker()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="crew.cluster" data-topic="crew_class_launcher_cluster" data-id="terminate_worker"><a href="crew_class_launcher_cluster.html#method-terminate_worker"><code>crew.cluster::crew_class_launcher_cluster$terminate_worker()</code></a></span></li>
 </ul></details></p><hr><a id="method-crew_class_launcher_slurm-new"></a><div class="section">
@@ -333,28 +331,6 @@ the bottom of the script at launch time.</p>
 <span><span class="op">}</span></span></code></pre></div><p></p></div>
 </div>
 
-
-</div><p></p><hr><a id="method-crew_class_launcher_slurm-args_terminate"></a><div class="section">
-<h3 id="method-args-terminate-">Method <code>args_terminate()</code><a class="anchor" aria-label="anchor" href="#method-args-terminate-"></a></h3>
-<p>Worker termination arguments.</p><div class="section">
-<h4 id="usage-3">Usage<a class="anchor" aria-label="anchor" href="#usage-3"></a></h4>
-<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">crew_class_launcher_slurm</span><span class="op">$</span><span class="fu">args_terminate</span><span class="op">(</span><span class="va">name</span><span class="op">)</span></span></code></pre></div><p></p></div>
-</div>
-
-<div class="section">
-<h4 id="arguments-2">Arguments<a class="anchor" aria-label="anchor" href="#arguments-2"></a></h4>
-<p></p><div class="arguments"><dl><dt><code>name</code></dt>
-<dd><p>Character of length 1, name of the job of the worker
-on the scheduler.</p></dd>
-
-
-</dl><p></p></div>
-</div>
-<div class="section">
-<h4 id="returns-3">Returns<a class="anchor" aria-label="anchor" href="#returns-3"></a></h4>
-<p>Character vector of arguments to the command that
-terminates a worker.</p>
-</div>
 
 </div>
 

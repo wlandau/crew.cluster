@@ -117,8 +117,6 @@ source code for additional attribution.</p>
 <ul><li><p><a href="#method-crew_class_launcher_lsf-new"><code>crew_class_launcher_lsf$new()</code></a></p></li>
 <li><p><a href="#method-crew_class_launcher_lsf-validate"><code>crew_class_launcher_lsf$validate()</code></a></p></li>
 <li><p><a href="#method-crew_class_launcher_lsf-script"><code>crew_class_launcher_lsf$script()</code></a></p></li>
-<li><p><a href="#method-crew_class_launcher_lsf-args_launch"><code>crew_class_launcher_lsf$args_launch()</code></a></p></li>
-<li><p><a href="#method-crew_class_launcher_lsf-args_terminate"><code>crew_class_launcher_lsf$args_terminate()</code></a></p></li>
 </ul></div><p><details><summary>Inherited methods</summary><ul><li><span class="pkg-link" data-pkg="crew" data-topic="crew_class_launcher" data-id="active"><a href="https://wlandau.github.io/crew/reference/crew_class_launcher.html#method-active"><code>crew::crew_class_launcher$active()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="crew" data-topic="crew_class_launcher" data-id="booting"><a href="https://wlandau.github.io/crew/reference/crew_class_launcher.html#method-booting"><code>crew::crew_class_launcher$booting()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="crew" data-topic="crew_class_launcher" data-id="call"><a href="https://wlandau.github.io/crew/reference/crew_class_launcher.html#method-call"><code>crew::crew_class_launcher$call()</code></a></span></li>
@@ -334,50 +332,6 @@ the bottom of the script at launch time.</p>
 <span><span class="op">}</span></span></code></pre></div><p></p></div>
 </div>
 
-
-</div><p></p><hr><a id="method-crew_class_launcher_lsf-args_launch"></a><div class="section">
-<h3 id="method-args-launch-">Method <code>args_launch()</code><a class="anchor" aria-label="anchor" href="#method-args-launch-"></a></h3>
-<p>Worker launch arguments.</p><div class="section">
-<h4 id="usage-3">Usage<a class="anchor" aria-label="anchor" href="#usage-3"></a></h4>
-<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">crew_class_launcher_lsf</span><span class="op">$</span><span class="fu">args_launch</span><span class="op">(</span><span class="va">script</span><span class="op">)</span></span></code></pre></div><p></p></div>
-</div>
-
-<div class="section">
-<h4 id="arguments-2">Arguments<a class="anchor" aria-label="anchor" href="#arguments-2"></a></h4>
-<p></p><div class="arguments"><dl><dt><code>script</code></dt>
-<dd><p>Character of length 1, path to the job script for
-the scheduler.</p></dd>
-
-
-</dl><p></p></div>
-</div>
-<div class="section">
-<h4 id="returns-3">Returns<a class="anchor" aria-label="anchor" href="#returns-3"></a></h4>
-<p>Character vector of arguments to the command that
-launches a worker.</p>
-</div>
-
-</div><p></p><hr><a id="method-crew_class_launcher_lsf-args_terminate"></a><div class="section">
-<h3 id="method-args-terminate-">Method <code>args_terminate()</code><a class="anchor" aria-label="anchor" href="#method-args-terminate-"></a></h3>
-<p>Termination arguments.</p><div class="section">
-<h4 id="usage-4">Usage<a class="anchor" aria-label="anchor" href="#usage-4"></a></h4>
-<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">crew_class_launcher_lsf</span><span class="op">$</span><span class="fu">args_terminate</span><span class="op">(</span><span class="va">name</span><span class="op">)</span></span></code></pre></div><p></p></div>
-</div>
-
-<div class="section">
-<h4 id="arguments-3">Arguments<a class="anchor" aria-label="anchor" href="#arguments-3"></a></h4>
-<p></p><div class="arguments"><dl><dt><code>name</code></dt>
-<dd><p>Character of length 1, name of the job of the worker
-on the scheduler.</p></dd>
-
-
-</dl><p></p></div>
-</div>
-<div class="section">
-<h4 id="returns-4">Returns<a class="anchor" aria-label="anchor" href="#returns-4"></a></h4>
-<p>Character vector of arguments to the command that
-terminates a worker.</p>
-</div>
 
 </div>
 
