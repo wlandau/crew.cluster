@@ -1,4 +1,4 @@
-# crew.cluster 0.1.4.9001
+# crew.cluster 0.2.0
 
 * Re-enable unit tests.
 * Require `crew` >= 0.7.0.
