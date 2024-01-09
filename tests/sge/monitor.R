@@ -9,16 +9,21 @@ test_that("SGE monitor terminate one job at a time", {
   on.exit(controller$terminate())
   controller$start()
   controller$launch(n = 2L)
+  names <- vapply(
+    controller$launcher$workers$handle,
+    function(handle) handle$name,
+    FUN.VALUE = character(1L)
+  )
   monitor <- crew_monitor_sge(verbose = TRUE)
-  envir <- new.env(parent = emptyenv())
   crew::crew_retry(
-    ~ nrow(monitor$jobs()) > 1L,
+    ~ all(names %in% monitor$jobs()$name),
     seconds_interval = 1,
     seconds_timeout = 60,
     message = "could not submit jobs"
   )
   jobs <- monitor$jobs()
-  expect_true(nrow(jobs) > 1L)
+  jobs <- jobs[jobs$name %in% names, ]
+  expect_equal(nrow(jobs), 2L)
   expect_true(is.character(jobs$job_number))
   expect_false(anyNA(jobs$job_number))
   expect_true(all(nzchar(jobs$job_number)))
@@ -43,16 +48,21 @@ test_that("THIS TEST DELETES ALL USER JOBS! USE WITH CAUTION!", {
   on.exit(controller$terminate())
   controller$start()
   controller$launch(n = 2L)
+  names <- vapply(
+    controller$launcher$workers$handle,
+    function(handle) handle$name,
+    FUN.VALUE = character(1L)
+  )
   monitor <- crew_monitor_sge(verbose = TRUE)
-  envir <- new.env(parent = emptyenv())
   crew::crew_retry(
-    ~ nrow(monitor$jobs()) > 1L,
+    ~ all(names %in% monitor$jobs()$name),
     seconds_interval = 1,
     seconds_timeout = 60,
     message = "could not submit jobs"
   )
   jobs <- monitor$jobs()
-  expect_true(nrow(jobs) > 1L)
+  jobs <- jobs[jobs$name %in% names, ]
+  expect_equal(nrow(jobs), 2L)
   expect_true(is.character(jobs$job_number))
   expect_false(anyNA(jobs$job_number))
   expect_true(all(nzchar(jobs$job_number)))
