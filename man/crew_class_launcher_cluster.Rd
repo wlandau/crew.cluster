@@ -22,10 +22,13 @@ source code for additional attribution.
 }
 
 \seealso{
-Other plugin_cluster: 
-\code{\link{crew_launcher_cluster}()}
+Other cluster: 
+\code{\link{crew_class_monitor_cluster}},
+\code{\link{crew_launcher_cluster}()},
+\code{\link{crew_monitor_cluster}()}
 }
-\concept{plugin_cluster}
+\concept{cluster}
+\keyword{internal}
 \section{Super class}{
 \code{\link[crew:crew_class_launcher]{crew::crew_class_launcher}} -> \code{crew_class_launcher_cluster}
 }

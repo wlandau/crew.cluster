@@ -36,11 +36,11 @@ launcher$script(name = "my_job_name")
 }
 }
 \seealso{
-Other plugin_pbs: 
+Other pbs: 
 \code{\link{crew_controller_pbs}()},
 \code{\link{crew_launcher_pbs}()}
 }
-\concept{plugin_pbs}
+\concept{pbs}
 \section{Super classes}{
 \code{\link[crew:crew_class_launcher]{crew::crew_class_launcher}} -> \code{\link[crew.cluster:crew_class_launcher_cluster]{crew.cluster::crew_class_launcher_cluster}} -> \code{crew_class_launcher_pbs}
 }

@@ -10,71 +10,31 @@ SGE monitor \code{R6} class
 See \code{\link[=crew_monitor_sge]{crew_monitor_sge()}}.
 }
 \seealso{
-Other monitor: 
+Other sge: 
+\code{\link{crew_class_launcher_sge}},
+\code{\link{crew_controller_sge}()},
+\code{\link{crew_launcher_sge}()},
 \code{\link{crew_monitor_sge}()}
 }
-\concept{monitor}
-\section{Active bindings}{
-\if{html}{\out{<div class="r6-active-bindings">}}
-\describe{
-\item{\code{verbose}}{See \code{\link[=crew_monitor_sge]{crew_monitor_sge()}}.}
-
-\item{\code{command_list}}{See \code{\link[=crew_monitor_sge]{crew_monitor_sge()}}.}
-
-\item{\code{command_terminate}}{See \code{\link[=crew_monitor_sge]{crew_monitor_sge()}}.}
-}
-\if{html}{\out{</div>}}
+\concept{sge}
+\section{Super class}{
+\code{\link[crew.cluster:crew_class_monitor_cluster]{crew.cluster::crew_class_monitor_cluster}} -> \code{crew_class_monitor_sge}
 }
 \section{Methods}{
 \subsection{Public methods}{
 \itemize{
-\item \href{#method-crew_class_monitor_sge-new}{\code{crew_class_monitor_sge$new()}}
-\item \href{#method-crew_class_monitor_sge-validate}{\code{crew_class_monitor_sge$validate()}}
 \item \href{#method-crew_class_monitor_sge-jobs}{\code{crew_class_monitor_sge$jobs()}}
 \item \href{#method-crew_class_monitor_sge-terminate}{\code{crew_class_monitor_sge$terminate()}}
 }
 }
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-crew_class_monitor_sge-new"></a>}}
-\if{latex}{\out{\hypertarget{method-crew_class_monitor_sge-new}{}}}
-\subsection{Method \code{new()}}{
-SGE monitor constructor.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{crew_class_monitor_sge$new(
-  verbose = NULL,
-  command_list = NULL,
-  command_terminate = NULL
-)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{verbose}}{See \code{\link[=crew_monitor_sge]{crew_monitor_sge()}}.}
-
-\item{\code{command_list}}{See \code{\link[=crew_monitor_sge]{crew_monitor_sge()}}.}
-
-\item{\code{command_terminate}}{See \code{\link[=crew_monitor_sge]{crew_monitor_sge()}}.}
-}
-\if{html}{\out{</div>}}
-}
-\subsection{Returns}{
-an SGE monitor object.
-}
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-crew_class_monitor_sge-validate"></a>}}
-\if{latex}{\out{\hypertarget{method-crew_class_monitor_sge-validate}{}}}
-\subsection{Method \code{validate()}}{
-Validate the monitor.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{crew_class_monitor_sge$validate()}\if{html}{\out{</div>}}
-}
-
-\subsection{Returns}{
-\code{NULL} (invisibly).
-}
-}
+\if{html}{\out{
+<details open><summary>Inherited methods</summary>
+<ul>
+<li><span class="pkg-link" data-pkg="crew.cluster" data-topic="crew_class_monitor_cluster" data-id="initialize"><a href='../../crew.cluster/html/crew_class_monitor_cluster.html#method-crew_class_monitor_cluster-initialize'><code>crew.cluster::crew_class_monitor_cluster$initialize()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="crew.cluster" data-topic="crew_class_monitor_cluster" data-id="validate"><a href='../../crew.cluster/html/crew_class_monitor_cluster.html#method-crew_class_monitor_cluster-validate'><code>crew.cluster::crew_class_monitor_cluster$validate()</code></a></span></li>
+</ul>
+</details>
+}}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-crew_class_monitor_sge-jobs"></a>}}
 \if{latex}{\out{\hypertarget{method-crew_class_monitor_sge-jobs}{}}}

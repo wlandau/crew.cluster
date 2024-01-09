@@ -37,11 +37,11 @@ launcher$script(name = "my_job_name")
 }
 }
 \seealso{
-Other plugin_slurm: 
+Other slurm: 
 \code{\link{crew_controller_slurm}()},
 \code{\link{crew_launcher_slurm}()}
 }
-\concept{plugin_slurm}
+\concept{slurm}
 \section{Super classes}{
 \code{\link[crew:crew_class_launcher]{crew::crew_class_launcher}} -> \code{\link[crew.cluster:crew_class_launcher_cluster]{crew.cluster::crew_class_launcher_cluster}} -> \code{crew_class_launcher_slurm}
 }

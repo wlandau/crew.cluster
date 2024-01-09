@@ -36,11 +36,13 @@ launcher$script(name = "my_job_name")
 }
 }
 \seealso{
-Other plugin_sge: 
+Other sge: 
+\code{\link{crew_class_monitor_sge}},
 \code{\link{crew_controller_sge}()},
-\code{\link{crew_launcher_sge}()}
+\code{\link{crew_launcher_sge}()},
+\code{\link{crew_monitor_sge}()}
 }
-\concept{plugin_sge}
+\concept{sge}
 \section{Super classes}{
 \code{\link[crew:crew_class_launcher]{crew::crew_class_launcher}} -> \code{\link[crew.cluster:crew_class_launcher_cluster]{crew.cluster::crew_class_launcher_cluster}} -> \code{crew_class_launcher_sge}
 }

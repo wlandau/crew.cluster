@@ -222,8 +222,10 @@ source code for additional attribution.
 }
 
 \seealso{
-Other plugin_sge: 
+Other sge: 
 \code{\link{crew_class_launcher_sge}},
-\code{\link{crew_controller_sge}()}
+\code{\link{crew_class_monitor_sge}},
+\code{\link{crew_controller_sge}()},
+\code{\link{crew_monitor_sge}()}
 }
-\concept{plugin_sge}
+\concept{sge}

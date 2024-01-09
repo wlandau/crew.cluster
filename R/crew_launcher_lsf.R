@@ -1,7 +1,7 @@
 #' @title `r lifecycle::badge('experimental')` Create a launcher with
 #'   LSF workers.
 #' @export
-#' @family plugin_lsf
+#' @family lsf
 #' @description Create an `R6` object to launch and maintain
 #'   workers as LSF jobs.
 #' @details WARNING: the `crew.cluster` LSF plugin is experimental.
@@ -126,7 +126,7 @@ crew_launcher_lsf <- function(
 
 #' @title `r lifecycle::badge("experimental")` LSF launcher class
 #' @export
-#' @family plugin_lsf
+#' @family lsf
 #' @description `R6` class to launch and manage LSF workers.
 #' @details See [crew_launcher_lsf()].
 #' @inheritSection crew.cluster-package Attribution

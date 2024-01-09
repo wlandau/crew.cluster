@@ -208,8 +208,8 @@ source code for additional attribution.
 }
 
 \seealso{
-Other plugin_slurm: 
+Other slurm: 
 \code{\link{crew_class_launcher_slurm}},
 \code{\link{crew_controller_slurm}()}
 }
-\concept{plugin_slurm}
+\concept{slurm}

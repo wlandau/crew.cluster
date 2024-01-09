@@ -1,7 +1,7 @@
 #' @title `r lifecycle::badge("maturing")` Create a launcher with
 #'   Sun Grid Engine (SGE) workers.
 #' @export
-#' @family plugin_sge
+#' @family sge
 #' @description Create an `R6` object to launch and maintain
 #'   workers as Sun Grid Engine (SGE) jobs.
 #' @details To launch a Sun Grid Engine (SGE) worker, this launcher
@@ -139,7 +139,7 @@ crew_launcher_sge <- function(
 
 #' @title `r lifecycle::badge("maturing")` SGE launcher class
 #' @export
-#' @family plugin_sge
+#' @family sge
 #' @description `R6` class to launch and manage SGE workers.
 #' @details See [crew_launcher_sge()].
 #' @inheritSection crew.cluster-package Attribution

@@ -25,7 +25,3 @@ reference:
   - '`crew_controller_slurm`'
   - '`crew_launcher_slurm`'
   - '`crew_class_launcher_slurm`'
-- title: Abstract cluster launcher
-  contents:
-  - '`crew_launcher_cluster`'
-  - '`crew_class_launcher_cluster`'

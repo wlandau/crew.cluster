@@ -235,8 +235,8 @@ controller$terminate()
 }
 }
 \seealso{
-Other plugin_lsf: 
+Other lsf: 
 \code{\link{crew_class_launcher_lsf}},
 \code{\link{crew_launcher_lsf}()}
 }
-\concept{plugin_lsf}
+\concept{lsf}

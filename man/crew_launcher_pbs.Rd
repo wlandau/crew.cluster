@@ -216,8 +216,8 @@ source code for additional attribution.
 }
 
 \seealso{
-Other plugin_pbs: 
+Other pbs: 
 \code{\link{crew_class_launcher_pbs}},
 \code{\link{crew_controller_pbs}()}
 }
-\concept{plugin_pbs}
+\concept{pbs}

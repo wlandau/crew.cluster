@@ -149,7 +149,10 @@ source code for additional attribution.
 }
 
 \seealso{
-Other plugin_cluster: 
-\code{\link{crew_class_launcher_cluster}}
+Other cluster: 
+\code{\link{crew_class_launcher_cluster}},
+\code{\link{crew_class_monitor_cluster}},
+\code{\link{crew_monitor_cluster}()}
 }
-\concept{plugin_cluster}
+\concept{cluster}
+\keyword{internal}
