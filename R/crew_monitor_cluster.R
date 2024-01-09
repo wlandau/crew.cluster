@@ -2,6 +2,7 @@
 #'   cluster monitor object.
 #' @export
 #' @family cluster
+#' @keywords internal
 #' @description Create an abstract cluster monitor `R6` object.
 #' @inheritParams crew_launcher_cluster
 #' @param command_list Character of length 1,
@@ -23,6 +24,7 @@ crew_monitor_cluster <- function(
 #' @title `r lifecycle::badge("experimental")` Abstract cluster monitor class
 #' @export
 #' @family cluster
+#' @keywords internal
 #' @description Abstract cluster monitor `R6` class
 #' @details See [crew_monitor_cluster()].
 crew_class_monitor_cluster <- R6::R6Class(

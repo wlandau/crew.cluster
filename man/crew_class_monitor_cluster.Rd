@@ -16,6 +16,7 @@ Other cluster:
 \code{\link{crew_monitor_cluster}()}
 }
 \concept{cluster}
+\keyword{internal}
 \section{Active bindings}{
 \if{html}{\out{<div class="r6-active-bindings">}}
 \describe{

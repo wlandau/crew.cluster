@@ -37,3 +37,4 @@ Other cluster:
 \code{\link{crew_launcher_cluster}()}
 }
 \concept{cluster}
+\keyword{internal}
