@@ -3,9 +3,10 @@
 
 [![CRAN](https://www.r-pkg.org/badges/version/crew.cluster)](https://CRAN.R-project.org/package=crew.cluster)
 [![status](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#Active)
-[![check](https://github.com/wlandau/crew.cluster/workflows/check/badge.svg)](https://github.com/wlandau/crew.cluster/actions?query=workflow%3Acheck)
+[![check](https://github.com/wlandau/crew.cluster/actions/workflows/check.yaml/badge.svg)](https://github.com/wlandau/crew.cluster/actions?query=workflow%3Acheck)
 [![codecov](https://codecov.io/gh/wlandau/crew.cluster/branch/main/graph/badge.svg?token=3T5DlLwUVl)](https://app.codecov.io/gh/wlandau/crew.cluster)
-[![lint](https://github.com/wlandau/crew.cluster/workflows/lint/badge.svg)](https://github.com/wlandau/crew.cluster/actions?query=workflow%3Alint)
+[![lint](https://github.com/wlandau/crew.cluster/actions/workflows/lint.yaml/badge.svg)](https://github.com/wlandau/crew.cluster/actions?query=workflow%3Alint)
+[![pkgdown](https://github.com/wlandau/crew.cluster/actions/workflows/pkgdown.yaml/badge.svg)](https://github.com/wlandau/crew.cluster/actions?query=workflow%3Apkgdown)
 
 In computationally demanding analysis projects, statisticians and data
 scientists asynchronously deploy long-running tasks to distributed
