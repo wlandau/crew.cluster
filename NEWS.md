@@ -1,7 +1,8 @@
-# crew.cluster 0.2.0.9001 (development)
+# crew.cluster 0.2.0.9002 (development)
 
 * Create an abstract monitor class for cluster-specific monitor classes to inherit from (#32).
 * Require `crew` >= 0.8.0.
+* Raise `seconds_timeout` to 60 across controllers.
 
 # crew.cluster 0.2.0
 

@@ -1,7 +1,6 @@
 #' @title crew.cluster: crew launcher plugins for traditional high-performance
 #'   computing clusters
 #' @name crew.cluster-package
-#' @docType package
 #' @family help
 #' @description In computationally demanding analysis projects,
 #'   statisticians and data scientists asynchronously
