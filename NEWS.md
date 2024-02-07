@@ -1,4 +1,4 @@
-# crew.cluster 0.2.0.9002 (development)
+# crew.cluster 0.3.0
 
 * Create an abstract monitor class for cluster-specific monitor classes to inherit from (#32).
 * Require `crew` >= 0.8.0.
