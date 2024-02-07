@@ -1,27 +1,29 @@
 destination: docs/
+template:
+  bootstrap: 5
 reference:
 - title: Package help
   contents:
-  - '`crew.cluster-package`'
+  - 'crew.cluster-package'
 - title: LSf
   contents:
-  - '`crew_controller_lsf`'
-  - '`crew_launcher_lsf`'
-  - '`crew_class_launcher_lsf`'
+  - 'crew_controller_lsf'
+  - 'crew_launcher_lsf'
+  - 'crew_class_launcher_lsf'
 - title: PBS
   contents:
-  - '`crew_controller_pbs`'
-  - '`crew_launcher_pbs`'
-  - '`crew_class_launcher_pbs`'
+  - 'crew_controller_pbs'
+  - 'crew_launcher_pbs'
+  - 'crew_class_launcher_pbs'
 - title: SGE
   contents:
-  - '`crew_controller_sge`'
-  - '`crew_launcher_sge`'
-  - '`crew_class_launcher_sge`'
-  - '`crew_monitor_sge`'
-  - '`crew_class_monitor_sge`'
+  - 'crew_controller_sge'
+  - 'crew_launcher_sge'
+  - 'crew_class_launcher_sge'
+  - 'crew_monitor_sge'
+  - 'crew_class_monitor_sge'
 - title: SLURM
   contents:
-  - '`crew_controller_slurm`'
-  - '`crew_launcher_slurm`'
-  - '`crew_class_launcher_slurm`'
+  - 'crew_controller_slurm'
+  - 'crew_launcher_slurm'
+  - 'crew_class_launcher_slurm'
