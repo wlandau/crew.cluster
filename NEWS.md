@@ -1,6 +1,6 @@
 # crew.cluster 0.3.0.9000
 
-
+* Add a "monitor" class for SLURM clusters.
 
 # crew.cluster 0.3.0
 
