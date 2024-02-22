@@ -210,6 +210,8 @@ source code for additional attribution.
 \seealso{
 Other slurm: 
 \code{\link{crew_class_launcher_slurm}},
-\code{\link{crew_controller_slurm}()}
+\code{\link{crew_class_monitor_slurm}},
+\code{\link{crew_controller_slurm}()},
+\code{\link{crew_monitor_slurm}()}
 }
 \concept{slurm}

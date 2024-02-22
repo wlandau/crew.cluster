@@ -49,7 +49,8 @@ Imports:
   rlang,
   utils,
   vctrs,
-  xml2
+  xml2,
+  yaml
 Suggests:
   knitr (>= 1.30),
   markdown (>= 1.1),

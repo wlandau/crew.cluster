@@ -38,8 +38,10 @@ launcher$script(name = "my_job_name")
 }
 \seealso{
 Other slurm: 
+\code{\link{crew_class_monitor_slurm}},
 \code{\link{crew_controller_slurm}()},
-\code{\link{crew_launcher_slurm}()}
+\code{\link{crew_launcher_slurm}()},
+\code{\link{crew_monitor_slurm}()}
 }
 \concept{slurm}
 \section{Super classes}{
