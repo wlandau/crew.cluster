@@ -32,6 +32,7 @@ crew_class_monitor_slurm <- R6::R6Class(
     #' This function loads the entire SLURM queue for all users, so it may take
     #' several seconds to execute. It is intended for interactive use, and
     #' should especially be avoided in scripts where it is called frequently.
+    #' It requires SLURM version 20.02 or higher, along with the YAML plugin.
     #' @return A `tibble` with one row per SLURM job and columns with
     #'   specific details.
     #' @param user Character of length 1, user name of the jobs to list.
