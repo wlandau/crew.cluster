@@ -38,6 +38,13 @@ Authors@R: c(
   person(
     family = "Eli Lilly and Company",
     role = "cph"
+  ),
+  person(
+    given = "Brendan",
+    family = "Furneaux",
+    role = "aut",
+    email = "brendan.furneaux@gmail.com",
+    comment = c(ORCID = "0000-0003-3522-7363")
   ))
 Depends:
   R (>= 4.0.0)
