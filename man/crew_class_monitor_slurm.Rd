@@ -40,11 +40,6 @@ Other slurm:
 \if{latex}{\out{\hypertarget{method-crew_class_monitor_slurm-jobs}{}}}
 \subsection{Method \code{jobs()}}{
 List SLURM jobs.
-
-This function loads the entire SLURM queue for all users, so it may take
-several seconds to execute. It is intended for interactive use, and
-should especially be avoided in scripts where it is called frequently.
-It requires SLURM version 20.02 or higher, along with the YAML plugin.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{crew_class_monitor_slurm$jobs(user = ps::ps_username())}\if{html}{\out{</div>}}
 }
@@ -56,6 +51,15 @@ It requires SLURM version 20.02 or higher, along with the YAML plugin.
 }
 \if{html}{\out{</div>}}
 }
+\subsection{Details}{
+This function loads the entire SLURM queue for all users,
+so it may take several seconds to execute.
+It is intended for interactive use, and
+should especially be avoided in scripts where it is called
+frequently. It requires SLURM version 20.02 or higher,
+along with the YAML plugin.
+}
+
 \subsection{Returns}{
 A \code{tibble} with one row per SLURM job and columns with
 specific details.

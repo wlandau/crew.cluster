@@ -28,11 +28,12 @@ crew_class_monitor_slurm <- R6::R6Class(
   cloneable = FALSE,
   public = list(
     #' @description List SLURM jobs.
-    #' 
-    #' This function loads the entire SLURM queue for all users, so it may take
-    #' several seconds to execute. It is intended for interactive use, and
-    #' should especially be avoided in scripts where it is called frequently.
-    #' It requires SLURM version 20.02 or higher, along with the YAML plugin.
+    #' @details This function loads the entire SLURM queue for all users,
+    #'   so it may take several seconds to execute.
+    #'   It is intended for interactive use, and
+    #'   should especially be avoided in scripts where it is called
+    #'   frequently. It requires SLURM version 20.02 or higher,
+    #'   along with the YAML plugin.
     #' @return A `tibble` with one row per SLURM job and columns with
     #'   specific details.
     #' @param user Character of length 1, user name of the jobs to list.
@@ -64,14 +65,17 @@ crew_class_monitor_slurm <- R6::R6Class(
           c(
             map(.x[monitor_cols], ~ unlist(.x) %||% NA),
             list(
-              nodes = paste(unlist(.x$job_resources$nodes), collapse = ",") %||% NA
+              nodes = paste(
+                unlist(.x$job_resources$nodes),
+                collapse = ","
+              ) %||% NA
             )
           )
         )
       )
       out <- do.call(vctrs::vec_rbind, out)
-      out <- out[out$user_name == user,]
-      out <- out[which(out$job_state != "CANCELLED"),]
+      out <- out[out$user_name == user, ]
+      out <- out[which(out$job_state != "CANCELLED"), ]
       out$job_id <- as.character(out$job_id)
       out$start_time <- as.POSIXct(out$start_time, origin = "1970-01-01")
       out

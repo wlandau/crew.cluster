@@ -27,3 +27,5 @@ reference:
   - 'crew_controller_slurm'
   - 'crew_launcher_slurm'
   - 'crew_class_launcher_slurm'
+  - 'crew_monitor_slurm'
+  - 'crew_class_monitor_slurm'

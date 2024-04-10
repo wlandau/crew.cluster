@@ -35,6 +35,7 @@
 #' @importFrom vctrs vec_rbind
 #' @importFrom utils globalVariables
 #' @importFrom xml2 as_list xml_find_all
+#' @importFrom yaml read_yaml
 NULL
 
 utils::globalVariables(".")
