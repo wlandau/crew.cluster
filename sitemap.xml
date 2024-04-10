@@ -52,6 +52,9 @@
     <loc>/reference/crew_class_monitor_sge.html</loc>
   </url>
   <url>
+    <loc>/reference/crew_class_monitor_slurm.html</loc>
+  </url>
+  <url>
     <loc>/reference/crew_controller_lsf.html</loc>
   </url>
   <url>
@@ -83,6 +86,9 @@
   </url>
   <url>
     <loc>/reference/crew_monitor_sge.html</loc>
+  </url>
+  <url>
+    <loc>/reference/crew_monitor_slurm.html</loc>
   </url>
   <url>
     <loc>/reference/index.html</loc>
