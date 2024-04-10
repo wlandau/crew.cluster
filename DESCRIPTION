@@ -36,6 +36,13 @@ Authors@R: c(
     comment = c(ORCID = "0000-0002-9937-9932")
   ),
   person(
+    given = "Brendan",
+    family = "Furneaux",
+    role = "aut",
+    email = "brendan.furneaux@gmail.com",
+    comment = c(ORCID = "0000-0003-3522-7363")
+  ),
+  person(
     family = "Eli Lilly and Company",
     role = "cph"
   ))
@@ -49,7 +56,8 @@ Imports:
   rlang,
   utils,
   vctrs,
-  xml2
+  xml2,
+  yaml
 Suggests:
   knitr (>= 1.30),
   markdown (>= 1.1),
