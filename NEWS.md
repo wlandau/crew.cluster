@@ -1,4 +1,4 @@
-# crew.cluster 0.3.0.9000
+# crew.cluster 0.3.1
 
 * Add a monitor class for SLURM clusters.
 
