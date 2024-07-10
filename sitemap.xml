@@ -1,96 +1,34 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>/404.html</loc>
-  </url>
-  <url>
-    <loc>/CODE_OF_CONDUCT.html</loc>
-  </url>
-  <url>
-    <loc>/CONTRIBUTING.html</loc>
-  </url>
-  <url>
-    <loc>/LICENSE-text.html</loc>
-  </url>
-  <url>
-    <loc>/LICENSE.html</loc>
-  </url>
-  <url>
-    <loc>/PULL_REQUEST_TEMPLATE.html</loc>
-  </url>
-  <url>
-    <loc>/authors.html</loc>
-  </url>
-  <url>
-    <loc>/index.html</loc>
-  </url>
-  <url>
-    <loc>/news/index.html</loc>
-  </url>
-  <url>
-    <loc>/reference/crew.cluster-package.html</loc>
-  </url>
-  <url>
-    <loc>/reference/crew_class_launcher_cluster.html</loc>
-  </url>
-  <url>
-    <loc>/reference/crew_class_launcher_lsf.html</loc>
-  </url>
-  <url>
-    <loc>/reference/crew_class_launcher_pbs.html</loc>
-  </url>
-  <url>
-    <loc>/reference/crew_class_launcher_sge.html</loc>
-  </url>
-  <url>
-    <loc>/reference/crew_class_launcher_slurm.html</loc>
-  </url>
-  <url>
-    <loc>/reference/crew_class_monitor_cluster.html</loc>
-  </url>
-  <url>
-    <loc>/reference/crew_class_monitor_sge.html</loc>
-  </url>
-  <url>
-    <loc>/reference/crew_class_monitor_slurm.html</loc>
-  </url>
-  <url>
-    <loc>/reference/crew_controller_lsf.html</loc>
-  </url>
-  <url>
-    <loc>/reference/crew_controller_pbs.html</loc>
-  </url>
-  <url>
-    <loc>/reference/crew_controller_sge.html</loc>
-  </url>
-  <url>
-    <loc>/reference/crew_controller_slurm.html</loc>
-  </url>
-  <url>
-    <loc>/reference/crew_launcher_cluster.html</loc>
-  </url>
-  <url>
-    <loc>/reference/crew_launcher_lsf.html</loc>
-  </url>
-  <url>
-    <loc>/reference/crew_launcher_pbs.html</loc>
-  </url>
-  <url>
-    <loc>/reference/crew_launcher_sge.html</loc>
-  </url>
-  <url>
-    <loc>/reference/crew_launcher_slurm.html</loc>
-  </url>
-  <url>
-    <loc>/reference/crew_monitor_cluster.html</loc>
-  </url>
-  <url>
-    <loc>/reference/crew_monitor_sge.html</loc>
-  </url>
-  <url>
-    <loc>/reference/crew_monitor_slurm.html</loc>
-  </url>
-  <url>
-    <loc>/reference/index.html</loc>
-  </url>
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>/404.html</loc></url>
+<url><loc>/CODE_OF_CONDUCT.html</loc></url>
+<url><loc>/CONTRIBUTING.html</loc></url>
+<url><loc>/LICENSE-text.html</loc></url>
+<url><loc>/LICENSE.html</loc></url>
+<url><loc>/PULL_REQUEST_TEMPLATE.html</loc></url>
+<url><loc>/authors.html</loc></url>
+<url><loc>/index.html</loc></url>
+<url><loc>/news/index.html</loc></url>
+<url><loc>/reference/crew.cluster-package.html</loc></url>
+<url><loc>/reference/crew_class_launcher_cluster.html</loc></url>
+<url><loc>/reference/crew_class_launcher_lsf.html</loc></url>
+<url><loc>/reference/crew_class_launcher_pbs.html</loc></url>
+<url><loc>/reference/crew_class_launcher_sge.html</loc></url>
+<url><loc>/reference/crew_class_launcher_slurm.html</loc></url>
+<url><loc>/reference/crew_class_monitor_cluster.html</loc></url>
+<url><loc>/reference/crew_class_monitor_sge.html</loc></url>
+<url><loc>/reference/crew_class_monitor_slurm.html</loc></url>
+<url><loc>/reference/crew_controller_lsf.html</loc></url>
+<url><loc>/reference/crew_controller_pbs.html</loc></url>
+<url><loc>/reference/crew_controller_sge.html</loc></url>
+<url><loc>/reference/crew_controller_slurm.html</loc></url>
+<url><loc>/reference/crew_launcher_cluster.html</loc></url>
+<url><loc>/reference/crew_launcher_lsf.html</loc></url>
+<url><loc>/reference/crew_launcher_pbs.html</loc></url>
+<url><loc>/reference/crew_launcher_sge.html</loc></url>
+<url><loc>/reference/crew_launcher_slurm.html</loc></url>
+<url><loc>/reference/crew_monitor_cluster.html</loc></url>
+<url><loc>/reference/crew_monitor_sge.html</loc></url>
+<url><loc>/reference/crew_monitor_slurm.html</loc></url>
+<url><loc>/reference/index.html</loc></url>
 </urlset>
+
