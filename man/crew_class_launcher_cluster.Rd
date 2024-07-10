@@ -191,7 +191,8 @@ dial into a socket.
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{call}}{Character of length 1, a namespaced call to \code{\link[=crew_worker]{crew_worker()}}
+\item{\code{call}}{Character of length 1, a namespaced call to
+\code{\link[crew:crew_worker]{crew::crew_worker()}}
 which will run in the worker and accept tasks.}
 
 \item{\code{name}}{Character of length 1, an informative worker name.}

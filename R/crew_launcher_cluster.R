@@ -243,7 +243,8 @@ crew_class_launcher_cluster <- R6::R6Class(
     #'   initiate the worker.
     #' @return A handle object to allow the termination of the worker
     #'   later on.
-    #' @param call Character of length 1, a namespaced call to [crew_worker()]
+    #' @param call Character of length 1, a namespaced call to
+    #'   [crew::crew_worker()]
     #'   which will run in the worker and accept tasks.
     #' @param name Character of length 1, an informative worker name.
     #' @param launcher Character of length 1, name of the launcher.
