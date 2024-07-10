@@ -37,6 +37,7 @@ crew_controller_slurm <- function(
   seconds_idle = Inf,
   seconds_wall = Inf,
   seconds_exit = NULL,
+  retry_tasks = TRUE,
   tasks_max = Inf,
   tasks_timers = 0L,
   reset_globals = TRUE,
@@ -74,7 +75,8 @@ crew_controller_slurm <- function(
     tls_enable = tls_enable,
     tls_config = tls_config,
     seconds_interval = seconds_interval,
-    seconds_timeout = seconds_timeout
+    seconds_timeout = seconds_timeout,
+    retry_tasks = retry_tasks
   )
   launcher <- crew_launcher_slurm(
     name = name,

@@ -53,7 +53,7 @@ controller$start()
 ```
 
 At this point, usage is exactly the same as basic
-[`crew`](https://wlandau.github.io/crew). The `push()` method submits
+[`crew`](https://wlandau.github.io/crew/). The `push()` method submits
 tasks and auto-scales SGE workers to meet demand.
 
 ``` r

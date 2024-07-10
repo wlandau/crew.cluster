@@ -51,7 +51,7 @@ controller <- crew_controller_sge(
 controller$start()
 ```
 
-At this point, usage is exactly the same as basic [`crew`](https://wlandau.github.io/crew). The `push()` method submits tasks and auto-scales SGE workers to meet demand.
+At this point, usage is exactly the same as basic [`crew`](https://wlandau.github.io/crew/). The `push()` method submits tasks and auto-scales SGE workers to meet demand.
 
 ```{r}
 controller$push(name = "do work", command = do_work())
