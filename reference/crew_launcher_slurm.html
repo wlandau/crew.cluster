@@ -9,7 +9,7 @@ workers as SLURM jobs."><meta property="og:image" content="/logo.svg"></head><bo
 
     <a class="navbar-brand me-2" href="../index.html">crew.cluster</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.3.2.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.3.2.9001</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -64,6 +64,7 @@ workers as SLURM jobs.</p>
 <span>  script_lines <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">character</a></span><span class="op">(</span><span class="fl">0L</span><span class="op">)</span>,</span>
 <span>  slurm_log_output <span class="op">=</span> <span class="st">"/dev/null"</span>,</span>
 <span>  slurm_log_error <span class="op">=</span> <span class="st">"/dev/null"</span>,</span>
+<span>  slurm_memory_gigabytes_required <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  slurm_memory_gigabytes_per_cpu <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  slurm_cpus_per_task <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  slurm_time_minutes <span class="op">=</span> <span class="fl">1440</span>,</span>
@@ -233,6 +234,15 @@ error. <code>slurm_log_error = "crew_log_%A.txt"</code> translates to a line of
 where <code>%A</code> is replaced by the job ID of the worker.
 The default is <code>/dev/null</code> to omit these logs.
 Set <code>slurm_log_error = NULL</code> to omit this line from the job script.</p></dd>
+
+
+<dt id="arg-slurm-memory-gigabytes-required">slurm_memory_gigabytes_required<a class="anchor" aria-label="anchor" href="#arg-slurm-memory-gigabytes-required"></a></dt>
+<dd><p>Positive numeric of length 1
+with the total number of gigabytes of memory required per node.
+<code>slurm_memory_gigabytes_required = 2.40123</code>
+translates to a line of <code>#SBATCH --mem=2041M</code>
+in the SLURM job script.
+<code>slurm_memory_gigabytes_required = NULL</code> omits this line.</p></dd>
 
 
 <dt id="arg-slurm-memory-gigabytes-per-cpu">slurm_memory_gigabytes_per_cpu<a class="anchor" aria-label="anchor" href="#arg-slurm-memory-gigabytes-per-cpu"></a></dt>
