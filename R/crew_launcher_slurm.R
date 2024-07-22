@@ -33,6 +33,12 @@
 #'   where `%A` is replaced by the job ID of the worker.
 #'   The default is `/dev/null` to omit these logs.
 #'   Set `slurm_log_error = NULL` to omit this line from the job script.
+#' @param slurm_memory_gigabytes_required Positive numeric of length 1
+#'   with the total number of gigabytes of memory required per node.
+#'  `slurm_memory_gigabytes_required = 2.40123`
+#'   translates to a line of `#SBATCH --mem=2041M`
+#'   in the SLURM job script.
+#'   `slurm_memory_gigabytes_required = NULL` omits this line.
 #' @param slurm_memory_gigabytes_per_cpu Positive numeric of length 1
 #'   with the gigabytes of memory required per CPU.
 #'   `slurm_memory_gigabytes_per_cpu = 2.40123`
@@ -77,6 +83,7 @@ crew_launcher_slurm <- function(
   script_lines = character(0L),
   slurm_log_output = "/dev/null",
   slurm_log_error = "/dev/null",
+  slurm_memory_gigabytes_required = NULL,
   slurm_memory_gigabytes_per_cpu = NULL,
   slurm_cpus_per_task = NULL,
   slurm_time_minutes = 1440,
@@ -115,6 +122,7 @@ crew_launcher_slurm <- function(
     slurm_log_output = slurm_log_output,
     slurm_log_error = slurm_log_error,
     slurm_memory_gigabytes_per_cpu = slurm_memory_gigabytes_per_cpu,
+    slurm_memory_gigabytes_required = slurm_memory_gigabytes_required,
     slurm_cpus_per_task = slurm_cpus_per_task,
     slurm_time_minutes = slurm_time_minutes,
     slurm_partition = slurm_partition
@@ -136,6 +144,7 @@ crew_class_launcher_slurm <- R6::R6Class(
   private = list(
     .slurm_log_output = NULL,
     .slurm_log_error = NULL,
+    .slurm_memory_gigabytes_required = NULL,
     .slurm_memory_gigabytes_per_cpu = NULL,
     .slurm_cpus_per_task = NULL,
     .slurm_time_minutes = NULL,
@@ -152,6 +161,10 @@ crew_class_launcher_slurm <- R6::R6Class(
     #' @field slurm_log_error See [crew_launcher_slurm()].
     slurm_log_error = function() {
       .subset2(private, ".slurm_log_error")
+    },
+    #' @field slurm_memory_gigabytes_required See [crew_launcher_slurm()].
+    slurm_memory_gigabytes_required = function() {
+      .subset2(private, ".slurm_memory_gigabytes_required")
     },
     #' @field slurm_memory_gigabytes_per_cpu See [crew_launcher_slurm()].
     slurm_memory_gigabytes_per_cpu = function() {
@@ -194,6 +207,7 @@ crew_class_launcher_slurm <- R6::R6Class(
     #' @param script_lines See [crew_launcher_sge()].
     #' @param slurm_log_output See [crew_launcher_slurm()].
     #' @param slurm_log_error See [crew_launcher_slurm()].
+    #' @param slurm_memory_gigabytes_required See [crew_launcher_slurm()].
     #' @param slurm_memory_gigabytes_per_cpu See [crew_launcher_slurm()].
     #' @param slurm_cpus_per_task See [crew_launcher_slurm()].
     #' @param slurm_time_minutes See [crew_launcher_slurm()].
@@ -220,6 +234,7 @@ crew_class_launcher_slurm <- R6::R6Class(
       script_lines = NULL,
       slurm_log_output = NULL,
       slurm_log_error = NULL,
+      slurm_memory_gigabytes_required = NULL,
       slurm_memory_gigabytes_per_cpu = NULL,
       slurm_cpus_per_task = NULL,
       slurm_time_minutes = NULL,
@@ -248,6 +263,7 @@ crew_class_launcher_slurm <- R6::R6Class(
       )
       private$.slurm_log_output <- slurm_log_output
       private$.slurm_log_error <- slurm_log_error
+      private$.slurm_memory_gigabytes_required <- slurm_memory_gigabytes_required # nolint
       private$.slurm_memory_gigabytes_per_cpu <- slurm_memory_gigabytes_per_cpu
       private$.slurm_cpus_per_task <- slurm_cpus_per_task
       private$.slurm_time_minutes <- slurm_time_minutes
@@ -274,6 +290,7 @@ crew_class_launcher_slurm <- R6::R6Class(
         }
       }
       fields <- c(
+        "slurm_memory_gigabytes_required",
         "slurm_memory_gigabytes_per_cpu",
         "slurm_cpus_per_task",
         "slurm_time_minutes"
@@ -322,6 +339,19 @@ crew_class_launcher_slurm <- R6::R6Class(
           is.null(private$.slurm_log_error),
           character(0L),
           paste0("#SBATCH --error=", private$.slurm_log_error)
+        ),
+        if_any(
+          is.null(private$.slurm_memory_gigabytes_required),
+          character(0L),
+          sprintf(
+            "#SBATCH --mem=%sM",
+            as.integer(
+              round(
+                x = 1024 * private$.slurm_memory_gigabytes_required,
+                digits = 0L
+              )
+            )
+          )
         ),
         if_any(
           is.null(private$.slurm_memory_gigabytes_per_cpu),

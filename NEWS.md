@@ -1,6 +1,6 @@
-# crew.cluster 0.3.2.9000 (development)
+# crew.cluster 0.3.2.9001 (development)
 
-
+* Add `slurm_memory_gigabytes_required` to set `--mem` in SLURM (#44, @multimeric).
 
 # crew.cluster 0.3.2
 

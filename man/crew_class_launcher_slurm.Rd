@@ -54,6 +54,8 @@ Other slurm:
 
 \item{\code{slurm_log_error}}{See \code{\link[=crew_launcher_slurm]{crew_launcher_slurm()}}.}
 
+\item{\code{slurm_memory_gigabytes_required}}{See \code{\link[=crew_launcher_slurm]{crew_launcher_slurm()}}.}
+
 \item{\code{slurm_memory_gigabytes_per_cpu}}{See \code{\link[=crew_launcher_slurm]{crew_launcher_slurm()}}.}
 
 \item{\code{slurm_cpus_per_task}}{See \code{\link[=crew_launcher_slurm]{crew_launcher_slurm()}}.}
@@ -126,6 +128,7 @@ SLURM launcher constructor.
   script_lines = NULL,
   slurm_log_output = NULL,
   slurm_log_error = NULL,
+  slurm_memory_gigabytes_required = NULL,
   slurm_memory_gigabytes_per_cpu = NULL,
   slurm_cpus_per_task = NULL,
   slurm_time_minutes = NULL,
@@ -177,6 +180,8 @@ SLURM launcher constructor.
 \item{\code{slurm_log_output}}{See \code{\link[=crew_launcher_slurm]{crew_launcher_slurm()}}.}
 
 \item{\code{slurm_log_error}}{See \code{\link[=crew_launcher_slurm]{crew_launcher_slurm()}}.}
+
+\item{\code{slurm_memory_gigabytes_required}}{See \code{\link[=crew_launcher_slurm]{crew_launcher_slurm()}}.}
 
 \item{\code{slurm_memory_gigabytes_per_cpu}}{See \code{\link[=crew_launcher_slurm]{crew_launcher_slurm()}}.}
 

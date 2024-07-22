@@ -28,6 +28,7 @@ crew_launcher_slurm(
   script_lines = character(0L),
   slurm_log_output = "/dev/null",
   slurm_log_error = "/dev/null",
+  slurm_memory_gigabytes_required = NULL,
   slurm_memory_gigabytes_per_cpu = NULL,
   slurm_cpus_per_task = NULL,
   slurm_time_minutes = 1440,
@@ -150,6 +151,13 @@ error. \code{slurm_log_error = "crew_log_\%A.txt"} translates to a line of
 where \verb{\%A} is replaced by the job ID of the worker.
 The default is \verb{/dev/null} to omit these logs.
 Set \code{slurm_log_error = NULL} to omit this line from the job script.}
+
+\item{slurm_memory_gigabytes_required}{Positive numeric of length 1
+with the total number of gigabytes of memory required per node.
+\code{slurm_memory_gigabytes_required = 2.40123}
+translates to a line of \verb{#SBATCH --mem=2041M}
+in the SLURM job script.
+\code{slurm_memory_gigabytes_required = NULL} omits this line.}
 
 \item{slurm_memory_gigabytes_per_cpu}{Positive numeric of length 1
 with the gigabytes of memory required per CPU.

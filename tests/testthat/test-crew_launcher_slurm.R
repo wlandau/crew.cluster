@@ -44,6 +44,7 @@ test_that("crew_launcher_slurm() script() all lines", {
     script_lines = c("module load R", "echo 'start'"),
     slurm_log_output = "log1",
     slurm_log_error = "log2",
+    slurm_memory_gigabytes_required = 4.1,
     slurm_memory_gigabytes_per_cpu = 2.096,
     slurm_cpus_per_task = 2,
     slurm_time_minutes = 57
@@ -54,6 +55,7 @@ test_that("crew_launcher_slurm() script() all lines", {
     "#SBATCH --job-name=this_job",
     "#SBATCH --output=log1",
     "#SBATCH --error=log2",
+    "#SBATCH --mem=4198M",
     "#SBATCH --mem-per-cpu=2146M",
     "#SBATCH --cpus-per-task=2",
     "#SBATCH --time=57",
