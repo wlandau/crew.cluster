@@ -49,6 +49,7 @@ crew_launcher_cluster <- function(
   garbage_collection = FALSE,
   launch_max = 5L,
   tls = crew::crew_tls(mode = "automatic"),
+  r_arguments = NULL,
   verbose = FALSE,
   command_submit = "",
   command_terminate = "",
@@ -81,6 +82,7 @@ crew_launcher_cluster <- function(
     garbage_collection = garbage_collection,
     launch_max = launch_max,
     tls = tls,
+    r_arguments = r_arguments,
     verbose = verbose,
     command_submit = command_submit,
     command_terminate = command_terminate,
@@ -160,6 +162,7 @@ crew_class_launcher_cluster <- R6::R6Class(
     #' @param garbage_collection See [crew_launcher_cluster()].
     #' @param launch_max See [crew_launcher_cluster()].
     #' @param tls See [crew_launcher_cluster()].
+    #' @param r_arguments See [crew_launcher_cluster()].
     #' @param verbose See [crew_launcher_cluster()].
     #' @param command_submit See [crew_launcher_cluster()].
     #' @param command_terminate See [crew_launcher_cluster()].
@@ -180,6 +183,7 @@ crew_class_launcher_cluster <- R6::R6Class(
       garbage_collection = NULL,
       launch_max = NULL,
       tls = NULL,
+      r_arguments = NULL,
       verbose = NULL,
       command_submit = NULL,
       command_terminate = NULL,
@@ -200,7 +204,8 @@ crew_class_launcher_cluster <- R6::R6Class(
         reset_options = reset_options,
         garbage_collection = garbage_collection,
         launch_max = launch_max,
-        tls = tls
+        tls = tls,
+        r_arguments = r_arguments
       )
       private$.verbose <- verbose
       private$.command_submit <- command_submit

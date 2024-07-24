@@ -118,6 +118,7 @@ LSF launcher constructor.
   garbage_collection = NULL,
   launch_max = NULL,
   tls = NULL,
+  r_arguments = NULL,
   verbose = NULL,
   command_submit = NULL,
   command_terminate = NULL,
@@ -162,6 +163,8 @@ LSF launcher constructor.
 \item{\code{launch_max}}{See \code{\link[=crew_launcher_lsf]{crew_launcher_lsf()}}.}
 
 \item{\code{tls}}{See \code{\link[=crew_launcher_lsf]{crew_launcher_lsf()}}.}
+
+\item{\code{r_arguments}}{See \code{\link[=crew_launcher_lsf]{crew_launcher_lsf()}}.}
 
 \item{\code{verbose}}{See \code{\link[=crew_launcher_lsf]{crew_launcher_lsf()}}.}
 

@@ -20,6 +20,7 @@ crew_launcher_cluster(
   garbage_collection = FALSE,
   launch_max = 5L,
   tls = crew::crew_tls(mode = "automatic"),
+  r_arguments = NULL,
   verbose = FALSE,
   command_submit = "",
   command_terminate = "",
@@ -96,6 +97,10 @@ circumstances. But \code{launch_max} should still be small enough
 to detect errors in the underlying platform.}
 
 \item{tls}{A TLS configuration object from \code{\link[crew:crew_tls]{crew_tls()}}.}
+
+\item{r_arguments}{Optional character vector of command line arguments
+to pass to R when starting a worker. Example:
+\code{r_arguments = c("--vanilla", "--max-connections=32")}.}
 
 \item{verbose}{Logical, whether to see console output and error messages
 when submitting worker.}

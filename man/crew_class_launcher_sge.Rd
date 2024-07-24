@@ -124,6 +124,7 @@ SGE launcher constructor.
   garbage_collection = NULL,
   launch_max = NULL,
   tls = NULL,
+  r_arguments = NULL,
   verbose = NULL,
   command_submit = NULL,
   command_terminate = NULL,
@@ -171,6 +172,8 @@ SGE launcher constructor.
 \item{\code{launch_max}}{See \code{\link[=crew_launcher_sge]{crew_launcher_sge()}}.}
 
 \item{\code{tls}}{See \code{\link[=crew_launcher_sge]{crew_launcher_sge()}}.}
+
+\item{\code{r_arguments}}{See \code{\link[=crew_launcher_sge]{crew_launcher_sge()}}.}
 
 \item{\code{verbose}}{See \code{\link[=crew_launcher_sge]{crew_launcher_sge()}}.}
 

@@ -27,6 +27,7 @@ crew_controller_lsf(
   reset_options = FALSE,
   garbage_collection = FALSE,
   launch_max = 5L,
+  r_arguments = NULL,
   verbose = FALSE,
   command_submit = as.character(Sys.which("bsub")),
   command_terminate = as.character(Sys.which("bkill")),
@@ -134,6 +135,10 @@ It is recommended to set \code{launch_max} above 0
 because sometimes workers are unproductive under perfectly ordinary
 circumstances. But \code{launch_max} should still be small enough
 to detect errors in the underlying platform.}
+
+\item{r_arguments}{Optional character vector of command line arguments
+to pass to R when starting a worker. Example:
+\code{r_arguments = c("--vanilla", "--max-connections=32")}.}
 
 \item{verbose}{Logical, whether to see console output and error messages
 when submitting worker.}
