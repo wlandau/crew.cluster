@@ -9,7 +9,7 @@ launch workers on Sun Grid Engine (SGE) workers."><meta property="og:image" cont
 
     <a class="navbar-brand me-2" href="../index.html">crew.cluster</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.3.2.9001</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.3.2.9004</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -56,6 +56,7 @@ launch workers on Sun Grid Engine (SGE) workers.</p>
 <span>  seconds_wall <span class="op">=</span> <span class="cn">Inf</span>,</span>
 <span>  seconds_exit <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  retry_tasks <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  log_resources <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  tasks_max <span class="op">=</span> <span class="cn">Inf</span>,</span>
 <span>  tasks_timers <span class="op">=</span> <span class="fl">0L</span>,</span>
 <span>  reset_globals <span class="op">=</span> <span class="cn">TRUE</span>,</span>
@@ -63,6 +64,7 @@ launch workers on Sun Grid Engine (SGE) workers.</p>
 <span>  reset_options <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  garbage_collection <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  launch_max <span class="op">=</span> <span class="fl">5L</span>,</span>
+<span>  r_arguments <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"--no-save"</span>, <span class="st">"--no-restore"</span><span class="op">)</span>,</span>
 <span>  verbose <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  command_submit <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Sys.which.html" class="external-link">Sys.which</a></span><span class="op">(</span><span class="st">"qsub"</span><span class="op">)</span><span class="op">)</span>,</span>
 <span>  command_terminate <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Sys.which.html" class="external-link">Sys.which</a></span><span class="op">(</span><span class="st">"qdel"</span><span class="op">)</span><span class="op">)</span>,</span>
@@ -171,6 +173,37 @@ Use <code>FALSE</code> for debugging purposes, e.g. to confirm that a task
 is causing a worker to run out of memory or crash in some other way.</p></dd>
 
 
+<dt id="arg-log-resources">log_resources<a class="anchor" aria-label="anchor" href="#arg-log-resources"></a></dt>
+<dd><p>Optional character string with a file path to a
+text file to log memory consumption.
+Set <code>log_resources</code> to <code>NULL</code> to avoid writing to a log file.
+If you supply a path, then
+the <code><a href="https://rdrr.io/r/base/Log.html" class="external-link">log()</a></code> method will write memory usage statistics to the file,
+and most controller methods will do the same with throttling
+so resource consumption is recorded throughout the whole life cycle
+of the controller.</p>
+<p>The log file is in comma-separated values
+(CSV) format which can be easily read by <code>readr::read_csv()</code>.
+The controller automatically deletes the old log file when it starts
+(when <code>controller$start()</code> is called for the first time, but not
+subsequent times).</p>
+<p>The log file has one row per observation of a process,
+including the current
+R process ("client") and the <code>mirai</code> dispatcher. If the dispatcher
+is not included in the output, it means the dispatcher process
+is not running.
+Columns include:
+* <code>type</code>: the type of process (client or dispatcher)
+* <code>pid</code>: the process ID.
+* <code>status</code>: The process status (from <code><a href="https://ps.r-lib.org/reference/ps_status.html" class="external-link">ps::ps_status()</a></code>).
+* <code>rss</code>: resident set size (RSS). RS is the total memory held by
+a process, including shared libraries which may also be
+in use by other processes. RSS is obtained
+from <code><a href="https://ps.r-lib.org/reference/ps_memory_info.html" class="external-link">ps::ps_memory_info()</a></code> and shown in bytes.
+* <code>elapsed</code>: number of elapsed seconds since the R process was
+started (from <code>proc.time()["elapsed"]</code>).</p></dd>
+
+
 <dt id="arg-tasks-max">tasks_max<a class="anchor" aria-label="anchor" href="#arg-tasks-max"></a></dt>
 <dd><p>Maximum number of tasks that a worker will do before
 exiting. See the <code>maxtasks</code> argument of <code><a href="https://shikokuchuo.net/mirai/reference/daemon.html" class="external-link">mirai::daemon()</a></code>.
@@ -218,6 +251,12 @@ It is recommended to set <code>launch_max</code> above 0
 because sometimes workers are unproductive under perfectly ordinary
 circumstances. But <code>launch_max</code> should still be small enough
 to detect errors in the underlying platform.</p></dd>
+
+
+<dt id="arg-r-arguments">r_arguments<a class="anchor" aria-label="anchor" href="#arg-r-arguments"></a></dt>
+<dd><p>Optional character vector of command line arguments
+to pass to R when starting a worker. Example:
+<code>r_arguments = c("--vanilla", "--max-connections=32")</code>.</p></dd>
 
 
 <dt id="arg-verbose">verbose<a class="anchor" aria-label="anchor" href="#arg-verbose"></a></dt>

@@ -9,7 +9,7 @@ workers as jobs on a PBS or TORQUE cluster."><meta property="og:image" content="
 
     <a class="navbar-brand me-2" href="../index.html">crew.cluster</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.3.2.9001</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.3.2.9004</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -56,6 +56,7 @@ workers as jobs on a PBS or TORQUE cluster.</p>
 <span>  garbage_collection <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  launch_max <span class="op">=</span> <span class="fl">5L</span>,</span>
 <span>  tls <span class="op">=</span> <span class="fu">crew</span><span class="fu">::</span><span class="fu"><a href="https://wlandau.github.io/crew/reference/crew_tls.html" class="external-link">crew_tls</a></span><span class="op">(</span>mode <span class="op">=</span> <span class="st">"automatic"</span><span class="op">)</span>,</span>
+<span>  r_arguments <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"--no-save"</span>, <span class="st">"--no-restore"</span><span class="op">)</span>,</span>
 <span>  verbose <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  command_submit <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Sys.which.html" class="external-link">Sys.which</a></span><span class="op">(</span><span class="st">"qsub"</span><span class="op">)</span><span class="op">)</span>,</span>
 <span>  command_terminate <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Sys.which.html" class="external-link">Sys.which</a></span><span class="op">(</span><span class="st">"qdel"</span><span class="op">)</span><span class="op">)</span>,</span>
@@ -170,6 +171,12 @@ to detect errors in the underlying platform.</p></dd>
 
 <dt id="arg-tls">tls<a class="anchor" aria-label="anchor" href="#arg-tls"></a></dt>
 <dd><p>A TLS configuration object from <code><a href="https://wlandau.github.io/crew/reference/crew_tls.html" class="external-link">crew_tls()</a></code>.</p></dd>
+
+
+<dt id="arg-r-arguments">r_arguments<a class="anchor" aria-label="anchor" href="#arg-r-arguments"></a></dt>
+<dd><p>Optional character vector of command line arguments
+to pass to R when starting a worker. Example:
+<code>r_arguments = c("--vanilla", "--max-connections=32")</code>.</p></dd>
 
 
 <dt id="arg-verbose">verbose<a class="anchor" aria-label="anchor" href="#arg-verbose"></a></dt>
