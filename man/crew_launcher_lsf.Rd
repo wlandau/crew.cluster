@@ -20,7 +20,7 @@ crew_launcher_lsf(
   garbage_collection = FALSE,
   launch_max = 5L,
   tls = crew::crew_tls(mode = "automatic"),
-  r_arguments = NULL,
+  r_arguments = c("--no-save", "--no-restore"),
   verbose = FALSE,
   command_submit = as.character(Sys.which("bsub")),
   command_terminate = as.character(Sys.which("bkill")),

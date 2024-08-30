@@ -46,7 +46,7 @@ crew_controller_lsf <- function(
   reset_options = FALSE,
   garbage_collection = FALSE,
   launch_max = 5L,
-  r_arguments = NULL,
+  r_arguments = c("--no-save", "--no-restore"),
   verbose = FALSE,
   command_submit = as.character(Sys.which("bsub")),
   command_terminate = as.character(Sys.which("bkill")),

@@ -49,7 +49,7 @@ crew_launcher_cluster <- function(
   garbage_collection = FALSE,
   launch_max = 5L,
   tls = crew::crew_tls(mode = "automatic"),
-  r_arguments = NULL,
+  r_arguments = c("--no-save", "--no-restore"),
   verbose = FALSE,
   command_submit = "",
   command_terminate = "",
