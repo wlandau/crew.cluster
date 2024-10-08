@@ -57,6 +57,7 @@ workers as LSF jobs.</p>
 <span>  launch_max <span class="op">=</span> <span class="fl">5L</span>,</span>
 <span>  tls <span class="op">=</span> <span class="fu">crew</span><span class="fu">::</span><span class="fu"><a href="https://wlandau.github.io/crew/reference/crew_tls.html" class="external-link">crew_tls</a></span><span class="op">(</span>mode <span class="op">=</span> <span class="st">"automatic"</span><span class="op">)</span>,</span>
 <span>  r_arguments <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"--no-save"</span>, <span class="st">"--no-restore"</span><span class="op">)</span>,</span>
+<span>  options_metrics <span class="op">=</span> <span class="fu">crew</span><span class="fu">::</span><span class="fu"><a href="https://wlandau.github.io/crew/reference/crew_options_metrics.html" class="external-link">crew_options_metrics</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  verbose <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  command_submit <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Sys.which.html" class="external-link">Sys.which</a></span><span class="op">(</span><span class="st">"bsub"</span><span class="op">)</span><span class="op">)</span>,</span>
 <span>  command_terminate <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Sys.which.html" class="external-link">Sys.which</a></span><span class="op">(</span><span class="st">"bkill"</span><span class="op">)</span><span class="op">)</span>,</span>
@@ -177,6 +178,12 @@ to detect errors in the underlying platform.</p></dd>
 to pass to <code>Rscript</code> (non-Windows) or <code>Rscript.exe</code> (Windows)
 when starting a worker. Example:
 <code>r_arguments = c("--vanilla", "--max-connections=32")</code>.</p></dd>
+
+
+<dt id="arg-options-metrics">options_metrics<a class="anchor" aria-label="anchor" href="#arg-options-metrics"></a></dt>
+<dd><p>Either <code>NULL</code> to opt out of resource metric logging
+for workers, or an object from <code><a href="https://wlandau.github.io/crew/reference/crew_options_metrics.html" class="external-link">crew_options_metrics()</a></code> to enable
+and configure resource metric logging for workers.</p></dd>
 
 
 <dt id="arg-verbose">verbose<a class="anchor" aria-label="anchor" href="#arg-verbose"></a></dt>
