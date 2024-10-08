@@ -2,7 +2,6 @@
 
 * Add `slurm_memory_gigabytes_required` to set `--mem` in SLURM (#44, @multimeric).
 * Add `r_arguments` to accept R command line arguments for workers.
-* Support `log_resources` in controllers.
 
 # crew.cluster 0.3.2
 
