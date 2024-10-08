@@ -119,6 +119,7 @@ PBS/TORQUE launcher constructor.
   launch_max = NULL,
   tls = NULL,
   r_arguments = NULL,
+  options_metrics = NULL,
   verbose = NULL,
   command_submit = NULL,
   command_terminate = NULL,
@@ -166,6 +167,8 @@ PBS/TORQUE launcher constructor.
 \item{\code{tls}}{See \code{\link[=crew_launcher_pbs]{crew_launcher_pbs()}}.}
 
 \item{\code{r_arguments}}{See \code{\link[=crew_launcher_pbs]{crew_launcher_pbs()}}.}
+
+\item{\code{options_metrics}}{See \code{\link[=crew_launcher_pbs]{crew_launcher_pbs()}}.}
 
 \item{\code{verbose}}{See \code{\link[=crew_launcher_pbs]{crew_launcher_pbs()}}.}
 

@@ -28,6 +28,7 @@ crew_controller_lsf(
   garbage_collection = FALSE,
   launch_max = 5L,
   r_arguments = c("--no-save", "--no-restore"),
+  options_metrics = crew::crew_options_metrics(),
   verbose = FALSE,
   command_submit = as.character(Sys.which("bsub")),
   command_terminate = as.character(Sys.which("bkill")),
@@ -140,6 +141,10 @@ to detect errors in the underlying platform.}
 to pass to \code{Rscript} (non-Windows) or \code{Rscript.exe} (Windows)
 when starting a worker. Example:
 \code{r_arguments = c("--vanilla", "--max-connections=32")}.}
+
+\item{options_metrics}{Either \code{NULL} to opt out of resource metric logging
+for workers, or an object from \code{\link[crew:crew_options_metrics]{crew_options_metrics()}} to enable
+and configure resource metric logging for workers.}
 
 \item{verbose}{Logical, whether to see console output and error messages
 when submitting worker.}

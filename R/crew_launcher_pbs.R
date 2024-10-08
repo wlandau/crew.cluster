@@ -76,6 +76,7 @@ crew_launcher_pbs <- function(
   launch_max = 5L,
   tls = crew::crew_tls(mode = "automatic"),
   r_arguments = c("--no-save", "--no-restore"),
+  options_metrics = crew::crew_options_metrics(),
   verbose = FALSE,
   command_submit = as.character(Sys.which("qsub")),
   command_terminate = as.character(Sys.which("qdel")),
@@ -116,6 +117,7 @@ crew_launcher_pbs <- function(
     launch_max = launch_max,
     tls = tls,
     r_arguments = r_arguments,
+    options_metrics = options_metrics,
     verbose = verbose,
     command_submit = command_submit,
     command_terminate = command_terminate,
@@ -200,6 +202,7 @@ crew_class_launcher_pbs <- R6::R6Class(
     #' @param launch_max See [crew_launcher_pbs()].
     #' @param tls See [crew_launcher_pbs()].
     #' @param r_arguments See [crew_launcher_pbs()].
+    #' @param options_metrics See [crew_launcher_pbs()].
     #' @param verbose See [crew_launcher_pbs()].
     #' @param command_submit See [crew_launcher_pbs()].
     #' @param command_terminate See [crew_launcher_pbs()].
@@ -228,6 +231,7 @@ crew_class_launcher_pbs <- R6::R6Class(
       launch_max = NULL,
       tls = NULL,
       r_arguments = NULL,
+      options_metrics = NULL,
       verbose = NULL,
       command_submit = NULL,
       command_terminate = NULL,
@@ -257,6 +261,7 @@ crew_class_launcher_pbs <- R6::R6Class(
         launch_max = launch_max,
         tls = tls,
         r_arguments = r_arguments,
+        options_metrics = options_metrics,
         verbose = verbose,
         command_submit = command_submit,
         command_terminate = command_terminate,
