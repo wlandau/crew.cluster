@@ -1,4 +1,4 @@
-#' @title SLURM options.
+#' @title `r lifecycle::badge('experimental')` SLURM options.
 #' @export
 #' @family slurm
 #' @description Set options for SLURM job management.

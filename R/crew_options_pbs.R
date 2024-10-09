@@ -1,4 +1,4 @@
-#' @title PBS options.
+#' @title `r lifecycle::badge('experimental')` PBS options.
 #' @export
 #' @family pbs
 #' @description Set options for PBS job management.

@@ -1,4 +1,4 @@
-#' @title SGE options.
+#' @title `r lifecycle::badge('maturing')` SGE options.
 #' @export
 #' @family sge
 #' @description Set options for SGE job management.

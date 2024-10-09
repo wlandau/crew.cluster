@@ -19,47 +19,15 @@
 #'   to actually launch a worker.
 #' @inheritSection crew.cluster-package Attribution
 #' @inheritParams crew_launcher_cluster
-#' @param slurm_log_output Character of length 1, file pattern to control
-#'   the locations of the SLURM worker log files. By default, both standard
-#'   output and standard error go to the same file.
-#'   `slurm_log_output = "crew_log_%A.txt"` translates to a line of
-#'   `#SBATCH --output=crew_log_%A.txt` in the SLURM job script,
-#'   where `%A` is replaced by the job ID of the worker.
-#'   The default is `/dev/null` to omit these logs.
-#'   Set `slurm_log_output = NULL` to omit this line from the job script.
-#' @param slurm_log_error Character of length 1, file pattern for standard
-#'   error. `slurm_log_error = "crew_log_%A.txt"` translates to a line of
-#'   `#SBATCH --error=crew_log_%A.txt` in the SLURM job script,
-#'   where `%A` is replaced by the job ID of the worker.
-#'   The default is `/dev/null` to omit these logs.
-#'   Set `slurm_log_error = NULL` to omit this line from the job script.
-#' @param slurm_memory_gigabytes_required Positive numeric of length 1
-#'   with the total number of gigabytes of memory required per node.
-#'  `slurm_memory_gigabytes_required = 2.40123`
-#'   translates to a line of `#SBATCH --mem=2041M`
-#'   in the SLURM job script.
-#'   `slurm_memory_gigabytes_required = NULL` omits this line.
-#' @param slurm_memory_gigabytes_per_cpu Positive numeric of length 1
-#'   with the gigabytes of memory required per CPU.
-#'   `slurm_memory_gigabytes_per_cpu = 2.40123`
-#'   translates to a line of `#SBATCH --mem-per-cpu=2041M`
-#'   in the SLURM job script.
-#'   `slurm_memory_gigabytes_per_cpu = NULL` omits this line.
-#' @param slurm_cpus_per_task Optional positive integer of length 1,
-#'   number of CPUs for the worker.
-#'   `slurm_cpus_per_task = 4` translates
-#'   to a line of `#SBATCH --cpus-per-task=4` in the SLURM job script.
-#'   `slurm_cpus_per_task = NULL` omits this line.
-#' @param slurm_time_minutes Numeric of length 1, number of minutes to
-#'   designate as the wall time of `crew` each worker instance on the
-#'   SLURM cluster. `slurm_time_minutes = 60` translates to a line of
-#'   `#SBATCH --time=60` in the SLURM job script. `slurm_time_minutes = NULL`
-#'   omits this line.
-#' @param slurm_partition Character of length 1, name of the SLURM partition to
-#'   create workers on. `slurm_partition = "partition1,partition2"`
-#'   translates to a line of `#SBATCH --partition=partition1,partition2`
-#'   in the SLURM job script. `slurm_partition = NULL`
-#'   omits this line.
+#' @param slurm_log_output Deprecated. Use `options_slurm` instead.
+#' @param slurm_log_error Deprecated. Use `options_slurm` instead.
+#' @param slurm_memory_gigabytes_required Deprecated.
+#'   Use `options_slurm` instead.
+#' @param slurm_memory_gigabytes_per_cpu Deprecated.
+#'   Use `options_slurm` instead.
+#' @param slurm_cpus_per_task Deprecated. Use `options_slurm` instead.
+#' @param slurm_time_minutes Deprecated. Use `options_slurm` instead.
+#' @param slurm_partition Deprecated. Use `options_slurm` instead.
 crew_launcher_slurm <- function(
   name = NULL,
   seconds_interval = 0.5,
@@ -77,18 +45,19 @@ crew_launcher_slurm <- function(
   tls = crew::crew_tls(mode = "automatic"),
   r_arguments = c("--no-save", "--no-restore"),
   options_metrics = crew::crew_options_metrics(),
-  verbose = FALSE,
-  command_submit = as.character(Sys.which("sbatch")),
-  command_terminate = as.character(Sys.which("scancel")),
+  options_slurm = crew.cluster::crew_options_slurm(),
+  verbose = NULL,
+  command_submit = NULL,
+  command_terminate = NULL,
   command_delete = NULL,
-  script_directory = tempdir(),
-  script_lines = character(0L),
-  slurm_log_output = "/dev/null",
-  slurm_log_error = "/dev/null",
+  script_directory = NULL,
+  script_lines = NULL,
+  slurm_log_output = NULL,
+  slurm_log_error = NULL,
   slurm_memory_gigabytes_required = NULL,
   slurm_memory_gigabytes_per_cpu = NULL,
   slurm_cpus_per_task = NULL,
-  slurm_time_minutes = 1440,
+  slurm_time_minutes = NULL,
   slurm_partition = NULL
 ) {
   name <- as.character(name %|||% crew::crew_random_name())
@@ -100,6 +69,33 @@ crew_launcher_slurm <- function(
       alternative = "command_terminate"
     )
     command_terminate <- command_delete
+  }
+  deprecated <- c(
+    "verbose",
+    "command_submit",
+    "command_terminate",
+    "command_delete",
+    "script_directory",
+    "script_lines",
+    "slurm_log_output",
+    "slurm_log_error",
+    "slurm_memory_gigabytes_required",
+    "slurm_memory_gigabytes_per_cpu",
+    'slurm_cpus_per_task',
+    "slurm_time_minutes",
+    "slurm_partition"
+  )
+  for (arg in deprecated) {
+    value <- get(arg)
+    crew::crew_deprecate(
+      name = arg,
+      date = "2024-10-09",
+      version = "0.3.2.9005",
+      alternative = "options_slurm argument",
+      value = value
+    )
+    field <- gsub("^slurm_", "", arg)
+    options_slurm[[field]] <- value %|||% options_slurm[[field]]
   }
   launcher <- crew_class_launcher_slurm$new(
     name = name,
@@ -118,18 +114,7 @@ crew_launcher_slurm <- function(
     tls = tls,
     r_arguments = r_arguments,
     options_metrics = options_metrics,
-    verbose = verbose,
-    command_submit = command_submit,
-    command_terminate = command_terminate,
-    script_directory = script_directory,
-    script_lines = script_lines,
-    slurm_log_output = slurm_log_output,
-    slurm_log_error = slurm_log_error,
-    slurm_memory_gigabytes_per_cpu = slurm_memory_gigabytes_per_cpu,
-    slurm_memory_gigabytes_required = slurm_memory_gigabytes_required,
-    slurm_cpus_per_task = slurm_cpus_per_task,
-    slurm_time_minutes = slurm_time_minutes,
-    slurm_partition = slurm_partition
+    options_cluster = options_slurm
   )
   launcher$validate()
   launcher
@@ -146,142 +131,19 @@ crew_class_launcher_slurm <- R6::R6Class(
   inherit = crew_class_launcher_cluster,
   cloneable = FALSE,
   private = list(
-    .slurm_log_output = NULL,
-    .slurm_log_error = NULL,
-    .slurm_memory_gigabytes_required = NULL,
-    .slurm_memory_gigabytes_per_cpu = NULL,
-    .slurm_cpus_per_task = NULL,
-    .slurm_time_minutes = NULL,
-    .slurm_partition = NULL,
     .args_terminate = function(name) {
       c("--name", shQuote(name))
     }
   ),
-  active = list(
-    #' @field slurm_log_output See [crew_launcher_slurm()].
-    slurm_log_output = function() {
-      .subset2(private, ".slurm_log_output")
-    },
-    #' @field slurm_log_error See [crew_launcher_slurm()].
-    slurm_log_error = function() {
-      .subset2(private, ".slurm_log_error")
-    },
-    #' @field slurm_memory_gigabytes_required See [crew_launcher_slurm()].
-    slurm_memory_gigabytes_required = function() {
-      .subset2(private, ".slurm_memory_gigabytes_required")
-    },
-    #' @field slurm_memory_gigabytes_per_cpu See [crew_launcher_slurm()].
-    slurm_memory_gigabytes_per_cpu = function() {
-      .subset2(private, ".slurm_memory_gigabytes_per_cpu")
-    },
-    #' @field slurm_cpus_per_task See [crew_launcher_slurm()].
-    slurm_cpus_per_task = function() {
-      .subset2(private, ".slurm_cpus_per_task")
-    },
-    #' @field slurm_time_minutes See [crew_launcher_slurm()].
-    slurm_time_minutes = function() {
-      .subset2(private, ".slurm_time_minutes")
-    },
-    #' @field slurm_partition See See [crew_launcher_slurm()].
-    slurm_partition = function() {
-      .subset2(private, ".slurm_partition")
-    }
-  ),
   public = list(
-    #' @description SLURM launcher constructor.
-    #' @return an SLURM launcher object.
-    #' @param name See [crew_launcher_slurm()].
-    #' @param seconds_interval See [crew_launcher_slurm()].
-    #' @param seconds_timeout See [crew_launcher_slurm()].
-    #' @param seconds_launch See [crew_launcher_slurm()].
-    #' @param seconds_idle See [crew_launcher_slurm()].
-    #' @param seconds_wall See [crew_launcher_slurm()].
-    #' @param tasks_max See [crew_launcher_slurm()].
-    #' @param tasks_timers See [crew_launcher_slurm()].
-    #' @param reset_globals See [crew_launcher_slurm()].
-    #' @param reset_packages See [crew_launcher_slurm()].
-    #' @param reset_options See [crew_launcher_slurm()].
-    #' @param garbage_collection See [crew_launcher_slurm()].
-    #' @param launch_max See [crew_launcher_slurm()].
-    #' @param tls See [crew_launcher_slurm()].
-    #' @param r_arguments See [crew_launcher_slurm()].
-    #' @param options_metrics See [crew_launcher_slurm()].
-    #' @param verbose See [crew_launcher_slurm()].
-    #' @param command_submit See [crew_launcher_sge()].
-    #' @param command_terminate See [crew_launcher_sge()].
-    #' @param script_directory See [crew_launcher_sge()].
-    #' @param script_lines See [crew_launcher_sge()].
-    #' @param slurm_log_output See [crew_launcher_slurm()].
-    #' @param slurm_log_error See [crew_launcher_slurm()].
-    #' @param slurm_memory_gigabytes_required See [crew_launcher_slurm()].
-    #' @param slurm_memory_gigabytes_per_cpu See [crew_launcher_slurm()].
-    #' @param slurm_cpus_per_task See [crew_launcher_slurm()].
-    #' @param slurm_time_minutes See [crew_launcher_slurm()].
-    #' @param slurm_partition See [crew_launcher_slurm()].
-    initialize = function(
-      name = NULL,
-      seconds_interval = NULL,
-      seconds_timeout = NULL,
-      seconds_launch = NULL,
-      seconds_idle = NULL,
-      seconds_wall = NULL,
-      tasks_max = NULL,
-      tasks_timers = NULL,
-      reset_globals = NULL,
-      reset_packages = NULL,
-      reset_options = NULL,
-      garbage_collection = NULL,
-      launch_max = NULL,
-      tls = NULL,
-      r_arguments = NULL,
-      options_metrics = NULL,
-      verbose = NULL,
-      command_submit = NULL,
-      command_terminate = NULL,
-      script_directory = NULL,
-      script_lines = NULL,
-      slurm_log_output = NULL,
-      slurm_log_error = NULL,
-      slurm_memory_gigabytes_required = NULL,
-      slurm_memory_gigabytes_per_cpu = NULL,
-      slurm_cpus_per_task = NULL,
-      slurm_time_minutes = NULL,
-      slurm_partition = NULL
-    ) {
-      super$initialize(
-        name = name,
-        seconds_interval = seconds_interval,
-        seconds_timeout = seconds_timeout,
-        seconds_launch = seconds_launch,
-        seconds_idle = seconds_idle,
-        seconds_wall = seconds_wall,
-        tasks_max = tasks_max,
-        tasks_timers = tasks_timers,
-        reset_globals = reset_globals,
-        reset_packages = reset_packages,
-        reset_options = reset_options,
-        garbage_collection = garbage_collection,
-        launch_max = launch_max,
-        tls = tls,
-        r_arguments = r_arguments,
-        options_metrics = options_metrics,
-        verbose = verbose,
-        command_submit = command_submit,
-        command_terminate = command_terminate,
-        script_directory = script_directory,
-        script_lines = script_lines
-      )
-      private$.slurm_log_output <- slurm_log_output
-      private$.slurm_log_error <- slurm_log_error
-      private$.slurm_memory_gigabytes_required <- slurm_memory_gigabytes_required # nolint
-      private$.slurm_memory_gigabytes_per_cpu <- slurm_memory_gigabytes_per_cpu
-      private$.slurm_cpus_per_task <- slurm_cpus_per_task
-      private$.slurm_time_minutes <- slurm_time_minutes
-      private$.slurm_partition <- slurm_partition
-    },
     #' @description Validate the launcher.
     #' @return `NULL` (invisibly). Throws an error if a field is invalid.
     validate = function() {
+      crew::crew_assert(
+        private$.options_cluster,
+        inherits(., "crew_options_slurm"),
+        message = "crew_options must be a crew_options_slurm() object."
+      )
       super$validate() # nolint
       invisible()
     },
@@ -307,57 +169,60 @@ crew_class_launcher_slurm <- R6::R6Class(
         "#!/bin/sh",
         paste0("#SBATCH --job-name=", name),
         if_any(
-          is.null(private$.slurm_log_output),
+          is.null(private$.options_cluster$log_output),
           character(0L),
-          paste0("#SBATCH --output=", private$.slurm_log_output)
+          paste0("#SBATCH --output=", private$.options_cluster$log_output)
         ),
         if_any(
-          is.null(private$.slurm_log_error),
+          is.null(private$.options_cluster$log_error),
           character(0L),
-          paste0("#SBATCH --error=", private$.slurm_log_error)
+          paste0("#SBATCH --error=", private$.options_cluster$log_error)
         ),
         if_any(
-          is.null(private$.slurm_memory_gigabytes_required),
+          is.null(private$.options_cluster$memory_gigabytes_required),
           character(0L),
           sprintf(
             "#SBATCH --mem=%sM",
             as.integer(
               round(
-                x = 1024 * private$.slurm_memory_gigabytes_required,
+                x = 1024 * private$.options_cluster$memory_gigabytes_required,
                 digits = 0L
               )
             )
           )
         ),
         if_any(
-          is.null(private$.slurm_memory_gigabytes_per_cpu),
+          is.null(private$.options_cluster$memory_gigabytes_per_cpu),
           character(0L),
           sprintf(
             "#SBATCH --mem-per-cpu=%sM",
             as.integer(
               round(
-                x = 1024 * private$.slurm_memory_gigabytes_per_cpu,
+                x = 1024 * private$.options_cluster$memory_gigabytes_per_cpu,
                 digits = 0L
               )
             )
           )
         ),
         if_any(
-          is.null(private$.slurm_cpus_per_task),
+          is.null(private$.options_cluster$cpus_per_task),
           character(0L),
-          paste0("#SBATCH --cpus-per-task=", private$.slurm_cpus_per_task)
+          paste0(
+            "#SBATCH --cpus-per-task=",
+            private$.options_cluster$cpus_per_task
+          )
         ),
         if_any(
-          is.null(private$.slurm_time_minutes),
+          is.null(private$.options_cluster$time_minutes),
           character(0L),
-          paste0("#SBATCH --time=", private$.slurm_time_minutes)
+          paste0("#SBATCH --time=", private$.options_cluster$time_minutes)
         ),
         if_any(
-          is.null(private$.slurm_partition),
+          is.null(private$.options_cluster$partition),
           character(0L),
-          paste0("#SBATCH --partition=", private$.slurm_partition)
+          paste0("#SBATCH --partition=", private$.options_cluster$partition)
         ),
-        private$.script_lines
+        private$.options_cluster$script_lines
       )
     }
   )

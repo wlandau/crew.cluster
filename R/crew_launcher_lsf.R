@@ -136,12 +136,12 @@ crew_class_launcher_lsf <- R6::R6Class(
     #' @description Validate the launcher.
     #' @return `NULL` (invisibly). Throws an error if a field is invalid.
     validate = function() {
-      super$validate() # nolint
       crew::crew_assert(
         private$.options_cluster,
         inherits(., "crew_options_lsf"),
         message = "crew_options must be a crew_options_lsf() object."
       )
+      super$validate() # nolint
       invisible()
     },
     #' @description Generate the job script.

@@ -1,4 +1,4 @@
-#' @title LSF options.
+#' @title `r lifecycle::badge('experimental')` LSF options.
 #' @export
 #' @family lsf
 #' @description Set options for LSF job management.
