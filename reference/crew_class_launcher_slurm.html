@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">crew.cluster</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.3.2.9004</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.3.2.9005</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -60,43 +60,12 @@ source code for additional attribution.</p>
 <code><a href="crew_class_monitor_slurm.html">crew_class_monitor_slurm</a></code>,
 <code><a href="crew_controller_slurm.html">crew_controller_slurm</a>()</code>,
 <code><a href="crew_launcher_slurm.html">crew_launcher_slurm</a>()</code>,
-<code><a href="crew_monitor_slurm.html">crew_monitor_slurm</a>()</code></p></div>
+<code><a href="crew_monitor_slurm.html">crew_monitor_slurm</a>()</code>,
+<code><a href="crew_options_slurm.html">crew_options_slurm</a>()</code></p></div>
     </div>
     <div class="section level2">
     <h2 id="super-classes">Super classes<a class="anchor" aria-label="anchor" href="#super-classes"></a></h2>
     <p><code><a href="https://wlandau.github.io/crew/reference/crew_class_launcher.html" class="external-link">crew::crew_class_launcher</a></code> -&gt; <code><a href="crew_class_launcher_cluster.html">crew.cluster::crew_class_launcher_cluster</a></code> -&gt; <code>crew_class_launcher_slurm</code></p>
-    </div>
-    <div class="section level2">
-    <h2 id="active-bindings">Active bindings<a class="anchor" aria-label="anchor" href="#active-bindings"></a></h2>
-    <p></p><div class="r6-active-bindings"><dl><dt><code>slurm_log_output</code></dt>
-<dd><p>See <code><a href="crew_launcher_slurm.html">crew_launcher_slurm()</a></code>.</p></dd>
-
-
-<dt><code>slurm_log_error</code></dt>
-<dd><p>See <code><a href="crew_launcher_slurm.html">crew_launcher_slurm()</a></code>.</p></dd>
-
-
-<dt><code>slurm_memory_gigabytes_required</code></dt>
-<dd><p>See <code><a href="crew_launcher_slurm.html">crew_launcher_slurm()</a></code>.</p></dd>
-
-
-<dt><code>slurm_memory_gigabytes_per_cpu</code></dt>
-<dd><p>See <code><a href="crew_launcher_slurm.html">crew_launcher_slurm()</a></code>.</p></dd>
-
-
-<dt><code>slurm_cpus_per_task</code></dt>
-<dd><p>See <code><a href="crew_launcher_slurm.html">crew_launcher_slurm()</a></code>.</p></dd>
-
-
-<dt><code>slurm_time_minutes</code></dt>
-<dd><p>See <code><a href="crew_launcher_slurm.html">crew_launcher_slurm()</a></code>.</p></dd>
-
-
-<dt><code>slurm_partition</code></dt>
-<dd><p>See See <code><a href="crew_launcher_slurm.html">crew_launcher_slurm()</a></code>.</p></dd>
-
-
-</dl><p></p></div>
     </div>
     <div class="section level2">
     <h2 id="methods">Methods<a class="anchor" aria-label="anchor" href="#methods"></a></h2>
@@ -104,8 +73,7 @@ source code for additional attribution.</p>
 <div class="section">
 <h3 id="public-methods">Public methods<a class="anchor" aria-label="anchor" href="#public-methods"></a></h3>
 
-<ul><li><p><a href="#method-crew_class_launcher_slurm-new"><code>crew_class_launcher_slurm$new()</code></a></p></li>
-<li><p><a href="#method-crew_class_launcher_slurm-validate"><code>crew_class_launcher_slurm$validate()</code></a></p></li>
+<ul><li><p><a href="#method-crew_class_launcher_slurm-validate"><code>crew_class_launcher_slurm$validate()</code></a></p></li>
 <li><p><a href="#method-crew_class_launcher_slurm-script"><code>crew_class_launcher_slurm$script()</code></a></p></li>
 </ul></div><p><details><summary>Inherited methods</summary><ul><li><span class="pkg-link" data-pkg="crew" data-topic="crew_class_launcher" data-id="active"><a href="https://wlandau.github.io/crew/reference/crew_class_launcher.html#method-active"><code>crew::crew_class_launcher$active()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="crew" data-topic="crew_class_launcher" data-id="booting"><a href="https://wlandau.github.io/crew/reference/crew_class_launcher.html#method-booting"><code>crew::crew_class_launcher$booting()</code></a></span></li>
@@ -125,186 +93,30 @@ source code for additional attribution.</p>
 <li><span class="pkg-link" data-pkg="crew" data-topic="crew_class_launcher" data-id="terminate_workers"><a href="https://wlandau.github.io/crew/reference/crew_class_launcher.html#method-terminate_workers"><code>crew::crew_class_launcher$terminate_workers()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="crew" data-topic="crew_class_launcher" data-id="unlaunched"><a href="https://wlandau.github.io/crew/reference/crew_class_launcher.html#method-unlaunched"><code>crew::crew_class_launcher$unlaunched()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="crew" data-topic="crew_class_launcher" data-id="wait"><a href="https://wlandau.github.io/crew/reference/crew_class_launcher.html#method-wait"><code>crew::crew_class_launcher$wait()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="crew.cluster" data-topic="crew_class_launcher_cluster" data-id="initialize"><a href="crew_class_launcher_cluster.html#method-initialize"><code>crew.cluster::crew_class_launcher_cluster$initialize()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="crew.cluster" data-topic="crew_class_launcher_cluster" data-id="launch_worker"><a href="crew_class_launcher_cluster.html#method-launch_worker"><code>crew.cluster::crew_class_launcher_cluster$launch_worker()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="crew.cluster" data-topic="crew_class_launcher_cluster" data-id="terminate_worker"><a href="crew_class_launcher_cluster.html#method-terminate_worker"><code>crew.cluster::crew_class_launcher_cluster$terminate_worker()</code></a></span></li>
-</ul></details></p><hr><a id="method-crew_class_launcher_slurm-new"></a><div class="section">
-<h3 id="method-new-">Method <code>new()</code><a class="anchor" aria-label="anchor" href="#method-new-"></a></h3>
-<p>SLURM launcher constructor.</p><div class="section">
-<h4 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a></h4>
-<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va"><a href="../reference/crew_class_launcher_slurm.html">crew_class_launcher_slurm</a></span><span class="op">$</span><span class="fu">new</span><span class="op">(</span></span>
-<span>  name <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  seconds_interval <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  seconds_timeout <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  seconds_launch <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  seconds_idle <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  seconds_wall <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  tasks_max <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  tasks_timers <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  reset_globals <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  reset_packages <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  reset_options <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  garbage_collection <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  launch_max <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  tls <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  r_arguments <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  options_metrics <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  verbose <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  command_submit <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  command_terminate <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  script_directory <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  script_lines <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  slurm_log_output <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  slurm_log_error <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  slurm_memory_gigabytes_required <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  slurm_memory_gigabytes_per_cpu <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  slurm_cpus_per_task <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  slurm_time_minutes <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  slurm_partition <span class="op">=</span> <span class="cn">NULL</span></span>
-<span><span class="op">)</span></span></code></pre></div><p></p></div>
-</div>
-
-<div class="section">
-<h4 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h4>
-<p></p><div class="arguments"><dl><dt><code>name</code></dt>
-<dd><p>See <code><a href="crew_launcher_slurm.html">crew_launcher_slurm()</a></code>.</p></dd>
-
-
-<dt><code>seconds_interval</code></dt>
-<dd><p>See <code><a href="crew_launcher_slurm.html">crew_launcher_slurm()</a></code>.</p></dd>
-
-
-<dt><code>seconds_timeout</code></dt>
-<dd><p>See <code><a href="crew_launcher_slurm.html">crew_launcher_slurm()</a></code>.</p></dd>
-
-
-<dt><code>seconds_launch</code></dt>
-<dd><p>See <code><a href="crew_launcher_slurm.html">crew_launcher_slurm()</a></code>.</p></dd>
-
-
-<dt><code>seconds_idle</code></dt>
-<dd><p>See <code><a href="crew_launcher_slurm.html">crew_launcher_slurm()</a></code>.</p></dd>
-
-
-<dt><code>seconds_wall</code></dt>
-<dd><p>See <code><a href="crew_launcher_slurm.html">crew_launcher_slurm()</a></code>.</p></dd>
-
-
-<dt><code>tasks_max</code></dt>
-<dd><p>See <code><a href="crew_launcher_slurm.html">crew_launcher_slurm()</a></code>.</p></dd>
-
-
-<dt><code>tasks_timers</code></dt>
-<dd><p>See <code><a href="crew_launcher_slurm.html">crew_launcher_slurm()</a></code>.</p></dd>
-
-
-<dt><code>reset_globals</code></dt>
-<dd><p>See <code><a href="crew_launcher_slurm.html">crew_launcher_slurm()</a></code>.</p></dd>
-
-
-<dt><code>reset_packages</code></dt>
-<dd><p>See <code><a href="crew_launcher_slurm.html">crew_launcher_slurm()</a></code>.</p></dd>
-
-
-<dt><code>reset_options</code></dt>
-<dd><p>See <code><a href="crew_launcher_slurm.html">crew_launcher_slurm()</a></code>.</p></dd>
-
-
-<dt><code>garbage_collection</code></dt>
-<dd><p>See <code><a href="crew_launcher_slurm.html">crew_launcher_slurm()</a></code>.</p></dd>
-
-
-<dt><code>launch_max</code></dt>
-<dd><p>See <code><a href="crew_launcher_slurm.html">crew_launcher_slurm()</a></code>.</p></dd>
-
-
-<dt><code>tls</code></dt>
-<dd><p>See <code><a href="crew_launcher_slurm.html">crew_launcher_slurm()</a></code>.</p></dd>
-
-
-<dt><code>r_arguments</code></dt>
-<dd><p>See <code><a href="crew_launcher_slurm.html">crew_launcher_slurm()</a></code>.</p></dd>
-
-
-<dt><code>options_metrics</code></dt>
-<dd><p>See <code><a href="crew_launcher_slurm.html">crew_launcher_slurm()</a></code>.</p></dd>
-
-
-<dt><code>verbose</code></dt>
-<dd><p>See <code><a href="crew_launcher_slurm.html">crew_launcher_slurm()</a></code>.</p></dd>
-
-
-<dt><code>command_submit</code></dt>
-<dd><p>See <code><a href="crew_launcher_sge.html">crew_launcher_sge()</a></code>.</p></dd>
-
-
-<dt><code>command_terminate</code></dt>
-<dd><p>See <code><a href="crew_launcher_sge.html">crew_launcher_sge()</a></code>.</p></dd>
-
-
-<dt><code>script_directory</code></dt>
-<dd><p>See <code><a href="crew_launcher_sge.html">crew_launcher_sge()</a></code>.</p></dd>
-
-
-<dt><code>script_lines</code></dt>
-<dd><p>See <code><a href="crew_launcher_sge.html">crew_launcher_sge()</a></code>.</p></dd>
-
-
-<dt><code>slurm_log_output</code></dt>
-<dd><p>See <code><a href="crew_launcher_slurm.html">crew_launcher_slurm()</a></code>.</p></dd>
-
-
-<dt><code>slurm_log_error</code></dt>
-<dd><p>See <code><a href="crew_launcher_slurm.html">crew_launcher_slurm()</a></code>.</p></dd>
-
-
-<dt><code>slurm_memory_gigabytes_required</code></dt>
-<dd><p>See <code><a href="crew_launcher_slurm.html">crew_launcher_slurm()</a></code>.</p></dd>
-
-
-<dt><code>slurm_memory_gigabytes_per_cpu</code></dt>
-<dd><p>See <code><a href="crew_launcher_slurm.html">crew_launcher_slurm()</a></code>.</p></dd>
-
-
-<dt><code>slurm_cpus_per_task</code></dt>
-<dd><p>See <code><a href="crew_launcher_slurm.html">crew_launcher_slurm()</a></code>.</p></dd>
-
-
-<dt><code>slurm_time_minutes</code></dt>
-<dd><p>See <code><a href="crew_launcher_slurm.html">crew_launcher_slurm()</a></code>.</p></dd>
-
-
-<dt><code>slurm_partition</code></dt>
-<dd><p>See <code><a href="crew_launcher_slurm.html">crew_launcher_slurm()</a></code>.</p></dd>
-
-
-</dl><p></p></div>
-</div>
-<div class="section">
-<h4 id="returns">Returns<a class="anchor" aria-label="anchor" href="#returns"></a></h4>
-<p>an SLURM launcher object.</p>
-</div>
-
-</div><p></p><hr><a id="method-crew_class_launcher_slurm-validate"></a><div class="section">
+</ul></details></p><hr><a id="method-crew_class_launcher_slurm-validate"></a><div class="section">
 <h3 id="method-validate-">Method <code>validate()</code><a class="anchor" aria-label="anchor" href="#method-validate-"></a></h3>
 <p>Validate the launcher.</p><div class="section">
-<h4 id="usage-1">Usage<a class="anchor" aria-label="anchor" href="#usage-1"></a></h4>
+<h4 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">crew_class_launcher_slurm</span><span class="op">$</span><span class="fu">validate</span><span class="op">(</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="returns-1">Returns<a class="anchor" aria-label="anchor" href="#returns-1"></a></h4>
+<h4 id="returns">Returns<a class="anchor" aria-label="anchor" href="#returns"></a></h4>
 <p><code>NULL</code> (invisibly). Throws an error if a field is invalid.</p>
 </div>
 
 </div><p></p><hr><a id="method-crew_class_launcher_slurm-script"></a><div class="section">
 <h3 id="method-script-">Method <code>script()</code><a class="anchor" aria-label="anchor" href="#method-script-"></a></h3>
 <p>Generate the job script.</p><div class="section">
-<h4 id="usage-2">Usage<a class="anchor" aria-label="anchor" href="#usage-2"></a></h4>
+<h4 id="usage-1">Usage<a class="anchor" aria-label="anchor" href="#usage-1"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">crew_class_launcher_slurm</span><span class="op">$</span><span class="fu">script</span><span class="op">(</span><span class="va">name</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="arguments-1">Arguments<a class="anchor" aria-label="anchor" href="#arguments-1"></a></h4>
+<h4 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>name</code></dt>
 <dd><p>Character of length 1, name of the job. For inspection
 purposes, you can supply a mock job name.</p></dd>
@@ -321,7 +133,7 @@ the bottom of the script at launch time.</p>
 </div>
 
 <div class="section">
-<h4 id="returns-2">Returns<a class="anchor" aria-label="anchor" href="#returns-2"></a></h4>
+<h4 id="returns-1">Returns<a class="anchor" aria-label="anchor" href="#returns-1"></a></h4>
 <p>Character vector of the lines of the job script.</p>
 </div>
 <div class="section">

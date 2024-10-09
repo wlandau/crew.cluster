@@ -9,7 +9,7 @@ launch workers on LSF workers."><meta property="og:image" content="/logo.svg"></
 
     <a class="navbar-brand me-2" href="../index.html">crew.cluster</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.3.2.9004</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.3.2.9005</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -65,15 +65,16 @@ launch workers on LSF workers.</p>
 <span>  launch_max <span class="op">=</span> <span class="fl">5L</span>,</span>
 <span>  r_arguments <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"--no-save"</span>, <span class="st">"--no-restore"</span><span class="op">)</span>,</span>
 <span>  options_metrics <span class="op">=</span> <span class="fu">crew</span><span class="fu">::</span><span class="fu"><a href="https://wlandau.github.io/crew/reference/crew_options_metrics.html" class="external-link">crew_options_metrics</a></span><span class="op">(</span><span class="op">)</span>,</span>
-<span>  verbose <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span>  command_submit <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Sys.which.html" class="external-link">Sys.which</a></span><span class="op">(</span><span class="st">"bsub"</span><span class="op">)</span><span class="op">)</span>,</span>
-<span>  command_terminate <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Sys.which.html" class="external-link">Sys.which</a></span><span class="op">(</span><span class="st">"bkill"</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>  options_cluster <span class="op">=</span> <span class="fu">crew.cluster</span><span class="fu">::</span><span class="fu"><a href="crew_options_lsf.html">crew_options_lsf</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  verbose <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  command_submit <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  command_terminate <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  command_delete <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  script_directory <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span>,</span>
-<span>  script_lines <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">character</a></span><span class="op">(</span><span class="fl">0L</span><span class="op">)</span>,</span>
-<span>  lsf_cwd <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/getwd.html" class="external-link">getwd</a></span><span class="op">(</span><span class="op">)</span>,</span>
-<span>  lsf_log_output <span class="op">=</span> <span class="st">"/dev/null"</span>,</span>
-<span>  lsf_log_error <span class="op">=</span> <span class="st">"/dev/null"</span>,</span>
+<span>  script_directory <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  script_lines <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  lsf_cwd <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  lsf_log_output <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  lsf_log_error <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  lsf_memory_gigabytes_limit <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  lsf_memory_gigabytes_required <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  lsf_cores <span class="op">=</span> <span class="cn">NULL</span></span>
@@ -232,25 +233,21 @@ for workers, or an object from <code><a href="https://wlandau.github.io/crew/ref
 and configure resource metric logging for workers.</p></dd>
 
 
+<dt id="arg-options-cluster">options_cluster<a class="anchor" aria-label="anchor" href="#arg-options-cluster"></a></dt>
+<dd><p>An options list from
+<code><a href="crew_options_lsf.html">crew_options_lsf()</a></code> with cluster-specific configuration options.</p></dd>
+
+
 <dt id="arg-verbose">verbose<a class="anchor" aria-label="anchor" href="#arg-verbose"></a></dt>
-<dd><p>Logical, whether to see console output and error messages
-when submitting worker.</p></dd>
+<dd><p>Deprecated. Use <code>options_cluster</code> instead.</p></dd>
 
 
 <dt id="arg-command-submit">command_submit<a class="anchor" aria-label="anchor" href="#arg-command-submit"></a></dt>
-<dd><p>Character of length 1,
-file path to the executable to submit a worker job.</p></dd>
+<dd><p>Deprecated. Use <code>options_cluster</code> instead.</p></dd>
 
 
 <dt id="arg-command-terminate">command_terminate<a class="anchor" aria-label="anchor" href="#arg-command-terminate"></a></dt>
-<dd><p>Character of length 1,
-file path to the executable to terminate a worker job.
-Set to <code>""</code> to skip manually terminating the worker.
-Unless there is an issue with the platform,
-the job should still exit thanks to the NNG-powered network programming
-capabilities of <code>mirai</code>. Still, if you set <code>command_terminate = ""</code>,
-you are assuming extra responsibility for manually monitoring
-your jobs on the cluster and manually terminating jobs as appropriate.</p></dd>
+<dd><p>Deprecated. Use <code>options_cluster</code> instead.</p></dd>
 
 
 <dt id="arg-command-delete">command_delete<a class="anchor" aria-label="anchor" href="#arg-command-delete"></a></dt>
@@ -259,76 +256,37 @@ Use <code>command_terminate</code> instead.</p></dd>
 
 
 <dt id="arg-script-directory">script_directory<a class="anchor" aria-label="anchor" href="#arg-script-directory"></a></dt>
-<dd><p>Character of length 1, directory path to the
-job scripts. Just before each job submission, a job script
-is created in this folder. Script base names are unique to each
-launcher and worker, and the launcher deletes the script when the
-worker is manually terminated. <code><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir()</a></code> is the default, but it
-might not work for some systems.
-<code>tools::R_user_dir("crew.cluster", which = "cache")</code>
-is another reasonable choice.</p></dd>
+<dd><p>Deprecated. Use <code>options_cluster</code> instead.</p></dd>
 
 
 <dt id="arg-script-lines">script_lines<a class="anchor" aria-label="anchor" href="#arg-script-lines"></a></dt>
-<dd><p>Optional character vector of additional lines to be
-added to the job script just after the more common flags.
-An example would be <code>script_lines = "module load R"</code> if your cluster
-supports R through an environment module.</p></dd>
+<dd><p>Deprecated. Use <code>options_cluster</code> instead.</p></dd>
 
 
 <dt id="arg-lsf-cwd">lsf_cwd<a class="anchor" aria-label="anchor" href="#arg-lsf-cwd"></a></dt>
-<dd><p>Character of length 1, directory to
-launch the worker from (as opposed to
-the system default). <code>lsf_cwd = "/home"</code> translates to a line of
-<code>#BSUB -cwd /home</code> in the LSF job script. <code>lsf_cwd = getwd()</code> is the
-default, which launches workers from the current working directory.
-Set <code>lsf_cwd = NULL</code> to omit this line from the job script.</p></dd>
+<dd><p>Deprecated. Use <code>options_cluster</code> instead.</p></dd>
 
 
 <dt id="arg-lsf-log-output">lsf_log_output<a class="anchor" aria-label="anchor" href="#arg-lsf-log-output"></a></dt>
-<dd><p>Character of length 1, file pattern to control
-the locations of the LSF worker log files. By default, both standard
-output and standard error go to the same file.
-<code>lsf_log_output = "crew_log_%J.log"</code> translates to a line of
-<code>#BSUB -o crew_log_%J.log</code> in the LSF job script,
-where <code>%J</code> is replaced by the job ID of the worker.
-The default is <code>/dev/null</code> to omit these logs.
-Set <code>lsf_log_output = NULL</code> to omit this line from the job script.</p></dd>
+<dd><p>Deprecated. Use <code>options_cluster</code> instead.</p></dd>
 
 
 <dt id="arg-lsf-log-error">lsf_log_error<a class="anchor" aria-label="anchor" href="#arg-lsf-log-error"></a></dt>
-<dd><p>Character of length 1, file pattern for standard
-error. <code>lsf_log_error = "crew_error_%J.err"</code> translates to a line of
-<code>#BSUB -e crew_error_%J.err</code> in the LSF job script,
-where <code>%J</code> is replaced by the job ID of the worker.
-The default is <code>/dev/null</code> to omit these logs.
-Set <code>lsf_log_error = NULL</code> to omit this line from the job script.</p></dd>
+<dd><p>Deprecated. Use <code>options_cluster</code> instead.</p></dd>
 
 
 <dt id="arg-lsf-memory-gigabytes-limit">lsf_memory_gigabytes_limit<a class="anchor" aria-label="anchor" href="#arg-lsf-memory-gigabytes-limit"></a></dt>
-<dd><p>Positive numeric of length 1
-with the limit in gigabytes
-<code>lsf_memory_gigabytes_limit = 4</code>
-translates to a line of <code>#BSUB -M 4G</code>
-in the LSF job script.
-<code>lsf_memory_gigabytes_limit = NULL</code> omits this line.</p></dd>
+<dd><p>Deprecated.
+Use <code>options_cluster</code> instead.</p></dd>
 
 
 <dt id="arg-lsf-memory-gigabytes-required">lsf_memory_gigabytes_required<a class="anchor" aria-label="anchor" href="#arg-lsf-memory-gigabytes-required"></a></dt>
-<dd><p>Positive numeric of length 1
-with the memory requirement in gigabytes
-<code>lsf_memory_gigabytes_required = 4</code>
-translates to a line of <code>#BSUB -R 'rusage[mem=4G]'</code>
-in the LSF job script.
-<code>lsf_memory_gigabytes_required = NULL</code> omits this line.</p></dd>
+<dd><p>Deprecated.
+Use <code>options_cluster</code> instead.</p></dd>
 
 
 <dt id="arg-lsf-cores">lsf_cores<a class="anchor" aria-label="anchor" href="#arg-lsf-cores"></a></dt>
-<dd><p>Optional positive integer of length 1,
-number of CPU cores for the worker.
-<code>lsf_cores = 4</code> translates
-to a line of <code>#BSUB -n 4</code> in the LSF job script.
-<code>lsf_cores = NULL</code> omits this line.</p></dd>
+<dd><p>Deprecated. Use <code>options_cluster</code> instead.</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -355,7 +313,8 @@ source code for additional attribution.</p>
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
     <div class="dont-index"><p>Other lsf:
 <code><a href="crew_class_launcher_lsf.html">crew_class_launcher_lsf</a></code>,
-<code><a href="crew_launcher_lsf.html">crew_launcher_lsf</a>()</code></p></div>
+<code><a href="crew_launcher_lsf.html">crew_launcher_lsf</a>()</code>,
+<code><a href="crew_options_lsf.html">crew_options_lsf</a>()</code></p></div>
     </div>
 
     <div class="section level2">

@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">crew.cluster</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.3.2.9004</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.3.2.9005</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -50,8 +50,7 @@
 
 
 <dl><dt id="arg-verbose">verbose<a class="anchor" aria-label="anchor" href="#arg-verbose"></a></dt>
-<dd><p>Logical, whether to see console output and error messages
-when submitting worker.</p></dd>
+<dd><p>Deprecated. Use <code>options_cluster</code> instead.</p></dd>
 
 
 <dt id="arg-command-list">command_list<a class="anchor" aria-label="anchor" href="#arg-command-list"></a></dt>
@@ -60,14 +59,7 @@ file path to the executable to list jobs.</p></dd>
 
 
 <dt id="arg-command-terminate">command_terminate<a class="anchor" aria-label="anchor" href="#arg-command-terminate"></a></dt>
-<dd><p>Character of length 1,
-file path to the executable to terminate a worker job.
-Set to <code>""</code> to skip manually terminating the worker.
-Unless there is an issue with the platform,
-the job should still exit thanks to the NNG-powered network programming
-capabilities of <code>mirai</code>. Still, if you set <code>command_terminate = ""</code>,
-you are assuming extra responsibility for manually monitoring
-your jobs on the cluster and manually terminating jobs as appropriate.</p></dd>
+<dd><p>Deprecated. Use <code>options_cluster</code> instead.</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -75,7 +67,8 @@ your jobs on the cluster and manually terminating jobs as appropriate.</p></dd>
     <div class="dont-index"><p>Other cluster:
 <code><a href="crew_class_launcher_cluster.html">crew_class_launcher_cluster</a></code>,
 <code><a href="crew_class_monitor_cluster.html">crew_class_monitor_cluster</a></code>,
-<code><a href="crew_launcher_cluster.html">crew_launcher_cluster</a>()</code></p></div>
+<code><a href="crew_launcher_cluster.html">crew_launcher_cluster</a>()</code>,
+<code><a href="crew_options_cluster.html">crew_options_cluster</a>()</code></p></div>
     </div>
 
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

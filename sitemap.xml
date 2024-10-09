@@ -29,6 +29,11 @@
 <url><loc>/reference/crew_monitor_cluster.html</loc></url>
 <url><loc>/reference/crew_monitor_sge.html</loc></url>
 <url><loc>/reference/crew_monitor_slurm.html</loc></url>
+<url><loc>/reference/crew_options_cluster.html</loc></url>
+<url><loc>/reference/crew_options_lsf.html</loc></url>
+<url><loc>/reference/crew_options_pbs.html</loc></url>
+<url><loc>/reference/crew_options_sge.html</loc></url>
+<url><loc>/reference/crew_options_slurm.html</loc></url>
 <url><loc>/reference/index.html</loc></url>
 </urlset>
 
