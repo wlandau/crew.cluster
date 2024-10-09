@@ -3,8 +3,10 @@ test_that("SGE monitor terminate one job at a time", {
     name = "my_workflow",
     workers = 2L,
     seconds_idle = 600,
-    script_lines = paste0("module load R/", getRversion()),
-    verbose = TRUE
+    options_cluster = crew_options_sge(
+      script_lines = paste0("module load R/", getRversion()),
+      verbose = TRUE
+    )
   )
   on.exit(controller$terminate())
   controller$start()
