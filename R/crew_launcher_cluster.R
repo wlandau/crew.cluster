@@ -222,29 +222,6 @@ crew_class_launcher_cluster <- R6::R6Class(
     #' @return `NULL` (invisibly). Throws an error if a field is invalid.
     validate = function() {
       super$validate() # nolint
-      crew::crew_assert(
-        private$.verbose,
-        isTRUE(.) || isFALSE(.),
-        message = "the \"verbose\" field is not a length-1 logical."
-      )
-      fields <- c("command_submit", "command_submit", "script_directory")
-      for (field in fields) {
-        crew::crew_assert(
-          self[[field]],
-          is.character(.),
-          length(.) == 1L,
-          !anyNA(.),
-          message = paste(field, "must be a valid length-1 character string.")
-        )
-      }
-      if (!is.null(private$.script_lines)) {
-        crew::crew_assert(
-          private$.script_lines,
-          is.character(.),
-          !anyNA(.),
-          message = "invalid script_lines field"
-        )
-      }
       invisible()
     },
     #' @description Launch a local process worker which will

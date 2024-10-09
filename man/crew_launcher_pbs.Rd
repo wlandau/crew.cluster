@@ -229,6 +229,7 @@ source code for additional attribution.
 \seealso{
 Other pbs: 
 \code{\link{crew_class_launcher_pbs}},
-\code{\link{crew_controller_pbs}()}
+\code{\link{crew_controller_pbs}()},
+\code{\link{crew_options_pbs}()}
 }
 \concept{pbs}

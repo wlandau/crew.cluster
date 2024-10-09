@@ -40,7 +40,8 @@ launcher$script(name = "my_job_name")
 \seealso{
 Other lsf: 
 \code{\link{crew_controller_lsf}()},
-\code{\link{crew_launcher_lsf}()}
+\code{\link{crew_launcher_lsf}()},
+\code{\link{crew_options_lsf}()}
 }
 \concept{lsf}
 \section{Super classes}{
@@ -67,7 +68,6 @@ Other lsf:
 \subsection{Public methods}{
 \itemize{
 \item \href{#method-crew_class_launcher_lsf-new}{\code{crew_class_launcher_lsf$new()}}
-\item \href{#method-crew_class_launcher_lsf-validate}{\code{crew_class_launcher_lsf$validate()}}
 \item \href{#method-crew_class_launcher_lsf-script}{\code{crew_class_launcher_lsf$script()}}
 }
 }
@@ -94,6 +94,7 @@ Other lsf:
 <li><span class="pkg-link" data-pkg="crew" data-topic="crew_class_launcher" data-id="wait"><a href='../../crew/html/crew_class_launcher.html#method-crew_class_launcher-wait'><code>crew::crew_class_launcher$wait()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="crew.cluster" data-topic="crew_class_launcher_cluster" data-id="launch_worker"><a href='../../crew.cluster/html/crew_class_launcher_cluster.html#method-crew_class_launcher_cluster-launch_worker'><code>crew.cluster::crew_class_launcher_cluster$launch_worker()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="crew.cluster" data-topic="crew_class_launcher_cluster" data-id="terminate_worker"><a href='../../crew.cluster/html/crew_class_launcher_cluster.html#method-crew_class_launcher_cluster-terminate_worker'><code>crew.cluster::crew_class_launcher_cluster$terminate_worker()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="crew.cluster" data-topic="crew_class_launcher_cluster" data-id="validate"><a href='../../crew.cluster/html/crew_class_launcher_cluster.html#method-crew_class_launcher_cluster-validate'><code>crew.cluster::crew_class_launcher_cluster$validate()</code></a></span></li>
 </ul>
 </details>
 }}
@@ -195,19 +196,6 @@ LSF launcher constructor.
 }
 \subsection{Returns}{
 an LSF launcher object.
-}
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-crew_class_launcher_lsf-validate"></a>}}
-\if{latex}{\out{\hypertarget{method-crew_class_launcher_lsf-validate}{}}}
-\subsection{Method \code{validate()}}{
-Validate the launcher.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{crew_class_launcher_lsf$validate()}\if{html}{\out{</div>}}
-}
-
-\subsection{Returns}{
-\code{NULL} (invisibly). Throws an error if a field is invalid.
 }
 }
 \if{html}{\out{<hr>}}

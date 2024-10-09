@@ -14,7 +14,8 @@ Other slurm:
 \code{\link{crew_class_launcher_slurm}},
 \code{\link{crew_controller_slurm}()},
 \code{\link{crew_launcher_slurm}()},
-\code{\link{crew_monitor_slurm}()}
+\code{\link{crew_monitor_slurm}()},
+\code{\link{crew_options_slurm}()}
 }
 \concept{slurm}
 \section{Super class}{

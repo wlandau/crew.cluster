@@ -282,41 +282,7 @@ crew_class_launcher_slurm <- R6::R6Class(
     #' @description Validate the launcher.
     #' @return `NULL` (invisibly). Throws an error if a field is invalid.
     validate = function() {
-      super$validate()
-      fields <- c("slurm_log_output", "slurm_log_error", "slurm_partition")
-      for (field in fields) {
-        if (!is.null(self[[field]])) {
-          crew::crew_assert(
-            self[[field]],
-            is.character(.),
-            length(.) == 1L,
-            !anyNA(.),
-            nzchar(.),
-            message = paste(
-              field,
-              "must be either NULL or a nonempty length-1 character string."
-            )
-          )
-        }
-      }
-      fields <- c(
-        "slurm_memory_gigabytes_required",
-        "slurm_memory_gigabytes_per_cpu",
-        "slurm_cpus_per_task",
-        "slurm_time_minutes"
-      )
-      for (field in fields) {
-        if (!is.null(self[[field]])) {
-          crew::crew_assert(
-            self[[field]],
-            is.numeric(.),
-            length(.) == 1L,
-            !anyNA(.),
-            . > 0L,
-            message = paste("invalid", field, "field")
-          )
-        }
-      }
+      super$validate() # nolint
       invisible()
     },
     #' @description Generate the job script.

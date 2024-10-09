@@ -256,6 +256,7 @@ controller$terminate()
 \seealso{
 Other lsf: 
 \code{\link{crew_class_launcher_lsf}},
-\code{\link{crew_launcher_lsf}()}
+\code{\link{crew_launcher_lsf}()},
+\code{\link{crew_options_lsf}()}
 }
 \concept{lsf}

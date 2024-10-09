@@ -256,6 +256,7 @@ controller$terminate()
 \seealso{
 Other pbs: 
 \code{\link{crew_class_launcher_pbs}},
-\code{\link{crew_launcher_pbs}()}
+\code{\link{crew_launcher_pbs}()},
+\code{\link{crew_options_pbs}()}
 }
 \concept{pbs}

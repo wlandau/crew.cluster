@@ -301,58 +301,7 @@ crew_class_launcher_sge <- R6::R6Class(
     #' @description Validate the launcher.
     #' @return `NULL` (invisibly). Throws an error if a field is invalid.
     validate = function() {
-      super$validate()
-      crew::crew_assert(
-        private$.sge_log_output,
-        is.character(.),
-        length(.) == 1L,
-        !anyNA(.),
-        nzchar(.),
-        message = "sge_log_output must be a nonempty length-1 character string."
-      )
-      if (!is.null(private$.sge_log_error)) {
-        crew::crew_assert(
-          private$.sge_log_error,
-          is.character(.),
-          length(.) == 1L,
-          !anyNA(.),
-          nzchar(.),
-          message = paste(
-            "sge_log_error must be a nonempty",
-            "length-1 character string."
-          )
-        )
-      }
-      fields <- c(
-        "sge_cwd",
-        "sge_envvars",
-        "sge_log_join"
-      )
-      for (field in fields) {
-        crew::crew_assert(
-          self[[field]],
-          isTRUE(.) || isFALSE(.),
-          message = paste(field, "is not a length-1 logical.")
-        )
-      }
-      fields <- c(
-        "sge_memory_gigabytes_limit",
-        "sge_memory_gigabytes_required",
-        "sge_cores",
-        "sge_gpu"
-      )
-      for (field in fields) {
-        if (!is.null(self[[field]])) {
-          crew::crew_assert(
-            self[[field]],
-            is.numeric(.),
-            length(.) == 1L,
-            !anyNA(.),
-            . > 0L,
-            message = paste("invalid", field, "field")
-          )
-        }
-      }
+      super$validate() # nolint
       invisible()
     },
     #' @description Generate the job script.

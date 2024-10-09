@@ -279,56 +279,7 @@ crew_class_launcher_pbs <- R6::R6Class(
     #' @description Validate the launcher.
     #' @return `NULL` (invisibly). Throws an error if a field is invalid.
     validate = function() {
-      super$validate()
-      crew::crew_assert(
-        private$.pbs_log_output,
-        is.character(.),
-        length(.) == 1L,
-        !anyNA(.),
-        nzchar(.),
-        message = "pbs_log_output must be a nonempty length-1 character string."
-      )
-      if (!is.null(private$.pbs_log_error)) {
-        crew::crew_assert(
-          private$.pbs_log_error,
-          is.character(.),
-          length(.) == 1L,
-          !anyNA(.),
-          nzchar(.),
-          message = paste(
-            "pbs_log_error must be a nonempty",
-            "length-1 character string."
-          )
-        )
-      }
-      fields <- c(
-        "pbs_cwd",
-        "pbs_log_join"
-      )
-      for (field in fields) {
-        crew::crew_assert(
-          self[[field]],
-          isTRUE(.) || isFALSE(.),
-          message = paste(field, "must be a length-1 logical.")
-        )
-      }
-      fields <- c(
-        "pbs_memory_gigabytes_required",
-        "pbs_cores",
-        "pbs_walltime_hours"
-      )
-      for (field in fields) {
-        if (!is.null(self[[field]])) {
-          crew::crew_assert(
-            self[[field]],
-            is.numeric(.),
-            length(.) == 1L,
-            !anyNA(.),
-            . > 0L,
-            message = paste("invalid", field, "field")
-          )
-        }
-      }
+      super$validate() # nolint
       invisible()
     },
     #' @description Generate the job script.

@@ -14,7 +14,8 @@ Other sge:
 \code{\link{crew_class_launcher_sge}},
 \code{\link{crew_controller_sge}()},
 \code{\link{crew_launcher_sge}()},
-\code{\link{crew_monitor_sge}()}
+\code{\link{crew_monitor_sge}()},
+\code{\link{crew_options_sge}()}
 }
 \concept{sge}
 \section{Super class}{
