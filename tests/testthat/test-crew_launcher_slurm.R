@@ -5,7 +5,7 @@ test_that("valid simple crew_launcher_slurm()", {
 test_that("valid populated crew_launcher_slurm()", {
   expect_silent(
     crew_launcher_slurm(
-      options_slurm = crew_options_slurm(
+      options_cluster = crew_options_slurm(
         script_lines = c("module load R", "echo 'start'"),
         log_output = "log1",
         log_error = "log2",
@@ -32,7 +32,7 @@ test_that("invalid crew_launcher_slurm(): non-SLURM field", {
 
 test_that("crew_launcher_slurm() script() nearly empty", {
   x <- crew_launcher_slurm(
-    options_slurm = crew_options_slurm(time_minutes = NULL)
+    options_cluster = crew_options_slurm(time_minutes = NULL)
   )
   lines <- c(
     "#!/bin/sh",
@@ -45,7 +45,7 @@ test_that("crew_launcher_slurm() script() nearly empty", {
 
 test_that("crew_launcher_slurm() script() all lines", {
   x <- crew_launcher_slurm(
-    options_slurm = crew_options_slurm(
+    options_cluster = crew_options_slurm(
       script_lines = c("module load R", "echo 'start'"),
       log_output = "log1",
       log_error = "log2",

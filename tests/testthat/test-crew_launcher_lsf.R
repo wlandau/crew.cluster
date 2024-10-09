@@ -5,7 +5,7 @@ test_that("valid simple crew_launcher_lsf()", {
 test_that("valid populated crew_launcher_lsf()", {
   expect_silent(
     crew_launcher_lsf(
-      options_lsf = crew_options_lsf(
+      options_cluster = crew_options_lsf(
         script_lines = c("module load R", "echo 'start'"),
         cwd = "/home",
         log_output = "log1",
@@ -34,7 +34,7 @@ test_that("invalid crew_launcher_lsf(): non-lsf field", {
 
 test_that("crew_launcher_lsf() script() nearly empty", {
   x <- crew_launcher_lsf(
-    options_lsf = crew_options_lsf(cwd = "/home")
+    options_cluster = crew_options_lsf(cwd = "/home")
   )
   lines <- c(
     "#!/bin/sh",
@@ -48,7 +48,7 @@ test_that("crew_launcher_lsf() script() nearly empty", {
 
 test_that("crew_launcher_lsf() script() all lines", {
   x <- crew_launcher_lsf(
-    options_lsf = crew_options_lsf(
+    options_cluster = crew_options_lsf(
       script_lines = c("module load R", "echo 'start'"),
       cwd = "/home",
       log_output = "log1",

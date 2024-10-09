@@ -18,12 +18,16 @@
 #'   to actually launch a worker.
 #' @inheritSection crew.cluster-package Attribution
 #' @inheritParams crew_launcher_cluster
-#' @param lsf_cwd Deprecated. Use `options_lsf` instead.
-#' @param lsf_log_output Deprecated. Use `options_lsf` instead.
-#' @param lsf_log_error Deprecated. Use `options_lsf` instead.
-#' @param lsf_memory_gigabytes_limit Deprecated. Use `options_lsf` instead.
-#' @param lsf_memory_gigabytes_required Deprecated. Use `options_lsf` instead.
-#' @param lsf_cores Deprecated. Use `options_lsf` instead.
+#' @param options_cluster An options list from
+#'   [crew_options_lsf()] with cluster-specific configuration options.
+#' @param lsf_cwd Deprecated. Use `options_cluster` instead.
+#' @param lsf_log_output Deprecated. Use `options_cluster` instead.
+#' @param lsf_log_error Deprecated. Use `options_cluster` instead.
+#' @param lsf_memory_gigabytes_limit Deprecated.
+#'   Use `options_cluster` instead.
+#' @param lsf_memory_gigabytes_required Deprecated.
+#'   Use `options_cluster` instead.
+#' @param lsf_cores Deprecated. Use `options_cluster` instead.
 crew_launcher_lsf <- function(
   name = NULL,
   seconds_interval = 0.5,
@@ -41,7 +45,7 @@ crew_launcher_lsf <- function(
   tls = crew::crew_tls(mode = "automatic"),
   r_arguments = c("--no-save", "--no-restore"),
   options_metrics = crew::crew_options_metrics(),
-  options_lsf = crew.cluster::crew_options_lsf(),
+  options_cluster = crew.cluster::crew_options_lsf(),
   verbose = NULL,
   command_submit = NULL,
   command_terminate = NULL,
@@ -85,11 +89,11 @@ crew_launcher_lsf <- function(
       name = arg,
       date = "2024-10-09",
       version = "0.3.2.9005",
-      alternative = "options_lsf argument",
+      alternative = "options_cluster argument",
       value = value
     )
     field <- gsub("^lsf_", "", arg)
-    options_lsf[[field]] <- value %|||% options_lsf[[field]]
+    options_cluster[[field]] <- value %|||% options_cluster[[field]]
   }
   launcher <- crew_class_launcher_lsf$new(
     name = name,
@@ -108,7 +112,7 @@ crew_launcher_lsf <- function(
     tls = tls,
     r_arguments = r_arguments,
     options_metrics = options_metrics,
-    options_cluster = options_lsf
+    options_cluster = options_cluster
   )
   launcher$validate()
   launcher
