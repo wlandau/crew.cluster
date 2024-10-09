@@ -3,7 +3,9 @@ test_that("PBS persistent workers", {
     name = "123",
     workers = 1L,
     seconds_idle = 300,
-    script_lines = paste0("module load R/", getRversion())
+    options_cluster = crew_options_pbs(
+      script_lines = paste0("module load R/", getRversion())
+    )
   )
   on.exit(x$terminate())
   x$start()
