@@ -1,8 +1,9 @@
-# crew.cluster 0.3.2.9004 (development)
+# crew.cluster 0.3.2.9005 (development)
 
 * Add `slurm_memory_gigabytes_required` to set `--mem` in SLURM (#44, @multimeric).
 * Add `r_arguments` to accept R command line arguments for workers.
 * Support `options_metrics`.
+* Organize arguments into options lists.
 
 # crew.cluster 0.3.2
 

@@ -47,27 +47,10 @@ Other lsf:
 \section{Super classes}{
 \code{\link[crew:crew_class_launcher]{crew::crew_class_launcher}} -> \code{\link[crew.cluster:crew_class_launcher_cluster]{crew.cluster::crew_class_launcher_cluster}} -> \code{crew_class_launcher_lsf}
 }
-\section{Active bindings}{
-\if{html}{\out{<div class="r6-active-bindings">}}
-\describe{
-\item{\code{lsf_cwd}}{See \code{\link[=crew_launcher_lsf]{crew_launcher_lsf()}}.}
-
-\item{\code{lsf_log_output}}{See \code{\link[=crew_launcher_lsf]{crew_launcher_lsf()}}.}
-
-\item{\code{lsf_log_error}}{See \code{\link[=crew_launcher_lsf]{crew_launcher_lsf()}}.}
-
-\item{\code{lsf_memory_gigabytes_limit}}{See \code{\link[=crew_launcher_lsf]{crew_launcher_lsf()}}.}
-
-\item{\code{lsf_memory_gigabytes_required}}{See \code{\link[=crew_launcher_lsf]{crew_launcher_lsf()}}.}
-
-\item{\code{lsf_cores}}{See \code{\link[=crew_launcher_lsf]{crew_launcher_lsf()}}.}
-}
-\if{html}{\out{</div>}}
-}
 \section{Methods}{
 \subsection{Public methods}{
 \itemize{
-\item \href{#method-crew_class_launcher_lsf-new}{\code{crew_class_launcher_lsf$new()}}
+\item \href{#method-crew_class_launcher_lsf-validate}{\code{crew_class_launcher_lsf$validate()}}
 \item \href{#method-crew_class_launcher_lsf-script}{\code{crew_class_launcher_lsf$script()}}
 }
 }
@@ -92,110 +75,23 @@ Other lsf:
 <li><span class="pkg-link" data-pkg="crew" data-topic="crew_class_launcher" data-id="terminate_workers"><a href='../../crew/html/crew_class_launcher.html#method-crew_class_launcher-terminate_workers'><code>crew::crew_class_launcher$terminate_workers()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="crew" data-topic="crew_class_launcher" data-id="unlaunched"><a href='../../crew/html/crew_class_launcher.html#method-crew_class_launcher-unlaunched'><code>crew::crew_class_launcher$unlaunched()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="crew" data-topic="crew_class_launcher" data-id="wait"><a href='../../crew/html/crew_class_launcher.html#method-crew_class_launcher-wait'><code>crew::crew_class_launcher$wait()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="crew.cluster" data-topic="crew_class_launcher_cluster" data-id="initialize"><a href='../../crew.cluster/html/crew_class_launcher_cluster.html#method-crew_class_launcher_cluster-initialize'><code>crew.cluster::crew_class_launcher_cluster$initialize()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="crew.cluster" data-topic="crew_class_launcher_cluster" data-id="launch_worker"><a href='../../crew.cluster/html/crew_class_launcher_cluster.html#method-crew_class_launcher_cluster-launch_worker'><code>crew.cluster::crew_class_launcher_cluster$launch_worker()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="crew.cluster" data-topic="crew_class_launcher_cluster" data-id="terminate_worker"><a href='../../crew.cluster/html/crew_class_launcher_cluster.html#method-crew_class_launcher_cluster-terminate_worker'><code>crew.cluster::crew_class_launcher_cluster$terminate_worker()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="crew.cluster" data-topic="crew_class_launcher_cluster" data-id="validate"><a href='../../crew.cluster/html/crew_class_launcher_cluster.html#method-crew_class_launcher_cluster-validate'><code>crew.cluster::crew_class_launcher_cluster$validate()</code></a></span></li>
 </ul>
 </details>
 }}
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-crew_class_launcher_lsf-new"></a>}}
-\if{latex}{\out{\hypertarget{method-crew_class_launcher_lsf-new}{}}}
-\subsection{Method \code{new()}}{
-LSF launcher constructor.
+\if{html}{\out{<a id="method-crew_class_launcher_lsf-validate"></a>}}
+\if{latex}{\out{\hypertarget{method-crew_class_launcher_lsf-validate}{}}}
+\subsection{Method \code{validate()}}{
+Validate the launcher.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{crew_class_launcher_lsf$new(
-  name = NULL,
-  seconds_interval = NULL,
-  seconds_timeout = NULL,
-  seconds_launch = NULL,
-  seconds_idle = NULL,
-  seconds_wall = NULL,
-  tasks_max = NULL,
-  tasks_timers = NULL,
-  reset_globals = NULL,
-  reset_packages = NULL,
-  reset_options = NULL,
-  garbage_collection = NULL,
-  launch_max = NULL,
-  tls = NULL,
-  r_arguments = NULL,
-  options_metrics = NULL,
-  verbose = NULL,
-  command_submit = NULL,
-  command_terminate = NULL,
-  script_directory = NULL,
-  script_lines = NULL,
-  lsf_cwd = NULL,
-  lsf_log_output = NULL,
-  lsf_log_error = NULL,
-  lsf_memory_gigabytes_limit = NULL,
-  lsf_memory_gigabytes_required = NULL,
-  lsf_cores = NULL
-)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{crew_class_launcher_lsf$validate()}\if{html}{\out{</div>}}
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{name}}{See \code{\link[=crew_launcher_lsf]{crew_launcher_lsf()}}.}
-
-\item{\code{seconds_interval}}{See \code{\link[=crew_launcher_lsf]{crew_launcher_lsf()}}.}
-
-\item{\code{seconds_timeout}}{See \code{\link[=crew_launcher_lsf]{crew_launcher_lsf()}}.}
-
-\item{\code{seconds_launch}}{See \code{\link[=crew_launcher_lsf]{crew_launcher_lsf()}}.}
-
-\item{\code{seconds_idle}}{See \code{\link[=crew_launcher_lsf]{crew_launcher_lsf()}}.}
-
-\item{\code{seconds_wall}}{See \code{\link[=crew_launcher_lsf]{crew_launcher_lsf()}}.}
-
-\item{\code{tasks_max}}{See \code{\link[=crew_launcher_lsf]{crew_launcher_lsf()}}.}
-
-\item{\code{tasks_timers}}{See \code{\link[=crew_launcher_lsf]{crew_launcher_lsf()}}.}
-
-\item{\code{reset_globals}}{See \code{\link[=crew_launcher_lsf]{crew_launcher_lsf()}}.}
-
-\item{\code{reset_packages}}{See \code{\link[=crew_launcher_lsf]{crew_launcher_lsf()}}.}
-
-\item{\code{reset_options}}{See \code{\link[=crew_launcher_lsf]{crew_launcher_lsf()}}.}
-
-\item{\code{garbage_collection}}{See \code{\link[=crew_launcher_lsf]{crew_launcher_lsf()}}.}
-
-\item{\code{launch_max}}{See \code{\link[=crew_launcher_lsf]{crew_launcher_lsf()}}.}
-
-\item{\code{tls}}{See \code{\link[=crew_launcher_lsf]{crew_launcher_lsf()}}.}
-
-\item{\code{r_arguments}}{See \code{\link[=crew_launcher_lsf]{crew_launcher_lsf()}}.}
-
-\item{\code{options_metrics}}{See \code{\link[=crew_launcher_lsf]{crew_launcher_lsf()}}.}
-
-\item{\code{verbose}}{See \code{\link[=crew_launcher_lsf]{crew_launcher_lsf()}}.}
-
-\item{\code{command_submit}}{See \code{\link[=crew_launcher_lsf]{crew_launcher_lsf()}}.}
-
-\item{\code{command_terminate}}{See \code{\link[=crew_launcher_lsf]{crew_launcher_lsf()}}.}
-
-\item{\code{script_directory}}{See \code{\link[=crew_launcher_lsf]{crew_launcher_lsf()}}.}
-
-\item{\code{script_lines}}{See \code{\link[=crew_launcher_lsf]{crew_launcher_lsf()}}.}
-
-\item{\code{lsf_cwd}}{See \code{\link[=crew_launcher_lsf]{crew_launcher_lsf()}}.}
-
-\item{\code{lsf_log_output}}{See \code{\link[=crew_launcher_lsf]{crew_launcher_lsf()}}.}
-
-\item{\code{lsf_log_error}}{See \code{\link[=crew_launcher_lsf]{crew_launcher_lsf()}}.}
-
-\item{\code{lsf_memory_gigabytes_limit}}{See \code{\link[=crew_launcher_lsf]{crew_launcher_lsf()}}.}
-
-\item{\code{lsf_memory_gigabytes_required}}{See \code{\link[=crew_launcher_lsf]{crew_launcher_lsf()}}.}
-
-\item{\code{lsf_cores}}{See \code{\link[=crew_launcher_lsf]{crew_launcher_lsf()}}.}
-}
-\if{html}{\out{</div>}}
-}
 \subsection{Returns}{
-an LSF launcher object.
+\code{NULL} (invisibly). Throws an error if a field is invalid.
 }
 }
 \if{html}{\out{<hr>}}

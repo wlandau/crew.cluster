@@ -4,7 +4,7 @@
 #' @description Set options for PBS job management.
 #' @return A classed list of options.
 #' @inheritSection crew.cluster-package Attribution
-#' @inheritParams crew_options_lsf
+#' @inheritParams crew_options_cluster
 #' @param cwd Logical of length 1, whether to set the working directory
 #'   of the worker to the working directory it was launched from.
 #'   `cwd = TRUE` is translates to a line of `cd "$O_WORKDIR"`

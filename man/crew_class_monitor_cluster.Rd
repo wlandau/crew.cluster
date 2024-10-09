@@ -13,7 +13,8 @@ See \code{\link[=crew_monitor_cluster]{crew_monitor_cluster()}}.
 Other cluster: 
 \code{\link{crew_class_launcher_cluster}},
 \code{\link{crew_launcher_cluster}()},
-\code{\link{crew_monitor_cluster}()}
+\code{\link{crew_monitor_cluster}()},
+\code{\link{crew_options_cluster}()}
 }
 \concept{cluster}
 \keyword{internal}

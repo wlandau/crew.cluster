@@ -5,13 +5,15 @@ test_that("valid simple crew_launcher_lsf()", {
 test_that("valid populated crew_launcher_lsf()", {
   expect_silent(
     crew_launcher_lsf(
-      script_lines = c("module load R", "echo 'start'"),
-      lsf_cwd = "/home",
-      lsf_log_output = "log1",
-      lsf_log_error = "log2",
-      lsf_memory_gigabytes_limit = NULL,
-      lsf_memory_gigabytes_required = NULL,
-      lsf_cores = NULL
+      options_lsf = crew_options_lsf(
+        script_lines = c("module load R", "echo 'start'"),
+        cwd = "/home",
+        log_output = "log1",
+        log_error = "log2",
+        memory_gigabytes_limit = NULL,
+        memory_gigabytes_required = NULL,
+        cores = NULL
+      )
     )
   )
 })
@@ -19,7 +21,7 @@ test_that("valid populated crew_launcher_lsf()", {
 test_that("invalid crew_launcher_lsf(): lsf field", {
   x <- crew_launcher_lsf()
   private <- crew_private(x)
-  private$.lsf_cores <- - 1L
+  private$.options_cluster$cores <- - 1L
   expect_error(x$validate(), class = "crew_error")
 })
 
@@ -32,7 +34,7 @@ test_that("invalid crew_launcher_lsf(): non-lsf field", {
 
 test_that("crew_launcher_lsf() script() nearly empty", {
   x <- crew_launcher_lsf(
-    lsf_cwd = "/home"
+    options_lsf = crew_options_lsf(cwd = "/home")
   )
   lines <- c(
     "#!/bin/sh",
@@ -46,13 +48,15 @@ test_that("crew_launcher_lsf() script() nearly empty", {
 
 test_that("crew_launcher_lsf() script() all lines", {
   x <- crew_launcher_lsf(
-    script_lines = c("module load R", "echo 'start'"),
-    lsf_cwd = "/home",
-    lsf_log_output = "log1",
-    lsf_log_error = "log2",
-    lsf_memory_gigabytes_limit = 2,
-    lsf_memory_gigabytes_required = 2,
-    lsf_cores = 2
+    options_lsf = crew_options_lsf(
+      script_lines = c("module load R", "echo 'start'"),
+      cwd = "/home",
+      log_output = "log1",
+      log_error = "log2",
+      memory_gigabytes_limit = 2,
+      memory_gigabytes_required = 2,
+      cores = 2
+    )
   )
   out <- x$script(name = "this_job")
   exp <- c(
@@ -90,9 +94,11 @@ test_that("crew_launcher_lsf() .args_terminate()", {
 
 test_that("deprecate command_delete", {
   skip_on_cran()
-  expect_warning(
-    x <- crew_launcher_lsf(command_delete = "user_del"),
-    class = "crew_deprecate"
+  suppressWarnings(
+    expect_warning(
+      x <- crew_launcher_lsf(command_delete = "user_del"),
+      class = "crew_deprecate"
+    )
   )
-  expect_equal(x$command_terminate, "user_del")
+  expect_equal(x$options_cluster$command_terminate, "user_del")
 })

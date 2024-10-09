@@ -6,8 +6,8 @@
 \usage{
 crew_options_sge(
   verbose = FALSE,
-  command_submit = as.character(Sys.which("sbatch")),
-  command_terminate = as.character(Sys.which("scancel")),
+  command_submit = as.character(Sys.which("qsub")),
+  command_terminate = as.character(Sys.which("qdel")),
   command_delete = NULL,
   script_directory = tempdir(),
   script_lines = character(0L),

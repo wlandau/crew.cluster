@@ -6,8 +6,8 @@
 \usage{
 crew_options_pbs(
   verbose = FALSE,
-  command_submit = as.character(Sys.which("bsub")),
-  command_terminate = as.character(Sys.which("bkill")),
+  command_submit = as.character(Sys.which("qsub")),
+  command_terminate = as.character(Sys.which("qdel")),
   script_directory = tempdir(),
   script_lines = character(0L),
   cwd = TRUE,

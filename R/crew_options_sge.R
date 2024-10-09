@@ -4,7 +4,7 @@
 #' @description Set options for SGE job management.
 #' @return A classed list of options.
 #' @inheritSection crew.cluster-package Attribution
-#' @inheritParams crew_options_lsf
+#' @inheritParams crew_options_cluster
 #' @param cwd Logical of length 1, whether to
 #'   launch the worker from the current working directory (as opposed to
 #'   the user home directory). `cwd = TRUE` translates to a line of

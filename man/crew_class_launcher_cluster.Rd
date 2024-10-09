@@ -25,7 +25,8 @@ source code for additional attribution.
 Other cluster: 
 \code{\link{crew_class_monitor_cluster}},
 \code{\link{crew_launcher_cluster}()},
-\code{\link{crew_monitor_cluster}()}
+\code{\link{crew_monitor_cluster}()},
+\code{\link{crew_options_cluster}()}
 }
 \concept{cluster}
 \keyword{internal}
@@ -35,18 +36,7 @@ Other cluster:
 \section{Active bindings}{
 \if{html}{\out{<div class="r6-active-bindings">}}
 \describe{
-\item{\code{verbose}}{See \code{\link[=crew_launcher_cluster]{crew_launcher_cluster()}}.}
-
-\item{\code{command_submit}}{See \code{\link[=crew_launcher_cluster]{crew_launcher_cluster()}}.}
-
-\item{\code{command_terminate}}{See \code{\link[=crew_launcher_cluster]{crew_launcher_cluster()}}.}
-
-\item{\code{script_directory}}{See \code{\link[=crew_launcher_cluster]{crew_launcher_cluster()}}.}
-
-\item{\code{script_lines}}{See \code{\link[=crew_launcher_cluster]{crew_launcher_cluster()}}.}
-
-\item{\code{prefix}}{Character of length 1, randomly generated sub-string
-in job names.}
+\item{\code{options_cluster}}{See \code{\link[=crew_launcher_cluster]{crew_launcher_cluster()}}.}
 }
 \if{html}{\out{</div>}}
 }
@@ -106,11 +96,7 @@ Abstract launcher constructor.
   tls = NULL,
   r_arguments = NULL,
   options_metrics = NULL,
-  verbose = NULL,
-  command_submit = NULL,
-  command_terminate = NULL,
-  script_directory = NULL,
-  script_lines = NULL
+  options_cluster = NULL
 )}\if{html}{\out{</div>}}
 }
 
@@ -149,15 +135,7 @@ Abstract launcher constructor.
 
 \item{\code{options_metrics}}{See \code{\link[=crew_launcher_cluster]{crew_launcher_cluster()}}.}
 
-\item{\code{verbose}}{See \code{\link[=crew_launcher_cluster]{crew_launcher_cluster()}}.}
-
-\item{\code{command_submit}}{See \code{\link[=crew_launcher_cluster]{crew_launcher_cluster()}}.}
-
-\item{\code{command_terminate}}{See \code{\link[=crew_launcher_cluster]{crew_launcher_cluster()}}.}
-
-\item{\code{script_directory}}{See \code{\link[=crew_launcher_cluster]{crew_launcher_cluster()}}.}
-
-\item{\code{script_lines}}{See \code{\link[=crew_launcher_cluster]{crew_launcher_cluster()}}.}
+\item{\code{options_cluster}}{See \code{\link[=crew_launcher_cluster]{crew_launcher_cluster()}}.}
 }
 \if{html}{\out{</div>}}
 }

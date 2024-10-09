@@ -4,30 +4,7 @@
 #' @description Set options for LSF job management.
 #' @return A classed list of options.
 #' @inheritSection crew.cluster-package Attribution
-#' @param verbose Logical, whether to see console output and error messages
-#'   when submitting worker.
-#' @param command_submit Character of length 1,
-#'   file path to the executable to submit a worker job.
-#' @param command_terminate Character of length 1,
-#'   file path to the executable to terminate a worker job.
-#'   Set to `""` to skip manually terminating the worker.
-#'   Unless there is an issue with the platform,
-#'   the job should still exit thanks to the NNG-powered network programming
-#'   capabilities of `mirai`. Still, if you set `command_terminate = ""`,
-#'   you are assuming extra responsibility for manually monitoring
-#'   your jobs on the cluster and manually terminating jobs as appropriate.
-#' @param script_directory Character of length 1, directory path to the
-#'   job scripts. Just before each job submission, a job script
-#'   is created in this folder. Script base names are unique to each
-#'   launcher and worker, and the launcher deletes the script when the
-#'   worker is manually terminated. `tempdir()` is the default, but it
-#'   might not work for some systems.
-#'   `tools::R_user_dir("crew.cluster", which = "cache")`
-#'   is another reasonable choice.
-#' @param script_lines Optional character vector of additional lines to be
-#'   added to the job script just after the more common flags.
-#'   An example would be `script_lines = "module load R"` if your cluster
-#'   supports R through an environment module.
+#' @inheritParams crew_options_cluster
 #' @param cwd Character of length 1, directory to
 #'   launch the worker from (as opposed to
 #'   the system default). `cwd = "/home"` translates to a line of

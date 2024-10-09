@@ -6,15 +6,13 @@ test_that("bad field in cluster launcher object", {
   skip_on_cran()
   x <- crew_launcher_cluster()
   private <- crew_private(x)
-  private$.verbose <- 2L
+  private$.options_cluster$verbose <- 2L
   expect_error(x$validate(), class = "crew_error")
 })
 
 test_that("active bindings", {
   x <- crew_launcher_cluster()
-  expect_false(x$verbose)
-  expect_equal(x$command_terminate, "")
-  expect_equal(x$script_lines, character(0L))
+  expect_s3_class(x$options_cluster, c("crew_options_cluster", "crew_options"))
 })
 
 test_that("SGE subclass mock job creates a tempdir() job script", {

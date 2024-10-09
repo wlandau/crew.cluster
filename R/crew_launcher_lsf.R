@@ -18,43 +18,12 @@
 #'   to actually launch a worker.
 #' @inheritSection crew.cluster-package Attribution
 #' @inheritParams crew_launcher_cluster
-#' @param lsf_cwd Character of length 1, directory to
-#'   launch the worker from (as opposed to
-#'   the system default). `lsf_cwd = "/home"` translates to a line of
-#'   `#BSUB -cwd /home` in the LSF job script. `lsf_cwd = getwd()` is the
-#'   default, which launches workers from the current working directory.
-#'   Set `lsf_cwd = NULL` to omit this line from the job script.
-#' @param lsf_log_output Character of length 1, file pattern to control
-#'   the locations of the LSF worker log files. By default, both standard
-#'   output and standard error go to the same file.
-#'   `lsf_log_output = "crew_log_%J.log"` translates to a line of
-#'   `#BSUB -o crew_log_%J.log` in the LSF job script,
-#'   where `%J` is replaced by the job ID of the worker.
-#'   The default is `/dev/null` to omit these logs.
-#'   Set `lsf_log_output = NULL` to omit this line from the job script.
-#' @param lsf_log_error Character of length 1, file pattern for standard
-#'   error. `lsf_log_error = "crew_error_%J.err"` translates to a line of
-#'   `#BSUB -e crew_error_%J.err` in the LSF job script,
-#'   where `%J` is replaced by the job ID of the worker.
-#'   The default is `/dev/null` to omit these logs.
-#'   Set `lsf_log_error = NULL` to omit this line from the job script.
-#' @param lsf_memory_gigabytes_limit Positive numeric of length 1
-#'   with the limit in gigabytes
-#'   `lsf_memory_gigabytes_limit = 4`
-#'   translates to a line of `#BSUB -M 4G`
-#'   in the LSF job script.
-#'   `lsf_memory_gigabytes_limit = NULL` omits this line.
-#' @param lsf_memory_gigabytes_required Positive numeric of length 1
-#'   with the memory requirement in gigabytes
-#'   `lsf_memory_gigabytes_required = 4`
-#'   translates to a line of `#BSUB -R 'rusage[mem=4G]'`
-#'   in the LSF job script.
-#'   `lsf_memory_gigabytes_required = NULL` omits this line.
-#' @param lsf_cores Optional positive integer of length 1,
-#'   number of CPU cores for the worker.
-#'   `lsf_cores = 4` translates
-#'   to a line of `#BSUB -n 4` in the LSF job script.
-#'   `lsf_cores = NULL` omits this line.
+#' @param lsf_cwd Deprecated. Use `options_lsf` instead.
+#' @param lsf_log_output Deprecated. Use `options_lsf` instead.
+#' @param lsf_log_error Deprecated. Use `options_lsf` instead.
+#' @param lsf_memory_gigabytes_limit Deprecated. Use `options_lsf` instead.
+#' @param lsf_memory_gigabytes_required Deprecated. Use `options_lsf` instead.
+#' @param lsf_cores Deprecated. Use `options_lsf` instead.
 crew_launcher_lsf <- function(
   name = NULL,
   seconds_interval = 0.5,
@@ -72,15 +41,16 @@ crew_launcher_lsf <- function(
   tls = crew::crew_tls(mode = "automatic"),
   r_arguments = c("--no-save", "--no-restore"),
   options_metrics = crew::crew_options_metrics(),
-  verbose = FALSE,
-  command_submit = as.character(Sys.which("bsub")),
-  command_terminate = as.character(Sys.which("bkill")),
+  options_lsf = crew.cluster::crew_options_lsf(),
+  verbose = NULL,
+  command_submit = NULL,
+  command_terminate = NULL,
   command_delete = NULL,
-  script_directory = tempdir(),
-  script_lines = character(0L),
-  lsf_cwd = getwd(),
-  lsf_log_output = "/dev/null",
-  lsf_log_error = "/dev/null",
+  script_directory = NULL,
+  script_lines = NULL,
+  lsf_cwd = NULL,
+  lsf_log_output = NULL,
+  lsf_log_error = NULL,
   lsf_memory_gigabytes_limit = NULL,
   lsf_memory_gigabytes_required = NULL,
   lsf_cores = NULL
@@ -94,6 +64,32 @@ crew_launcher_lsf <- function(
       alternative = "command_terminate"
     )
     command_terminate <- command_delete
+  }
+  deprecated <- c(
+    "verbose",
+    "command_submit",
+    "command_terminate",
+    "command_delete",
+    "script_directory",
+    "script_lines",
+    "lsf_cwd",
+    "lsf_log_output",
+    "lsf_log_error",
+    "lsf_memory_gigabytes_limit",
+    "lsf_memory_gigabytes_required",
+    "lsf_cores"
+  )
+  for (arg in deprecated) {
+    value <- get(arg)
+    crew::crew_deprecate(
+      name = arg,
+      date = "2024-10-09",
+      version = "0.3.2.9005",
+      alternative = "options_lsf argument",
+      value = value
+    )
+    field <- gsub("^lsf_", "", arg)
+    options_lsf[[field]] <- value %|||% options_lsf[[field]]
   }
   launcher <- crew_class_launcher_lsf$new(
     name = name,
@@ -112,17 +108,7 @@ crew_launcher_lsf <- function(
     tls = tls,
     r_arguments = r_arguments,
     options_metrics = options_metrics,
-    verbose = verbose,
-    command_submit = command_submit,
-    command_terminate = command_terminate,
-    script_directory = script_directory,
-    script_lines = script_lines,
-    lsf_cwd = lsf_cwd,
-    lsf_log_output = lsf_log_output,
-    lsf_log_error = lsf_log_error,
-    lsf_memory_gigabytes_limit = lsf_memory_gigabytes_limit,
-    lsf_memory_gigabytes_required = lsf_memory_gigabytes_required,
-    lsf_cores = lsf_cores
+    options_cluster = options_lsf
   )
   launcher$validate()
   launcher
@@ -139,12 +125,6 @@ crew_class_launcher_lsf <- R6::R6Class(
   inherit = crew_class_launcher_cluster,
   cloneable = FALSE,
   private = list(
-    .lsf_cwd = NULL,
-    .lsf_log_output = NULL,
-    .lsf_log_error = NULL,
-    .lsf_memory_gigabytes_limit = NULL,
-    .lsf_memory_gigabytes_required = NULL,
-    .lsf_cores = NULL,
     .args_launch = function(script) {
       c("<", shQuote(script))
     },
@@ -152,125 +132,16 @@ crew_class_launcher_lsf <- R6::R6Class(
       c("-J", shQuote(name))
     }
   ),
-  active = list(
-    #' @field lsf_cwd See [crew_launcher_lsf()].
-    lsf_cwd = function() {
-      .subset2(private, ".lsf_cwd")
-    },
-    #' @field lsf_log_output See [crew_launcher_lsf()].
-    lsf_log_output = function() {
-      .subset2(private, ".lsf_log_output")
-    },
-    #' @field lsf_log_error See [crew_launcher_lsf()].
-    lsf_log_error = function() {
-      .subset2(private, ".lsf_log_error")
-    },
-    #' @field lsf_memory_gigabytes_limit See [crew_launcher_lsf()].
-    lsf_memory_gigabytes_limit = function() {
-      .subset2(private, ".lsf_memory_gigabytes_limit")
-    },
-    #' @field lsf_memory_gigabytes_required See [crew_launcher_lsf()].
-    lsf_memory_gigabytes_required = function() {
-      .subset2(private, ".lsf_memory_gigabytes_required")
-    },
-    #' @field lsf_cores See [crew_launcher_lsf()].
-    lsf_cores = function() {
-      .subset2(private, ".lsf_cores")
-    }
-  ),
   public = list(
-    #' @description LSF launcher constructor.
-    #' @return an LSF launcher object.
-    #' @param name See [crew_launcher_lsf()].
-    #' @param seconds_interval See [crew_launcher_lsf()].
-    #' @param seconds_timeout See [crew_launcher_lsf()].
-    #' @param seconds_launch See [crew_launcher_lsf()].
-    #' @param seconds_idle See [crew_launcher_lsf()].
-    #' @param seconds_wall See [crew_launcher_lsf()].
-    #' @param tasks_max See [crew_launcher_lsf()].
-    #' @param tasks_timers See [crew_launcher_lsf()].
-    #' @param reset_globals See [crew_launcher_lsf()].
-    #' @param reset_packages See [crew_launcher_lsf()].
-    #' @param reset_options See [crew_launcher_lsf()].
-    #' @param garbage_collection See [crew_launcher_lsf()].
-    #' @param launch_max See [crew_launcher_lsf()].
-    #' @param tls See [crew_launcher_lsf()].
-    #' @param r_arguments See [crew_launcher_lsf()].
-    #' @param options_metrics See [crew_launcher_lsf()].
-    #' @param verbose See [crew_launcher_lsf()].
-    #' @param command_submit See [crew_launcher_lsf()].
-    #' @param command_terminate See [crew_launcher_lsf()].
-    #' @param script_directory See [crew_launcher_lsf()].
-    #' @param script_lines See [crew_launcher_lsf()].
-    #' @param lsf_cwd See [crew_launcher_lsf()].
-    #' @param lsf_log_output See [crew_launcher_lsf()].
-    #' @param lsf_log_error See [crew_launcher_lsf()].
-    #' @param lsf_memory_gigabytes_limit See [crew_launcher_lsf()].
-    #' @param lsf_memory_gigabytes_required See [crew_launcher_lsf()].
-    #' @param lsf_cores See [crew_launcher_lsf()].
-    initialize = function(
-      name = NULL,
-      seconds_interval = NULL,
-      seconds_timeout = NULL,
-      seconds_launch = NULL,
-      seconds_idle = NULL,
-      seconds_wall = NULL,
-      tasks_max = NULL,
-      tasks_timers = NULL,
-      reset_globals = NULL,
-      reset_packages = NULL,
-      reset_options = NULL,
-      garbage_collection = NULL,
-      launch_max = NULL,
-      tls = NULL,
-      r_arguments = NULL,
-      options_metrics = NULL,
-      verbose = NULL,
-      command_submit = NULL,
-      command_terminate = NULL,
-      script_directory = NULL,
-      script_lines = NULL,
-      lsf_cwd = NULL,
-      lsf_log_output = NULL,
-      lsf_log_error = NULL,
-      lsf_memory_gigabytes_limit = NULL,
-      lsf_memory_gigabytes_required = NULL,
-      lsf_cores = NULL
-    ) {
-      super$initialize(
-        name = name,
-        seconds_interval = seconds_interval,
-        seconds_timeout = seconds_timeout,
-        seconds_launch = seconds_launch,
-        seconds_idle = seconds_idle,
-        seconds_wall = seconds_wall,
-        tasks_max = tasks_max,
-        tasks_timers = tasks_timers,
-        reset_globals = reset_globals,
-        reset_packages = reset_packages,
-        reset_options = reset_options,
-        garbage_collection = garbage_collection,
-        launch_max = launch_max,
-        tls = tls,
-        r_arguments = r_arguments,
-        options_metrics = options_metrics,
-        verbose = verbose,
-        command_submit = command_submit,
-        command_terminate = command_terminate,
-        script_directory = script_directory,
-        script_lines = script_lines
-      )
-      private$.lsf_cwd <- lsf_cwd
-      private$.lsf_log_output <- lsf_log_output
-      private$.lsf_log_error <- lsf_log_error
-      private$.lsf_memory_gigabytes_limit <- lsf_memory_gigabytes_limit
-      private$.lsf_memory_gigabytes_required <- lsf_memory_gigabytes_required
-      private$.lsf_cores <- lsf_cores
-    },
     #' @description Validate the launcher.
     #' @return `NULL` (invisibly). Throws an error if a field is invalid.
     validate = function() {
       super$validate() # nolint
+      crew::crew_assert(
+        private$.options_cluster,
+        inherits(., "crew_options_lsf"),
+        message = "crew_options must be a crew_options_lsf() object."
+      )
       invisible()
     },
     #' @description Generate the job script.
@@ -296,39 +167,42 @@ crew_class_launcher_lsf <- R6::R6Class(
         "#!/bin/sh",
         paste("#BSUB -J", name),
         if_any(
-          is.null(private$.lsf_cwd),
+          is.null(private$.options_cluster$cwd),
           character(0L),
-          paste("#BSUB -cwd", private$.lsf_cwd)
+          paste("#BSUB -cwd", private$.options_cluster$cwd)
         ),
         if_any(
-          is.null(private$.lsf_log_output),
+          is.null(private$.options_cluster$log_output),
           character(0L),
-          paste("#BSUB -o", private$.lsf_log_output)
+          paste("#BSUB -o", private$.options_cluster$log_output)
         ),
         if_any(
-          is.null(private$.lsf_log_error),
+          is.null(private$.options_cluster$log_error),
           character(0L),
-          paste("#BSUB -e", private$.lsf_log_error)
+          paste("#BSUB -e", private$.options_cluster$log_error)
         ),
         if_any(
-          is.null(private$.lsf_memory_gigabytes_limit),
-          character(0L),
-          sprintf("#BSUB -M %sG", private$.lsf_memory_gigabytes_limit)
-        ),
-        if_any(
-          is.null(private$.lsf_memory_gigabytes_required),
+          is.null(private$.options_cluster$memory_gigabytes_limit),
           character(0L),
           sprintf(
-            "#BSUB -R 'rusage[mem=%sG]'",
-            private$.lsf_memory_gigabytes_required
+            "#BSUB -M %sG",
+            private$.options_cluster$memory_gigabytes_limit
           )
         ),
         if_any(
-          is.null(private$.lsf_cores),
+          is.null(private$.options_cluster$memory_gigabytes_required),
           character(0L),
-          paste("#BSUB -n", private$.lsf_cores)
+          sprintf(
+            "#BSUB -R 'rusage[mem=%sG]'",
+            private$.options_cluster$memory_gigabytes_required
+          )
         ),
-        private$.script_lines
+        if_any(
+          is.null(private$.options_cluster$cores),
+          character(0L),
+          paste("#BSUB -n", private$.options_cluster$cores)
+        ),
+        private$.options_cluster$script_lines
       )
     }
   )

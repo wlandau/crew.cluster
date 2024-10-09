@@ -22,12 +22,13 @@ crew_launcher_cluster(
   tls = crew::crew_tls(mode = "automatic"),
   r_arguments = c("--no-save", "--no-restore"),
   options_metrics = crew::crew_options_metrics(),
-  verbose = FALSE,
-  command_submit = "",
-  command_terminate = "",
+  options_cluster = crew::crew_options_cluster(),
+  verbose = NULL,
+  command_submit = NULL,
+  command_terminate = NULL,
   command_delete = NULL,
-  script_directory = tempdir(),
-  script_lines = character(0L)
+  script_directory = NULL,
+  script_lines = NULL
 )
 }
 \arguments{
@@ -108,37 +109,22 @@ when starting a worker. Example:
 for workers, or an object from \code{\link[crew:crew_options_metrics]{crew_options_metrics()}} to enable
 and configure resource metric logging for workers.}
 
-\item{verbose}{Logical, whether to see console output and error messages
-when submitting worker.}
+\item{options_cluster}{List of options from a \code{crew.cluster}
+options function such as \code{\link[=crew_options_slurm]{crew_options_slurm()}}.
+Make sure the cluster types of the launcher and options function match.}
 
-\item{command_submit}{Character of length 1,
-file path to the executable to submit a worker job.}
+\item{verbose}{Deprecated. Use \code{options_cluster} instead.}
 
-\item{command_terminate}{Character of length 1,
-file path to the executable to terminate a worker job.
-Set to \code{""} to skip manually terminating the worker.
-Unless there is an issue with the platform,
-the job should still exit thanks to the NNG-powered network programming
-capabilities of \code{mirai}. Still, if you set \code{command_terminate = ""},
-you are assuming extra responsibility for manually monitoring
-your jobs on the cluster and manually terminating jobs as appropriate.}
+\item{command_submit}{Deprecated. Use \code{options_cluster} instead.}
+
+\item{command_terminate}{Deprecated. Use \code{options_cluster} instead.}
 
 \item{command_delete}{Deprecated on 2024-01-08 (version 0.1.4.9001).
 Use \code{command_terminate} instead.}
 
-\item{script_directory}{Character of length 1, directory path to the
-job scripts. Just before each job submission, a job script
-is created in this folder. Script base names are unique to each
-launcher and worker, and the launcher deletes the script when the
-worker is manually terminated. \code{tempdir()} is the default, but it
-might not work for some systems.
-\code{tools::R_user_dir("crew.cluster", which = "cache")}
-is another reasonable choice.}
+\item{script_directory}{Deprecated. Use \code{options_cluster} instead.}
 
-\item{script_lines}{Optional character vector of additional lines to be
-added to the job script just after the more common flags.
-An example would be \code{script_lines = "module load R"} if your cluster
-supports R through an environment module.}
+\item{script_lines}{Deprecated. Use \code{options_cluster} instead.}
 }
 \description{
 Create an \code{R6} abstract cluster launcher object.
@@ -163,7 +149,8 @@ source code for additional attribution.
 Other cluster: 
 \code{\link{crew_class_launcher_cluster}},
 \code{\link{crew_class_monitor_cluster}},
-\code{\link{crew_monitor_cluster}()}
+\code{\link{crew_monitor_cluster}()},
+\code{\link{crew_options_cluster}()}
 }
 \concept{cluster}
 \keyword{internal}

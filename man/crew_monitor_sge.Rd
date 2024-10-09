@@ -11,20 +11,12 @@ crew_monitor_sge(
 )
 }
 \arguments{
-\item{verbose}{Logical, whether to see console output and error messages
-when submitting worker.}
+\item{verbose}{Deprecated. Use \code{options_cluster} instead.}
 
 \item{command_list}{Character of length 1,
 file path to the executable to list jobs.}
 
-\item{command_terminate}{Character of length 1,
-file path to the executable to terminate a worker job.
-Set to \code{""} to skip manually terminating the worker.
-Unless there is an issue with the platform,
-the job should still exit thanks to the NNG-powered network programming
-capabilities of \code{mirai}. Still, if you set \code{command_terminate = ""},
-you are assuming extra responsibility for manually monitoring
-your jobs on the cluster and manually terminating jobs as appropriate.}
+\item{command_terminate}{Deprecated. Use \code{options_cluster} instead.}
 }
 \description{
 Create an \code{R6} object to monitor SGE cluster jobs.

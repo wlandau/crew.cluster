@@ -4,7 +4,7 @@
 #' @description Set options for SLURM job management.
 #' @return A classed list of options.
 #' @inheritSection crew.cluster-package Attribution
-#' @inheritParams crew_options_lsf
+#' @inheritParams crew_options_cluster
 #' @param log_output Character of length 1, file pattern to control
 #'   the locations of the SLURM worker log files. By default, both standard
 #'   output and standard error go to the same file.
