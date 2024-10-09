@@ -44,8 +44,10 @@ test_that("THIS TEST DELETES ALL USER JOBS! USE WITH CAUTION!", {
     name = "my_workflow",
     workers = 2L,
     seconds_idle = 600,
-    script_lines = paste0("module load R/", getRversion()),
-    verbose = TRUE
+    options_cluster = crew_options_slurm(
+      script_lines = paste0("module load R/", getRversion()),
+      verbose = TRUE
+    )
   )
   on.exit(controller$terminate())
   controller$start()
