@@ -5,30 +5,26 @@ test_that("valid simple crew_launcher_sge()", {
 test_that("valid populated crew_launcher_sge()", {
   expect_silent(
     crew_launcher_sge(
-      script_lines = c("module load R", "echo 'start'"),
-      sge_cwd = TRUE,
-      sge_envvars = TRUE,
-      sge_log_output = "out",
-      sge_log_error = "err",
-      sge_log_join = FALSE,
-      sge_memory_gigabytes_required = 2,
-      sge_memory_gigabytes_limit = 8,
-      sge_cores = 2L,
-      sge_gpu = 1L
+      options_cluster = crew_options_sge(
+        script_lines = c("module load R", "echo 'start'"),
+        cwd = TRUE,
+        envvars = TRUE,
+        log_output = "out",
+        log_error = "err",
+        log_join = FALSE,
+        memory_gigabytes_required = 2,
+        memory_gigabytes_limit = 8,
+        cores = 2L,
+        gpu = 1L
+      )
     )
   )
-})
-
-test_that("active bindings", {
-  x <- crew_launcher_sge()
-  expect_equal(x$sge_log_output, "/dev/null")
-  expect_null(x$sge_log_error)
 })
 
 test_that("invalid crew_launcher_sge(): SGE field", {
   x <- crew_launcher_sge()
   private <- crew_private(x)
-  private$.sge_cores <- - 1L
+  private$.options_cluster$cores <- - 1L
   expect_error(x$validate(), class = "crew_error")
 })
 
@@ -41,10 +37,12 @@ test_that("invalid crew_launcher_sge(): non-SGE field", {
 
 test_that("crew_launcher_sge() script() nearly empty", {
   x <- crew_launcher_sge(
-    sge_cwd = FALSE,
-    sge_envvars = FALSE,
-    sge_log_output = "log_file",
-    sge_log_join = FALSE
+    options_cluster = crew_options_sge(
+      cwd = FALSE,
+      envvars = FALSE,
+      log_output = "log_file",
+      log_join = FALSE
+    )
   )
   expect_equal(
     x$script(name = "my_job"),
@@ -54,16 +52,18 @@ test_that("crew_launcher_sge() script() nearly empty", {
 
 test_that("crew_launcher_sge() script() all lines", {
   x <- crew_launcher_sge(
-    script_lines = c("module load R", "echo 'start'"),
-    sge_cwd = TRUE,
-    sge_envvars = TRUE,
-    sge_log_output = "out_dir/",
-    sge_log_error = "err_dir/",
-    sge_log_join = FALSE,
-    sge_memory_gigabytes_required = 2,
-    sge_memory_gigabytes_limit = 8.4,
-    sge_cores = 2L,
-    sge_gpu = 1L
+    options_cluster = crew_options_sge(
+      script_lines = c("module load R", "echo 'start'"),
+      cwd = TRUE,
+      envvars = TRUE,
+      log_output = "out_dir/",
+      log_error = "err_dir/",
+      log_join = FALSE,
+      memory_gigabytes_required = 2,
+      memory_gigabytes_limit = 8.4,
+      cores = 2L,
+      gpu = 1L
+    )
   )
   out <- x$script(name = "this_job")
   exp <- c(
@@ -85,9 +85,11 @@ test_that("crew_launcher_sge() script() all lines", {
 
 test_that("deprecate command_delete", {
   skip_on_cran()
-  expect_warning(
-    x <- crew_launcher_sge(command_delete = "user_del"),
-    class = "crew_deprecate"
+  suppressWarnings(
+    expect_warning(
+      x <- crew_launcher_sge(command_delete = "user_del"),
+      class = "crew_deprecate"
+    )
   )
-  expect_equal(x$command_terminate, "user_del")
+  expect_equal(x$options_cluster$command_terminate, "user_del")
 })
