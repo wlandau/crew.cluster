@@ -44,15 +44,14 @@ crew_launcher_cluster <- function(
   script_lines = NULL
 ) {
   name <- as.character(name %|||% crew::crew_random_name())
-  if (!is.null(command_delete)) {
-    crew::crew_deprecate(
-      name = "command_delete",
-      date = "2023-01-08",
-      version = "0.1.4.9001",
-      alternative = "command_terminate"
-    )
-    command_terminate <- command_delete
-  }
+  crew::crew_deprecate(
+    name = "command_delete",
+    date = "2023-01-08",
+    version = "0.1.4.9001",
+    alternative = "command_terminate",
+    value = command_delete
+  )
+  command_terminate <- command_delete %|||% command_terminate
   deprecated <- c(
     "verbose",
     "command_submit",
