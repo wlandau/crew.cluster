@@ -7,7 +7,7 @@ test_that("crew_options_cluster", {
         verbose = FALSE,
         command_submit = "",
         command_terminate = "",
-        script_directory = "x", 
+        script_directory = "x",
         script_lines = character(0)
       ),
       class = c("crew_options_cluster", "crew_options")

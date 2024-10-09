@@ -108,7 +108,7 @@ The risks of `crew.cluster` are the same as [those of `crew`](https://wlandau.gi
 # Thanks
 
 * [Charlie Gao](https://github.com/shikokuchuo) created [`mirai`](https://github.com/shikokuchuo/mirai) and [`nanonext`](https://github.com/shikokuchuo/nanonext) and graciously accommodated the complicated and demanding feature requests that made `crew` and its ecosystem possible.
-* Thanks to [Michael Schubert](https://github.com/mschubert) for sharing the [template files](https://github.com/mschubert/clustermq/tree/master/inst) in [`clustermq`](https://github.com/mschubert/clustermq) under the permissive [Apache License 2.0](https://github.com/mschubert/clustermq/blob/master/LICENSE). These scripts helped construct launcher plugins to clusters where direct access was not possible. See the [`NOTICE`](https://github.com/wlandau/crew.cluster/blob/main/NOTICE) file in this package.
+* Thanks to [Michael Schubert](https://github.com/mschubert) for sharing the [template files](https://github.com/mschubert/clustermq/tree/master/inst) in [`clustermq`](https://github.com/mschubert/clustermq) under the permissive [Apache License 2.0](https://github.com/mschubert/clustermq/blob/master/LICENSE). These scripts helped construct launcher plugins to clusters where direct access was not possible. See the [`LICENSE.note`](https://github.com/wlandau/crew.cluster/blob/main/LICENSE.note) file in this package.
 
 # Code of Conduct
 

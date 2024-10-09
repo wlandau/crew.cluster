@@ -22,7 +22,7 @@ crew_launcher_cluster(
   tls = crew::crew_tls(mode = "automatic"),
   r_arguments = c("--no-save", "--no-restore"),
   options_metrics = crew::crew_options_metrics(),
-  options_cluster = crew::crew_options_cluster(),
+  options_cluster = crew.cluster::crew_options_cluster(),
   verbose = NULL,
   command_submit = NULL,
   command_terminate = NULL,

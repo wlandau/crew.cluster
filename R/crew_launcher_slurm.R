@@ -83,7 +83,7 @@ crew_launcher_slurm <- function(
     "slurm_log_error",
     "slurm_memory_gigabytes_required",
     "slurm_memory_gigabytes_per_cpu",
-    'slurm_cpus_per_task',
+    "slurm_cpus_per_task",
     "slurm_time_minutes",
     "slurm_partition"
   )

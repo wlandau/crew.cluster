@@ -29,7 +29,7 @@ crew_controller_lsf(
   launch_max = 5L,
   r_arguments = c("--no-save", "--no-restore"),
   options_metrics = crew::crew_options_metrics(),
-  options_lsf = crew.cluster::crew_options_lsf(),
+  options_cluster = crew.cluster::crew_options_lsf(),
   verbose = NULL,
   command_submit = NULL,
   command_terminate = NULL,
@@ -147,6 +147,9 @@ when starting a worker. Example:
 for workers, or an object from \code{\link[crew:crew_options_metrics]{crew_options_metrics()}} to enable
 and configure resource metric logging for workers.}
 
+\item{options_cluster}{An options list from
+\code{\link[=crew_options_lsf]{crew_options_lsf()}} with cluster-specific configuration options.}
+
 \item{verbose}{Deprecated. Use \code{options_cluster} instead.}
 
 \item{command_submit}{Deprecated. Use \code{options_cluster} instead.}
@@ -160,17 +163,19 @@ Use \code{command_terminate} instead.}
 
 \item{script_lines}{Deprecated. Use \code{options_cluster} instead.}
 
-\item{lsf_cwd}{Deprecated. Use \code{options_lsf} instead.}
+\item{lsf_cwd}{Deprecated. Use \code{options_cluster} instead.}
 
-\item{lsf_log_output}{Deprecated. Use \code{options_lsf} instead.}
+\item{lsf_log_output}{Deprecated. Use \code{options_cluster} instead.}
 
-\item{lsf_log_error}{Deprecated. Use \code{options_lsf} instead.}
+\item{lsf_log_error}{Deprecated. Use \code{options_cluster} instead.}
 
-\item{lsf_memory_gigabytes_limit}{Deprecated. Use \code{options_lsf} instead.}
+\item{lsf_memory_gigabytes_limit}{Deprecated.
+Use \code{options_cluster} instead.}
 
-\item{lsf_memory_gigabytes_required}{Deprecated. Use \code{options_lsf} instead.}
+\item{lsf_memory_gigabytes_required}{Deprecated.
+Use \code{options_cluster} instead.}
 
-\item{lsf_cores}{Deprecated. Use \code{options_lsf} instead.}
+\item{lsf_cores}{Deprecated. Use \code{options_cluster} instead.}
 }
 \description{
 Create an \code{R6} object to submit tasks and

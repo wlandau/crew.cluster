@@ -29,18 +29,19 @@ crew_controller_slurm(
   launch_max = 5L,
   r_arguments = c("--no-save", "--no-restore"),
   options_metrics = crew::crew_options_metrics(),
-  verbose = FALSE,
-  command_submit = as.character(Sys.which("sbatch")),
-  command_terminate = as.character(Sys.which("scancel")),
+  options_cluster = crew.cluster::crew_options_slurm(),
+  verbose = NULL,
+  command_submit = NULL,
+  command_terminate = NULL,
   command_delete = NULL,
-  script_directory = tempdir(),
-  script_lines = character(0L),
-  slurm_log_output = "/dev/null",
-  slurm_log_error = "/dev/null",
+  script_directory = NULL,
+  script_lines = NULL,
+  slurm_log_output = NULL,
+  slurm_log_error = NULL,
   slurm_memory_gigabytes_required = NULL,
   slurm_memory_gigabytes_per_cpu = NULL,
   slurm_cpus_per_task = NULL,
-  slurm_time_minutes = 1440,
+  slurm_time_minutes = NULL,
   slurm_partition = NULL
 )
 }
@@ -147,6 +148,9 @@ when starting a worker. Example:
 for workers, or an object from \code{\link[crew:crew_options_metrics]{crew_options_metrics()}} to enable
 and configure resource metric logging for workers.}
 
+\item{options_cluster}{An options list from
+\code{\link[=crew_options_slurm]{crew_options_slurm()}} with cluster-specific configuration options.}
+
 \item{verbose}{Deprecated. Use \code{options_cluster} instead.}
 
 \item{command_submit}{Deprecated. Use \code{options_cluster} instead.}
@@ -160,53 +164,21 @@ Use \code{command_terminate} instead.}
 
 \item{script_lines}{Deprecated. Use \code{options_cluster} instead.}
 
-\item{slurm_log_output}{Character of length 1, file pattern to control
-the locations of the SLURM worker log files. By default, both standard
-output and standard error go to the same file.
-\code{slurm_log_output = "crew_log_\%A.txt"} translates to a line of
-\verb{#SBATCH --output=crew_log_\%A.txt} in the SLURM job script,
-where \verb{\%A} is replaced by the job ID of the worker.
-The default is \verb{/dev/null} to omit these logs.
-Set \code{slurm_log_output = NULL} to omit this line from the job script.}
+\item{slurm_log_output}{Deprecated. Use \code{options_cluster} instead.}
 
-\item{slurm_log_error}{Character of length 1, file pattern for standard
-error. \code{slurm_log_error = "crew_log_\%A.txt"} translates to a line of
-\verb{#SBATCH --error=crew_log_\%A.txt} in the SLURM job script,
-where \verb{\%A} is replaced by the job ID of the worker.
-The default is \verb{/dev/null} to omit these logs.
-Set \code{slurm_log_error = NULL} to omit this line from the job script.}
+\item{slurm_log_error}{Deprecated. Use \code{options_cluster} instead.}
 
-\item{slurm_memory_gigabytes_required}{Positive numeric of length 1
-with the total number of gigabytes of memory required per node.
-\code{slurm_memory_gigabytes_required = 2.40123}
-translates to a line of \verb{#SBATCH --mem=2041M}
-in the SLURM job script.
-\code{slurm_memory_gigabytes_required = NULL} omits this line.}
+\item{slurm_memory_gigabytes_required}{Deprecated.
+Use \code{options_cluster} instead.}
 
-\item{slurm_memory_gigabytes_per_cpu}{Positive numeric of length 1
-with the gigabytes of memory required per CPU.
-\code{slurm_memory_gigabytes_per_cpu = 2.40123}
-translates to a line of \verb{#SBATCH --mem-per-cpu=2041M}
-in the SLURM job script.
-\code{slurm_memory_gigabytes_per_cpu = NULL} omits this line.}
+\item{slurm_memory_gigabytes_per_cpu}{Deprecated.
+Use \code{options_cluster} instead.}
 
-\item{slurm_cpus_per_task}{Optional positive integer of length 1,
-number of CPUs for the worker.
-\code{slurm_cpus_per_task = 4} translates
-to a line of \verb{#SBATCH --cpus-per-task=4} in the SLURM job script.
-\code{slurm_cpus_per_task = NULL} omits this line.}
+\item{slurm_cpus_per_task}{Deprecated. Use \code{options_cluster} instead.}
 
-\item{slurm_time_minutes}{Numeric of length 1, number of minutes to
-designate as the wall time of \code{crew} each worker instance on the
-SLURM cluster. \code{slurm_time_minutes = 60} translates to a line of
-\verb{#SBATCH --time=60} in the SLURM job script. \code{slurm_time_minutes = NULL}
-omits this line.}
+\item{slurm_time_minutes}{Deprecated. Use \code{options_cluster} instead.}
 
-\item{slurm_partition}{Character of length 1, name of the SLURM partition to
-create workers on. \code{slurm_partition = "partition1,partition2"}
-translates to a line of \verb{#SBATCH --partition=partition1,partition2}
-in the SLURM job script. \code{slurm_partition = NULL}
-omits this line.}
+\item{slurm_partition}{Deprecated. Use \code{options_cluster} instead.}
 }
 \description{
 Create an \code{R6} object to submit tasks and

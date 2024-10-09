@@ -47,7 +47,7 @@ crew_controller_lsf <- function(
   launch_max = 5L,
   r_arguments = c("--no-save", "--no-restore"),
   options_metrics = crew::crew_options_metrics(),
-  options_lsf = crew.cluster::crew_options_lsf(),
+  options_cluster = crew.cluster::crew_options_lsf(),
   verbose = NULL,
   command_submit = NULL,
   command_terminate = NULL,
@@ -61,14 +61,6 @@ crew_controller_lsf <- function(
   lsf_memory_gigabytes_required = NULL,
   lsf_cores = NULL
 ) {
-  if (!is.null(seconds_exit)) {
-    crew::crew_deprecate(
-      name = "seconds_exit",
-      date = "2023-09-21",
-      version = "0.5.0.9002",
-      alternative = "none (no longer necessary)"
-    )
-  }
   client <- crew::crew_client(
     name = name,
     workers = workers,
@@ -98,7 +90,7 @@ crew_controller_lsf <- function(
     tls = tls,
     r_arguments = r_arguments,
     options_metrics = options_metrics,
-    options_lsf = options_lsf,
+    options_cluster = options_cluster,
     verbose = verbose,
     command_submit = command_submit,
     command_terminate = command_terminate,

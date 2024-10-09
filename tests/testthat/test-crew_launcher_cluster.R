@@ -19,21 +19,24 @@ test_that("SGE subclass mock job creates a tempdir() job script", {
   skip_on_cran()
   skip_on_os("windows")
   x <- crew_launcher_sge(
-    command_submit = "cat",
-    command_terminate = "echo",
-    script_lines = c("module load R", "echo 'start'"),
-    sge_cwd = TRUE,
-    sge_envvars = TRUE,
-    sge_log_output = "out_dir/",
-    sge_log_error = "err_dir/",
-    sge_log_join = FALSE,
-    sge_memory_gigabytes_required = 2.4,
-    sge_memory_gigabytes_limit = 8.4,
-    sge_cores = 2L,
-    sge_gpu = 1L
+    options_cluster = crew_options_sge(
+      command_submit = "cat",
+      command_terminate = "echo",
+      script_lines = c("module load R", "echo 'start'"),
+      cwd = TRUE,
+      envvars = TRUE,
+      log_output = "out_dir/",
+      log_error = "err_dir/",
+      log_join = FALSE,
+      memory_gigabytes_required = 2.4,
+      memory_gigabytes_limit = 8.4,
+      cores = 2L,
+      gpu = 1L
+    )
   )
   x$start(sockets = "my_socket")
-  expect_null(x$prefix)
+  private <- crew_private(x)
+  expect_null(private$.prefix)
   handle <- x$launch_worker(
     call = x$call(
       socket = "my_socket",
@@ -46,12 +49,11 @@ test_that("SGE subclass mock job creates a tempdir() job script", {
     worker = 1L,
     instance = "instance"
   )
-  private <- crew_private(x)
   private$.workers$handle[[1L]] <- handle
-  expect_false(is.null(x$prefix))
+  expect_false(is.null(private$.prefix))
   script <- path_script(
     dir = tempdir(),
-    prefix = x$prefix,
+    prefix = private$.prefix,
     launcher = x$name,
     worker = 1L
   )
@@ -83,22 +85,25 @@ test_that("SGE subclass mock job creates a custom job script", {
   skip_on_os("windows")
   dir <- file.path(tempfile(), basename(tempfile()), basename(tempfile()))
   x <- crew_launcher_sge(
-    command_submit = "cat",
-    command_terminate = "echo",
-    script_directory = dir,
-    script_lines = c("module load R", "echo 'start'"),
-    sge_cwd = TRUE,
-    sge_envvars = TRUE,
-    sge_log_output = "out_dir/",
-    sge_log_error = "err_dir/",
-    sge_log_join = FALSE,
-    sge_memory_gigabytes_required = 2.4,
-    sge_memory_gigabytes_limit = 8.4,
-    sge_cores = 2L,
-    sge_gpu = 1L
+    options_cluster = crew_options_sge(
+      command_submit = "cat",
+      command_terminate = "echo",
+      script_directory = dir,
+      script_lines = c("module load R", "echo 'start'"),
+      cwd = TRUE,
+      envvars = TRUE,
+      log_output = "out_dir/",
+      log_error = "err_dir/",
+      log_join = FALSE,
+      memory_gigabytes_required = 2.4,
+      memory_gigabytes_limit = 8.4,
+      cores = 2L,
+      gpu = 1L
+    )
   )
+  private <- crew_private(x)
   x$start(sockets = "my_socket")
-  expect_null(x$prefix)
+  expect_null(private$.prefix)
   handle <- x$launch_worker(
     call = x$call(
       socket = "my_socket",
@@ -111,12 +116,11 @@ test_that("SGE subclass mock job creates a custom job script", {
     worker = 1L,
     instance = "instance"
   )
-  private <- crew_private(x)
   private$.workers$handle[[1L]] <- handle
-  expect_false(is.null(x$prefix))
+  expect_false(is.null(private$.prefix))
   script <- path_script(
     dir = dir,
-    prefix = x$prefix,
+    prefix = private$.prefix,
     launcher = x$name,
     worker = 1L
   )
@@ -141,13 +145,4 @@ test_that("SGE subclass mock job creates a custom job script", {
   expect_equal(out[seq_along(exp)], exp)
   x$terminate_worker(x$workers$handle[[1L]])
   expect_false(file.exists(script))
-})
-
-test_that("deprecate command_delete", {
-  skip_on_cran()
-  expect_warning(
-    x <- crew_launcher_cluster(command_delete = "user_del"),
-    class = "crew_deprecate"
-  )
-  expect_equal(x$command_terminate, "user_del")
 })

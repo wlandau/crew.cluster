@@ -60,7 +60,7 @@ crew_options_slurm <- function(
   memory_gigabytes_required = NULL,
   memory_gigabytes_per_cpu = NULL,
   cpus_per_task = NULL,
-  time_minutes = 1440,
+  time_minutes = NULL,
   partition = NULL
 ) {
   out <- structure(

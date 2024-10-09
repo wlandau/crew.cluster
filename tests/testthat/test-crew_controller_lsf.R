@@ -1,6 +1,6 @@
 test_that("crew_controller_lsf() script() nearly empty", {
   x <- crew_controller_lsf(
-    lsf_cwd = "/home"
+    options_cluster = crew_options_lsf(cwd = "/home")
   )
   lines <- c(
     "#!/bin/sh",
@@ -14,13 +14,15 @@ test_that("crew_controller_lsf() script() nearly empty", {
 
 test_that("crew_controller_lsf() script() all lines", {
   x <- crew_controller_lsf(
-    script_lines = c("module load R", "echo 'start'"),
-    lsf_cwd = "/home",
-    lsf_log_output = "log1",
-    lsf_log_error = "log2",
-    lsf_memory_gigabytes_limit = 2,
-    lsf_memory_gigabytes_required = 2,
-    lsf_cores = 2
+    options_cluster = crew_options_lsf(
+      script_lines = c("module load R", "echo 'start'"),
+      cwd = "/home",
+      log_output = "log1",
+      log_error = "log2",
+      memory_gigabytes_limit = 2,
+      memory_gigabytes_required = 2,
+      cores = 2
+    )
   )
   out <- x$launcher$script(name = "my_name")
   exp <- c(
@@ -36,11 +38,4 @@ test_that("crew_controller_lsf() script() all lines", {
     "echo 'start'"
   )
   expect_equal(out, exp)
-})
-
-test_that("deprecate seconds_exit", {
-  expect_warning(
-    x <- crew_controller_lsf(seconds_exit = 1),
-    class = "crew_deprecate"
-  )
 })

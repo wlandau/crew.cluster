@@ -48,29 +48,9 @@ Other slurm:
 \section{Super classes}{
 \code{\link[crew:crew_class_launcher]{crew::crew_class_launcher}} -> \code{\link[crew.cluster:crew_class_launcher_cluster]{crew.cluster::crew_class_launcher_cluster}} -> \code{crew_class_launcher_slurm}
 }
-\section{Active bindings}{
-\if{html}{\out{<div class="r6-active-bindings">}}
-\describe{
-\item{\code{slurm_log_output}}{See \code{\link[=crew_launcher_slurm]{crew_launcher_slurm()}}.}
-
-\item{\code{slurm_log_error}}{See \code{\link[=crew_launcher_slurm]{crew_launcher_slurm()}}.}
-
-\item{\code{slurm_memory_gigabytes_required}}{See \code{\link[=crew_launcher_slurm]{crew_launcher_slurm()}}.}
-
-\item{\code{slurm_memory_gigabytes_per_cpu}}{See \code{\link[=crew_launcher_slurm]{crew_launcher_slurm()}}.}
-
-\item{\code{slurm_cpus_per_task}}{See \code{\link[=crew_launcher_slurm]{crew_launcher_slurm()}}.}
-
-\item{\code{slurm_time_minutes}}{See \code{\link[=crew_launcher_slurm]{crew_launcher_slurm()}}.}
-
-\item{\code{slurm_partition}}{See See \code{\link[=crew_launcher_slurm]{crew_launcher_slurm()}}.}
-}
-\if{html}{\out{</div>}}
-}
 \section{Methods}{
 \subsection{Public methods}{
 \itemize{
-\item \href{#method-crew_class_launcher_slurm-new}{\code{crew_class_launcher_slurm$new()}}
 \item \href{#method-crew_class_launcher_slurm-validate}{\code{crew_class_launcher_slurm$validate()}}
 \item \href{#method-crew_class_launcher_slurm-script}{\code{crew_class_launcher_slurm$script()}}
 }
@@ -96,114 +76,12 @@ Other slurm:
 <li><span class="pkg-link" data-pkg="crew" data-topic="crew_class_launcher" data-id="terminate_workers"><a href='../../crew/html/crew_class_launcher.html#method-crew_class_launcher-terminate_workers'><code>crew::crew_class_launcher$terminate_workers()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="crew" data-topic="crew_class_launcher" data-id="unlaunched"><a href='../../crew/html/crew_class_launcher.html#method-crew_class_launcher-unlaunched'><code>crew::crew_class_launcher$unlaunched()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="crew" data-topic="crew_class_launcher" data-id="wait"><a href='../../crew/html/crew_class_launcher.html#method-crew_class_launcher-wait'><code>crew::crew_class_launcher$wait()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="crew.cluster" data-topic="crew_class_launcher_cluster" data-id="initialize"><a href='../../crew.cluster/html/crew_class_launcher_cluster.html#method-crew_class_launcher_cluster-initialize'><code>crew.cluster::crew_class_launcher_cluster$initialize()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="crew.cluster" data-topic="crew_class_launcher_cluster" data-id="launch_worker"><a href='../../crew.cluster/html/crew_class_launcher_cluster.html#method-crew_class_launcher_cluster-launch_worker'><code>crew.cluster::crew_class_launcher_cluster$launch_worker()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="crew.cluster" data-topic="crew_class_launcher_cluster" data-id="terminate_worker"><a href='../../crew.cluster/html/crew_class_launcher_cluster.html#method-crew_class_launcher_cluster-terminate_worker'><code>crew.cluster::crew_class_launcher_cluster$terminate_worker()</code></a></span></li>
 </ul>
 </details>
 }}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-crew_class_launcher_slurm-new"></a>}}
-\if{latex}{\out{\hypertarget{method-crew_class_launcher_slurm-new}{}}}
-\subsection{Method \code{new()}}{
-SLURM launcher constructor.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{crew_class_launcher_slurm$new(
-  name = NULL,
-  seconds_interval = NULL,
-  seconds_timeout = NULL,
-  seconds_launch = NULL,
-  seconds_idle = NULL,
-  seconds_wall = NULL,
-  tasks_max = NULL,
-  tasks_timers = NULL,
-  reset_globals = NULL,
-  reset_packages = NULL,
-  reset_options = NULL,
-  garbage_collection = NULL,
-  launch_max = NULL,
-  tls = NULL,
-  r_arguments = NULL,
-  options_metrics = NULL,
-  verbose = NULL,
-  command_submit = NULL,
-  command_terminate = NULL,
-  script_directory = NULL,
-  script_lines = NULL,
-  slurm_log_output = NULL,
-  slurm_log_error = NULL,
-  slurm_memory_gigabytes_required = NULL,
-  slurm_memory_gigabytes_per_cpu = NULL,
-  slurm_cpus_per_task = NULL,
-  slurm_time_minutes = NULL,
-  slurm_partition = NULL
-)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{name}}{See \code{\link[=crew_launcher_slurm]{crew_launcher_slurm()}}.}
-
-\item{\code{seconds_interval}}{See \code{\link[=crew_launcher_slurm]{crew_launcher_slurm()}}.}
-
-\item{\code{seconds_timeout}}{See \code{\link[=crew_launcher_slurm]{crew_launcher_slurm()}}.}
-
-\item{\code{seconds_launch}}{See \code{\link[=crew_launcher_slurm]{crew_launcher_slurm()}}.}
-
-\item{\code{seconds_idle}}{See \code{\link[=crew_launcher_slurm]{crew_launcher_slurm()}}.}
-
-\item{\code{seconds_wall}}{See \code{\link[=crew_launcher_slurm]{crew_launcher_slurm()}}.}
-
-\item{\code{tasks_max}}{See \code{\link[=crew_launcher_slurm]{crew_launcher_slurm()}}.}
-
-\item{\code{tasks_timers}}{See \code{\link[=crew_launcher_slurm]{crew_launcher_slurm()}}.}
-
-\item{\code{reset_globals}}{See \code{\link[=crew_launcher_slurm]{crew_launcher_slurm()}}.}
-
-\item{\code{reset_packages}}{See \code{\link[=crew_launcher_slurm]{crew_launcher_slurm()}}.}
-
-\item{\code{reset_options}}{See \code{\link[=crew_launcher_slurm]{crew_launcher_slurm()}}.}
-
-\item{\code{garbage_collection}}{See \code{\link[=crew_launcher_slurm]{crew_launcher_slurm()}}.}
-
-\item{\code{launch_max}}{See \code{\link[=crew_launcher_slurm]{crew_launcher_slurm()}}.}
-
-\item{\code{tls}}{See \code{\link[=crew_launcher_slurm]{crew_launcher_slurm()}}.}
-
-\item{\code{r_arguments}}{See \code{\link[=crew_launcher_slurm]{crew_launcher_slurm()}}.}
-
-\item{\code{options_metrics}}{See \code{\link[=crew_launcher_slurm]{crew_launcher_slurm()}}.}
-
-\item{\code{verbose}}{See \code{\link[=crew_launcher_slurm]{crew_launcher_slurm()}}.}
-
-\item{\code{command_submit}}{See \code{\link[=crew_launcher_sge]{crew_launcher_sge()}}.}
-
-\item{\code{command_terminate}}{See \code{\link[=crew_launcher_sge]{crew_launcher_sge()}}.}
-
-\item{\code{script_directory}}{See \code{\link[=crew_launcher_sge]{crew_launcher_sge()}}.}
-
-\item{\code{script_lines}}{See \code{\link[=crew_launcher_sge]{crew_launcher_sge()}}.}
-
-\item{\code{slurm_log_output}}{See \code{\link[=crew_launcher_slurm]{crew_launcher_slurm()}}.}
-
-\item{\code{slurm_log_error}}{See \code{\link[=crew_launcher_slurm]{crew_launcher_slurm()}}.}
-
-\item{\code{slurm_memory_gigabytes_required}}{See \code{\link[=crew_launcher_slurm]{crew_launcher_slurm()}}.}
-
-\item{\code{slurm_memory_gigabytes_per_cpu}}{See \code{\link[=crew_launcher_slurm]{crew_launcher_slurm()}}.}
-
-\item{\code{slurm_cpus_per_task}}{See \code{\link[=crew_launcher_slurm]{crew_launcher_slurm()}}.}
-
-\item{\code{slurm_time_minutes}}{See \code{\link[=crew_launcher_slurm]{crew_launcher_slurm()}}.}
-
-\item{\code{slurm_partition}}{See \code{\link[=crew_launcher_slurm]{crew_launcher_slurm()}}.}
-}
-\if{html}{\out{</div>}}
-}
-\subsection{Returns}{
-an SLURM launcher object.
-}
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-crew_class_launcher_slurm-validate"></a>}}
 \if{latex}{\out{\hypertarget{method-crew_class_launcher_slurm-validate}{}}}

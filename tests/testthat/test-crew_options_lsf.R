@@ -18,14 +18,14 @@ test_that("crew_options_lsf()", {
       list(
         verbose = TRUE,
         command_submit = "submit",
-        command_terminate = "terminate", 
+        command_terminate = "terminate",
         script_directory = "a",
         script_lines = "b",
         cwd = "x",
-        log_output = "1", 
+        log_output = "1",
         log_error = "2",
         memory_gigabytes_limit = 1234,
-        memory_gigabytes_required = 123, 
+        memory_gigabytes_required = 123,
         cores = 2
       ),
       class = c("crew_options_lsf", "crew_options_cluster", "crew_options")

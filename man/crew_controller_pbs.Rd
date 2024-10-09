@@ -29,19 +29,20 @@ crew_controller_pbs(
   launch_max = 5L,
   r_arguments = c("--no-save", "--no-restore"),
   options_metrics = crew::crew_options_metrics(),
-  verbose = FALSE,
-  command_submit = as.character(Sys.which("qsub")),
-  command_terminate = as.character(Sys.which("qdel")),
+  options_cluster = crew.cluster::crew_options_pbs(),
+  verbose = NULL,
+  command_submit = NULL,
+  command_terminate = NULL,
   command_delete = NULL,
-  script_directory = tempdir(),
-  script_lines = character(0L),
-  pbs_cwd = TRUE,
-  pbs_log_output = "/dev/null",
+  script_directory = NULL,
+  script_lines = NULL,
+  pbs_cwd = NULL,
+  pbs_log_output = NULL,
   pbs_log_error = NULL,
-  pbs_log_join = TRUE,
+  pbs_log_join = NULL,
   pbs_memory_gigabytes_required = NULL,
   pbs_cores = NULL,
-  pbs_walltime_hours = 12
+  pbs_walltime_hours = NULL
 )
 }
 \arguments{
@@ -147,6 +148,9 @@ when starting a worker. Example:
 for workers, or an object from \code{\link[crew:crew_options_metrics]{crew_options_metrics()}} to enable
 and configure resource metric logging for workers.}
 
+\item{options_cluster}{An options list from
+\code{\link[=crew_options_pbs]{crew_options_pbs()}} with cluster-specific configuration options.}
+
 \item{verbose}{Deprecated. Use \code{options_cluster} instead.}
 
 \item{command_submit}{Deprecated. Use \code{options_cluster} instead.}
@@ -160,53 +164,20 @@ Use \code{command_terminate} instead.}
 
 \item{script_lines}{Deprecated. Use \code{options_cluster} instead.}
 
-\item{pbs_cwd}{Logical of length 1, whether to set the working directory
-of the worker to the working directory it was launched from.
-\code{pbs_cwd = TRUE} is translates to a line of \verb{cd "$PBS_O_WORKDIR"}
-in the job script. This line is inserted after the content of
-\code{script_lines} to make sure the \verb{#PBS} directives are above
-system commands. \code{pbs_cwd = FALSE} omits this line.}
+\item{pbs_cwd}{Deprecated. Use \code{options_cluster} instead.}
 
-\item{pbs_log_output}{Character of length 1, file or directory path to PBS
-worker log files for standard output.
-\code{pbs_log_output = "VALUE"} translates to a line of
-\verb{#PBS -o VALUE} in the PBS job script. The default is \verb{/dev/null} to omit
-the logs. If you do supply a non-\verb{/dev/null} value,
-it is recommended to supply a
-directory path with a trailing slash so that each worker gets its own set
-of log files.}
+\item{pbs_log_output}{Deprecated. Use \code{options_cluster} instead.}
 
-\item{pbs_log_error}{Character of length 1, file or directory path to PBS
-worker log files for standard error.
-\code{pbs_log_error = "VALUE"} translates to a line of
-\verb{#PBS -e VALUE} in the PBS job script.
-The default of \code{NULL} omits this line.
-If you do supply a non-\verb{/dev/null} value, it is recommended to supply a
-directory path with a trailing slash so that each worker gets its own set
-of log files.}
+\item{pbs_log_error}{Deprecated. Use \code{options_cluster} instead.}
 
-\item{pbs_log_join}{Logical, whether to join the stdout and stderr log
-files together into one file. \code{pbs_log_join = TRUE} translates to a line
-of \verb{#PBS -j oe} in the PBS job script, while \code{pbs_log_join = FALSE} is
-equivalent to \verb{#PBS -j n}. If \code{pbs_log_join = TRUE}, then \code{pbs_log_error}
-should be \code{NULL}.}
+\item{pbs_log_join}{Deprecated. Use \code{options_cluster} instead.}
 
-\item{pbs_memory_gigabytes_required}{Optional positive numeric of length 1
-with the gigabytes of memory required to run the worker.
-\code{pbs_memory_gigabytes_required = 2.4}
-translates to a line of \verb{#PBS -l mem=2.4gb} in the PBS job script.
-\code{pbs_memory_gigabytes_required = NULL} omits this line.}
+\item{pbs_memory_gigabytes_required}{Deprecated.
+Use \code{options_cluster} instead.}
 
-\item{pbs_cores}{Optional positive integer of length 1,
-number of cores per worker ("slots" in PBS lingo).
-\code{pbs_cores = 4} translates
-to a line of \verb{#PBS -l ppn=4} in the PBS job script.
-\code{pbs_cores = NULL} omits this line.}
+\item{pbs_cores}{Deprecated. Use \code{options_cluster} instead.}
 
-\item{pbs_walltime_hours}{Numeric of length 1 with the hours of wall time
-to request for the job. \code{pbs_walltime_hours = 23} translates to
-a line of \verb{#PBS -l walltime=23:00:00} in the job script.
-\code{pbs_walltime_hours = NULL} omits this line.}
+\item{pbs_walltime_hours}{Deprecated. Use \code{options_cluster} instead.}
 }
 \description{
 Create an \code{R6} object to submit tasks and

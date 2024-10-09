@@ -2,7 +2,7 @@
 % Please edit documentation in R/crew_options_sge.R
 \name{crew_options_sge}
 \alias{crew_options_sge}
-\title{SGE options.}
+\title{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#maturing}{\figure{lifecycle-maturing.svg}{options: alt='[Maturing]'}}}{\strong{[Maturing]}} SGE options.}
 \usage{
 crew_options_sge(
   verbose = FALSE,

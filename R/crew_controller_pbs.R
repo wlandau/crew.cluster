@@ -43,28 +43,21 @@ crew_controller_pbs <- function(
   launch_max = 5L,
   r_arguments = c("--no-save", "--no-restore"),
   options_metrics = crew::crew_options_metrics(),
-  verbose = FALSE,
-  command_submit = as.character(Sys.which("qsub")),
-  command_terminate = as.character(Sys.which("qdel")),
+  options_cluster = crew.cluster::crew_options_pbs(),
+  verbose = NULL,
+  command_submit = NULL,
+  command_terminate = NULL,
   command_delete = NULL,
-  script_directory = tempdir(),
-  script_lines = character(0L),
-  pbs_cwd = TRUE,
-  pbs_log_output = "/dev/null",
+  script_directory = NULL,
+  script_lines = NULL,
+  pbs_cwd = NULL,
+  pbs_log_output = NULL,
   pbs_log_error = NULL,
-  pbs_log_join = TRUE,
+  pbs_log_join = NULL,
   pbs_memory_gigabytes_required = NULL,
   pbs_cores = NULL,
-  pbs_walltime_hours = 12
+  pbs_walltime_hours = NULL
 ) {
-  if (!is.null(seconds_exit)) {
-    crew::crew_deprecate(
-      name = "seconds_exit",
-      date = "2023-09-21",
-      version = "0.5.0.9002",
-      alternative = "none (no longer necessary)"
-    )
-  }
   client <- crew::crew_client(
     name = name,
     workers = workers,
@@ -94,6 +87,7 @@ crew_controller_pbs <- function(
     tls = tls,
     r_arguments = r_arguments,
     options_metrics = options_metrics,
+    options_cluster = options_cluster,
     verbose = verbose,
     command_submit = command_submit,
     command_terminate = command_terminate,

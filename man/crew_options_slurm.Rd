@@ -2,7 +2,7 @@
 % Please edit documentation in R/crew_options_slurm.R
 \name{crew_options_slurm}
 \alias{crew_options_slurm}
-\title{SLURM options.}
+\title{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}} SLURM options.}
 \usage{
 crew_options_slurm(
   verbose = FALSE,
@@ -16,7 +16,7 @@ crew_options_slurm(
   memory_gigabytes_required = NULL,
   memory_gigabytes_per_cpu = NULL,
   cpus_per_task = NULL,
-  time_minutes = 1440,
+  time_minutes = NULL,
   partition = NULL
 )
 }

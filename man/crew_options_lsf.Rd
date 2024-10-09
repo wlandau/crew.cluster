@@ -2,7 +2,7 @@
 % Please edit documentation in R/crew_options_lsf.R
 \name{crew_options_lsf}
 \alias{crew_options_lsf}
-\title{LSF options.}
+\title{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}} LSF options.}
 \usage{
 crew_options_lsf(
   verbose = FALSE,

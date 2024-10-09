@@ -47,28 +47,21 @@ crew_controller_slurm <- function(
   launch_max = 5L,
   r_arguments = c("--no-save", "--no-restore"),
   options_metrics = crew::crew_options_metrics(),
-  verbose = FALSE,
-  command_submit = as.character(Sys.which("sbatch")),
-  command_terminate = as.character(Sys.which("scancel")),
+  options_cluster = crew.cluster::crew_options_slurm(),
+  verbose = NULL,
+  command_submit = NULL,
+  command_terminate = NULL,
   command_delete = NULL,
-  script_directory = tempdir(),
-  script_lines = character(0L),
-  slurm_log_output = "/dev/null",
-  slurm_log_error = "/dev/null",
+  script_directory = NULL,
+  script_lines = NULL,
+  slurm_log_output = NULL,
+  slurm_log_error = NULL,
   slurm_memory_gigabytes_required = NULL,
   slurm_memory_gigabytes_per_cpu = NULL,
   slurm_cpus_per_task = NULL,
-  slurm_time_minutes = 1440,
+  slurm_time_minutes = NULL,
   slurm_partition = NULL
 ) {
-  if (!is.null(seconds_exit)) {
-    crew::crew_deprecate(
-      name = "seconds_exit",
-      date = "2023-09-21",
-      version = "0.5.0.9002",
-      alternative = "none (no longer necessary)"
-    )
-  }
   client <- crew::crew_client(
     name = name,
     workers = workers,
@@ -98,6 +91,7 @@ crew_controller_slurm <- function(
     tls = tls,
     r_arguments = r_arguments,
     options_metrics = options_metrics,
+    options_cluster = options_cluster,
     verbose = verbose,
     command_submit = command_submit,
     command_terminate = command_terminate,

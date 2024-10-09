@@ -2,7 +2,7 @@
 % Please edit documentation in R/crew_options_pbs.R
 \name{crew_options_pbs}
 \alias{crew_options_pbs}
-\title{PBS options.}
+\title{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}} PBS options.}
 \usage{
 crew_options_pbs(
   verbose = FALSE,
