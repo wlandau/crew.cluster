@@ -23,10 +23,10 @@ systems. Inspiration also comes from packages
 
 # Installation
 
-| Type        | Source     | Command                                                                      |
-|-------------|------------|------------------------------------------------------------------------------|
-| Release     | CRAN       | `install.packages("crew.cluster")`                                           |
-| Development | GitHub     | `remotes::install_github("wlandau/crew.cluster")`                            |
+| Type | Source | Command |
+|----|----|----|
+| Release | CRAN | `install.packages("crew.cluster")` |
+| Development | GitHub | `remotes::install_github("wlandau/crew.cluster")` |
 | Development | R-universe | `install.packages("crew.cluster", repos = "https://wlandau.r-universe.dev")` |
 
 # Documentation
@@ -143,7 +143,7 @@ not be able to.
   2.0](https://github.com/mschubert/clustermq/blob/master/LICENSE).
   These scripts helped construct launcher plugins to clusters where
   direct access was not possible. See the
-  [`NOTICE`](https://github.com/wlandau/crew.cluster/blob/main/NOTICE)
+  [`LICENSE.note`](https://github.com/wlandau/crew.cluster/blob/main/LICENSE.note)
   file in this package.
 
 # Code of Conduct

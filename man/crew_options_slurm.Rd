@@ -8,7 +8,6 @@ crew_options_slurm(
   verbose = FALSE,
   command_submit = as.character(Sys.which("sbatch")),
   command_terminate = as.character(Sys.which("scancel")),
-  command_delete = NULL,
   script_directory = tempdir(),
   script_lines = character(0L),
   log_output = "/dev/null",

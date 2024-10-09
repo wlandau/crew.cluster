@@ -59,7 +59,6 @@ crew_options_sge <- function(
   verbose = FALSE,
   command_submit = as.character(Sys.which("qsub")),
   command_terminate = as.character(Sys.which("qdel")),
-  command_delete = NULL,
   script_directory = tempdir(),
   script_lines = character(0L),
   cwd = TRUE,
