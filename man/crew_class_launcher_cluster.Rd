@@ -92,7 +92,7 @@ Abstract launcher constructor.
   reset_packages = NULL,
   reset_options = NULL,
   garbage_collection = NULL,
-  launch_max = NULL,
+  crashes_error = NULL,
   tls = NULL,
   r_arguments = NULL,
   options_metrics = NULL,
@@ -127,7 +127,7 @@ Abstract launcher constructor.
 
 \item{\code{garbage_collection}}{See \code{\link[=crew_launcher_cluster]{crew_launcher_cluster()}}.}
 
-\item{\code{launch_max}}{See \code{\link[=crew_launcher_cluster]{crew_launcher_cluster()}}.}
+\item{\code{crashes_error}}{See \code{\link[=crew_launcher_cluster]{crew_launcher_cluster()}}.}
 
 \item{\code{tls}}{See \code{\link[=crew_launcher_cluster]{crew_launcher_cluster()}}.}
 

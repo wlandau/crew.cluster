@@ -31,7 +31,7 @@ crew_launcher_cluster <- function(
   reset_packages = FALSE,
   reset_options = FALSE,
   garbage_collection = FALSE,
-  launch_max = 5L,
+  crashes_error = 5L,
   tls = crew::crew_tls(mode = "automatic"),
   r_arguments = c("--no-save", "--no-restore"),
   options_metrics = crew::crew_options_metrics(),
@@ -84,7 +84,7 @@ crew_launcher_cluster <- function(
     reset_packages = reset_packages,
     reset_options = reset_options,
     garbage_collection = garbage_collection,
-    launch_max = launch_max,
+    crashes_error = crashes_error,
     tls = tls,
     r_arguments = r_arguments,
     options_metrics = options_metrics,
@@ -136,7 +136,7 @@ crew_class_launcher_cluster <- R6::R6Class(
     #' @param reset_packages See [crew_launcher_cluster()].
     #' @param reset_options See [crew_launcher_cluster()].
     #' @param garbage_collection See [crew_launcher_cluster()].
-    #' @param launch_max See [crew_launcher_cluster()].
+    #' @param crashes_error See [crew_launcher_cluster()].
     #' @param tls See [crew_launcher_cluster()].
     #' @param r_arguments See [crew_launcher_cluster()].
     #' @param options_metrics See [crew_launcher_cluster()].
@@ -154,7 +154,7 @@ crew_class_launcher_cluster <- R6::R6Class(
       reset_packages = NULL,
       reset_options = NULL,
       garbage_collection = NULL,
-      launch_max = NULL,
+      crashes_error = NULL,
       tls = NULL,
       r_arguments = NULL,
       options_metrics = NULL,
@@ -173,7 +173,7 @@ crew_class_launcher_cluster <- R6::R6Class(
         reset_packages = reset_packages,
         reset_options = reset_options,
         garbage_collection = garbage_collection,
-        launch_max = launch_max,
+        crashes_error = crashes_error,
         tls = tls,
         r_arguments = r_arguments,
         options_metrics = options_metrics
