@@ -21,3 +21,7 @@ if_any <- function(condition, true, false) {
     false
   }
 }
+
+slice_bounded <- function(x, index) {
+  x[min(index, length(x))]
+}

@@ -156,8 +156,10 @@ crew_class_launcher_pbs <- R6::R6Class(
     #'   back to 1 if a worker instance successfully completes
     #'   all its tasks and then exits normally.
     #'   By assigning vector arguments
-    #'   to the cluster-specific options of the controller,
+    #'   to certain cluster-specific options of the controller,
     #'   you can configure different sets of resources for different attempts.
+    #'   See cluster-specific option functions
+    #'   like [crew_options_slurm()] for details.
     #' @examples
     #' if (identical(Sys.getenv("CREW_EXAMPLES"), "true")) {
     #' launcher <- crew_launcher_pbs(
@@ -167,7 +169,7 @@ crew_class_launcher_pbs <- R6::R6Class(
     #' launcher$script(name = "my_job_name")
     #' }
     script = function(name, attempt) {
-      options <- private$.options_cluster
+      options <- crew_options_slice(private$.options_cluster, attempt)
       c(
         paste("#PBS -N", name),
         paste("#PBS -o", options$log_output),

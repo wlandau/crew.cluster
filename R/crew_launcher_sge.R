@@ -170,7 +170,7 @@ crew_class_launcher_sge <- R6::R6Class(
     #' launcher$script(name = "my_job_name")
     #' }
     script = function(name, attempt) {
-      options <- private$.options_cluster
+      options <- crew_options_slice(private$.options_cluster, attempt)
       c(
         paste("#$ -N", name),
         if_any(options$cwd, "#$ -cwd", character(0L)),

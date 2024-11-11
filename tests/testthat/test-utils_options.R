@@ -8,3 +8,7 @@ test_that("invalid options", {
     class = "crew_error"
   )
 })
+
+test_that("crew_options_slice()", {
+
+})
