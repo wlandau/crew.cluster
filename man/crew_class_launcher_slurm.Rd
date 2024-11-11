@@ -61,6 +61,7 @@ Other slurm:
 <li><span class="pkg-link" data-pkg="crew" data-topic="crew_class_launcher" data-id="active"><a href='../../crew/html/crew_class_launcher.html#method-crew_class_launcher-active'><code>crew::crew_class_launcher$active()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="crew" data-topic="crew_class_launcher" data-id="booting"><a href='../../crew/html/crew_class_launcher.html#method-crew_class_launcher-booting'><code>crew::crew_class_launcher$booting()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="crew" data-topic="crew_class_launcher" data-id="call"><a href='../../crew/html/crew_class_launcher.html#method-crew_class_launcher-call'><code>crew::crew_class_launcher$call()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="crew" data-topic="crew_class_launcher" data-id="crashes"><a href='../../crew/html/crew_class_launcher.html#method-crew_class_launcher-crashes'><code>crew::crew_class_launcher$crashes()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="crew" data-topic="crew_class_launcher" data-id="done"><a href='../../crew/html/crew_class_launcher.html#method-crew_class_launcher-done'><code>crew::crew_class_launcher$done()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="crew" data-topic="crew_class_launcher" data-id="errors"><a href='../../crew/html/crew_class_launcher.html#method-crew_class_launcher-errors'><code>crew::crew_class_launcher$errors()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="crew" data-topic="crew_class_launcher" data-id="forward"><a href='../../crew/html/crew_class_launcher.html#method-crew_class_launcher-forward'><code>crew::crew_class_launcher$forward()</code></a></span></li>
@@ -101,7 +102,7 @@ Validate the launcher.
 \subsection{Method \code{script()}}{
 Generate the job script.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{crew_class_launcher_slurm$script(name)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{crew_class_launcher_slurm$script(name, attempt)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
@@ -109,6 +110,15 @@ Generate the job script.
 \describe{
 \item{\code{name}}{Character of length 1, name of the job. For inspection
 purposes, you can supply a mock job name.}
+
+\item{\code{attempt}}{Positive integer, number of the current attempt.
+The attempt number increments each time a worker exits
+without completing all its tasks, and it resets
+back to 1 if a worker instance successfully completes
+all its tasks and then exits normally.
+By assigning vector arguments
+to the cluster-specific options of the controller,
+you can configure different sets of resources for different attempts.}
 }
 \if{html}{\out{</div>}}
 }

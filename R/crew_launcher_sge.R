@@ -153,6 +153,14 @@ crew_class_launcher_sge <- R6::R6Class(
     #' @return Character vector of the lines of the job script.
     #' @param name Character of length 1, name of the job. For inspection
     #'   purposes, you can supply a mock job name.
+    #' @param attempt Positive integer, number of the current attempt.
+    #'   The attempt number increments each time a worker exits
+    #'   without completing all its tasks, and it resets
+    #'   back to 1 if a worker instance successfully completes
+    #'   all its tasks and then exits normally.
+    #'   By assigning vector arguments
+    #'   to the cluster-specific options of the controller,
+    #'   you can configure different sets of resources for different attempts.
     #' @examples
     #' if (identical(Sys.getenv("CREW_EXAMPLES"), "true")) {
     #' launcher <- crew_launcher_sge(
@@ -161,45 +169,46 @@ crew_class_launcher_sge <- R6::R6Class(
     #' )
     #' launcher$script(name = "my_job_name")
     #' }
-    script = function(name) {
+    script = function(name, attempt) {
+      options <- private$.options_cluster
       c(
         paste("#$ -N", name),
-        if_any(private$.options_cluster$cwd, "#$ -cwd", character(0L)),
-        if_any(private$.options_cluster$envvars, "#$ -V", character(0L)),
-        paste("#$ -o", private$.options_cluster$log_output),
+        if_any(options$cwd, "#$ -cwd", character(0L)),
+        if_any(options$envvars, "#$ -V", character(0L)),
+        paste("#$ -o", options$log_output),
         if_any(
-          is.null(private$.options_cluster$log_error),
+          is.null(options$log_error),
           character(0L),
-          paste("#$ -e", private$.options_cluster$log_error)
+          paste("#$ -e", options$log_error)
         ),
-        if_any(private$.options_cluster$log_join, "#$ -j y", "#$ -j n"),
+        if_any(options$log_join, "#$ -j y", "#$ -j n"),
         if_any(
-          is.null(private$.options_cluster$memory_gigabytes_limit),
+          is.null(options$memory_gigabytes_limit),
           character(0L),
           sprintf(
             "#$ -l h_rss=%sG",
-            private$.options_cluster$memory_gigabytes_limit
+            options$memory_gigabytes_limit
           )
         ),
         if_any(
-          is.null(private$.options_cluster$memory_gigabytes_required),
+          is.null(options$memory_gigabytes_required),
           character(0L),
           sprintf(
             "#$ -l m_mem_free=%sG",
-            private$.options_cluster$memory_gigabytes_required
+            options$memory_gigabytes_required
           )
         ),
         if_any(
-          is.null(private$.options_cluster$cores),
+          is.null(options$cores),
           character(0L),
-          paste("#$ -pe smp", as.character(private$.options_cluster$cores))
+          paste("#$ -pe smp", as.character(options$cores))
         ),
         if_any(
-          is.null(private$.options_cluster$gpu),
+          is.null(options$gpu),
           character(0L),
-          paste0("#$ -l gpu=", as.character(private$.options_cluster$gpu))
+          paste0("#$ -l gpu=", as.character(options$gpu))
         ),
-        private$.options_cluster$script_lines
+        options$script_lines
       )
     }
   )
