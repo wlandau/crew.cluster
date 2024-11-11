@@ -53,7 +53,7 @@
 #'   usually with a single element.
 #'   Supply a vector to make `cpus_per_task` a retryable option
 #'   (see the "Retryable options" section for details).
-#'   
+#'
 #'   `cpus_per_task` is the number of CPUs for the worker.
 #'   `cpus_per_task = 4` translates
 #'   to a line of `#SBATCH --cpus-per-task=4` in the SLURM job script.
@@ -70,7 +70,7 @@
 #' @param partition Character of vector, usually with a single element.
 #'   Supply a vector to make `partition` a retryable option
 #'   (see the "Retryable options" section for details).
-#'   
+#'
 #'   `partition` is the name of the SLURM partition to
 #'   create workers on. `partition = "partition1,partition2"`
 #'   translates to a line of `#SBATCH --partition=partition1,partition2`

@@ -18,6 +18,7 @@ README
 reproducibly
 rOpenSci
 asynchronicity
+retryable
 ropensci
 scm
 SHA

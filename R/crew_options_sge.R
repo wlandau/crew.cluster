@@ -46,7 +46,7 @@
 #'   with a single element.
 #'   Supply a vector to make `memory_gigabytes_limit` a retryable option
 #'   (see the "Retryable options" section for details).
-#'   
+#'
 #'   `memory_gigabytes_limit` is
 #'   the maximum number of gigabytes of memory a worker is allowed to
 #'   consume. If the worker consumes more than this level of memory, then

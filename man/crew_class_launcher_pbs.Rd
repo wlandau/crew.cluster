@@ -114,8 +114,10 @@ without completing all its tasks, and it resets
 back to 1 if a worker instance successfully completes
 all its tasks and then exits normally.
 By assigning vector arguments
-to the cluster-specific options of the controller,
-you can configure different sets of resources for different attempts.}
+to certain cluster-specific options of the controller,
+you can configure different sets of resources for different attempts.
+See cluster-specific option functions
+like \code{\link[=crew_options_slurm]{crew_options_slurm()}} for details.}
 }
 \if{html}{\out{</div>}}
 }

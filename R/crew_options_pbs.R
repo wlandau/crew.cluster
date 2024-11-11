@@ -4,7 +4,7 @@
 #' @description Set options for PBS job management.
 #' @section Retryable options:
 #'   Arguments `memory_gigabytes_required`, `cores`,
-#'   and `walltime_hours` are retryable options. 
+#'   and `walltime_hours` are retryable options.
 #'   Each of these arguments be a vector where each successive element is
 #'   used during a retry if the worker previously exited without
 #'   completing all its assigned tasks.
@@ -44,7 +44,7 @@
 #'   usually with a single element.
 #'   Supply a vector to make `memory_gigabytes_required` a retryable option
 #'   (see the "Retryable options" section for details).
-#'   
+#'
 #'   `memory_gigabytes_required` is
 #'   the gigabytes of memory required to run the worker.
 #'   `memory_gigabytes_required = 2.4`
@@ -54,7 +54,7 @@
 #'   usually with a single element.
 #'   Supply a vector to make `cores` a retryable option
 #'   (see the "Retryable options" section for details).
-#'   
+#'
 #'   `cores` is the number of cores for the worker
 #'   ("slots" in PBS lingo).
 #'   `cores = 4` translates

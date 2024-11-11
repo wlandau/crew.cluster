@@ -4,7 +4,7 @@
 #' @description Set options for LSF job management.
 #' @section Retryable options:
 #'   Arguments `memory_gigabytes_limit`, `memory_gigabytes_required`,
-#'   and `cores` are retryable options. 
+#'   and `cores` are retryable options.
 #'   Each of these arguments be a vector where each successive element is
 #'   used during a retry if the worker previously exited without
 #'   completing all its assigned tasks.
@@ -37,7 +37,7 @@
 #'   usually with a single element.
 #'   Supply a vector to make `memory_gigabytes_limit` a retryable option
 #'   (see the "Retryable options" section for details).
-#'   
+#'
 #'   `memory_gigabytes_limit` is the memory
 #'   limit in gigabytes of the worker.
 #'   `memory_gigabytes_limit = 4`
