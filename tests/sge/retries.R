@@ -13,7 +13,7 @@ test_that("SGE retries", {
     options_cluster = crew_options_sge(
       verbose = TRUE,
       script_lines = paste0("module load R/", getRversion()),
-      cores = c(1, 2, 3) 
+      cores = c(1, 2, 3)
     ),
     crashes_error = 4L
   )
