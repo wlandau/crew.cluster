@@ -48,7 +48,8 @@ controller <- crew_controller_sge(
   tasks_max = 2, # to avoid reaching wall time limits
   seconds_idle = 10, # to release resources when they are not needed,
   # Try 16 GB memory first, then use 32 GB to retry if the worker crashes,
-  # then 64 GB for all subsequent retries:
+  # then 64 GB for all subsequent retries after failure. Go back to 16 GB
+  # if the worker completes all its tasks before exiting.
   sge_memory_gigabytes_required = c(16, 32, 64),
   script_lines = "module load R" # if R is an environment module
 )
