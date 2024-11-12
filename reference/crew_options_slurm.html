@@ -118,8 +118,12 @@ Set <code>log_error = NULL</code> to omit this line from the job script.</p></dd
 
 
 <dt id="arg-memory-gigabytes-required">memory_gigabytes_required<a class="anchor" aria-label="anchor" href="#arg-memory-gigabytes-required"></a></dt>
-<dd><p>Positive numeric of length 1
-with the total number of gigabytes of memory required per node.
+<dd><p>Positive numeric vector,
+usually with a single element.
+Supply a vector to make <code>memory_gigabytes_required</code> a retryable option
+(see the "Retryable options" section for details).</p>
+<p>Each element is of <code>memory_gigabytes_required</code>
+the total number of gigabytes of memory required per node.
 <code>memory_gigabytes_required = 2.40123</code>
 translates to a line of <code>#SBATCH --mem=2041M</code>
 in the SLURM job script.
@@ -127,8 +131,12 @@ in the SLURM job script.
 
 
 <dt id="arg-memory-gigabytes-per-cpu">memory_gigabytes_per_cpu<a class="anchor" aria-label="anchor" href="#arg-memory-gigabytes-per-cpu"></a></dt>
-<dd><p>Positive numeric of length 1
-with the gigabytes of memory required per CPU.
+<dd><p>Positive numeric vector,
+usually with a single element.
+Supply a vector to make <code>memory_gigabytes_per_cpu</code> a retryable option
+(see the "Retryable options" section for details).</p>
+<p><code>memory_gigabytes_per_cpu</code> is the gigabytes of
+memory required per CPU.
 <code>memory_gigabytes_per_cpu = 2.40123</code>
 translates to a line of <code>#SBATCH --mem-per-cpu=2041M</code>
 in the SLURM job script.
@@ -136,15 +144,21 @@ in the SLURM job script.
 
 
 <dt id="arg-cpus-per-task">cpus_per_task<a class="anchor" aria-label="anchor" href="#arg-cpus-per-task"></a></dt>
-<dd><p>Optional positive integer of length 1,
-number of CPUs for the worker.
+<dd><p>Optional positive integer vector,
+usually with a single element.
+Supply a vector to make <code>cpus_per_task</code> a retryable option
+(see the "Retryable options" section for details).</p>
+<p><code>cpus_per_task</code> is the number of CPUs for the worker.
 <code>cpus_per_task = 4</code> translates
 to a line of <code>#SBATCH --cpus-per-task=4</code> in the SLURM job script.
 <code>cpus_per_task = NULL</code> omits this line.</p></dd>
 
 
 <dt id="arg-time-minutes">time_minutes<a class="anchor" aria-label="anchor" href="#arg-time-minutes"></a></dt>
-<dd><p>Numeric of length 1, number of minutes to
+<dd><p>Numeric of length 1, usually with a single element.
+Supply a vector to make <code>time_minutes</code> a retryable option
+(see the "Retryable options" section for details).</p>
+<p><code>time_minutes</code> is the number of minutes to
 designate as the wall time of <code>crew</code> each worker instance on the
 SLURM cluster. <code>time_minutes = 60</code> translates to a line of
 <code>#SBATCH --time=60</code> in the SLURM job script. <code>time_minutes = NULL</code>
@@ -152,7 +166,10 @@ omits this line.</p></dd>
 
 
 <dt id="arg-partition">partition<a class="anchor" aria-label="anchor" href="#arg-partition"></a></dt>
-<dd><p>Character of length 1, name of the SLURM partition to
+<dd><p>Character of vector, usually with a single element.
+Supply a vector to make <code>partition</code> a retryable option
+(see the "Retryable options" section for details).</p>
+<p><code>partition</code> is the name of the SLURM partition to
 create workers on. <code>partition = "partition1,partition2"</code>
 translates to a line of <code>#SBATCH --partition=partition1,partition2</code>
 in the SLURM job script. <code>partition = NULL</code>
@@ -162,6 +179,20 @@ omits this line.</p></dd>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     <p>A classed list of options.</p>
+    </div>
+    <div class="section level2">
+    <h2 id="retryable-options">Retryable options<a class="anchor" aria-label="anchor" href="#retryable-options"></a></h2>
+
+
+<p>Arguments <code>memory_gigabytes_required</code>, <code>memory_gigabytes_per_cpu</code>,
+<code>cpus_per_task</code>, <code>time_minutes</code>, and <code>partition</code> are retryable options.
+Each of these arguments be a vector where each successive element is
+used during a retry if the worker previously exited without
+completing all its assigned tasks.
+The last element of the vector is used if there are more retries than
+the length of the vector.
+Control the number of allowable retries with <code>crashes_error</code>
+argument of the controller.</p>
     </div>
     <div class="section level2">
     <h2 id="attribution">Attribution<a class="anchor" aria-label="anchor" href="#attribution"></a></h2>
@@ -199,7 +230,7 @@ source code for additional attribution.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] ""</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $script_directory</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/RtmpVHc14h"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/RtmpViwPPq"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $script_lines</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> character(0)</span>

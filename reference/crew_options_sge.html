@@ -144,8 +144,12 @@ should be <code>NULL</code>.</p></dd>
 
 
 <dt id="arg-memory-gigabytes-limit">memory_gigabytes_limit<a class="anchor" aria-label="anchor" href="#arg-memory-gigabytes-limit"></a></dt>
-<dd><p>Optional numeric of length 1
-with the maximum number of gigabytes of memory a worker is allowed to
+<dd><p>Optional numeric vector, usually
+with a single element.
+Supply a vector to make <code>memory_gigabytes_limit</code> a retryable option
+(see the "Retryable options" section for details).</p>
+<p><code>memory_gigabytes_limit</code> is
+the maximum number of gigabytes of memory a worker is allowed to
 consume. If the worker consumes more than this level of memory, then
 SGE will terminate it. <code>memory_gigabytes_limit = 5.7"</code>
 translates to a line of <code>"#$ -l h_rss=5.7G"</code> in the SGE job script.
@@ -153,15 +157,23 @@ translates to a line of <code>"#$ -l h_rss=5.7G"</code> in the SGE job script.
 
 
 <dt id="arg-memory-gigabytes-required">memory_gigabytes_required<a class="anchor" aria-label="anchor" href="#arg-memory-gigabytes-required"></a></dt>
-<dd><p>Optional positive numeric of length 1
-with the gigabytes of memory required to run the worker.
+<dd><p>Optional positive numeric vector,
+usually with a single element.
+Supply a vector to make <code>memory_gigabytes_required</code> a retryable option
+(see the "Retryable options" section for details).</p>
+<p><code>memory_gigabytes_required</code> is
+the gigabytes of memory required to run the worker.
 <code>memory_gigabytes_required = 2.4</code>
 translates to a line of <code>#$ -l m_mem_free=2.4G</code> in the SGE job script.
 <code>memory_gigabytes_required = NULL</code> omits this line.</p></dd>
 
 
 <dt id="arg-cores">cores<a class="anchor" aria-label="anchor" href="#arg-cores"></a></dt>
-<dd><p>Optional positive integer of length 1,
+<dd><p>Optional positive integer vector, usually with a single
+element.
+Supply a vector to make <code>cores</code> a retryable option
+(see the "Retryable options" section for details).</p>
+<p><code>cores</code> is the
 number of cores per worker ("slots" in SGE lingo).
 <code>cores = 4</code> translates
 to a line of <code>#$ -pe smp 4</code> in the SGE job script.
@@ -169,7 +181,10 @@ to a line of <code>#$ -pe smp 4</code> in the SGE job script.
 
 
 <dt id="arg-gpu">gpu<a class="anchor" aria-label="anchor" href="#arg-gpu"></a></dt>
-<dd><p>Optional integer of length 1 with the number of GPUs to
+<dd><p>Optional integer vector, usually with a single element.
+Supply a vector to make <code>gpu</code> a retryable option
+(see the "Retryable options" section for details).</p>
+<p><code>gpu</code> is the number of GPUs to
 request for the worker. <code>gpu = 1</code> translates to a line of
 <code>"#$ -l gpu=1"</code> in the SGE job script. <code>gpu = NULL</code> omits this line.</p></dd>
 
@@ -177,6 +192,20 @@ request for the worker. <code>gpu = 1</code> translates to a line of
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     <p>A classed list of options.</p>
+    </div>
+    <div class="section level2">
+    <h2 id="retryable-options">Retryable options<a class="anchor" aria-label="anchor" href="#retryable-options"></a></h2>
+
+
+<p>Arguments <code>memory_gigabytes_limit</code>, <code>memory_gigabytes_required</code>,
+<code>cores</code>, and <code>gpu</code> are retryable options.
+Each of these arguments be a vector where each successive element is
+used during a retry if the worker previously exited without
+completing all its assigned tasks.
+The last element of the vector is used if there are more retries than
+the length of the vector.
+Control the number of allowable retries with <code>crashes_error</code>
+argument of the controller.</p>
     </div>
     <div class="section level2">
     <h2 id="attribution">Attribution<a class="anchor" aria-label="anchor" href="#attribution"></a></h2>
@@ -214,7 +243,7 @@ source code for additional attribution.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] ""</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $script_directory</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/RtmpVHc14h"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/RtmpViwPPq"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $script_lines</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> character(0)</span>

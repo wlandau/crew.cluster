@@ -137,24 +137,35 @@ should be <code>NULL</code>.</p></dd>
 
 
 <dt id="arg-memory-gigabytes-required">memory_gigabytes_required<a class="anchor" aria-label="anchor" href="#arg-memory-gigabytes-required"></a></dt>
-<dd><p>Optional positive numeric of length 1
-with the gigabytes of memory required to run the worker.
+<dd><p>Optional positive numeric vector,
+usually with a single element.
+Supply a vector to make <code>memory_gigabytes_required</code> a retryable option
+(see the "Retryable options" section for details).</p>
+<p><code>memory_gigabytes_required</code> is
+the gigabytes of memory required to run the worker.
 <code>memory_gigabytes_required = 2.4</code>
 translates to a line of <code>#PBS -l mem=2.4gb</code> in the PBS job script.
 <code>memory_gigabytes_required = NULL</code> omits this line.</p></dd>
 
 
 <dt id="arg-cores">cores<a class="anchor" aria-label="anchor" href="#arg-cores"></a></dt>
-<dd><p>Optional positive integer of length 1,
-number of cores per worker ("slots" in PBS lingo).
+<dd><p>Optional positive integer vector,
+usually with a single element.
+Supply a vector to make <code>cores</code> a retryable option
+(see the "Retryable options" section for details).</p>
+<p><code>cores</code> is the number of cores for the worker
+("slots" in PBS lingo).
 <code>cores = 4</code> translates
 to a line of <code>#PBS -l ppn=4</code> in the PBS job script.
 <code>cores = NULL</code> omits this line.</p></dd>
 
 
 <dt id="arg-walltime-hours">walltime_hours<a class="anchor" aria-label="anchor" href="#arg-walltime-hours"></a></dt>
-<dd><p>Numeric of length 1 with the hours of wall time
-to request for the job. <code>walltime_hours = 23</code> translates to
+<dd><p>Numeric vector, usually with a single element.
+Supply a vector to make <code>cores</code> a retryable option
+(see the "Retryable options" section for details).</p>
+<p><code>walltime_hours</code> is the hours of wall time
+to request for the worker. <code>walltime_hours = 23</code> translates to
 a line of <code>#PBS -l walltime=23:00:00</code> in the job script.
 <code>walltime_hours = NULL</code> omits this line.</p></dd>
 
@@ -162,6 +173,20 @@ a line of <code>#PBS -l walltime=23:00:00</code> in the job script.
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     <p>A classed list of options.</p>
+    </div>
+    <div class="section level2">
+    <h2 id="retryable-options">Retryable options<a class="anchor" aria-label="anchor" href="#retryable-options"></a></h2>
+
+
+<p>Arguments <code>memory_gigabytes_required</code>, <code>cores</code>,
+and <code>walltime_hours</code> are retryable options.
+Each of these arguments be a vector where each successive element is
+used during a retry if the worker previously exited without
+completing all its assigned tasks.
+The last element of the vector is used if there are more retries than
+the length of the vector.
+Control the number of allowable retries with <code>crashes_error</code>
+argument of the controller.</p>
     </div>
     <div class="section level2">
     <h2 id="attribution">Attribution<a class="anchor" aria-label="anchor" href="#attribution"></a></h2>
@@ -197,7 +222,7 @@ source code for additional attribution.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] ""</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $script_directory</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/RtmpVHc14h"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/RtmpViwPPq"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $script_lines</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> character(0)</span>
