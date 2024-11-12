@@ -119,6 +119,8 @@ used during a retry if the worker previously exited without
 completing all its assigned tasks.
 The last element of the vector is used if there are more retries than
 the length of the vector.
+Control the number of allowable retries with \code{crashes_error}
+argument of the controller.
 }
 
 \section{Attribution}{

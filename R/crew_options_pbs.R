@@ -10,6 +10,8 @@
 #'   completing all its assigned tasks.
 #'   The last element of the vector is used if there are more retries than
 #'   the length of the vector.
+#'   Control the number of allowable retries with `crashes_error`
+#'   argument of the controller.
 #' @return A classed list of options.
 #' @inheritSection crew.cluster-package Attribution
 #' @inheritParams crew_options_cluster
