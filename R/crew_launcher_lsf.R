@@ -156,6 +156,14 @@ crew_class_launcher_lsf <- R6::R6Class(
     #' @return Character vector of the lines of the job script.
     #' @param name Character of length 1, name of the job. For inspection
     #'   purposes, you can supply a mock job name.
+    #' @param attempt Positive integer, number of the current attempt.
+    #'   The attempt number increments each time a worker exits
+    #'   without completing all its tasks, and it resets
+    #'   back to 1 if a worker instance successfully completes
+    #'   all its tasks and then exits normally.
+    #'   By assigning vector arguments
+    #'   to the cluster-specific options of the controller,
+    #'   you can configure different sets of resources for different attempts.
     #' @examples
     #' if (identical(Sys.getenv("CREW_EXAMPLES"), "true")) {
     #' launcher <- crew_launcher_lsf(
@@ -166,47 +174,48 @@ crew_class_launcher_lsf <- R6::R6Class(
     #' )
     #' launcher$script(name = "my_job_name")
     #' }
-    script = function(name) {
+    script = function(name, attempt) {
+      options <- crew_options_slice(private$.options_cluster, attempt)
       c(
         "#!/bin/sh",
         paste("#BSUB -J", name),
         if_any(
-          is.null(private$.options_cluster$cwd),
+          is.null(options$cwd),
           character(0L),
-          paste("#BSUB -cwd", private$.options_cluster$cwd)
+          paste("#BSUB -cwd", options$cwd)
         ),
         if_any(
-          is.null(private$.options_cluster$log_output),
+          is.null(options$log_output),
           character(0L),
-          paste("#BSUB -o", private$.options_cluster$log_output)
+          paste("#BSUB -o", options$log_output)
         ),
         if_any(
-          is.null(private$.options_cluster$log_error),
+          is.null(options$log_error),
           character(0L),
-          paste("#BSUB -e", private$.options_cluster$log_error)
+          paste("#BSUB -e", options$log_error)
         ),
         if_any(
-          is.null(private$.options_cluster$memory_gigabytes_limit),
+          is.null(options$memory_gigabytes_limit),
           character(0L),
           sprintf(
             "#BSUB -M %sG",
-            private$.options_cluster$memory_gigabytes_limit
+            options$memory_gigabytes_limit
           )
         ),
         if_any(
-          is.null(private$.options_cluster$memory_gigabytes_required),
+          is.null(options$memory_gigabytes_required),
           character(0L),
           sprintf(
             "#BSUB -R 'rusage[mem=%sG]'",
-            private$.options_cluster$memory_gigabytes_required
+            options$memory_gigabytes_required
           )
         ),
         if_any(
-          is.null(private$.options_cluster$cores),
+          is.null(options$cores),
           character(0L),
-          paste("#BSUB -n", private$.options_cluster$cores)
+          paste("#BSUB -n", options$cores)
         ),
-        private$.options_cluster$script_lines
+        options$script_lines
       )
     }
   )

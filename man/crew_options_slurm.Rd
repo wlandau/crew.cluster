@@ -65,33 +65,55 @@ where \verb{\%A} is replaced by the job ID of the worker.
 The default is \verb{/dev/null} to omit these logs.
 Set \code{log_error = NULL} to omit this line from the job script.}
 
-\item{memory_gigabytes_required}{Positive numeric of length 1
-with the total number of gigabytes of memory required per node.
+\item{memory_gigabytes_required}{Positive numeric vector,
+usually with a single element.
+Supply a vector to make \code{memory_gigabytes_required} a retryable option
+(see the "Retryable options" section for details).
+
+Each element is of \code{memory_gigabytes_required}
+the total number of gigabytes of memory required per node.
 \code{memory_gigabytes_required = 2.40123}
 translates to a line of \verb{#SBATCH --mem=2041M}
 in the SLURM job script.
 \code{memory_gigabytes_required = NULL} omits this line.}
 
-\item{memory_gigabytes_per_cpu}{Positive numeric of length 1
-with the gigabytes of memory required per CPU.
+\item{memory_gigabytes_per_cpu}{Positive numeric vector,
+usually with a single element.
+Supply a vector to make \code{memory_gigabytes_per_cpu} a retryable option
+(see the "Retryable options" section for details).
+
+\code{memory_gigabytes_per_cpu} is the gigabytes of
+memory required per CPU.
 \code{memory_gigabytes_per_cpu = 2.40123}
 translates to a line of \verb{#SBATCH --mem-per-cpu=2041M}
 in the SLURM job script.
 \code{memory_gigabytes_per_cpu = NULL} omits this line.}
 
-\item{cpus_per_task}{Optional positive integer of length 1,
-number of CPUs for the worker.
+\item{cpus_per_task}{Optional positive integer vector,
+usually with a single element.
+Supply a vector to make \code{cpus_per_task} a retryable option
+(see the "Retryable options" section for details).
+
+\code{cpus_per_task} is the number of CPUs for the worker.
 \code{cpus_per_task = 4} translates
 to a line of \verb{#SBATCH --cpus-per-task=4} in the SLURM job script.
 \code{cpus_per_task = NULL} omits this line.}
 
-\item{time_minutes}{Numeric of length 1, number of minutes to
+\item{time_minutes}{Numeric of length 1, usually with a single element.
+Supply a vector to make \code{time_minutes} a retryable option
+(see the "Retryable options" section for details).
+
+\code{time_minutes} is the number of minutes to
 designate as the wall time of \code{crew} each worker instance on the
 SLURM cluster. \code{time_minutes = 60} translates to a line of
 \verb{#SBATCH --time=60} in the SLURM job script. \code{time_minutes = NULL}
 omits this line.}
 
-\item{partition}{Character of length 1, name of the SLURM partition to
+\item{partition}{Character of vector, usually with a single element.
+Supply a vector to make \code{partition} a retryable option
+(see the "Retryable options" section for details).
+
+\code{partition} is the name of the SLURM partition to
 create workers on. \code{partition = "partition1,partition2"}
 translates to a line of \verb{#SBATCH --partition=partition1,partition2}
 in the SLURM job script. \code{partition = NULL}
@@ -103,6 +125,19 @@ A classed list of options.
 \description{
 Set options for SLURM job management.
 }
+\section{Retryable options}{
+
+Arguments \code{memory_gigabytes_required}, \code{memory_gigabytes_per_cpu},
+\code{cpus_per_task}, \code{time_minutes}, and \code{partition} are retryable options.
+Each of these arguments be a vector where each successive element is
+used during a retry if the worker previously exited without
+completing all its assigned tasks.
+The last element of the vector is used if there are more retries than
+the length of the vector.
+Control the number of allowable retries with \code{crashes_error}
+argument of the controller.
+}
+
 \section{Attribution}{
 
 The template files at

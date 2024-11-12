@@ -45,7 +45,7 @@ test_that("crew_launcher_sge() script() nearly empty", {
     )
   )
   expect_equal(
-    x$script(name = "my_job"),
+    x$script(name = "my_job", attempt = 1L),
     c("#$ -N my_job", "#$ -o log_file", "#$ -j n")
   )
 })
@@ -65,7 +65,7 @@ test_that("crew_launcher_sge() script() all lines", {
       gpu = 1L
     )
   )
-  out <- x$script(name = "this_job")
+  out <- x$script(name = "this_job", attempt = 1L)
   exp <- c(
     "#$ -N this_job",
     "#$ -cwd",

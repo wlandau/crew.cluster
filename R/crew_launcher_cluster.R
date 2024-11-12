@@ -205,7 +205,10 @@ crew_class_launcher_cluster <- R6::R6Class(
     #' @param instance Character of length 1 to uniquely identify
     #'   the current instance of the worker.
     launch_worker = function(call, name, launcher, worker, instance) {
-      lines <- c(self$script(name = name), paste("Rscript -e", shQuote(call)))
+      lines <- c(
+        self$script(name = name, attempt = self$crashes(index = worker) + 1L),
+        paste("Rscript -e", shQuote(call))
+      )
       if (is.null(private$.prefix)) {
         if (!file.exists(private$.options_cluster$script_directory)) {
           dir.create(

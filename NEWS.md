@@ -5,6 +5,7 @@
 * Support `options_metrics`.
 * Organize arguments into options lists.
 * Use `crashes_error` from `crew`.
+* Implement retryable options for memory, cores, GPUs, wall time, and SLURM partition (#48, @stemangiola).
 
 # crew.cluster 0.3.2
 

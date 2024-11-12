@@ -2,6 +2,16 @@
 #' @export
 #' @family lsf
 #' @description Set options for LSF job management.
+#' @section Retryable options:
+#'   Arguments `memory_gigabytes_limit`, `memory_gigabytes_required`,
+#'   and `cores` are retryable options.
+#'   Each of these arguments be a vector where each successive element is
+#'   used during a retry if the worker previously exited without
+#'   completing all its assigned tasks.
+#'   The last element of the vector is used if there are more retries than
+#'   the length of the vector.
+#'   Control the number of allowable retries with `crashes_error`
+#'   argument of the controller.
 #' @return A classed list of options.
 #' @inheritSection crew.cluster-package Attribution
 #' @inheritParams crew_options_cluster
@@ -25,20 +35,33 @@
 #'   where `%J` is replaced by the job ID of the worker.
 #'   The default is `/dev/null` to omit these logs.
 #'   Set `log_error = NULL` to omit this line from the job script.
-#' @param memory_gigabytes_limit Positive numeric of length 1
-#'   with the limit in gigabytes
+#' @param memory_gigabytes_limit Positive numeric vector,
+#'   usually with a single element.
+#'   Supply a vector to make `memory_gigabytes_limit` a retryable option
+#'   (see the "Retryable options" section for details).
+#'
+#'   `memory_gigabytes_limit` is the memory
+#'   limit in gigabytes of the worker.
 #'   `memory_gigabytes_limit = 4`
 #'   translates to a line of `#BSUB -M 4G`
 #'   in the LSF job script.
 #'   `memory_gigabytes_limit = NULL` omits this line.
-#' @param memory_gigabytes_required Positive numeric of length 1
-#'   with the memory requirement in gigabytes
+#' @param memory_gigabytes_required Positive numeric vector,
+#'   usually with a single element.
+#'   Supply a vector to make `memory_gigabytes_required` a retryable option
+#'   (see the "Retryable options" section for details).
+#'
+#'   `memory_gigabytes_required` is the memory requirement in gigabytes.
 #'   `memory_gigabytes_required = 4`
 #'   translates to a line of `#BSUB -R 'rusage[mem=4G]'`
 #'   in the LSF job script.
 #'   `memory_gigabytes_required = NULL` omits this line.
-#' @param cores Optional positive integer of length 1,
-#'   number of CPU cores for the worker.
+#' @param cores Optional positive integer vector, usually with
+#'   a single element.
+#'   Supply a vector to make `cores` a retryable option
+#'   (see the "Retryable options" section for details).
+#'
+#'   `cores` is the number of CPU cores for the worker.
 #'   `cores = 4` translates
 #'   to a line of `#BSUB -n 4` in the LSF job script.
 #'   `cores = NULL` omits this line.
@@ -106,7 +129,7 @@ crew_options_validate.crew_options_lsf <- function(options) {
       crew::crew_assert(
         options[[field]],
         is.numeric(.),
-        length(.) == 1L,
+        length(.) >= 1L,
         !anyNA(.),
         . > 0L,
         message = paste("invalid", field, "field")

@@ -150,6 +150,16 @@ crew_class_launcher_pbs <- R6::R6Class(
     #' @return Character vector of the lines of the job script.
     #' @param name Character of length 1, name of the job. For inspection
     #'   purposes, you can supply a mock job name.
+    #' @param attempt Positive integer, number of the current attempt.
+    #'   The attempt number increments each time a worker exits
+    #'   without completing all its tasks, and it resets
+    #'   back to 1 if a worker instance successfully completes
+    #'   all its tasks and then exits normally.
+    #'   By assigning vector arguments
+    #'   to certain cluster-specific options of the controller,
+    #'   you can configure different sets of resources for different attempts.
+    #'   See cluster-specific option functions
+    #'   like [crew_options_slurm()] for details.
     #' @examples
     #' if (identical(Sys.getenv("CREW_EXAMPLES"), "true")) {
     #' launcher <- crew_launcher_pbs(
@@ -158,40 +168,41 @@ crew_class_launcher_pbs <- R6::R6Class(
     #' )
     #' launcher$script(name = "my_job_name")
     #' }
-    script = function(name) {
+    script = function(name, attempt) {
+      options <- crew_options_slice(private$.options_cluster, attempt)
       c(
         paste("#PBS -N", name),
-        paste("#PBS -o", private$.options_cluster$log_output),
+        paste("#PBS -o", options$log_output),
         if_any(
-          is.null(private$.options_cluster$log_error),
+          is.null(options$log_error),
           character(0L),
-          paste("#PBS -e", private$.options_cluster$log_error)
+          paste("#PBS -e", options$log_error)
         ),
-        if_any(private$.options_cluster$log_join, "#PBS -j oe", "#PBS -j n"),
+        if_any(options$log_join, "#PBS -j oe", "#PBS -j n"),
         if_any(
-          is.null(private$.options_cluster$memory_gigabytes_required),
+          is.null(options$memory_gigabytes_required),
           character(0L),
           sprintf(
             "#PBS -l mem=%sgb",
-            private$.options_cluster$memory_gigabytes_required
+            options$memory_gigabytes_required
           )
         ),
         if_any(
-          is.null(private$.options_cluster$cores),
+          is.null(options$cores),
           character(0L),
-          paste0("#PBS -l ppn=", as.character(private$.options_cluster$cores))
+          paste0("#PBS -l ppn=", as.character(options$cores))
         ),
         if_any(
-          is.null(private$.options_cluster$walltime_hours),
+          is.null(options$walltime_hours),
           character(0L),
           sprintf(
             "#PBS -l walltime=%s:00:00",
-            as.character(private$.options_cluster$walltime_hours)
+            as.character(options$walltime_hours)
           )
         ),
-        private$.options_cluster$script_lines,
+        options$script_lines,
         if_any(
-          private$.options_cluster$cwd,
+          options$cwd,
           "cd \"$PBS_O_WORKDIR\"",
           character(0L)
         )

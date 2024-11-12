@@ -2,6 +2,16 @@
 #' @export
 #' @family pbs
 #' @description Set options for PBS job management.
+#' @section Retryable options:
+#'   Arguments `memory_gigabytes_required`, `cores`,
+#'   and `walltime_hours` are retryable options.
+#'   Each of these arguments be a vector where each successive element is
+#'   used during a retry if the worker previously exited without
+#'   completing all its assigned tasks.
+#'   The last element of the vector is used if there are more retries than
+#'   the length of the vector.
+#'   Control the number of allowable retries with `crashes_error`
+#'   argument of the controller.
 #' @return A classed list of options.
 #' @inheritSection crew.cluster-package Attribution
 #' @inheritParams crew_options_cluster
@@ -32,18 +42,32 @@
 #'   of `#PBS -j oe` in the PBS job script, while `log_join = FALSE` is
 #'   equivalent to `#PBS -j n`. If `log_join = TRUE`, then `log_error`
 #'   should be `NULL`.
-#' @param memory_gigabytes_required Optional positive numeric of length 1
-#'   with the gigabytes of memory required to run the worker.
+#' @param memory_gigabytes_required Optional positive numeric vector,
+#'   usually with a single element.
+#'   Supply a vector to make `memory_gigabytes_required` a retryable option
+#'   (see the "Retryable options" section for details).
+#'
+#'   `memory_gigabytes_required` is
+#'   the gigabytes of memory required to run the worker.
 #'   `memory_gigabytes_required = 2.4`
 #'   translates to a line of `#PBS -l mem=2.4gb` in the PBS job script.
 #'   `memory_gigabytes_required = NULL` omits this line.
-#' @param cores Optional positive integer of length 1,
-#'   number of cores per worker ("slots" in PBS lingo).
+#' @param cores Optional positive integer vector,
+#'   usually with a single element.
+#'   Supply a vector to make `cores` a retryable option
+#'   (see the "Retryable options" section for details).
+#'
+#'   `cores` is the number of cores for the worker
+#'   ("slots" in PBS lingo).
 #'   `cores = 4` translates
 #'   to a line of `#PBS -l ppn=4` in the PBS job script.
 #'   `cores = NULL` omits this line.
-#' @param walltime_hours Numeric of length 1 with the hours of wall time
-#'   to request for the job. `walltime_hours = 23` translates to
+#' @param walltime_hours Numeric vector, usually with a single element.
+#'   Supply a vector to make `cores` a retryable option
+#'   (see the "Retryable options" section for details).
+#'
+#'   `walltime_hours` is the hours of wall time
+#'   to request for the worker. `walltime_hours = 23` translates to
 #'   a line of `#PBS -l walltime=23:00:00` in the job script.
 #'   `walltime_hours = NULL` omits this line.
 #' @examples
@@ -128,7 +152,7 @@ crew_options_validate.crew_options_pbs <- function(options) {
       crew::crew_assert(
         options[[field]],
         is.numeric(.),
-        length(.) == 1L,
+        length(.) >= 1L,
         !anyNA(.),
         . > 0L,
         message = paste("invalid", field, "field")
