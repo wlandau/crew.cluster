@@ -20,3 +20,8 @@ crew_options_slice <- function(options, index) {
   }
   options
 }
+
+slice_bounded <- function(x, index) {
+  x[min(index, length(x))]
+}
+
