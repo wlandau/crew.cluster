@@ -6,7 +6,7 @@ test_that("crew_controller_slurm() script() nearly empty", {
     "#SBATCH --output=/dev/null",
     "#SBATCH --error=/dev/null"
   )
-  expect_equal(x$launcher$script(name = "name"), lines)
+  expect_equal(x$launcher$script(name = "name", attempt = 1L), lines)
 })
 
 test_that("crew_controller_slurm() script() all lines", {
@@ -21,7 +21,7 @@ test_that("crew_controller_slurm() script() all lines", {
       time_minutes = 57
     )
   )
-  out <- x$launcher$script(name = "my_name")
+  out <- x$launcher$script(name = "my_name", attempt = 1L)
   exp <- c(
     "#!/bin/sh",
     "#SBATCH --job-name=my_name",

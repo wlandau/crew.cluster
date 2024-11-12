@@ -13,7 +13,7 @@ test_that("crew_controller_sge() script() all lines", {
       gpu = 1L
     )
   )
-  out <- x$launcher$script(name = "a_job")
+  out <- x$launcher$script(name = "a_job", attempt = 1L)
   exp <- c(
     "#$ -N a_job",
     "#$ -cwd",

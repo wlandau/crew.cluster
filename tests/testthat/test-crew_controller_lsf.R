@@ -9,7 +9,7 @@ test_that("crew_controller_lsf() script() nearly empty", {
     "#BSUB -o /dev/null",
     "#BSUB -e /dev/null"
   )
-  expect_equal(x$launcher$script(name = "name"), lines)
+  expect_equal(x$launcher$script(name = "name", attempt = 1L), lines)
 })
 
 test_that("crew_controller_lsf() script() all lines", {
@@ -24,7 +24,7 @@ test_that("crew_controller_lsf() script() all lines", {
       cores = 2
     )
   )
-  out <- x$launcher$script(name = "my_name")
+  out <- x$launcher$script(name = "my_name", attempt = 1L)
   exp <- c(
     "#!/bin/sh",
     "#BSUB -J my_name",

@@ -11,7 +11,7 @@ test_that("crew_controller_pbs() script() all lines", {
       walltime_hours = 57
     )
   )
-  out <- x$launcher$script(name = "this_job")
+  out <- x$launcher$script(name = "this_job", attempt = 1L)
   exp <- c(
     "#PBS -N this_job",
     "#PBS -o out_dir/",
