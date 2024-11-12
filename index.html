@@ -111,7 +111,8 @@
 <span>  tasks_max <span class="op">=</span> <span class="fl">2</span>, <span class="co"># to avoid reaching wall time limits</span></span>
 <span>  seconds_idle <span class="op">=</span> <span class="fl">10</span>, <span class="co"># to release resources when they are not needed,</span></span>
 <span>  <span class="co"># Try 16 GB memory first, then use 32 GB to retry if the worker crashes,</span></span>
-<span>  <span class="co"># then 64 GB for all subsequent retries:</span></span>
+<span>  <span class="co"># then 64 GB for all subsequent retries after failure. Go back to 16 GB</span></span>
+<span>  <span class="co"># if the worker completes all its tasks before exiting.</span></span>
 <span>  sge_memory_gigabytes_required <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">16</span>, <span class="fl">32</span>, <span class="fl">64</span><span class="op">)</span>,</span>
 <span>  script_lines <span class="op">=</span> <span class="st">"module load R"</span> <span class="co"># if R is an environment module</span></span>
 <span><span class="op">)</span></span>
