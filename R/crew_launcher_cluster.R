@@ -206,7 +206,7 @@ crew_class_launcher_cluster <- R6::R6Class(
     #'   the current instance of the worker.
     launch_worker = function(call, name, launcher, worker, instance) {
       attempt <- self$crashes(index = worker) + 1L
-      if (private$.options_cluster$verbose && (attempt > 0L)) {
+      if (private$.options_cluster$verbose && (attempt > 1L)) {
         crew_message(
           "Attempt ",
           attempt,
