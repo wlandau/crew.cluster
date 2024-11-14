@@ -32,7 +32,7 @@ crew_launcher_sge <- function(
   seconds_interval = 0.5,
   seconds_timeout = 60,
   seconds_launch = 86400,
-  seconds_idle = Inf,
+  seconds_idle = 300,
   seconds_wall = Inf,
   tasks_max = Inf,
   tasks_timers = 0L,

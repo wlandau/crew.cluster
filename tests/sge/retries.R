@@ -1,6 +1,4 @@
 # Watch the number of cores allocated to each worker instance
-
-
 library(crew.cluster)
 library(testthat)
 

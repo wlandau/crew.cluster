@@ -6,6 +6,7 @@
 * Organize arguments into options lists.
 * Use `crashes_error` from `crew`.
 * Implement retryable options for memory, cores, GPUs, wall time, and SLURM partition (#48, @stemangiola).
+* Set default `seconds_idle` to 300.
 
 # crew.cluster 0.3.2
 

@@ -34,7 +34,7 @@ crew_controller_slurm <- function(
   seconds_interval = 0.25,
   seconds_timeout = 60,
   seconds_launch = 86400,
-  seconds_idle = Inf,
+  seconds_idle = 300,
   seconds_wall = Inf,
   seconds_exit = NULL,
   retry_tasks = TRUE,
