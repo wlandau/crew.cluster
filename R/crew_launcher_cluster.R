@@ -199,7 +199,8 @@ crew_class_launcher_cluster <- R6::R6Class(
     #' @param name Character string, an informative worker name.
     #' @param launcher Character string, name of the launcher.
     #' @param worker Character string, name of the worker instance.
-    launch_worker = function(call, name, launcher, worker) {
+    #' @param instance Deprecated in `crew.cluster`
+    launch_worker = function(call, name, launcher, worker, instance = NULL) {
       lines <- c(
         self$script(name = name),
         paste("Rscript -e", shQuote(call))

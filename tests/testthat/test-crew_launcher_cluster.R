@@ -18,6 +18,7 @@ test_that("active bindings", {
 test_that("SGE subclass mock job creates a tempdir() job script", {
   skip_on_cran()
   skip_on_os("windows")
+  skip_if_not_installed("crew", minimum_version = "1.0.0")
   x <- crew_launcher_sge(
     options_cluster = crew_options_sge(
       command_submit = "cat",
@@ -77,6 +78,7 @@ test_that("SGE subclass mock job creates a tempdir() job script", {
 test_that("SGE subclass mock job creates a custom job script", {
   skip_on_cran()
   skip_on_os("windows")
+  skip_if_not_installed("crew", minimum_version = "1.0.0")
   dir <- file.path(tempfile(), basename(tempfile()), basename(tempfile()))
   x <- crew_launcher_sge(
     crashes_error = 10,
