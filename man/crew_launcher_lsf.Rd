@@ -7,6 +7,7 @@ LSF workers.}
 \usage{
 crew_launcher_lsf(
   name = NULL,
+  workers = 1L,
   seconds_interval = 0.5,
   seconds_timeout = 60,
   seconds_launch = 86400,
@@ -18,7 +19,7 @@ crew_launcher_lsf(
   reset_packages = FALSE,
   reset_options = FALSE,
   garbage_collection = FALSE,
-  crashes_error = 5L,
+  crashes_error = NULL,
   tls = crew::crew_tls(mode = "automatic"),
   r_arguments = c("--no-save", "--no-restore"),
   options_metrics = crew::crew_options_metrics(),
@@ -40,6 +41,14 @@ crew_launcher_lsf(
 \arguments{
 \item{name}{Character string, name of the launcher. If the name is
 \code{NULL}, then a name is automatically generated when the launcher starts.}
+
+\item{workers}{Maximum number of workers to run concurrently
+when auto-scaling, excluding task retries and manual calls to \code{launch()}.
+Special workers allocated for task retries
+do not count towards this limit, so the number of workers running at a
+given time may exceed this maximum.
+A smaller number of workers may run if the number of executing tasks
+is smaller than the supplied value of the \code{workers} argument.}
 
 \item{seconds_interval}{Number of seconds between
 polling intervals waiting for certain internal

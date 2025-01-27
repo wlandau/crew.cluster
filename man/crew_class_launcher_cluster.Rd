@@ -73,6 +73,7 @@ Abstract launcher constructor.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{crew_class_launcher_cluster$new(
   name = NULL,
+  workers = NULL,
   seconds_interval = NULL,
   seconds_timeout = NULL,
   seconds_launch = NULL,
@@ -96,6 +97,8 @@ Abstract launcher constructor.
 \if{html}{\out{<div class="arguments">}}
 \describe{
 \item{\code{name}}{See \code{\link[=crew_launcher_cluster]{crew_launcher_cluster()}}.}
+
+\item{\code{workers}}{See \code{\link[=crew_launcher_cluster]{crew_launcher_cluster()}}.}
 
 \item{\code{seconds_interval}}{See \code{\link[=crew_launcher_cluster]{crew_launcher_cluster()}}.}
 
@@ -155,7 +158,13 @@ Validate the launcher.
 Launch a local process worker which will
 dial into a socket.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{crew_class_launcher_cluster$launch_worker(call, name, launcher, worker)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{crew_class_launcher_cluster$launch_worker(
+  call,
+  name,
+  launcher,
+  worker,
+  instance = NULL
+)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
@@ -170,6 +179,8 @@ which will run in the worker and accept tasks.}
 \item{\code{launcher}}{Character string, name of the launcher.}
 
 \item{\code{worker}}{Character string, name of the worker instance.}
+
+\item{\code{instance}}{Deprecated in \code{crew.cluster}}
 }
 \if{html}{\out{</div>}}
 }

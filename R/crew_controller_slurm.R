@@ -44,7 +44,7 @@ crew_controller_slurm <- function(
   reset_packages = FALSE,
   reset_options = FALSE,
   garbage_collection = FALSE,
-  crashes_error = 5L,
+  crashes_error = NULL,
   r_arguments = c("--no-save", "--no-restore"),
   options_metrics = crew::crew_options_metrics(),
   options_cluster = crew.cluster::crew_options_slurm(),
@@ -62,9 +62,15 @@ crew_controller_slurm <- function(
   slurm_time_minutes = NULL,
   slurm_partition = NULL
 ) {
+  crew::crew_deprecate(
+    name = "crashes_error",
+    date = "2025-01-27",
+    version = "0.3.4",
+    alternative = "crashes_error",
+    condition = "message",
+    value = crashes_error
+  )
   client <- crew::crew_client(
-    name = name,
-    workers = workers,
     host = host,
     port = port,
     tls = tls,
@@ -76,6 +82,7 @@ crew_controller_slurm <- function(
   )
   launcher <- crew_launcher_slurm(
     name = name,
+    workers = workers,
     seconds_interval = seconds_interval,
     seconds_timeout = seconds_timeout,
     seconds_launch = seconds_launch,
@@ -87,7 +94,6 @@ crew_controller_slurm <- function(
     reset_packages = reset_packages,
     reset_options = reset_options,
     garbage_collection = garbage_collection,
-    crashes_error = crashes_error,
     tls = tls,
     r_arguments = r_arguments,
     options_metrics = options_metrics,

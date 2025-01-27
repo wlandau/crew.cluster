@@ -30,6 +30,7 @@
 #' @param lsf_cores Deprecated. Use `options_cluster` instead.
 crew_launcher_lsf <- function(
   name = NULL,
+  workers = 1L,
   seconds_interval = 0.5,
   seconds_timeout = 60,
   seconds_launch = 86400,
@@ -41,7 +42,7 @@ crew_launcher_lsf <- function(
   reset_packages = FALSE,
   reset_options = FALSE,
   garbage_collection = FALSE,
-  crashes_error = 5L,
+  crashes_error = NULL,
   tls = crew::crew_tls(mode = "automatic"),
   r_arguments = c("--no-save", "--no-restore"),
   options_metrics = crew::crew_options_metrics(),
@@ -60,6 +61,14 @@ crew_launcher_lsf <- function(
   lsf_cores = NULL
 ) {
   name <- as.character(name %|||% crew::crew_random_name())
+  crew::crew_deprecate(
+    name = "crashes_error",
+    date = "2025-01-27",
+    version = "0.3.4",
+    alternative = "crashes_error",
+    condition = "message",
+    value = crashes_error
+  )
   if (!is.null(command_delete)) {
     crew::crew_deprecate(
       name = "command_delete",
@@ -97,6 +106,7 @@ crew_launcher_lsf <- function(
   }
   launcher <- crew_class_launcher_lsf$new(
     name = name,
+    workers = workers,
     seconds_interval = seconds_interval,
     seconds_timeout = seconds_timeout,
     seconds_launch = seconds_launch,

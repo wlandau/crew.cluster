@@ -49,7 +49,7 @@ Authors@R: c(
 Depends:
   R (>= 4.0.0)
 Imports:
-  crew (>= 0.10.2),
+  crew (>= 1.0.0),
   ps,
   lifecycle,
   R6,

@@ -20,6 +20,7 @@
 #' @param script_lines Deprecated. Use `options_cluster` instead.
 crew_launcher_cluster <- function(
   name = NULL,
+  workers = 1L,
   seconds_interval = 0.5,
   seconds_timeout = 60,
   seconds_launch = 86400,
@@ -31,7 +32,7 @@ crew_launcher_cluster <- function(
   reset_packages = FALSE,
   reset_options = FALSE,
   garbage_collection = FALSE,
-  crashes_error = 5L,
+  crashes_error = NULL,
   tls = crew::crew_tls(mode = "automatic"),
   r_arguments = c("--no-save", "--no-restore"),
   options_metrics = crew::crew_options_metrics(),
@@ -50,6 +51,14 @@ crew_launcher_cluster <- function(
     version = "0.1.4.9001",
     alternative = "command_terminate",
     value = command_delete
+  )
+  crew::crew_deprecate(
+    name = "crashes_error",
+    date = "2025-01-27",
+    version = "0.3.4",
+    alternative = "crashes_error",
+    condition = "message",
+    value = crashes_error
   )
   command_terminate <- command_delete %|||% command_terminate
   deprecated <- c(
@@ -73,6 +82,7 @@ crew_launcher_cluster <- function(
   }
   launcher <- crew_class_launcher_cluster$new(
     name = name,
+    workers = workers,
     seconds_interval = seconds_interval,
     seconds_timeout = seconds_timeout,
     seconds_launch = seconds_launch,
@@ -125,6 +135,7 @@ crew_class_launcher_cluster <- R6::R6Class(
     #' @description Abstract launcher constructor.
     #' @return An abstract launcher object.
     #' @param name See [crew_launcher_cluster()].
+    #' @param workers See [crew_launcher_cluster()].
     #' @param seconds_interval See [crew_launcher_cluster()].
     #' @param seconds_timeout See [crew_launcher_cluster()].
     #' @param seconds_launch See [crew_launcher_cluster()].
@@ -143,6 +154,7 @@ crew_class_launcher_cluster <- R6::R6Class(
     #' @param options_cluster See [crew_launcher_cluster()].
     initialize = function(
       name = NULL,
+      workers = NULL,
       seconds_interval = NULL,
       seconds_timeout = NULL,
       seconds_launch = NULL,
@@ -162,6 +174,7 @@ crew_class_launcher_cluster <- R6::R6Class(
     ) {
       super$initialize(
         name = name,
+        workers = workers,
         seconds_interval = seconds_interval,
         seconds_timeout = seconds_timeout,
         seconds_launch = seconds_launch,
