@@ -9,7 +9,7 @@ launch workers on Sun Grid Engine (SGE) workers."><meta property="og:image" cont
 
     <a class="navbar-brand me-2" href="../index.html">crew.cluster</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.3.3.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.3.4</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -89,12 +89,11 @@ launch workers on Sun Grid Engine (SGE) workers.</p>
 
 
 <dl><dt id="arg-name">name<a class="anchor" aria-label="anchor" href="#arg-name"></a></dt>
-<dd><p>Name of the client object. If <code>NULL</code>, a name is automatically
-generated.</p></dd>
+<dd><p>Deprecated on 2025-01-14 (<code>crew</code> version 0.10.2.9002).</p></dd>
 
 
 <dt id="arg-workers">workers<a class="anchor" aria-label="anchor" href="#arg-workers"></a></dt>
-<dd><p>Integer, maximum number of parallel workers to run.</p></dd>
+<dd><p>Deprecated on 2025-01-13 (<code>crew</code> version 0.10.2.9002).</p></dd>
 
 
 <dt id="arg-host">host<a class="anchor" aria-label="anchor" href="#arg-host"></a></dt>
@@ -104,7 +103,9 @@ If <code>NULL</code>, the host defaults to the local IP address.</p></dd>
 
 <dt id="arg-port">port<a class="anchor" aria-label="anchor" href="#arg-port"></a></dt>
 <dd><p>TCP port to listen for the workers. If <code>NULL</code>,
-then an available ephemeral port is automatically chosen.</p></dd>
+then an available ephemeral port is automatically chosen.
+Controllers running simultaneously on the same computer
+(as in a controller group) must not share the same TCP port.</p></dd>
 
 
 <dt id="arg-tls">tls<a class="anchor" aria-label="anchor" href="#arg-tls"></a></dt>
@@ -166,12 +167,7 @@ No longer necessary.</p></dd>
 
 
 <dt id="arg-retry-tasks">retry_tasks<a class="anchor" aria-label="anchor" href="#arg-retry-tasks"></a></dt>
-<dd><p><code>TRUE</code> to automatically retry a task in the event of
-an unexpected worker exit. <code>FALSE</code> to give up on the first exit and
-return a <code>mirai</code> error code (code number 19).
-<code>TRUE</code> (default) is recommended in most situations.
-Use <code>FALSE</code> for debugging purposes, e.g. to confirm that a task
-is causing a worker to run out of memory or crash in some other way.</p></dd>
+<dd><p>Deprecated on 2025-01-13 (<code>crew</code> version 0.10.2.9002).</p></dd>
 
 
 <dt id="arg-tasks-max">tasks_max<a class="anchor" aria-label="anchor" href="#arg-tasks-max"></a></dt>
@@ -212,14 +208,7 @@ tasks, <code>FALSE</code> to skip.</p></dd>
 
 
 <dt id="arg-crashes-error">crashes_error<a class="anchor" aria-label="anchor" href="#arg-crashes-error"></a></dt>
-<dd><p>Positive integer scalar. If a worker exits
-<code>crashes_error</code> times in a row without completing all its assigned
-tasks, then the launcher throws an informative error.
-The reason for <code>crashes_error</code>
-is to avoid an infinite loop where a task crashes a worker
-(through a segfault, maxing out memory, etc) but the worker always
-relaunches. To monitor the resources of <code>crew</code> workers,
-please see <a href="https://wlandau.github.io/crew/articles/logging.html" class="external-link">https://wlandau.github.io/crew/articles/logging.html</a>.</p></dd>
+<dd><p>Deprecated on 2025-01-13 (<code>crew</code> version 0.10.2.9002).</p></dd>
 
 
 <dt id="arg-r-arguments">r_arguments<a class="anchor" aria-label="anchor" href="#arg-r-arguments"></a></dt>

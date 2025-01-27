@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">crew.cluster</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.3.3.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.3.4</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -126,11 +126,7 @@ Set <code>log_error = NULL</code> to omit this line from the job script.</p></dd
 
 
 <dt id="arg-memory-gigabytes-limit">memory_gigabytes_limit<a class="anchor" aria-label="anchor" href="#arg-memory-gigabytes-limit"></a></dt>
-<dd><p>Positive numeric vector,
-usually with a single element.
-Supply a vector to make <code>memory_gigabytes_limit</code> a retryable option
-(see the "Retryable options" section for details).</p>
-<p><code>memory_gigabytes_limit</code> is the memory
+<dd><p>Positive numeric scalar, memory
 limit in gigabytes of the worker.
 <code>memory_gigabytes_limit = 4</code>
 translates to a line of <code>#BSUB -M 4G</code>
@@ -139,11 +135,8 @@ in the LSF job script.
 
 
 <dt id="arg-memory-gigabytes-required">memory_gigabytes_required<a class="anchor" aria-label="anchor" href="#arg-memory-gigabytes-required"></a></dt>
-<dd><p>Positive numeric vector,
-usually with a single element.
-Supply a vector to make <code>memory_gigabytes_required</code> a retryable option
-(see the "Retryable options" section for details).</p>
-<p><code>memory_gigabytes_required</code> is the memory requirement in gigabytes.
+<dd><p>Positive numeric scalar,
+memory requirement in gigabytes.
 <code>memory_gigabytes_required = 4</code>
 translates to a line of <code>#BSUB -R 'rusage[mem=4G]'</code>
 in the LSF job script.
@@ -151,11 +144,8 @@ in the LSF job script.
 
 
 <dt id="arg-cores">cores<a class="anchor" aria-label="anchor" href="#arg-cores"></a></dt>
-<dd><p>Optional positive integer vector, usually with
-a single element.
-Supply a vector to make <code>cores</code> a retryable option
-(see the "Retryable options" section for details).</p>
-<p><code>cores</code> is the number of CPU cores for the worker.
+<dd><p>Optional positive integer scalar,
+number of CPU cores for the worker.
 <code>cores = 4</code> translates
 to a line of <code>#BSUB -n 4</code> in the LSF job script.
 <code>cores = NULL</code> omits this line.</p></dd>
@@ -169,15 +159,8 @@ to a line of <code>#BSUB -n 4</code> in the LSF job script.
     <h2 id="retryable-options">Retryable options<a class="anchor" aria-label="anchor" href="#retryable-options"></a></h2>
 
 
-<p>Arguments <code>memory_gigabytes_limit</code>, <code>memory_gigabytes_required</code>,
-and <code>cores</code> are retryable options.
-Each of these arguments be a vector where each successive element is
-used during a retry if the worker previously exited without
-completing all its assigned tasks.
-The last element of the vector is used if there are more retries than
-the length of the vector.
-Control the number of allowable retries with <code>crashes_error</code>
-argument of the controller.</p>
+<p>Retryable options are deprecated in <code>crew.cluster</code> as of
+2025-01-27 (version <code>0.3.4</code>).</p>
     </div>
     <div class="section level2">
     <h2 id="attribution">Attribution<a class="anchor" aria-label="anchor" href="#attribution"></a></h2>
@@ -213,7 +196,7 @@ source code for additional attribution.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] ""</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $script_directory</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/Rtmp59XTVt"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/RtmpFMVGXE"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $script_lines</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> character(0)</span>
