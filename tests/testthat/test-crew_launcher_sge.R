@@ -28,13 +28,6 @@ test_that("invalid crew_launcher_sge(): SGE field", {
   expect_error(x$validate(), class = "crew_error")
 })
 
-test_that("invalid crew_launcher_sge(): non-SGE field", {
-  skip_on_cran()
-  x <- crew_launcher_sge()
-  x$set_name(- 1L)
-  expect_error(x$validate(), class = "crew_error")
-})
-
 test_that("crew_launcher_sge() script() nearly empty", {
   x <- crew_launcher_sge(
     options_cluster = crew_options_sge(
@@ -45,7 +38,7 @@ test_that("crew_launcher_sge() script() nearly empty", {
     )
   )
   expect_equal(
-    x$script(name = "my_job", attempt = 1L),
+    x$script(name = "my_job"),
     c("#$ -N my_job", "#$ -o log_file", "#$ -j n")
   )
 })
@@ -65,7 +58,7 @@ test_that("crew_launcher_sge() script() all lines", {
       gpu = 1L
     )
   )
-  out <- x$script(name = "this_job", attempt = 1L)
+  out <- x$script(name = "this_job")
   exp <- c(
     "#$ -N this_job",
     "#$ -cwd",

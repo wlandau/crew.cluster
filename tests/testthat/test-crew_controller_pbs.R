@@ -11,7 +11,7 @@ test_that("crew_controller_pbs() script() all lines", {
       walltime_hours = 57
     )
   )
-  out <- x$launcher$script(name = "this_job", attempt = 1L)
+  out <- x$launcher$script(name = "this_job")
   exp <- c(
     "#PBS -N this_job",
     "#PBS -o out_dir/",
@@ -20,49 +20,6 @@ test_that("crew_controller_pbs() script() all lines", {
     "#PBS -l mem=2gb",
     "#PBS -l ppn=2",
     "#PBS -l walltime=57:00:00",
-    "module load R",
-    "echo 'start'",
-    "cd \"$PBS_O_WORKDIR\""
-  )
-  expect_equal(out, exp)
-})
-
-test_that("crew_controller_pbs() script() retryable options", {
-  x <- crew_controller_pbs(
-    options_cluster = crew_options_pbs(
-      script_lines = c("module load R", "echo 'start'"),
-      cwd = TRUE,
-      log_output = "out_dir/",
-      log_error = "err_dir/",
-      log_join = FALSE,
-      memory_gigabytes_required = c(7, 8),
-      cores = c(2L, 4L),
-      walltime_hours = c(57, 11)
-    )
-  )
-  out <- x$launcher$script(name = "this_job", attempt = 1L)
-  exp <- c(
-    "#PBS -N this_job",
-    "#PBS -o out_dir/",
-    "#PBS -e err_dir/",
-    "#PBS -j n",
-    "#PBS -l mem=7gb",
-    "#PBS -l ppn=2",
-    "#PBS -l walltime=57:00:00",
-    "module load R",
-    "echo 'start'",
-    "cd \"$PBS_O_WORKDIR\""
-  )
-  expect_equal(out, exp)
-  out <- x$launcher$script(name = "this_job", attempt = 2L)
-  exp <- c(
-    "#PBS -N this_job",
-    "#PBS -o out_dir/",
-    "#PBS -e err_dir/",
-    "#PBS -j n",
-    "#PBS -l mem=8gb",
-    "#PBS -l ppn=4",
-    "#PBS -l walltime=11:00:00",
     "module load R",
     "echo 'start'",
     "cd \"$PBS_O_WORKDIR\""

@@ -23,13 +23,6 @@ test_that("invalid crew_launcher_slurm(): SLURM field", {
   expect_error(x$validate(), class = "crew_error")
 })
 
-test_that("invalid crew_launcher_slurm(): non-SLURM field", {
-  skip_on_cran()
-  x <- crew_launcher_slurm()
-  x$set_name(- 1L)
-  expect_error(x$validate(), class = "crew_error")
-})
-
 test_that("crew_launcher_slurm() script() nearly empty", {
   x <- crew_launcher_slurm(
     options_cluster = crew_options_slurm(time_minutes = NULL)
@@ -40,7 +33,7 @@ test_that("crew_launcher_slurm() script() nearly empty", {
     "#SBATCH --output=/dev/null",
     "#SBATCH --error=/dev/null"
   )
-  expect_equal(x$script(name = "a_job", attempt = 1L), lines)
+  expect_equal(x$script(name = "a_job"), lines)
 })
 
 test_that("crew_launcher_slurm() script() all lines", {
@@ -55,7 +48,7 @@ test_that("crew_launcher_slurm() script() all lines", {
       time_minutes = 57
     )
   )
-  out <- x$script(name = "this_job", attempt = 1L)
+  out <- x$script(name = "this_job")
   exp <- c(
     "#!/bin/sh",
     "#SBATCH --job-name=this_job",

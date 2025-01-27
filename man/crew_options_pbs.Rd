@@ -80,33 +80,21 @@ of \verb{#PBS -j oe} in the PBS job script, while \code{log_join = FALSE} is
 equivalent to \verb{#PBS -j n}. If \code{log_join = TRUE}, then \code{log_error}
 should be \code{NULL}.}
 
-\item{memory_gigabytes_required}{Optional positive numeric vector,
-usually with a single element.
-Supply a vector to make \code{memory_gigabytes_required} a retryable option
-(see the "Retryable options" section for details).
-
-\code{memory_gigabytes_required} is
-the gigabytes of memory required to run the worker.
+\item{memory_gigabytes_required}{Optional positive numeric scalar,
+gigabytes of memory required to run the worker.
 \code{memory_gigabytes_required = 2.4}
 translates to a line of \verb{#PBS -l mem=2.4gb} in the PBS job script.
 \code{memory_gigabytes_required = NULL} omits this line.}
 
-\item{cores}{Optional positive integer vector,
-usually with a single element.
-Supply a vector to make \code{cores} a retryable option
-(see the "Retryable options" section for details).
-
-\code{cores} is the number of cores for the worker
+\item{cores}{Optional positive integer scalar,
+number of cores for the worker
 ("slots" in PBS lingo).
 \code{cores = 4} translates
 to a line of \verb{#PBS -l ppn=4} in the PBS job script.
 \code{cores = NULL} omits this line.}
 
-\item{walltime_hours}{Numeric vector, usually with a single element.
-Supply a vector to make \code{cores} a retryable option
-(see the "Retryable options" section for details).
-
-\code{walltime_hours} is the hours of wall time
+\item{walltime_hours}{Numeric scalar,
+hours of wall time
 to request for the worker. \code{walltime_hours = 23} translates to
 a line of \verb{#PBS -l walltime=23:00:00} in the job script.
 \code{walltime_hours = NULL} omits this line.}
@@ -119,15 +107,8 @@ Set options for PBS job management.
 }
 \section{Retryable options}{
 
-Arguments \code{memory_gigabytes_required}, \code{cores},
-and \code{walltime_hours} are retryable options.
-Each of these arguments be a vector where each successive element is
-used during a retry if the worker previously exited without
-completing all its assigned tasks.
-The last element of the vector is used if there are more retries than
-the length of the vector.
-Control the number of allowable retries with \code{crashes_error}
-argument of the controller.
+Retryable options are deprecated in \code{crew.cluster} as of
+2025-01-27 (version \verb{0.3.4}).
 }
 
 \section{Attribution}{

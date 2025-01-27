@@ -46,16 +46,17 @@ crew_controller_slurm(
 )
 }
 \arguments{
-\item{name}{Name of the client object. If \code{NULL}, a name is automatically
-generated.}
+\item{name}{Deprecated on 2025-01-14 (\code{crew} version 0.10.2.9002).}
 
-\item{workers}{Integer, maximum number of parallel workers to run.}
+\item{workers}{Deprecated on 2025-01-13 (\code{crew} version 0.10.2.9002).}
 
 \item{host}{IP address of the \code{mirai} client to send and receive tasks.
 If \code{NULL}, the host defaults to the local IP address.}
 
 \item{port}{TCP port to listen for the workers. If \code{NULL},
-then an available ephemeral port is automatically chosen.}
+then an available ephemeral port is automatically chosen.
+Controllers running simultaneously on the same computer
+(as in a controller group) must not share the same TCP port.}
 
 \item{tls}{A TLS configuration object from \code{\link[crew:crew_tls]{crew_tls()}}.}
 
@@ -97,12 +98,7 @@ See the \code{walltime} argument of \code{mirai::daemon()}.}
 \item{seconds_exit}{Deprecated on 2023-09-21 in version 0.1.2.9000.
 No longer necessary.}
 
-\item{retry_tasks}{\code{TRUE} to automatically retry a task in the event of
-an unexpected worker exit. \code{FALSE} to give up on the first exit and
-return a \code{mirai} error code (code number 19).
-\code{TRUE} (default) is recommended in most situations.
-Use \code{FALSE} for debugging purposes, e.g. to confirm that a task
-is causing a worker to run out of memory or crash in some other way.}
+\item{retry_tasks}{Deprecated on 2025-01-13 (\code{crew} version 0.10.2.9002).}
 
 \item{tasks_max}{Maximum number of tasks that a worker will do before
 exiting. See the \code{maxtasks} argument of \code{mirai::daemon()}.
@@ -129,14 +125,7 @@ because packages sometimes rely on options they set at loading time.}
 \item{garbage_collection}{\code{TRUE} to run garbage collection between
 tasks, \code{FALSE} to skip.}
 
-\item{crashes_error}{Positive integer scalar. If a worker exits
-\code{crashes_error} times in a row without completing all its assigned
-tasks, then the launcher throws an informative error.
-The reason for \code{crashes_error}
-is to avoid an infinite loop where a task crashes a worker
-(through a segfault, maxing out memory, etc) but the worker always
-relaunches. To monitor the resources of \code{crew} workers,
-please see \url{https://wlandau.github.io/crew/articles/logging.html}.}
+\item{crashes_error}{Deprecated on 2025-01-13 (\code{crew} version 0.10.2.9002).}
 
 \item{r_arguments}{Optional character vector of command line arguments
 to pass to \code{Rscript} (non-Windows) or \code{Rscript.exe} (Windows)

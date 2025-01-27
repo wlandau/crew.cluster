@@ -34,20 +34,14 @@ test_that("SGE subclass mock job creates a tempdir() job script", {
       gpu = 1L
     )
   )
-  x$start(sockets = "my_socket")
+  x$start(url = "my_url", profile = "my_profile")
   private <- crew_private(x)
   expect_null(private$.prefix)
   handle <- x$launch_worker(
-    call = x$call(
-      socket = "my_socket",
-      launcher = x$name,
-      worker = 1L,
-      instance = "instance"
-    ),
+    call = x$call(worker = "worker_name"),
     name = "my_name",
     launcher = x$name,
-    worker = 1L,
-    instance = "instance"
+    worker = "worker_name"
   )
   private$.workers$handle[[1L]] <- handle
   expect_false(is.null(private$.prefix))
@@ -55,7 +49,7 @@ test_that("SGE subclass mock job creates a tempdir() job script", {
     dir = tempdir(),
     prefix = private$.prefix,
     launcher = x$name,
-    worker = 1L
+    worker = "worker_name"
   )
   expect_equal(handle$name, "my_name")
   expect_equal(handle$script, script)
@@ -103,20 +97,14 @@ test_that("SGE subclass mock job creates a custom job script", {
     )
   )
   private <- crew_private(x)
-  x$start(sockets = "my_socket")
+  x$start(url = "my_url", profile = "my_profile")
   expect_null(private$.prefix)
   private$.workers$crashes <- 2L
   handle <- x$launch_worker(
-    call = x$call(
-      socket = "my_socket",
-      launcher = x$name,
-      worker = 1L,
-      instance = "instance"
-    ),
+    call = x$call(worker = "my_worker"),
     name = "my_name",
     launcher = x$name,
-    worker = 1L,
-    instance = "instance"
+    worker = "my_worker"
   )
   private$.workers$handle[[1L]] <- handle
   expect_false(is.null(private$.prefix))
@@ -124,7 +112,7 @@ test_that("SGE subclass mock job creates a custom job script", {
     dir = dir,
     prefix = private$.prefix,
     launcher = x$name,
-    worker = 1L
+    worker = "my_worker"
   )
   expect_equal(handle$name, "my_name")
   expect_equal(handle$script, script)
@@ -147,49 +135,4 @@ test_that("SGE subclass mock job creates a custom job script", {
   expect_equal(out[seq_along(exp)], exp)
   x$terminate_worker(x$workers$handle[[1L]])
   expect_false(file.exists(script))
-})
-
-test_that("SGE subclass mock job prints retry message", {
-  skip_on_cran()
-  skip_on_os("windows")
-  dir <- file.path(tempfile(), basename(tempfile()), basename(tempfile()))
-  x <- crew_launcher_sge(
-    crashes_error = 10,
-    options_cluster = crew_options_sge(
-      command_submit = "rm",
-      command_terminate = "echo",
-      script_directory = dir,
-      script_lines = c("module load R", "echo 'start'"),
-      cwd = TRUE,
-      envvars = TRUE,
-      log_output = "out_dir/",
-      log_error = "err_dir/",
-      log_join = FALSE,
-      memory_gigabytes_required = 2.4,
-      memory_gigabytes_limit = 8.4,
-      cores = 2L,
-      gpu = 1L,
-      verbose = TRUE
-    )
-  )
-  private <- crew_private(x)
-  x$start(sockets = "my_socket")
-  private$.workers$crashes <- 2L
-  expect_message(
-    utils::capture.output(
-      handle <- x$launch_worker(
-        call = x$call(
-          socket = "my_socket",
-          launcher = x$name,
-          worker = 1L,
-          instance = "instance"
-        ),
-        name = "my_name",
-        launcher = x$name,
-        worker = 1L,
-        instance = "instance"
-      )
-    ),
-    class = "crew_message"
-  )
 })

@@ -193,35 +193,15 @@ crew_class_launcher_cluster <- R6::R6Class(
     #'   initiate the worker.
     #' @return A handle object to allow the termination of the worker
     #'   later on.
-    #' @param call Character of length 1, a namespaced call to
+    #' @param call Character string, a namespaced call to
     #'   [crew::crew_worker()]
     #'   which will run in the worker and accept tasks.
-    #' @param name Character of length 1, an informative worker name.
-    #' @param launcher Character of length 1, name of the launcher.
-    #' @param worker Positive integer of length 1, index of the worker.
-    #'   This worker index remains the same even when the current instance
-    #'   of the worker exits and a new instance launches.
-    #'   It is always between 1 and the maximum number of concurrent workers.
-    #' @param instance Character of length 1 to uniquely identify
-    #'   the current instance of the worker.
-    launch_worker = function(call, name, launcher, worker, instance) {
-      attempt <- self$crashes(index = worker) + 1L
-      if (private$.options_cluster$verbose && (attempt > 1L)) {
-        crew_message(
-          "Attempt ",
-          attempt,
-          " of ",
-          private$.crashes_error,
-          ": instance ",
-          instance,
-          " worker ",
-          worker,
-          " launcher ",
-          launcher
-        )
-      }
+    #' @param name Character string, an informative worker name.
+    #' @param launcher Character string, name of the launcher.
+    #' @param worker Character string, name of the worker instance.
+    launch_worker = function(call, name, launcher, worker) {
       lines <- c(
-        self$script(name = name, attempt = attempt),
+        self$script(name = name),
         paste("Rscript -e", shQuote(call))
       )
       if (is.null(private$.prefix)) {

@@ -25,13 +25,6 @@ test_that("invalid crew_launcher_pbs(): pbs field", {
   expect_error(x$validate(), class = "crew_error")
 })
 
-test_that("invalid crew_launcher_pbs(): non-pbs field", {
-  skip_on_cran()
-  x <- crew_launcher_pbs()
-  x$set_name(- 1L)
-  expect_error(x$validate(), class = "crew_error")
-})
-
 test_that("crew_launcher_pbs() script() nearly empty", {
   x <- crew_launcher_pbs(
     options_cluster = crew_options_pbs(
@@ -42,7 +35,7 @@ test_that("crew_launcher_pbs() script() nearly empty", {
     )
   )
   expect_equal(
-    x$script(name = "my_job", attempt = 1L),
+    x$script(name = "my_job"),
     c("#PBS -N my_job", "#PBS -o log_file", "#PBS -j n")
   )
 })
@@ -59,7 +52,7 @@ test_that("crew_launcher_pbs() script() all lines", {
       walltime_hours = 57
     )
   )
-  out <- x$script(name = "this_job", attempt = 1L)
+  out <- x$script(name = "this_job")
   exp <- c(
     "#PBS -N this_job",
     "#PBS -o out_dir/",

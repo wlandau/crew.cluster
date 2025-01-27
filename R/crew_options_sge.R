@@ -3,15 +3,8 @@
 #' @family sge
 #' @description Set options for SGE job management.
 #' @section Retryable options:
-#'   Arguments `memory_gigabytes_limit`, `memory_gigabytes_required`,
-#'   `cores`, and `gpu` are retryable options.
-#'   Each of these arguments be a vector where each successive element is
-#'   used during a retry if the worker previously exited without
-#'   completing all its assigned tasks.
-#'   The last element of the vector is used if there are more retries than
-#'   the length of the vector.
-#'   Control the number of allowable retries with `crashes_error`
-#'   argument of the controller.
+#'   Retryable options are deprecated in `crew.cluster` as of
+#'   2025-01-27 (version `0.3.4`).
 #' @return A classed list of options.
 #' @inheritSection crew.cluster-package Attribution
 #' @inheritParams crew_options_cluster
@@ -44,42 +37,24 @@
 #'   of `#$ -j y` in the SGE job script, while `log_join = FALSE` is
 #'   equivalent to `#$ -j n`. If `log_join = TRUE`, then `log_error`
 #'   should be `NULL`.
-#' @param memory_gigabytes_limit Optional numeric vector, usually
-#'   with a single element.
-#'   Supply a vector to make `memory_gigabytes_limit` a retryable option
-#'   (see the "Retryable options" section for details).
-#'
-#'   `memory_gigabytes_limit` is
-#'   the maximum number of gigabytes of memory a worker is allowed to
+#' @param memory_gigabytes_limit Optional numeric scalar,
+#'   maximum number of gigabytes of memory a worker is allowed to
 #'   consume. If the worker consumes more than this level of memory, then
 #'   SGE will terminate it. `memory_gigabytes_limit = 5.7"`
 #'   translates to a line of `"#$ -l h_rss=5.7G"` in the SGE job script.
 #'   `memory_gigabytes_limit = NULL` omits this line.
-#' @param memory_gigabytes_required Optional positive numeric vector,
-#'   usually with a single element.
-#'   Supply a vector to make `memory_gigabytes_required` a retryable option
-#'   (see the "Retryable options" section for details).
-#'
-#'   `memory_gigabytes_required` is
-#'   the gigabytes of memory required to run the worker.
+#' @param memory_gigabytes_required Optional positive numeric scalar,
+#'   gigabytes of memory required to run the worker.
 #'   `memory_gigabytes_required = 2.4`
 #'   translates to a line of `#$ -l m_mem_free=2.4G` in the SGE job script.
 #'   `memory_gigabytes_required = NULL` omits this line.
-#' @param cores Optional positive integer vector, usually with a single
-#'   element.
-#'   Supply a vector to make `cores` a retryable option
-#'   (see the "Retryable options" section for details).
-#'
-#'   `cores` is the
+#' @param cores Optional positive integer scalar,
 #'   number of cores per worker ("slots" in SGE lingo).
 #'   `cores = 4` translates
 #'   to a line of `#$ -pe smp 4` in the SGE job script.
 #'   `cores = NULL` omits this line.
-#' @param gpu Optional integer vector, usually with a single element.
-#'   Supply a vector to make `gpu` a retryable option
-#'   (see the "Retryable options" section for details).
-#'
-#'   `gpu` is the number of GPUs to
+#' @param gpu Optional integer scalar,
+#'   number of GPUs to
 #'   request for the worker. `gpu = 1` translates to a line of
 #'   `"#$ -l gpu=1"` in the SGE job script. `gpu = NULL` omits this line.
 #' @examples
@@ -100,6 +75,37 @@ crew_options_sge <- function(
   cores = NULL,
   gpu = NULL
 ) {
+  crew::crew_deprecate(
+    name = "Retryable options in crew.cluster",
+    date = "2025-01-27",
+    version = "0.3.4",
+    alternative = paste(
+      "none. Please supply scalars for memory_gigabytes_limit,",
+      "memory_gigabytes_required, cores, and gpu"
+    ),
+    value = if_any(
+      length(memory_gigabytes_limit) > 1L ||
+        length(memory_gigabytes_required) > 1L ||
+        length(cores) > 1L ||
+        length(gpu) > 1L,
+      TRUE,
+      NULL
+    ),
+    skip_cran = TRUE,
+    condition = "message"
+  )
+  if (!is.null(memory_gigabytes_limit)) {
+    memory_gigabytes_limit <- memory_gigabytes_limit[1L]
+  }
+  if (!is.null(memory_gigabytes_required)) {
+    memory_gigabytes_required <- memory_gigabytes_required[1L]
+  }
+  if (!is.null(cores)) {
+    cores <- cores[1L]
+  }
+  if (!is.null(gpu)) {
+    gpu <- gpu[1L]
+  }
   out <- structure(
     list(
       verbose = verbose,

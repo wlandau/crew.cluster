@@ -18,6 +18,7 @@ README
 reproducibly
 rOpenSci
 asynchronicity
+backoff
 retryable
 ropensci
 scm

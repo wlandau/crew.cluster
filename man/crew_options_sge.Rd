@@ -85,45 +85,27 @@ of \verb{#$ -j y} in the SGE job script, while \code{log_join = FALSE} is
 equivalent to \verb{#$ -j n}. If \code{log_join = TRUE}, then \code{log_error}
 should be \code{NULL}.}
 
-\item{memory_gigabytes_limit}{Optional numeric vector, usually
-with a single element.
-Supply a vector to make \code{memory_gigabytes_limit} a retryable option
-(see the "Retryable options" section for details).
-
-\code{memory_gigabytes_limit} is
-the maximum number of gigabytes of memory a worker is allowed to
+\item{memory_gigabytes_limit}{Optional numeric scalar,
+maximum number of gigabytes of memory a worker is allowed to
 consume. If the worker consumes more than this level of memory, then
 SGE will terminate it. \verb{memory_gigabytes_limit = 5.7"}
 translates to a line of \code{"#$ -l h_rss=5.7G"} in the SGE job script.
 \code{memory_gigabytes_limit = NULL} omits this line.}
 
-\item{memory_gigabytes_required}{Optional positive numeric vector,
-usually with a single element.
-Supply a vector to make \code{memory_gigabytes_required} a retryable option
-(see the "Retryable options" section for details).
-
-\code{memory_gigabytes_required} is
-the gigabytes of memory required to run the worker.
+\item{memory_gigabytes_required}{Optional positive numeric scalar,
+gigabytes of memory required to run the worker.
 \code{memory_gigabytes_required = 2.4}
 translates to a line of \verb{#$ -l m_mem_free=2.4G} in the SGE job script.
 \code{memory_gigabytes_required = NULL} omits this line.}
 
-\item{cores}{Optional positive integer vector, usually with a single
-element.
-Supply a vector to make \code{cores} a retryable option
-(see the "Retryable options" section for details).
-
-\code{cores} is the
+\item{cores}{Optional positive integer scalar,
 number of cores per worker ("slots" in SGE lingo).
 \code{cores = 4} translates
 to a line of \verb{#$ -pe smp 4} in the SGE job script.
 \code{cores = NULL} omits this line.}
 
-\item{gpu}{Optional integer vector, usually with a single element.
-Supply a vector to make \code{gpu} a retryable option
-(see the "Retryable options" section for details).
-
-\code{gpu} is the number of GPUs to
+\item{gpu}{Optional integer scalar,
+number of GPUs to
 request for the worker. \code{gpu = 1} translates to a line of
 \code{"#$ -l gpu=1"} in the SGE job script. \code{gpu = NULL} omits this line.}
 }
@@ -135,15 +117,8 @@ Set options for SGE job management.
 }
 \section{Retryable options}{
 
-Arguments \code{memory_gigabytes_limit}, \code{memory_gigabytes_required},
-\code{cores}, and \code{gpu} are retryable options.
-Each of these arguments be a vector where each successive element is
-used during a retry if the worker previously exited without
-completing all its assigned tasks.
-The last element of the vector is used if there are more retries than
-the length of the vector.
-Control the number of allowable retries with \code{crashes_error}
-argument of the controller.
+Retryable options are deprecated in \code{crew.cluster} as of
+2025-01-27 (version \verb{0.3.4}).
 }
 
 \section{Attribution}{

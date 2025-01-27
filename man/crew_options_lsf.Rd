@@ -71,35 +71,22 @@ where \verb{\%J} is replaced by the job ID of the worker.
 The default is \verb{/dev/null} to omit these logs.
 Set \code{log_error = NULL} to omit this line from the job script.}
 
-\item{memory_gigabytes_limit}{Positive numeric vector,
-usually with a single element.
-Supply a vector to make \code{memory_gigabytes_limit} a retryable option
-(see the "Retryable options" section for details).
-
-\code{memory_gigabytes_limit} is the memory
+\item{memory_gigabytes_limit}{Positive numeric scalar, memory
 limit in gigabytes of the worker.
 \code{memory_gigabytes_limit = 4}
 translates to a line of \verb{#BSUB -M 4G}
 in the LSF job script.
 \code{memory_gigabytes_limit = NULL} omits this line.}
 
-\item{memory_gigabytes_required}{Positive numeric vector,
-usually with a single element.
-Supply a vector to make \code{memory_gigabytes_required} a retryable option
-(see the "Retryable options" section for details).
-
-\code{memory_gigabytes_required} is the memory requirement in gigabytes.
+\item{memory_gigabytes_required}{Positive numeric scalar,
+memory requirement in gigabytes.
 \code{memory_gigabytes_required = 4}
 translates to a line of \verb{#BSUB -R 'rusage[mem=4G]'}
 in the LSF job script.
 \code{memory_gigabytes_required = NULL} omits this line.}
 
-\item{cores}{Optional positive integer vector, usually with
-a single element.
-Supply a vector to make \code{cores} a retryable option
-(see the "Retryable options" section for details).
-
-\code{cores} is the number of CPU cores for the worker.
+\item{cores}{Optional positive integer scalar,
+number of CPU cores for the worker.
 \code{cores = 4} translates
 to a line of \verb{#BSUB -n 4} in the LSF job script.
 \code{cores = NULL} omits this line.}
@@ -112,15 +99,8 @@ Set options for LSF job management.
 }
 \section{Retryable options}{
 
-Arguments \code{memory_gigabytes_limit}, \code{memory_gigabytes_required},
-and \code{cores} are retryable options.
-Each of these arguments be a vector where each successive element is
-used during a retry if the worker previously exited without
-completing all its assigned tasks.
-The last element of the vector is used if there are more retries than
-the length of the vector.
-Control the number of allowable retries with \code{crashes_error}
-argument of the controller.
+Retryable options are deprecated in \code{crew.cluster} as of
+2025-01-27 (version \verb{0.3.4}).
 }
 
 \section{Attribution}{

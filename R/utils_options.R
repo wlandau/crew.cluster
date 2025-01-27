@@ -12,15 +12,3 @@ crew_options_validate.default <- function(options) {
     )
   )
 }
-
-crew_options_slice <- function(options, index) {
-  exclude <- names(formals(crew_options_cluster))
-  for (name in setdiff(names(options), exclude)) {
-    options[[name]] <- slice_bounded(options[[name]], index)
-  }
-  options
-}
-
-slice_bounded <- function(x, index) {
-  x[min(index, length(x))]
-}

@@ -1,6 +1,6 @@
-# crew.cluster 0.3.3 (development)
+# crew.cluster 0.3.4
 
-
+* Deprecate retryable options because `crew` 1.0.0 moved away from them.
 
 # crew.cluster 0.3.3
 
