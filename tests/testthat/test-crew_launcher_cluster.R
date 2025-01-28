@@ -44,7 +44,6 @@ test_that("SGE subclass mock job creates a tempdir() job script", {
     launcher = x$name,
     worker = "worker_name"
   )
-  private$.workers$handle[[1L]] <- handle
   expect_false(is.null(private$.prefix))
   script <- path_script(
     dir = tempdir(),
@@ -71,7 +70,7 @@ test_that("SGE subclass mock job creates a tempdir() job script", {
     "echo 'start'"
   )
   expect_equal(out[seq_along(exp)], exp)
-  x$terminate_worker(x$workers$handle[[1L]])
+  x$terminate_worker(handle)
   expect_false(file.exists(script))
 })
 
@@ -81,7 +80,6 @@ test_that("SGE subclass mock job creates a custom job script", {
   skip_if_not_installed("crew", minimum_version = "1.0.0")
   dir <- file.path(tempfile(), basename(tempfile()), basename(tempfile()))
   x <- crew_launcher_sge(
-    crashes_error = 10,
     options_cluster = crew_options_sge(
       command_submit = "cat",
       command_terminate = "echo",
@@ -101,14 +99,12 @@ test_that("SGE subclass mock job creates a custom job script", {
   private <- crew_private(x)
   x$start(url = "my_url", profile = "my_profile")
   expect_null(private$.prefix)
-  private$.workers$crashes <- 2L
   handle <- x$launch_worker(
     call = x$call(worker = "my_worker"),
     name = "my_name",
     launcher = x$name,
     worker = "my_worker"
   )
-  private$.workers$handle[[1L]] <- handle
   expect_false(is.null(private$.prefix))
   script <- path_script(
     dir = dir,
@@ -135,6 +131,6 @@ test_that("SGE subclass mock job creates a custom job script", {
     "echo 'start'"
   )
   expect_equal(out[seq_along(exp)], exp)
-  x$terminate_worker(x$workers$handle[[1L]])
+  x$terminate_worker(handle)
   expect_false(file.exists(script))
 })
