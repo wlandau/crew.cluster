@@ -37,7 +37,7 @@ crew_controller_slurm <- function(
   seconds_idle = 300,
   seconds_wall = Inf,
   seconds_exit = NULL,
-  retry_tasks = TRUE,
+  retry_tasks = NULL,
   tasks_max = Inf,
   tasks_timers = 0L,
   reset_globals = TRUE,
@@ -46,6 +46,8 @@ crew_controller_slurm <- function(
   garbage_collection = FALSE,
   crashes_error = NULL,
   r_arguments = c("--no-save", "--no-restore"),
+  crashes_max = 5L,
+  backup = NULL,
   options_metrics = crew::crew_options_metrics(),
   options_cluster = crew.cluster::crew_options_slurm(),
   verbose = NULL,
@@ -66,9 +68,17 @@ crew_controller_slurm <- function(
     name = "crashes_error",
     date = "2025-01-27",
     version = "0.3.4",
-    alternative = "crashes_error",
+    alternative = "crashes_max",
     condition = "message",
     value = crashes_error
+  )
+  crew::crew_deprecate(
+    name = "retry_tasks",
+    date = "2025-01-27",
+    version = "0.3.e4",
+    alternative = "none",
+    condition = "message",
+    value = retry_tasks
   )
   client <- crew::crew_client(
     host = host,
@@ -77,8 +87,7 @@ crew_controller_slurm <- function(
     tls_enable = tls_enable,
     tls_config = tls_config,
     seconds_interval = seconds_interval,
-    seconds_timeout = seconds_timeout,
-    retry_tasks = retry_tasks
+    seconds_timeout = seconds_timeout
   )
   launcher <- crew_launcher_slurm(
     name = name,
@@ -112,7 +121,12 @@ crew_controller_slurm <- function(
     slurm_time_minutes = slurm_time_minutes,
     slurm_partition = slurm_partition
   )
-  controller <- crew::crew_controller(client = client, launcher = launcher)
+  controller <- crew::crew_controller(
+    client = client,
+    launcher = launcher,
+    crashes_max = crashes_max,
+    backup = backup
+  )
   controller$validate()
   controller
 }

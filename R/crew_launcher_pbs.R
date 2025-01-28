@@ -67,7 +67,7 @@ crew_launcher_pbs <- function(
     name = "crashes_error",
     date = "2025-01-27",
     version = "0.3.4",
-    alternative = "crashes_error",
+    alternative = "crashes_max",
     condition = "message",
     value = crashes_error
   )
@@ -120,7 +120,6 @@ crew_launcher_pbs <- function(
     reset_packages = reset_packages,
     reset_options = reset_options,
     garbage_collection = garbage_collection,
-    crashes_error = crashes_error,
     tls = tls,
     r_arguments = r_arguments,
     options_metrics = options_metrics,

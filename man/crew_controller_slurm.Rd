@@ -19,7 +19,7 @@ crew_controller_slurm(
   seconds_idle = 300,
   seconds_wall = Inf,
   seconds_exit = NULL,
-  retry_tasks = TRUE,
+  retry_tasks = NULL,
   tasks_max = Inf,
   tasks_timers = 0L,
   reset_globals = TRUE,
@@ -28,6 +28,8 @@ crew_controller_slurm(
   garbage_collection = FALSE,
   crashes_error = NULL,
   r_arguments = c("--no-save", "--no-restore"),
+  crashes_max = 5L,
+  backup = NULL,
   options_metrics = crew::crew_options_metrics(),
   options_cluster = crew.cluster::crew_options_slurm(),
   verbose = NULL,
@@ -131,6 +133,39 @@ tasks, \code{FALSE} to skip.}
 to pass to \code{Rscript} (non-Windows) or \code{Rscript.exe} (Windows)
 when starting a worker. Example:
 \code{r_arguments = c("--vanilla", "--max-connections=32")}.}
+
+\item{crashes_max}{In rare cases, a worker may exit unexpectedly
+before it completes its current task. If this happens, \code{pop()}
+returns a status of \code{"crash"} instead of \code{"error"} for the task.
+The controller does not automatically retry the task, but
+you can retry it manually by calling \code{push()} again and using the same
+task name as before. (However, \code{targets} pipelines running \code{crew}
+do automatically retry tasks whose workers crashed.)
+
+\code{crashes_max} is a non-negative integer, and it sets the maximum number of
+allowable consecutive crashes for a given task.
+If a task's worker crashes more than \code{crashes_max} times in a row,
+then \code{pop()} throws an error when it tries to return the results
+of the task.}
+
+\item{backup}{An optional \code{crew} controller object, or \code{NULL} to omit.
+If supplied, the \code{backup} controller runs any pushed tasks that have
+already reached \code{crashes_max} consecutive crashes.
+Using \code{backup}, you can create
+a chain of controllers with different levels of resources
+(such as worker memory and CPUs) so that a task that fails on
+one controller can retry using incrementally more powerful workers.
+All controllers in a backup chain should be part of the same
+controller group (see \code{\link[crew:crew_controller_group]{crew_controller_group()}}) so you can call the
+group-level \code{pop()} and \code{collect()} methods to make sure you get results
+regardless of which controller actually ended up running the task.
+
+Limitations of \code{backup}:
+* \code{crashes_max} needs to be positive in order for \code{backup} to be used.
+Otherwise, every task would always skip the current controller and
+go to \code{backup}.
+* \code{backup} cannot be a controller group. It must be an ordinary
+controller.}
 
 \item{options_metrics}{Either \code{NULL} to opt out of resource metric logging
 for workers, or an object from \code{\link[crew:crew_options_metrics]{crew_options_metrics()}} to enable
