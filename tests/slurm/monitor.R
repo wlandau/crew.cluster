@@ -12,7 +12,7 @@ test_that("SLURM monitor terminate one job at a time", {
   controller$start()
   controller$launch(n = 2L)
   names <- vapply(
-    controller$launcher$workers$handle,
+    controller$launcher$instances$handle,
     function(handle) handle$name,
     FUN.VALUE = character(1L)
   )
@@ -53,7 +53,7 @@ test_that("THIS TEST DELETES ALL USER JOBS! USE WITH CAUTION!", {
   controller$start()
   controller$launch(n = 2L)
   names <- vapply(
-    controller$launcher$workers$handle,
+    controller$launcher$instances$handle,
     function(handle) handle$name,
     FUN.VALUE = character(1L)
   )
