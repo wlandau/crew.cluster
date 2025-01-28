@@ -25,7 +25,7 @@ jobs:
         with:
           extra-packages: any::lintr
           needs: lint
-          cache-version: 2
+          cache-version: 3
 
       - name: Lint
         run: lintr::lint_package()
