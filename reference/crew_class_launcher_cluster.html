@@ -85,10 +85,12 @@ source code for additional attribution.</p>
 <li><p><a href="#method-crew_class_launcher_cluster-launch_worker"><code>crew_class_launcher_cluster$launch_worker()</code></a></p></li>
 <li><p><a href="#method-crew_class_launcher_cluster-terminate_worker"><code>crew_class_launcher_cluster$terminate_worker()</code></a></p></li>
 </ul></div><p><details><summary>Inherited methods</summary><ul><li><span class="pkg-link" data-pkg="crew" data-topic="crew_class_launcher" data-id="call"><a href="https://wlandau.github.io/crew/reference/crew_class_launcher.html#method-call"><code>crew::crew_class_launcher$call()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="crew" data-topic="crew_class_launcher" data-id="crashes"><a href="https://wlandau.github.io/crew/reference/crew_class_launcher.html#method-crashes"><code>crew::crew_class_launcher$crashes()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="crew" data-topic="crew_class_launcher" data-id="launch"><a href="https://wlandau.github.io/crew/reference/crew_class_launcher.html#method-launch"><code>crew::crew_class_launcher$launch()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="crew" data-topic="crew_class_launcher" data-id="poll"><a href="https://wlandau.github.io/crew/reference/crew_class_launcher.html#method-poll"><code>crew::crew_class_launcher$poll()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="crew" data-topic="crew_class_launcher" data-id="resolve"><a href="https://wlandau.github.io/crew/reference/crew_class_launcher.html#method-resolve"><code>crew::crew_class_launcher$resolve()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="crew" data-topic="crew_class_launcher" data-id="scale"><a href="https://wlandau.github.io/crew/reference/crew_class_launcher.html#method-scale"><code>crew::crew_class_launcher$scale()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="crew" data-topic="crew_class_launcher" data-id="set_name"><a href="https://wlandau.github.io/crew/reference/crew_class_launcher.html#method-set_name"><code>crew::crew_class_launcher$set_name()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="crew" data-topic="crew_class_launcher" data-id="settings"><a href="https://wlandau.github.io/crew/reference/crew_class_launcher.html#method-settings"><code>crew::crew_class_launcher$settings()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="crew" data-topic="crew_class_launcher" data-id="start"><a href="https://wlandau.github.io/crew/reference/crew_class_launcher.html#method-start"><code>crew::crew_class_launcher$start()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="crew" data-topic="crew_class_launcher" data-id="terminate"><a href="https://wlandau.github.io/crew/reference/crew_class_launcher.html#method-terminate"><code>crew::crew_class_launcher$terminate()</code></a></span></li>
@@ -100,6 +102,7 @@ source code for additional attribution.</p>
 <h4 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va"><a href="../reference/crew_class_launcher_cluster.html">crew_class_launcher_cluster</a></span><span class="op">$</span><span class="fu">new</span><span class="op">(</span></span>
 <span>  name <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  workers <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  seconds_interval <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  seconds_timeout <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  seconds_launch <span class="op">=</span> <span class="cn">NULL</span>,</span>
@@ -111,7 +114,6 @@ source code for additional attribution.</p>
 <span>  reset_packages <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  reset_options <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  garbage_collection <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  crashes_error <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  tls <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  r_arguments <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  options_metrics <span class="op">=</span> <span class="cn">NULL</span>,</span>
@@ -122,6 +124,10 @@ source code for additional attribution.</p>
 <div class="section">
 <h4 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>name</code></dt>
+<dd><p>See <code><a href="crew_launcher_cluster.html">crew_launcher_cluster()</a></code>.</p></dd>
+
+
+<dt><code>workers</code></dt>
 <dd><p>See <code><a href="crew_launcher_cluster.html">crew_launcher_cluster()</a></code>.</p></dd>
 
 
@@ -169,10 +175,6 @@ source code for additional attribution.</p>
 <dd><p>See <code><a href="crew_launcher_cluster.html">crew_launcher_cluster()</a></code>.</p></dd>
 
 
-<dt><code>crashes_error</code></dt>
-<dd><p>See <code><a href="crew_launcher_cluster.html">crew_launcher_cluster()</a></code>.</p></dd>
-
-
 <dt><code>tls</code></dt>
 <dd><p>See <code><a href="crew_launcher_cluster.html">crew_launcher_cluster()</a></code>.</p></dd>
 
@@ -213,7 +215,13 @@ source code for additional attribution.</p>
 <p>Launch a local process worker which will
 dial into a socket.</p><div class="section">
 <h4 id="usage-2">Usage<a class="anchor" aria-label="anchor" href="#usage-2"></a></h4>
-<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">crew_class_launcher_cluster</span><span class="op">$</span><span class="fu">launch_worker</span><span class="op">(</span><span class="va">call</span>, <span class="va">name</span>, <span class="va">launcher</span>, <span class="va">worker</span><span class="op">)</span></span></code></pre></div><p></p></div>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">crew_class_launcher_cluster</span><span class="op">$</span><span class="fu">launch_worker</span><span class="op">(</span></span>
+<span>  <span class="va">call</span>,</span>
+<span>  <span class="va">name</span>,</span>
+<span>  <span class="va">launcher</span>,</span>
+<span>  <span class="va">worker</span>,</span>
+<span>  instance <span class="op">=</span> <span class="cn">NULL</span></span>
+<span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
@@ -234,6 +242,10 @@ which will run in the worker and accept tasks.</p></dd>
 
 <dt><code>worker</code></dt>
 <dd><p>Character string, name of the worker instance.</p></dd>
+
+
+<dt><code>instance</code></dt>
+<dd><p>Deprecated in <code>crew.cluster</code></p></dd>
 
 
 </dl><p></p></div>
