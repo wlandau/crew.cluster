@@ -9,7 +9,7 @@ launch workers on SLURM workers."><meta property="og:image" content="/logo.svg">
 
     <a class="navbar-brand me-2" href="../index.html">crew.cluster</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.3.4.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.3.4.9001</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -49,6 +49,7 @@ launch workers on SLURM workers.</p>
 <span>  tls <span class="op">=</span> <span class="fu">crew</span><span class="fu">::</span><span class="fu"><a href="https://wlandau.github.io/crew/reference/crew_tls.html" class="external-link">crew_tls</a></span><span class="op">(</span>mode <span class="op">=</span> <span class="st">"automatic"</span><span class="op">)</span>,</span>
 <span>  tls_enable <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  tls_config <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  serialization <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  seconds_interval <span class="op">=</span> <span class="fl">0.25</span>,</span>
 <span>  seconds_timeout <span class="op">=</span> <span class="fl">60</span>,</span>
 <span>  seconds_launch <span class="op">=</span> <span class="fl">86400</span>,</span>
@@ -120,6 +121,15 @@ Use argument <code>tls</code> instead.</p></dd>
 <dt id="arg-tls-config">tls_config<a class="anchor" aria-label="anchor" href="#arg-tls-config"></a></dt>
 <dd><p>Deprecated on 2023-09-15 in version 0.4.1.
 Use argument <code>tls</code> instead.</p></dd>
+
+
+<dt id="arg-serialization">serialization<a class="anchor" aria-label="anchor" href="#arg-serialization"></a></dt>
+<dd><p>Either <code>NULL</code> (default) or an object produced by
+<code><a href="https://shikokuchuo.net/nanonext/reference/serial_config.html" class="external-link">mirai::serial_config()</a></code> to control the serialization
+of data sent to workers. This can help with either more efficient
+data transfers or to preserve attributes of otherwise
+non-exportable objects (such as <code>torch</code> tensors or <code>arrow</code> tables).
+See <code><a href="https://shikokuchuo.net/nanonext/reference/serial_config.html" class="external-link">?mirai::serial_config</a></code> for details.</p></dd>
 
 
 <dt id="arg-seconds-interval">seconds_interval<a class="anchor" aria-label="anchor" href="#arg-seconds-interval"></a></dt>
