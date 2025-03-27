@@ -27,6 +27,7 @@ crew_controller_sge <- function(
   tls = crew::crew_tls(mode = "automatic"),
   tls_enable = NULL,
   tls_config = NULL,
+  serialization = NULL,
   seconds_interval = 0.25,
   seconds_timeout = 60,
   seconds_launch = 86400,
@@ -84,6 +85,7 @@ crew_controller_sge <- function(
     tls = tls,
     tls_enable = tls_enable,
     tls_config = tls_config,
+    serialization = serialization,
     seconds_interval = seconds_interval,
     seconds_timeout = seconds_timeout
   )

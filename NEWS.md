@@ -1,6 +1,6 @@
-# crew.cluster 0.3.4.9000 (development)
+# crew.cluster 0.3.4.9001 (development)
 
-
+* Add a new `serialization` argument to all controllers.
 
 # crew.cluster 0.3.4
 
