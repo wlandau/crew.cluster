@@ -108,7 +108,7 @@ in a <code><a href="https://wlandau.github.io/crew/reference/crew_throttle.html"
 <dt id="arg-seconds-timeout">seconds_timeout<a class="anchor" aria-label="anchor" href="#arg-seconds-timeout"></a></dt>
 <dd><p>Number of seconds until timing
 out while waiting for certain synchronous operations to complete,
-such as checking <code><a href="https://shikokuchuo.net/mirai/reference/status.html" class="external-link">mirai::status()</a></code>.</p></dd>
+such as checking <code><a href="https://mirai.r-lib.org/reference/status.html" class="external-link">mirai::status()</a></code>.</p></dd>
 
 
 <dt id="arg-seconds-launch">seconds_launch<a class="anchor" aria-label="anchor" href="#arg-seconds-launch"></a></dt>
@@ -124,7 +124,7 @@ considered alive if it is actively connected to its assign websocket.</p></dd>
 since the completion of the last task. If exceeded, the worker exits.
 But the timer does not launch until <code>tasks_timers</code> tasks
 have completed.
-See the <code>idletime</code> argument of <code><a href="https://shikokuchuo.net/mirai/reference/daemon.html" class="external-link">mirai::daemon()</a></code>. <code>crew</code> does not
+See the <code>idletime</code> argument of <code><a href="https://mirai.r-lib.org/reference/daemon.html" class="external-link">mirai::daemon()</a></code>. <code>crew</code> does not
 excel with perfectly transient workers because it does not micromanage
 the assignment of tasks to workers, so please allow enough idle
 time for a new worker to be delegated a new task.</p></dd>
@@ -134,12 +134,12 @@ time for a new worker to be delegated a new task.</p></dd>
 <dd><p>Soft wall time in seconds.
 The timer does not launch until <code>tasks_timers</code> tasks
 have completed.
-See the <code>walltime</code> argument of <code><a href="https://shikokuchuo.net/mirai/reference/daemon.html" class="external-link">mirai::daemon()</a></code>.</p></dd>
+See the <code>walltime</code> argument of <code><a href="https://mirai.r-lib.org/reference/daemon.html" class="external-link">mirai::daemon()</a></code>.</p></dd>
 
 
 <dt id="arg-tasks-max">tasks_max<a class="anchor" aria-label="anchor" href="#arg-tasks-max"></a></dt>
 <dd><p>Maximum number of tasks that a worker will do before
-exiting. See the <code>maxtasks</code> argument of <code><a href="https://shikokuchuo.net/mirai/reference/daemon.html" class="external-link">mirai::daemon()</a></code>.
+exiting. See the <code>maxtasks</code> argument of <code><a href="https://mirai.r-lib.org/reference/daemon.html" class="external-link">mirai::daemon()</a></code>.
 <code>crew</code> does not
 excel with perfectly transient workers because it does not micromanage
 the assignment of tasks to workers, it is recommended to set
@@ -149,7 +149,7 @@ the assignment of tasks to workers, it is recommended to set
 <dt id="arg-tasks-timers">tasks_timers<a class="anchor" aria-label="anchor" href="#arg-tasks-timers"></a></dt>
 <dd><p>Number of tasks to do before activating
 the timers for <code>seconds_idle</code> and <code>seconds_wall</code>.
-See the <code>timerstart</code> argument of <code><a href="https://shikokuchuo.net/mirai/reference/daemon.html" class="external-link">mirai::daemon()</a></code>.</p></dd>
+See the <code>timerstart</code> argument of <code><a href="https://mirai.r-lib.org/reference/daemon.html" class="external-link">mirai::daemon()</a></code>.</p></dd>
 
 
 <dt id="arg-reset-globals">reset_globals<a class="anchor" aria-label="anchor" href="#arg-reset-globals"></a></dt>
