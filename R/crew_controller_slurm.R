@@ -9,8 +9,8 @@
 #'   with caution and report bugs to
 #'   <https://github.com/wlandau/crew.cluster>.
 #' @inheritSection crew.cluster-package Attribution
-#' @inheritParams crew::crew_client
 #' @inheritParams crew_launcher_slurm
+#' @inheritParams crew::crew_client
 #' @inheritParams crew::crew_controller
 #' @param seconds_exit Deprecated on 2023-09-21 in version 0.1.2.9000.
 #'   No longer necessary.

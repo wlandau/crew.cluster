@@ -5,8 +5,8 @@
 #' @description Create an `R6` object to submit tasks and
 #'   launch workers on Sun Grid Engine (SGE) workers.
 #' @inheritSection crew.cluster-package Attribution
-#' @inheritParams crew::crew_client
 #' @inheritParams crew_launcher_sge
+#' @inheritParams crew::crew_client
 #' @inheritParams crew::crew_controller
 #' @param seconds_exit Deprecated on 2023-09-21 in version 0.1.2.9000.
 #'   No longer necessary.
