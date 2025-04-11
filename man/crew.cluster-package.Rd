@@ -10,12 +10,12 @@ statisticians and data scientists asynchronously
 deploy long-running tasks to distributed systems,
 ranging from traditional clusters to cloud services.
 The \code{crew.cluster} package extends the
-\href{https://github.com/shikokuchuo/mirai}{\code{mirai}}-powered
+\href{https://github.com/r-lib/mirai}{\code{mirai}}-powered
 \href{https://wlandau.github.io}{\code{crew}} package with worker
 launcher plugins for traditional
 high-performance computing systems.
 Inspiration also comes from packages
-\href{https://github.com/shikokuchuo/mirai}{\code{mirai}},
+\href{https://github.com/r-lib/mirai}{\code{mirai}},
 \href{https://future.futureverse.org/}{\code{future}},
 \href{https://mrc-ide.github.io/rrq/}{\code{rrq}},
 \href{https://mschubert.github.io/clustermq/}{\code{clustermq}},

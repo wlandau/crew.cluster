@@ -9,13 +9,13 @@ Description: In computationally demanding analysis projects,
   'crew' package with worker launcher plugins for traditional
   high-performance computing systems.
   Inspiration also comes from packages 'mirai' by Gao (2023)
-  <https://github.com/shikokuchuo/mirai>,
+  <https://github.com/r-lib/mirai>,
   'future' by Bengtsson (2021) <doi:10.32614/RJ-2021-048>,
   'rrq' by FitzJohn and Ashton (2023) <https://github.com/mrc-ide/rrq>,
   'clustermq' by Schubert (2019) <doi:10.1093/bioinformatics/btz284>),
   and 'batchtools' by Lang, Bischl, and Surmann (2017).
   <doi:10.21105/joss.00135>.
-Version: 0.3.5
+Version: 0.3.6
 License: MIT + file LICENSE
 URL: https://wlandau.github.io/crew.cluster/,
   https://github.com/wlandau/crew.cluster

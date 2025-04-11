@@ -7,12 +7,12 @@
 #'   deploy long-running tasks to distributed systems,
 #'   ranging from traditional clusters to cloud services.
 #'   The `crew.cluster` package extends the
-#'   [`mirai`](https://github.com/shikokuchuo/mirai)-powered
+#'   [`mirai`](https://github.com/r-lib/mirai)-powered
 #'   [`crew`](https://wlandau.github.io) package with worker
 #'   launcher plugins for traditional
 #'   high-performance computing systems.
 #'   Inspiration also comes from packages
-#'   [`mirai`](https://github.com/shikokuchuo/mirai),
+#'   [`mirai`](https://github.com/r-lib/mirai),
 #'   [`future`](https://future.futureverse.org/),
 #'   [`rrq`](https://mrc-ide.github.io/rrq/),
 #'   [`clustermq`](https://mschubert.github.io/clustermq/),

@@ -21,7 +21,7 @@ knitr::opts_chunk$set(
 [![lint](https://github.com/wlandau/crew.cluster/actions/workflows/lint.yaml/badge.svg)](https://github.com/wlandau/crew.cluster/actions?query=workflow%3Alint)
 [![pkgdown](https://github.com/wlandau/crew.cluster/actions/workflows/pkgdown.yaml/badge.svg)](https://github.com/wlandau/crew.cluster/actions?query=workflow%3Apkgdown)
 
-In computationally demanding analysis projects, statisticians and data scientists asynchronously deploy long-running tasks to distributed systems, ranging from traditional clusters to cloud services. The `crew.cluster` package extends the [`mirai`](https://github.com/shikokuchuo/mirai)-powered 'crew' package with worker launcher plugins for traditional high-performance computing systems. Inspiration also comes from packages [`mirai`](https://github.com/shikokuchuo/mirai), [`future`](https://future.futureverse.org/), [`rrq`](https://mrc-ide.github.io/rrq/), [`clustermq`](https://mschubert.github.io/clustermq/), and [`batchtools`](https://mllg.github.io/batchtools/).
+In computationally demanding analysis projects, statisticians and data scientists asynchronously deploy long-running tasks to distributed systems, ranging from traditional clusters to cloud services. The `crew.cluster` package extends the [`mirai`](https://github.com/r-lib/mirai)-powered 'crew' package with worker launcher plugins for traditional high-performance computing systems. Inspiration also comes from packages [`mirai`](https://github.com/r-lib/mirai), [`future`](https://future.futureverse.org/), [`rrq`](https://mrc-ide.github.io/rrq/), [`clustermq`](https://mschubert.github.io/clustermq/), and [`batchtools`](https://mllg.github.io/batchtools/).
 
 # Installation
 
@@ -111,7 +111,7 @@ The risks of `crew.cluster` are the same as [those of `crew`](https://wlandau.gi
 
 # Thanks
 
-* [Charlie Gao](https://github.com/shikokuchuo) created [`mirai`](https://github.com/shikokuchuo/mirai) and [`nanonext`](https://github.com/shikokuchuo/nanonext) and graciously accommodated the complicated and demanding feature requests that made `crew` and its ecosystem possible.
+* [Charlie Gao](https://github.com/shikokuchuo) created [`mirai`](https://github.com/r-lib/mirai) and [`nanonext`](https://github.com/r-lib/nanonext) and graciously accommodated the complicated and demanding feature requests that made `crew` and its ecosystem possible.
 * Thanks to [Michael Schubert](https://github.com/mschubert) for sharing the [template files](https://github.com/mschubert/clustermq/tree/master/inst) in [`clustermq`](https://github.com/mschubert/clustermq) under the permissive [Apache License 2.0](https://github.com/mschubert/clustermq/blob/master/LICENSE). These scripts helped construct launcher plugins to clusters where direct access was not possible. See the [`LICENSE.note`](https://github.com/wlandau/crew.cluster/blob/main/LICENSE.note) file in this package.
 
 # Code of Conduct

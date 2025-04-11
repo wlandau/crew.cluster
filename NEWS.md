@@ -1,3 +1,7 @@
+# crew.cluster 0.3.6
+
+* Fix links.
+
 # crew.cluster 0.3.5
 
 * Add a new `serialization` argument to all controllers.

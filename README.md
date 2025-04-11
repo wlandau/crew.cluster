@@ -12,10 +12,10 @@ In computationally demanding analysis projects, statisticians and data
 scientists asynchronously deploy long-running tasks to distributed
 systems, ranging from traditional clusters to cloud services. The
 `crew.cluster` package extends the
-[`mirai`](https://github.com/shikokuchuo/mirai)-powered ‘crew’ package
-with worker launcher plugins for traditional high-performance computing
+[`mirai`](https://github.com/r-lib/mirai)-powered ‘crew’ package with
+worker launcher plugins for traditional high-performance computing
 systems. Inspiration also comes from packages
-[`mirai`](https://github.com/shikokuchuo/mirai),
+[`mirai`](https://github.com/r-lib/mirai),
 [`future`](https://future.futureverse.org/),
 [`rrq`](https://mrc-ide.github.io/rrq/),
 [`clustermq`](https://mschubert.github.io/clustermq/), and
@@ -135,8 +135,8 @@ not be able to.
 # Thanks
 
 - [Charlie Gao](https://github.com/shikokuchuo) created
-  [`mirai`](https://github.com/shikokuchuo/mirai) and
-  [`nanonext`](https://github.com/shikokuchuo/nanonext) and graciously
+  [`mirai`](https://github.com/r-lib/mirai) and
+  [`nanonext`](https://github.com/r-lib/nanonext) and graciously
   accommodated the complicated and demanding feature requests that made
   `crew` and its ecosystem possible.
 - Thanks to [Michael Schubert](https://github.com/mschubert) for sharing
