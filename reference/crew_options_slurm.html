@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">crew.cluster</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.3.6.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.3.7</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -50,7 +50,8 @@
 <span>  memory_gigabytes_per_cpu <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  cpus_per_task <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  time_minutes <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  partition <span class="op">=</span> <span class="cn">NULL</span></span>
+<span>  partition <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  n_tasks <span class="op">=</span> <span class="fl">1</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -161,6 +162,14 @@ translates to a line of <code>#SBATCH --partition=partition1,partition2</code>
 in the SLURM job script. <code>partition = NULL</code>
 omits this line.</p></dd>
 
+
+<dt id="arg-n-tasks">n_tasks<a class="anchor" aria-label="anchor" href="#arg-n-tasks"></a></dt>
+<dd><p>Numeric scalar, number of SLURM tasks to run
+within the job.
+<code>n_tasks = 1</code> translates to a line of <code>#SBATCH --ntasks=1</code>
+in the SLURM job script.
+<code>n_tasks = 0</code> omits this line.</p></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
@@ -209,7 +218,7 @@ source code for additional attribution.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] ""</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $script_directory</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/RtmpcXzYFR"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/Rtmp9LFHOb"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $script_lines</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> character(0)</span>
@@ -234,6 +243,9 @@ source code for additional attribution.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $partition</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> NULL</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $n_tasks</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> attr(,"class")</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "crew_options_slurm"   "crew_options_cluster" "crew_options"        </span>
