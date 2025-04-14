@@ -1,6 +1,6 @@
-# crew.cluster 0.3.6.9000 (development)
+# crew.cluster 0.3.7
 
-
+* Add `n_tasks` to `crew_options_slurm()`
 
 # crew.cluster 0.3.6
 

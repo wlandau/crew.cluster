@@ -16,7 +16,8 @@ crew_options_slurm(
   memory_gigabytes_per_cpu = NULL,
   cpus_per_task = NULL,
   time_minutes = NULL,
-  partition = NULL
+  partition = NULL,
+  n_tasks = 1
 )
 }
 \arguments{
@@ -99,6 +100,12 @@ create workers on. \code{partition = "partition1,partition2"}
 translates to a line of \verb{#SBATCH --partition=partition1,partition2}
 in the SLURM job script. \code{partition = NULL}
 omits this line.}
+
+\item{n_tasks}{Numeric scalar, number of SLURM tasks to run
+within the job.
+\code{n_tasks = 1} translates to a line of \verb{#SBATCH --ntasks=1}
+in the SLURM job script.
+\code{n_tasks = 0} omits this line.}
 }
 \value{
 A classed list of options.

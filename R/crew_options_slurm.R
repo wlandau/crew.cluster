@@ -52,6 +52,11 @@
 #'   translates to a line of `#SBATCH --partition=partition1,partition2`
 #'   in the SLURM job script. `partition = NULL`
 #'   omits this line.
+#' @param n_tasks Numeric scalar, number of SLURM tasks to run
+#'   within the job.
+#'   `n_tasks = 1` translates to a line of `#SBATCH --ntasks=1`
+#'   in the SLURM job script.
+#'   `n_tasks = 0` omits this line.
 #' @examples
 #'   crew_options_slurm()
 crew_options_slurm <- function(
@@ -66,7 +71,8 @@ crew_options_slurm <- function(
   memory_gigabytes_per_cpu = NULL,
   cpus_per_task = NULL,
   time_minutes = NULL,
-  partition = NULL
+  partition = NULL,
+  n_tasks = 1
 ) {
   crew::crew_deprecate(
     name = "Retryable options in crew.cluster",
@@ -117,7 +123,8 @@ crew_options_slurm <- function(
       memory_gigabytes_required = memory_gigabytes_required,
       cpus_per_task = cpus_per_task,
       time_minutes = time_minutes,
-      partition = partition
+      partition = partition,
+      n_tasks = n_tasks
     ),
     class = c("crew_options_slurm", "crew_options_cluster", "crew_options")
   )
@@ -160,7 +167,8 @@ crew_options_validate.crew_options_slurm <- function(options) {
     "memory_gigabytes_required",
     "memory_gigabytes_per_cpu",
     "cpus_per_task",
-    "time_minutes"
+    "time_minutes",
+    "n_tasks"
   )
   for (field in fields) {
     if (!is.null(options[[field]])) {

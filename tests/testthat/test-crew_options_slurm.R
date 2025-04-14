@@ -11,7 +11,8 @@ test_that("crew_options_slurm()", {
     memory_gigabytes_per_cpu = 456,
     cpus_per_task = 3,
     time_minutes = 1440,
-    partition = "partition"
+    partition = "partition",
+    n_tasks = 4
   )
   expect_equal(
     out,
@@ -28,7 +29,8 @@ test_that("crew_options_slurm()", {
         memory_gigabytes_required = 123,
         cpus_per_task = 3,
         time_minutes = 1440,
-        partition = "partition"
+        partition = "partition",
+        n_tasks = 4
       ),
       class = c("crew_options_slurm", "crew_options_cluster", "crew_options")
     )

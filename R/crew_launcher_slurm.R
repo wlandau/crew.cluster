@@ -234,6 +234,11 @@ crew_class_launcher_slurm <- R6::R6Class(
           character(0L),
           paste0("#SBATCH --partition=", options$partition)
         ),
+        if_any(
+          is.null(options$n_tasks),
+          character(0L),
+          paste0("#SBATCH --ntasks=", options$n_tasks)
+        ),
         options$script_lines
       )
     }

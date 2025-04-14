@@ -31,7 +31,8 @@ test_that("crew_launcher_slurm() script() nearly empty", {
     "#!/bin/sh",
     "#SBATCH --job-name=a_job",
     "#SBATCH --output=/dev/null",
-    "#SBATCH --error=/dev/null"
+    "#SBATCH --error=/dev/null",
+    "#SBATCH --ntasks=1"
   )
   expect_equal(x$script(name = "a_job"), lines)
 })
@@ -58,6 +59,7 @@ test_that("crew_launcher_slurm() script() all lines", {
     "#SBATCH --mem-per-cpu=2146M",
     "#SBATCH --cpus-per-task=2",
     "#SBATCH --time=57",
+    "#SBATCH --ntasks=1",
     "module load R",
     "echo 'start'"
   )
