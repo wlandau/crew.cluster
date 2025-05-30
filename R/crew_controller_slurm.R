@@ -9,9 +9,9 @@
 #'   with caution and report bugs to
 #'   <https://github.com/wlandau/crew.cluster>.
 #' @inheritSection crew.cluster-package Attribution
+#' @inheritParams crew::crew_controller
 #' @inheritParams crew_launcher_slurm
 #' @inheritParams crew::crew_client
-#' @inheritParams crew::crew_controller
 #' @param seconds_exit Deprecated on 2023-09-21 in version 0.1.2.9000.
 #'   No longer necessary.
 #' @examples
@@ -101,10 +101,6 @@ crew_controller_slurm <- function(
     seconds_wall = seconds_wall,
     tasks_max = tasks_max,
     tasks_timers = tasks_timers,
-    reset_globals = reset_globals,
-    reset_packages = reset_packages,
-    reset_options = reset_options,
-    garbage_collection = garbage_collection,
     tls = tls,
     r_arguments = r_arguments,
     options_metrics = options_metrics,
@@ -126,6 +122,10 @@ crew_controller_slurm <- function(
   controller <- crew::crew_controller(
     client = client,
     launcher = launcher,
+    reset_globals = reset_globals,
+    reset_packages = reset_packages,
+    reset_options = reset_options,
+    garbage_collection = garbage_collection,
     crashes_max = crashes_max,
     backup = backup
   )

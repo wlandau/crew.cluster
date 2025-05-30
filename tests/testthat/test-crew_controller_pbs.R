@@ -26,3 +26,18 @@ test_that("crew_controller_pbs() script() all lines", {
   )
   expect_equal(out, exp)
 })
+
+# https://github.com/wlandau/crew/issues/217
+test_that("crew_controller_pbs() cleanup deprecations", {
+  x <- crew_controller_pbs()
+  fields <- c(
+    "reset_globals",
+    "reset_packages",
+    "reset_globals",
+    "garbage_collection"
+  )
+  for (field in fields) {
+    expect_true(is.logical(x[[field]]))
+    expect_null(x$launcher[[field]])
+  }
+})
