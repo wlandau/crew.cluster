@@ -1,9 +1,9 @@
 test_that("valid simple crew_launcher_lsf()", {
-  expect_silent(crew_launcher_lsf())
+  expect_no_error(crew_launcher_lsf())
 })
 
 test_that("valid populated crew_launcher_lsf()", {
-  expect_silent(
+  expect_no_error(
     crew_launcher_lsf(
       options_cluster = crew_options_lsf(
         script_lines = c("module load R", "echo 'start'"),

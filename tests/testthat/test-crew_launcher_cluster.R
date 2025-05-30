@@ -1,5 +1,5 @@
 test_that("valid abstract cluster launcher object", {
-  expect_silent(crew_launcher_cluster())
+  expect_no_error(crew_launcher_cluster())
 })
 
 test_that("bad field in cluster launcher object", {

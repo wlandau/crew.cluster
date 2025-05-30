@@ -1,9 +1,9 @@
 test_that("valid simple crew_launcher_slurm()", {
-  expect_silent(crew_launcher_slurm())
+  expect_no_error(crew_launcher_slurm())
 })
 
 test_that("valid populated crew_launcher_slurm()", {
-  expect_silent(
+  expect_no_error(
     crew_launcher_slurm(
       options_cluster = crew_options_slurm(
         script_lines = c("module load R", "echo 'start'"),

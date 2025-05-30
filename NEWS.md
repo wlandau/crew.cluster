@@ -1,6 +1,6 @@
-# crew.cluster 0.3.7.9000 (development)
+# crew.cluster 0.3.7.9001 (development)
 
-
+* Use `expect_no_error()` instead of `expect_silent()` to ensure compatibility with the deprecations to fix https://github.com/wlandau/crew/issues/217.
 
 # crew.cluster 0.3.7
 
