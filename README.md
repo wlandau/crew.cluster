@@ -19,7 +19,7 @@ systems. Inspiration also comes from packages
 [`future`](https://future.futureverse.org/),
 [`rrq`](https://mrc-ide.github.io/rrq/),
 [`clustermq`](https://mschubert.github.io/clustermq/), and
-[`batchtools`](https://mllg.github.io/batchtools/).
+[`batchtools`](https://batchtools.mlr-org.com).
 
 # Installation
 

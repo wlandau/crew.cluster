@@ -19,7 +19,7 @@ Inspiration also comes from packages
 \href{https://future.futureverse.org/}{\code{future}},
 \href{https://mrc-ide.github.io/rrq/}{\code{rrq}},
 \href{https://mschubert.github.io/clustermq/}{\code{clustermq}},
-and \href{https://mllg.github.io/batchtools/}{\code{batchtools}}.
+and \href{https://batchtools.mlr-org.com}{\code{batchtools}}.
 }
 \section{Attribution}{
 

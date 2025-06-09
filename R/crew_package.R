@@ -16,7 +16,7 @@
 #'   [`future`](https://future.futureverse.org/),
 #'   [`rrq`](https://mrc-ide.github.io/rrq/),
 #'   [`clustermq`](https://mschubert.github.io/clustermq/),
-#'   and [`batchtools`](https://mllg.github.io/batchtools/).
+#'   and [`batchtools`](https://batchtools.mlr-org.com).
 #' @section Attribution:
 #'   The template files at
 #'   <https://github.com/mschubert/clustermq/tree/master/inst>
