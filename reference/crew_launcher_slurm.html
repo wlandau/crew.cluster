@@ -29,7 +29,7 @@ workers as SLURM jobs."><meta property="og:image" content="/logo.svg"></head><bo
 </nav><div class="container template-reference-topic">
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
-      <img src="../logo.svg" class="logo" alt=""><h1><a href="https://lifecycle.r-lib.org/articles/stages.html#experimental" class="external-link"><img src="figures/lifecycle-experimental.svg" alt="[Experimental]"></a> Create a launcher with SLURM workers.</h1>
+      <img src="../logo.svg" class="logo" alt=""><h1><a href="https://lifecycle.r-lib.org/articles/stages.html#maturing" class="external-link"><img src="figures/lifecycle-maturing.svg" alt="[Maturing]"></a> Create a launcher with SLURM workers.</h1>
       <small class="dont-index">Source: <a href="https://github.com/wlandau/crew.cluster/blob/main/R/crew_launcher_slurm.R" class="external-link"><code>R/crew_launcher_slurm.R</code></a></small>
       <div class="d-none name"><code>crew_launcher_slurm.Rd</code></div>
     </div>
@@ -261,11 +261,7 @@ Use <code>options_cluster</code> instead.</p></dd>
 </dl></div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
-    <p>WARNING: the <code>crew.cluster</code> SLURM plugin is experimental
-and has not actually been tested on a SLURM cluster. Please proceed
-with caution and report bugs to
-<a href="https://github.com/wlandau/crew.cluster" class="external-link">https://github.com/wlandau/crew.cluster</a>.</p>
-<p>To launch a SLURM worker, this launcher
+    <p>To launch a SLURM worker, this launcher
 creates a temporary job script with a call to <code><a href="https://wlandau.github.io/crew/reference/crew_worker.html" class="external-link">crew::crew_worker()</a></code>
 and submits it as an SLURM job with <code>sbatch</code>. To see most of the lines
 of the job script in advance, use the <code>script()</code> method of the launcher.
