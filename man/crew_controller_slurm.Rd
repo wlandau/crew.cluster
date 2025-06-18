@@ -2,7 +2,7 @@
 % Please edit documentation in R/crew_controller_slurm.R
 \name{crew_controller_slurm}
 \alias{crew_controller_slurm}
-\title{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}} Create a controller with a
+\title{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#maturing}{\figure{lifecycle-maturing.svg}{options: alt='[Maturing]'}}}{\strong{[Maturing]}} Create a controller with a
 SLURM launcher.}
 \usage{
 crew_controller_slurm(
@@ -230,12 +230,6 @@ Use \code{options_cluster} instead.}
 \description{
 Create an \code{R6} object to submit tasks and
 launch workers on SLURM workers.
-}
-\details{
-WARNING: the \code{crew.cluster} SLURM plugin is experimental
-and has not actually been tested on a SLURM cluster. Please proceed
-with caution and report bugs to
-\url{https://github.com/wlandau/crew.cluster}.
 }
 \section{Attribution}{
 

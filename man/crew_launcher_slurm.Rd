@@ -2,7 +2,7 @@
 % Please edit documentation in R/crew_launcher_slurm.R
 \name{crew_launcher_slurm}
 \alias{crew_launcher_slurm}
-\title{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}} Create a launcher with
+\title{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#maturing}{\figure{lifecycle-maturing.svg}{options: alt='[Maturing]'}}}{\strong{[Maturing]}} Create a launcher with
 SLURM workers.}
 \usage{
 crew_launcher_slurm(
@@ -162,11 +162,6 @@ Create an \code{R6} object to launch and maintain
 workers as SLURM jobs.
 }
 \details{
-WARNING: the \code{crew.cluster} SLURM plugin is experimental
-and has not actually been tested on a SLURM cluster. Please proceed
-with caution and report bugs to
-\url{https://github.com/wlandau/crew.cluster}.
-
 To launch a SLURM worker, this launcher
 creates a temporary job script with a call to \code{crew::crew_worker()}
 and submits it as an SLURM job with \code{sbatch}. To see most of the lines
