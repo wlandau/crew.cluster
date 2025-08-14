@@ -24,7 +24,7 @@ test_that("valid populated crew_launcher_sge()", {
 test_that("invalid crew_launcher_sge(): SGE field", {
   x <- crew_launcher_sge()
   private <- crew_private(x)
-  private$.options_cluster$cores <- - 1L
+  private$.options_cluster$cores <- -1L
   expect_error(x$validate(), class = "crew_error")
 })
 

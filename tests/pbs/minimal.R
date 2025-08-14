@@ -10,7 +10,8 @@ test_that("PBS minimal", {
   )
   on.exit(controller$terminate())
   controller$start()
-  controller$push( # Should see a job submission message.
+  controller$push(
+    # Should see a job submission message.
     name = "do work",
     command = as.character(Sys.info()["nodename"])
   )

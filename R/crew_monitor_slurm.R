@@ -56,8 +56,16 @@ crew_class_monitor_slurm <- R6::R6Class(
         stderr = if_any(private$.verbose, "", FALSE),
         wait = TRUE
       )
-      monitor_cols <- c("job_id", "partition", "name", "user_name", "job_state",
-                        "start_time", "node_count", "state_reason")
+      monitor_cols <- c(
+        "job_id",
+        "partition",
+        "name",
+        "user_name",
+        "job_state",
+        "start_time",
+        "node_count",
+        "state_reason"
+      )
       yaml <- yaml::read_yaml(text = text)
       out <- map(
         yaml$jobs,
@@ -68,7 +76,8 @@ crew_class_monitor_slurm <- R6::R6Class(
               nodes = paste(
                 unlist(.x$job_resources$nodes),
                 collapse = ","
-              ) %||% NA
+              ) %||%
+                NA
             )
           )
         )
