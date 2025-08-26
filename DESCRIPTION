@@ -64,6 +64,8 @@ Suggests:
   rmarkdown (>= 2.4),
   testthat (>= 3.0.0)
 Remotes:
+  r-lib/nanonext,
+  r-lib/mirai,
   wlandau/crew
 Encoding: UTF-8
 Language: en-US
