@@ -1,6 +1,6 @@
-# crew.cluster 0.3.8.9000 (development)
+# crew.cluster 0.3.8.9001 (development)
 
-
+* Remove `termiante_worker()` and deprecate `command_terminate` (https://github.com/wlandau/crew/pull/236).
 
 # crew.cluster 0.3.8
 

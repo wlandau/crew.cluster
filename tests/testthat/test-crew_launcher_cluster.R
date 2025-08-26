@@ -70,8 +70,6 @@ test_that("SGE subclass mock job creates a tempdir() job script", {
     "echo 'start'"
   )
   expect_equal(out[seq_along(exp)], exp)
-  x$terminate_worker(handle)
-  expect_false(file.exists(script))
 })
 
 test_that("SGE subclass mock job creates a custom job script", {
@@ -131,6 +129,4 @@ test_that("SGE subclass mock job creates a custom job script", {
     "echo 'start'"
   )
   expect_equal(out[seq_along(exp)], exp)
-  x$terminate_worker(handle)
-  expect_false(file.exists(script))
 })
