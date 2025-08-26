@@ -9,14 +9,8 @@
 #'   when submitting worker.
 #' @param command_submit Character of length 1,
 #'   file path to the executable to submit a worker job.
-#' @param command_terminate Character of length 1,
-#'   file path to the executable to terminate a worker job.
-#'   Set to `""` to skip manually terminating the worker.
-#'   Unless there is an issue with the platform,
-#'   the job should still exit thanks to the NNG-powered network programming
-#'   capabilities of `mirai`. Still, if you set `command_terminate = ""`,
-#'   you are assuming extra responsibility for manually monitoring
-#'   your jobs on the cluster and manually terminating jobs as appropriate.
+#' @param command_terminate Deprecated on 2025-08-26 in
+#'   `crew.cluster` version 0.3.8.9001. No longer needed.
 #' @param script_directory Character of length 1, directory path to the
 #'   job scripts. Just before each job submission, a job script
 #'   is created in this folder. Script base names are unique to each
@@ -34,15 +28,25 @@
 crew_options_cluster <- function(
   verbose = FALSE,
   command_submit = as.character(Sys.which("qsub")),
-  command_terminate = as.character(Sys.which("qdel")),
+  command_terminate = NULL,
   script_directory = tempdir(),
   script_lines = character(0L)
 ) {
+  crew::crew_deprecate(
+    name = "command_terminate",
+    date = "2025-08-26",
+    version = "0.3.8.9001",
+    alternative = paste(
+      "none (no longer needed,
+      c.f. https://github.com/wlandau/crew/issues/236)."
+    ),
+    condition = "message",
+    value = command_terminate
+  )
   out <- structure(
     list(
       verbose = verbose,
       command_submit = command_submit,
-      command_terminate = command_terminate,
       script_directory = script_directory,
       script_lines = script_lines
     ),
@@ -59,7 +63,7 @@ crew_options_validate.crew_options_cluster <- function(options) {
     isTRUE(.) || isFALSE(.),
     message = "the \"verbose\" field is not a length-1 logical."
   )
-  fields <- c("command_submit", "command_submit", "script_directory")
+  fields <- c("command_submit", "script_directory")
   for (field in fields) {
     crew::crew_assert(
       options[[field]],

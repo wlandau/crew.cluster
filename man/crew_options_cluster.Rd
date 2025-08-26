@@ -7,7 +7,7 @@
 crew_options_cluster(
   verbose = FALSE,
   command_submit = as.character(Sys.which("qsub")),
-  command_terminate = as.character(Sys.which("qdel")),
+  command_terminate = NULL,
   script_directory = tempdir(),
   script_lines = character(0L)
 )
@@ -19,14 +19,8 @@ when submitting worker.}
 \item{command_submit}{Character of length 1,
 file path to the executable to submit a worker job.}
 
-\item{command_terminate}{Character of length 1,
-file path to the executable to terminate a worker job.
-Set to \code{""} to skip manually terminating the worker.
-Unless there is an issue with the platform,
-the job should still exit thanks to the NNG-powered network programming
-capabilities of \code{mirai}. Still, if you set \code{command_terminate = ""},
-you are assuming extra responsibility for manually monitoring
-your jobs on the cluster and manually terminating jobs as appropriate.}
+\item{command_terminate}{Deprecated on 2025-08-26 in
+\code{crew.cluster} version 0.3.8.9001. No longer needed.}
 
 \item{script_directory}{Character of length 1, directory path to the
 job scripts. Just before each job submission, a job script

@@ -2,7 +2,6 @@ test_that("crew_options_sge()", {
   out <- crew_options_sge(
     verbose = TRUE,
     command_submit = "submit",
-    command_terminate = "terminate",
     script_directory = "a",
     script_lines = "b",
     cwd = FALSE,
@@ -21,7 +20,6 @@ test_that("crew_options_sge()", {
       list(
         verbose = TRUE,
         command_submit = "submit",
-        command_terminate = "terminate",
         script_directory = "a",
         script_lines = "b",
         cwd = FALSE,

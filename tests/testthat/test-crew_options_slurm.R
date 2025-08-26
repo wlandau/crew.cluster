@@ -2,7 +2,6 @@ test_that("crew_options_slurm()", {
   out <- crew_options_slurm(
     verbose = TRUE,
     command_submit = "submit",
-    command_terminate = "terminate",
     script_directory = "a",
     script_lines = "b",
     log_output = "/dev/null",
@@ -20,7 +19,6 @@ test_that("crew_options_slurm()", {
       list(
         verbose = TRUE,
         command_submit = "submit",
-        command_terminate = "terminate",
         script_directory = "a",
         script_lines = "b",
         log_output = "/dev/null",
