@@ -119,9 +119,6 @@ crew_class_launcher_cluster <- R6::R6Class(
     .prefix = NULL,
     .args_launch = function(script) {
       shQuote(script)
-    },
-    .args_terminate = function(name) {
-      shQuote(name)
     }
   ),
   active = list(
@@ -238,23 +235,6 @@ crew_class_launcher_cluster <- R6::R6Class(
         wait = FALSE
       )
       list(name = name, script = script)
-    },
-    #' @description Terminate a local process worker.
-    #' @return `NULL` (invisibly).
-    #' @param handle A process handle object previously
-    #'   returned by `launch_worker()`.
-    terminate_worker = function(handle) {
-      unlink(handle$script)
-      if (nzchar(private$.options_cluster$command_terminate)) {
-        system2(
-          command = private$.options_cluster$command_terminate,
-          args = private$.args_terminate(name = handle$name),
-          stdout = if_any(private$.options_cluster$verbose, "", FALSE),
-          stderr = if_any(private$.options_cluster$verbose, "", FALSE),
-          wait = FALSE
-        )
-      }
-      invisible()
     }
   )
 )

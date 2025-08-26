@@ -2,7 +2,6 @@ test_that("crew_options_lsf()", {
   out <- crew_options_lsf(
     verbose = TRUE,
     command_submit = "submit",
-    command_terminate = "terminate",
     script_directory = "a",
     script_lines = "b",
     cwd = "x",
@@ -18,7 +17,6 @@ test_that("crew_options_lsf()", {
       list(
         verbose = TRUE,
         command_submit = "submit",
-        command_terminate = "terminate",
         script_directory = "a",
         script_lines = "b",
         cwd = "x",

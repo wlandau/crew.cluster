@@ -2,7 +2,6 @@ test_that("crew_options_pbs()", {
   out <- crew_options_pbs(
     verbose = TRUE,
     command_submit = "submit",
-    command_terminate = "terminate",
     script_directory = "a",
     script_lines = "b",
     cwd = TRUE,
@@ -19,7 +18,6 @@ test_that("crew_options_pbs()", {
       list(
         verbose = TRUE,
         command_submit = "submit",
-        command_terminate = "terminate",
         script_directory = "a",
         script_lines = "b",
         cwd = TRUE,

@@ -6,7 +6,6 @@ test_that("crew_options_cluster", {
       list(
         verbose = FALSE,
         command_submit = "",
-        command_terminate = "",
         script_directory = "x",
         script_lines = character(0)
       ),

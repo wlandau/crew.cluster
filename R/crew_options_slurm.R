@@ -62,7 +62,7 @@
 crew_options_slurm <- function(
   verbose = FALSE,
   command_submit = as.character(Sys.which("sbatch")),
-  command_terminate = as.character(Sys.which("scancel")),
+  command_terminate = NULL,
   script_directory = tempdir(),
   script_lines = character(0L),
   log_output = "/dev/null",
@@ -95,6 +95,17 @@ crew_options_slurm <- function(
     skip_cran = TRUE,
     condition = "message"
   )
+  crew::crew_deprecate(
+    name = "command_terminate",
+    date = "2025-08-26",
+    version = "0.3.8.9001",
+    alternative = paste(
+      "none (no longer needed,
+      c.f. https://github.com/wlandau/crew/issues/236)."
+    ),
+    condition = "message",
+    value = command_terminate
+  )
   if (!is.null(memory_gigabytes_required)) {
     memory_gigabytes_required <- memory_gigabytes_required[1L]
   }
@@ -114,7 +125,6 @@ crew_options_slurm <- function(
     list(
       verbose = verbose,
       command_submit = command_submit,
-      command_terminate = command_terminate,
       script_directory = script_directory,
       script_lines = script_lines,
       log_output = log_output,

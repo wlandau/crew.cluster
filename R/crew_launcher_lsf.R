@@ -140,9 +140,6 @@ crew_class_launcher_lsf <- R6::R6Class(
   private = list(
     .args_launch = function(script) {
       c("<", shQuote(script))
-    },
-    .args_terminate = function(name) {
-      c("-J", shQuote(name))
     }
   ),
   public = list(

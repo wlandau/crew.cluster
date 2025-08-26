@@ -22,7 +22,6 @@ test_that("SGE subclass mock job creates a tempdir() job script", {
   x <- crew_launcher_sge(
     options_cluster = crew_options_sge(
       command_submit = "cat",
-      command_terminate = "echo",
       script_lines = c("module load R", "echo 'start'"),
       cwd = TRUE,
       envvars = TRUE,
@@ -70,8 +69,6 @@ test_that("SGE subclass mock job creates a tempdir() job script", {
     "echo 'start'"
   )
   expect_equal(out[seq_along(exp)], exp)
-  x$terminate_worker(handle)
-  expect_false(file.exists(script))
 })
 
 test_that("SGE subclass mock job creates a custom job script", {
@@ -82,7 +79,6 @@ test_that("SGE subclass mock job creates a custom job script", {
   x <- crew_launcher_sge(
     options_cluster = crew_options_sge(
       command_submit = "cat",
-      command_terminate = "echo",
       script_directory = dir,
       script_lines = c("module load R", "echo 'start'"),
       cwd = TRUE,
@@ -131,6 +127,4 @@ test_that("SGE subclass mock job creates a custom job script", {
     "echo 'start'"
   )
   expect_equal(out[seq_along(exp)], exp)
-  x$terminate_worker(handle)
-  expect_false(file.exists(script))
 })
