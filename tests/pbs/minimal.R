@@ -18,6 +18,6 @@ test_that("PBS minimal", {
   controller$wait()
   task <- controller$pop()
   expect_false(task$result[[1L]] == as.character(Sys.info()["nodename"]))
-  controller$launcher$terminate() # Should see a job deletion message.
+  controller$launcher$terminate()
   Sys.sleep(5L)
 })
