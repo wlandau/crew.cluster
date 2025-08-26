@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">crew.cluster</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.3.8.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.3.8.9001</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -41,7 +41,7 @@
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">crew_options_pbs</span><span class="op">(</span></span>
 <span>  verbose <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  command_submit <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Sys.which.html" class="external-link">Sys.which</a></span><span class="op">(</span><span class="st">"qsub"</span><span class="op">)</span><span class="op">)</span>,</span>
-<span>  command_terminate <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Sys.which.html" class="external-link">Sys.which</a></span><span class="op">(</span><span class="st">"qdel"</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>  command_terminate <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  script_directory <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  script_lines <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">character</a></span><span class="op">(</span><span class="fl">0L</span><span class="op">)</span>,</span>
 <span>  cwd <span class="op">=</span> <span class="cn">TRUE</span>,</span>
@@ -69,14 +69,8 @@ file path to the executable to submit a worker job.</p></dd>
 
 
 <dt id="arg-command-terminate">command_terminate<a class="anchor" aria-label="anchor" href="#arg-command-terminate"></a></dt>
-<dd><p>Character of length 1,
-file path to the executable to terminate a worker job.
-Set to <code>""</code> to skip manually terminating the worker.
-Unless there is an issue with the platform,
-the job should still exit thanks to the NNG-powered network programming
-capabilities of <code>mirai</code>. Still, if you set <code>command_terminate = ""</code>,
-you are assuming extra responsibility for manually monitoring
-your jobs on the cluster and manually terminating jobs as appropriate.</p></dd>
+<dd><p>Deprecated on 2025-08-26 in
+<code>crew.cluster</code> version 0.3.8.9001. No longer needed.</p></dd>
 
 
 <dt id="arg-script-directory">script_directory<a class="anchor" aria-label="anchor" href="#arg-script-directory"></a></dt>
@@ -202,11 +196,8 @@ source code for additional attribution.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $command_submit</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] ""</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $command_terminate</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] ""</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $script_directory</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/Rtmp1Fj5na"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/Rtmpw2bxUJ"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $script_lines</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> character(0)</span>
