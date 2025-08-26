@@ -159,8 +159,8 @@ dial into a socket.
 \if{html}{\out{<div class="r">}}\preformatted{crew_class_launcher_cluster$launch_worker(
   call,
   name,
-  launcher,
-  worker,
+  launcher = NULL,
+  worker = NULL,
   instance = NULL
 )}\if{html}{\out{</div>}}
 }
@@ -174,11 +174,11 @@ which will run in the worker and accept tasks.}
 
 \item{\code{name}}{Character string, an informative worker name.}
 
-\item{\code{launcher}}{Character string, name of the launcher.}
+\item{\code{launcher}}{Deprecated in \code{crew.cluster}.}
 
-\item{\code{worker}}{Character string, name of the worker instance.}
+\item{\code{worker}}{Deprecated in \code{crew.cluster}.}
 
-\item{\code{instance}}{Deprecated in \code{crew.cluster}}
+\item{\code{instance}}{Deprecated in \code{crew.cluster}.}
 }
 \if{html}{\out{</div>}}
 }

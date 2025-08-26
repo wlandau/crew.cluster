@@ -116,7 +116,6 @@ crew_class_launcher_cluster <- R6::R6Class(
   cloneable = FALSE,
   private = list(
     .options_cluster = NULL,
-    .prefix = NULL,
     .args_launch = function(script) {
       shQuote(script)
     }
@@ -203,28 +202,29 @@ crew_class_launcher_cluster <- R6::R6Class(
     #'   [crew::crew_worker()]
     #'   which will run in the worker and accept tasks.
     #' @param name Character string, an informative worker name.
-    #' @param launcher Character string, name of the launcher.
-    #' @param worker Character string, name of the worker instance.
-    #' @param instance Deprecated in `crew.cluster`
-    launch_worker = function(call, name, launcher, worker, instance = NULL) {
+    #' @param launcher Deprecated in `crew.cluster`.
+    #' @param worker Deprecated in `crew.cluster`.
+    #' @param instance Deprecated in `crew.cluster`.
+    launch_worker = function(
+      call,
+      name,
+      launcher = NULL,
+      worker = NULL,
+      instance = NULL
+    ) {
       lines <- c(
         self$script(name = name),
         paste("Rscript -e", shQuote(call))
       )
-      if (is.null(private$.prefix)) {
-        if (!file.exists(private$.options_cluster$script_directory)) {
-          dir.create(
-            private$.options_cluster$script_directory,
-            recursive = TRUE
-          )
-        }
-        private$.prefix <- crew::crew_random_name()
+      if (!file.exists(private$.options_cluster$script_directory)) {
+        dir.create(
+          private$.options_cluster$script_directory,
+          recursive = TRUE
+        )
       }
-      script <- path_script(
-        dir = private$.options_cluster$script_directory,
-        prefix = private$.prefix,
-        launcher = launcher,
-        worker = worker
+      script <- file.path(
+        private$.options_cluster$script_directory,
+        paste0(name, ".sh")
       )
       writeLines(text = lines, con = script)
       system2(

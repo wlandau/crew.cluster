@@ -35,21 +35,11 @@ test_that("SGE subclass mock job creates a tempdir() job script", {
     )
   )
   x$start(url = "my_url", profile = "my_profile")
-  private <- crew_private(x)
-  expect_null(private$.prefix)
   handle <- x$launch_worker(
     call = x$call(worker = "worker_name"),
-    name = "my_name",
-    launcher = x$name,
-    worker = "worker_name"
+    name = "my_name"
   )
-  expect_false(is.null(private$.prefix))
-  script <- path_script(
-    dir = tempdir(),
-    prefix = private$.prefix,
-    launcher = x$name,
-    worker = "worker_name"
-  )
+  script <- file.path(tempdir(), "my_name.sh")
   expect_equal(handle$name, "my_name")
   expect_equal(handle$script, script)
   expect_true(file.exists(script))
@@ -94,20 +84,11 @@ test_that("SGE subclass mock job creates a custom job script", {
   )
   private <- crew_private(x)
   x$start(url = "my_url", profile = "my_profile")
-  expect_null(private$.prefix)
   handle <- x$launch_worker(
     call = x$call(worker = "my_worker"),
-    name = "my_name",
-    launcher = x$name,
-    worker = "my_worker"
+    name = "my_name"
   )
-  expect_false(is.null(private$.prefix))
-  script <- path_script(
-    dir = dir,
-    prefix = private$.prefix,
-    launcher = x$name,
-    worker = "my_worker"
-  )
+  script <- file.path(dir, "my_name.sh")
   expect_equal(handle$name, "my_name")
   expect_equal(handle$script, script)
   expect_true(file.exists(script))
