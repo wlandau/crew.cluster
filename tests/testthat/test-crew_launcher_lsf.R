@@ -76,15 +76,6 @@ test_that("crew_launcher_lsf() .args_launch()", {
   )
 })
 
-test_that("crew_launcher_lsf() .args_terminate()", {
-  x <- crew_launcher_lsf()
-  private <- crew_private(x)
-  expect_equal(
-    private$.args_terminate(name = "this_name"),
-    c("-J", shQuote("this_name"))
-  )
-})
-
 test_that("deprecate command_delete", {
   skip_on_cran()
   suppressWarnings(

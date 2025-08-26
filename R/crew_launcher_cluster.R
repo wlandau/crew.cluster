@@ -119,9 +119,6 @@ crew_class_launcher_cluster <- R6::R6Class(
     .prefix = NULL,
     .args_launch = function(script) {
       shQuote(script)
-    },
-    .args_terminate = function(name) {
-      shQuote(name)
     }
   ),
   active = list(

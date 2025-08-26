@@ -136,11 +136,6 @@ crew_class_launcher_slurm <- R6::R6Class(
   classname = "crew_class_launcher_slurm",
   inherit = crew_class_launcher_cluster,
   cloneable = FALSE,
-  private = list(
-    .args_terminate = function(name) {
-      c("--name", shQuote(name))
-    }
-  ),
   public = list(
     #' @description Validate the launcher.
     #' @return `NULL` (invisibly). Throws an error if a field is invalid.
