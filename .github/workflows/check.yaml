@@ -38,7 +38,7 @@ jobs:
 
       - uses: r-lib/actions/setup-r-dependencies@v2
         with:
-          extra-packages: github::wlandau/crew, any::rcmdcheck, local::.
+          extra-packages: any::rcmdcheck, local::., github::wlandau/crew
           needs: check
           cache-version: 3
 
