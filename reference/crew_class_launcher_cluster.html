@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">crew.cluster</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.3.8.9001</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.3.8.9002</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -82,19 +82,18 @@ source code for additional attribution.</p>
 
 <ul><li><p><a href="#method-crew_class_launcher_cluster-new"><code>crew_class_launcher_cluster$new()</code></a></p></li>
 <li><p><a href="#method-crew_class_launcher_cluster-validate"><code>crew_class_launcher_cluster$validate()</code></a></p></li>
-<li><p><a href="#method-crew_class_launcher_cluster-launch_worker"><code>crew_class_launcher_cluster$launch_worker()</code></a></p></li>
+<li><p><a href="#method-crew_class_launcher_cluster-launch_workers"><code>crew_class_launcher_cluster$launch_workers()</code></a></p></li>
 </ul></div><p><details><summary>Inherited methods</summary><ul><li><span class="pkg-link" data-pkg="crew" data-topic="crew_class_launcher" data-id="call"><a href="https://wlandau.github.io/crew/reference/crew_class_launcher.html#method-call"><code>crew::crew_class_launcher$call()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="crew" data-topic="crew_class_launcher" data-id="crashes"><a href="https://wlandau.github.io/crew/reference/crew_class_launcher.html#method-crashes"><code>crew::crew_class_launcher$crashes()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="crew" data-topic="crew_class_launcher" data-id="launch"><a href="https://wlandau.github.io/crew/reference/crew_class_launcher.html#method-launch"><code>crew::crew_class_launcher$launch()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="crew" data-topic="crew_class_launcher" data-id="launch_worker"><a href="https://wlandau.github.io/crew/reference/crew_class_launcher.html#method-launch_worker"><code>crew::crew_class_launcher$launch_worker()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="crew" data-topic="crew_class_launcher" data-id="poll"><a href="https://wlandau.github.io/crew/reference/crew_class_launcher.html#method-poll"><code>crew::crew_class_launcher$poll()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="crew" data-topic="crew_class_launcher" data-id="resolve"><a href="https://wlandau.github.io/crew/reference/crew_class_launcher.html#method-resolve"><code>crew::crew_class_launcher$resolve()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="crew" data-topic="crew_class_launcher" data-id="scale"><a href="https://wlandau.github.io/crew/reference/crew_class_launcher.html#method-scale"><code>crew::crew_class_launcher$scale()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="crew" data-topic="crew_class_launcher" data-id="set_name"><a href="https://wlandau.github.io/crew/reference/crew_class_launcher.html#method-set_name"><code>crew::crew_class_launcher$set_name()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="crew" data-topic="crew_class_launcher" data-id="settings"><a href="https://wlandau.github.io/crew/reference/crew_class_launcher.html#method-settings"><code>crew::crew_class_launcher$settings()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="crew" data-topic="crew_class_launcher" data-id="start"><a href="https://wlandau.github.io/crew/reference/crew_class_launcher.html#method-start"><code>crew::crew_class_launcher$start()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="crew" data-topic="crew_class_launcher" data-id="terminate"><a href="https://wlandau.github.io/crew/reference/crew_class_launcher.html#method-terminate"><code>crew::crew_class_launcher$terminate()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="crew" data-topic="crew_class_launcher" data-id="terminate_workers"><a href="https://wlandau.github.io/crew/reference/crew_class_launcher.html#method-terminate_workers"><code>crew::crew_class_launcher$terminate_workers()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="crew" data-topic="crew_class_launcher" data-id="update"><a href="https://wlandau.github.io/crew/reference/crew_class_launcher.html#method-update"><code>crew::crew_class_launcher$update()</code></a></span></li>
 </ul></details></p><hr><a id="method-crew_class_launcher_cluster-new"></a><div class="section">
 <h3 id="method-new-">Method <code>new()</code><a class="anchor" aria-label="anchor" href="#method-new-"></a></h3>
 <p>Abstract launcher constructor.</p><div class="section">
@@ -209,18 +208,11 @@ source code for additional attribution.</p>
 <p><code>NULL</code> (invisibly). Throws an error if a field is invalid.</p>
 </div>
 
-</div><p></p><hr><a id="method-crew_class_launcher_cluster-launch_worker"></a><div class="section">
-<h3 id="method-launch-worker-">Method <code>launch_worker()</code><a class="anchor" aria-label="anchor" href="#method-launch-worker-"></a></h3>
-<p>Launch a local process worker which will
-dial into a socket.</p><div class="section">
+</div><p></p><hr><a id="method-crew_class_launcher_cluster-launch_workers"></a><div class="section">
+<h3 id="method-launch-workers-">Method <code>launch_workers()</code><a class="anchor" aria-label="anchor" href="#method-launch-workers-"></a></h3>
+<p>Launch a job array</p><div class="section">
 <h4 id="usage-2">Usage<a class="anchor" aria-label="anchor" href="#usage-2"></a></h4>
-<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">crew_class_launcher_cluster</span><span class="op">$</span><span class="fu">launch_worker</span><span class="op">(</span></span>
-<span>  <span class="va">call</span>,</span>
-<span>  <span class="va">name</span>,</span>
-<span>  launcher <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  worker <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  instance <span class="op">=</span> <span class="cn">NULL</span></span>
-<span><span class="op">)</span></span></code></pre></div><p></p></div>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">crew_class_launcher_cluster</span><span class="op">$</span><span class="fu">launch_workers</span><span class="op">(</span><span class="va">call</span>, <span class="va">n</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
@@ -231,20 +223,9 @@ dial into a socket.</p><div class="section">
 which will run in the worker and accept tasks.</p></dd>
 
 
-<dt><code>name</code></dt>
-<dd><p>Character string, an informative worker name.</p></dd>
-
-
-<dt><code>launcher</code></dt>
-<dd><p>Deprecated in <code>crew.cluster</code>.</p></dd>
-
-
-<dt><code>worker</code></dt>
-<dd><p>Deprecated in <code>crew.cluster</code>.</p></dd>
-
-
-<dt><code>instance</code></dt>
-<dd><p>Deprecated in <code>crew.cluster</code>.</p></dd>
+<dt><code>n</code></dt>
+<dd><p>Positive integer of length 1, number of workers to launch
+in the current round of auto-scaling.</p></dd>
 
 
 </dl><p></p></div>
