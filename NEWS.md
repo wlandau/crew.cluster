@@ -1,7 +1,8 @@
-# crew.cluster 0.3.8.9001 (development)
+# crew.cluster 0.3.8.9002 (development)
 
 * Remove `termiante_worker()` and deprecate `command_terminate` (https://github.com/wlandau/crew/pull/236).
 * Only use `call` and `name` in `launch_worker()`.
+* Support job arrays (#56, #57).
 
 # crew.cluster 0.3.8
 

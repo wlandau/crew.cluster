@@ -38,8 +38,8 @@ test_that("crew_launcher_sge() script() nearly empty", {
     )
   )
   expect_equal(
-    x$script(name = "my_job"),
-    c("#$ -N my_job", "#$ -o log_file", "#$ -j n")
+    x$script(name = "my_job", n = 2L),
+    c("#$ -N my_job", "#$ -t 1-2", "#$ -o log_file", "#$ -j n")
   )
 })
 
@@ -58,9 +58,10 @@ test_that("crew_launcher_sge() script() all lines", {
       gpu = 1L
     )
   )
-  out <- x$script(name = "this_job")
+  out <- x$script(name = "this_job", n = 4L)
   exp <- c(
     "#$ -N this_job",
+    "#$ -t 1-4",
     "#$ -cwd",
     "#$ -V",
     "#$ -o out_dir/",

@@ -35,17 +35,13 @@ test_that("SGE subclass mock job creates a tempdir() job script", {
     )
   )
   x$start(url = "my_url", profile = "my_profile")
-  handle <- x$launch_worker(
-    call = x$call(worker = "worker_name"),
-    name = "my_name"
-  )
-  script <- file.path(tempdir(), "my_name.sh")
-  expect_equal(handle$name, "my_name")
-  expect_equal(handle$script, script)
-  expect_true(file.exists(script))
-  out <- readLines(script)
+  handle <- x$launch_workers(call = x$call(), n = 4L)
+  expect_true(is.character(handle$script) && length(handle$script) == 1L)
+  expect_false(anyNA(handle$script))
+  expect_true(file.exists(handle$script))
+  out <- readLines(handle$script)
   exp <- c(
-    "#$ -N my_name",
+    "#$ -t 1-4",
     "#$ -cwd",
     "#$ -V",
     "#$ -o out_dir/",
@@ -58,7 +54,7 @@ test_that("SGE subclass mock job creates a tempdir() job script", {
     "module load R",
     "echo 'start'"
   )
-  expect_equal(out[seq_along(exp)], exp)
+  expect_equal(out[seq_along(exp) + 1], exp)
 })
 
 test_that("SGE subclass mock job creates a custom job script", {
@@ -84,17 +80,14 @@ test_that("SGE subclass mock job creates a custom job script", {
   )
   private <- crew_private(x)
   x$start(url = "my_url", profile = "my_profile")
-  handle <- x$launch_worker(
-    call = x$call(worker = "my_worker"),
-    name = "my_name"
-  )
-  script <- file.path(dir, "my_name.sh")
-  expect_equal(handle$name, "my_name")
-  expect_equal(handle$script, script)
-  expect_true(file.exists(script))
-  out <- readLines(script)
+  handle <- x$launch_workers(call = x$call(), n = 8L)
+  expect_true(is.character(handle$script) && length(handle$script) == 1L)
+  expect_false(anyNA(handle$script))
+  expect_true(file.exists(handle$script))
+  expect_true(file.exists(handle$script))
+  out <- readLines(handle$script)
   exp <- c(
-    "#$ -N my_name",
+    "#$ -t 1-8",
     "#$ -cwd",
     "#$ -V",
     "#$ -o out_dir/",
@@ -107,5 +100,5 @@ test_that("SGE subclass mock job creates a custom job script", {
     "module load R",
     "echo 'start'"
   )
-  expect_equal(out[seq_along(exp)], exp)
+  expect_equal(out[seq_along(exp) + 1L], exp)
 })

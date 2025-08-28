@@ -192,8 +192,7 @@ crew_class_launcher_cluster <- R6::R6Class(
       crew_options_validate(private$.options_cluster)
       invisible()
     },
-    #' @description Launch a local process worker which will
-    #'   dial into a socket.
+    #' @description Launch a job array
     #' @details The `call` argument is R code that will run to
     #'   initiate the worker.
     #' @return A handle object to allow the termination of the worker
@@ -201,19 +200,17 @@ crew_class_launcher_cluster <- R6::R6Class(
     #' @param call Character string, a namespaced call to
     #'   [crew::crew_worker()]
     #'   which will run in the worker and accept tasks.
-    #' @param name Character string, an informative worker name.
-    #' @param launcher Deprecated in `crew.cluster`.
-    #' @param worker Deprecated in `crew.cluster`.
-    #' @param instance Deprecated in `crew.cluster`.
-    launch_worker = function(
-      call,
-      name,
-      launcher = NULL,
-      worker = NULL,
-      instance = NULL
-    ) {
+    #' @param n Positive integer of length 1, number of workers to launch
+    #'   in the current round of auto-scaling.
+    launch_workers = function(call, n) {
+      name <- paste0(
+        "crew-worker-",
+        self$name,
+        "-",
+        nanonext::random(n = 4L)
+      )
       lines <- c(
-        self$script(name = name),
+        self$script(name = name, n = n),
         paste("Rscript -e", shQuote(call))
       )
       if (!file.exists(private$.options_cluster$script_directory)) {

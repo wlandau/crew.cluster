@@ -35,8 +35,8 @@ test_that("crew_launcher_pbs() script() nearly empty", {
     )
   )
   expect_equal(
-    x$script(name = "my_job"),
-    c("#PBS -N my_job", "#PBS -o log_file", "#PBS -j n")
+    x$script(name = "my_job", n = 10L),
+    c("#PBS -N my_job", "#PBS -J 1-10", "#PBS -o log_file", "#PBS -j n")
   )
 })
 
@@ -52,9 +52,10 @@ test_that("crew_launcher_pbs() script() all lines", {
       walltime_hours = 57
     )
   )
-  out <- x$script(name = "this_job")
+  out <- x$script(name = "this_job", n = 5L)
   exp <- c(
     "#PBS -N this_job",
+    "#PBS -J 1-5",
     "#PBS -o out_dir/",
     "#PBS -e err_dir/",
     "#PBS -j n",
