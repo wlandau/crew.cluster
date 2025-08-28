@@ -60,17 +60,16 @@ Other sge:
 <li><span class="pkg-link" data-pkg="crew" data-topic="crew_class_launcher" data-id="call"><a href='../../crew/html/crew_class_launcher.html#method-crew_class_launcher-call'><code>crew::crew_class_launcher$call()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="crew" data-topic="crew_class_launcher" data-id="crashes"><a href='../../crew/html/crew_class_launcher.html#method-crew_class_launcher-crashes'><code>crew::crew_class_launcher$crashes()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="crew" data-topic="crew_class_launcher" data-id="launch"><a href='../../crew/html/crew_class_launcher.html#method-crew_class_launcher-launch'><code>crew::crew_class_launcher$launch()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="crew" data-topic="crew_class_launcher" data-id="launch_worker"><a href='../../crew/html/crew_class_launcher.html#method-crew_class_launcher-launch_worker'><code>crew::crew_class_launcher$launch_worker()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="crew" data-topic="crew_class_launcher" data-id="poll"><a href='../../crew/html/crew_class_launcher.html#method-crew_class_launcher-poll'><code>crew::crew_class_launcher$poll()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="crew" data-topic="crew_class_launcher" data-id="resolve"><a href='../../crew/html/crew_class_launcher.html#method-crew_class_launcher-resolve'><code>crew::crew_class_launcher$resolve()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="crew" data-topic="crew_class_launcher" data-id="scale"><a href='../../crew/html/crew_class_launcher.html#method-crew_class_launcher-scale'><code>crew::crew_class_launcher$scale()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="crew" data-topic="crew_class_launcher" data-id="set_name"><a href='../../crew/html/crew_class_launcher.html#method-crew_class_launcher-set_name'><code>crew::crew_class_launcher$set_name()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="crew" data-topic="crew_class_launcher" data-id="settings"><a href='../../crew/html/crew_class_launcher.html#method-crew_class_launcher-settings'><code>crew::crew_class_launcher$settings()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="crew" data-topic="crew_class_launcher" data-id="start"><a href='../../crew/html/crew_class_launcher.html#method-crew_class_launcher-start'><code>crew::crew_class_launcher$start()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="crew" data-topic="crew_class_launcher" data-id="terminate"><a href='../../crew/html/crew_class_launcher.html#method-crew_class_launcher-terminate'><code>crew::crew_class_launcher$terminate()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="crew" data-topic="crew_class_launcher" data-id="terminate_workers"><a href='../../crew/html/crew_class_launcher.html#method-crew_class_launcher-terminate_workers'><code>crew::crew_class_launcher$terminate_workers()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="crew" data-topic="crew_class_launcher" data-id="update"><a href='../../crew/html/crew_class_launcher.html#method-crew_class_launcher-update'><code>crew::crew_class_launcher$update()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="crew.cluster" data-topic="crew_class_launcher_cluster" data-id="initialize"><a href='../../crew.cluster/html/crew_class_launcher_cluster.html#method-crew_class_launcher_cluster-initialize'><code>crew.cluster::crew_class_launcher_cluster$initialize()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="crew.cluster" data-topic="crew_class_launcher_cluster" data-id="launch_worker"><a href='../../crew.cluster/html/crew_class_launcher_cluster.html#method-crew_class_launcher_cluster-launch_worker'><code>crew.cluster::crew_class_launcher_cluster$launch_worker()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="crew.cluster" data-topic="crew_class_launcher_cluster" data-id="launch_workers"><a href='../../crew.cluster/html/crew_class_launcher_cluster.html#method-crew_class_launcher_cluster-launch_workers'><code>crew.cluster::crew_class_launcher_cluster$launch_workers()</code></a></span></li>
 </ul>
 </details>
 }}
@@ -93,7 +92,7 @@ Validate the launcher.
 \subsection{Method \code{script()}}{
 Generate the job script.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{crew_class_launcher_sge$script(name)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{crew_class_launcher_sge$script(name, n)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
@@ -101,6 +100,10 @@ Generate the job script.
 \describe{
 \item{\code{name}}{Character of length 1, name of the job. For inspection
 purposes, you can supply a mock job name.}
+
+\item{\code{n}}{Positive integer of length 1, number of crew workers
+(i.e. cluster jobs) to launch in the current round
+of auto-scaling.}
 }
 \if{html}{\out{</div>}}
 }

@@ -159,6 +159,9 @@ crew_class_launcher_pbs <- R6::R6Class(
     #' @return Character vector of the lines of the job script.
     #' @param name Character of length 1, name of the job. For inspection
     #'   purposes, you can supply a mock job name.
+    #' @param n Positive integer of length 1, number of crew workers
+    #'   (i.e. cluster jobs) to launch in the current round
+    #'   of auto-scaling.
     #' @examples
     #' if (identical(Sys.getenv("CREW_EXAMPLES"), "true")) {
     #' launcher <- crew_launcher_pbs(
@@ -167,10 +170,11 @@ crew_class_launcher_pbs <- R6::R6Class(
     #' )
     #' launcher$script(name = "my_job_name")
     #' }
-    script = function(name) {
+    script = function(name, n) {
       options <- private$.options_cluster
       c(
         paste("#PBS -N", name),
+        paste0("#PBS -J 1-", n),
         paste("#PBS -o", options$log_output),
         if_any(
           is.null(options$log_error),
