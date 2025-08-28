@@ -3,11 +3,12 @@ test_that("crew_controller_slurm() script() nearly empty", {
   lines <- c(
     "#!/bin/sh",
     "#SBATCH --job-name=name",
+    "#SBATCH --array=1-4",
     "#SBATCH --output=/dev/null",
     "#SBATCH --error=/dev/null",
     "#SBATCH --ntasks=1"
   )
-  expect_equal(x$launcher$script(name = "name"), lines)
+  expect_equal(x$launcher$script(name = "name", n = 4L), lines)
 })
 
 test_that("crew_controller_slurm() script() without --ntasks", {
@@ -17,10 +18,11 @@ test_that("crew_controller_slurm() script() without --ntasks", {
   lines <- c(
     "#!/bin/sh",
     "#SBATCH --job-name=name",
+    "#SBATCH --array=1-4",
     "#SBATCH --output=/dev/null",
     "#SBATCH --error=/dev/null"
   )
-  expect_equal(x$launcher$script(name = "name"), lines)
+  expect_equal(x$launcher$script(name = "name", n = 4L), lines)
 })
 
 test_that("crew_controller_slurm() script() all lines", {
@@ -36,10 +38,11 @@ test_that("crew_controller_slurm() script() all lines", {
       n_tasks = 3
     )
   )
-  out <- x$launcher$script(name = "my_name")
+  out <- x$launcher$script(name = "my_name", n = 8L)
   exp <- c(
     "#!/bin/sh",
     "#SBATCH --job-name=my_name",
+    "#SBATCH --array=1-8",
     "#SBATCH --output=log1",
     "#SBATCH --error=log2",
     "#SBATCH --mem=5192M",
