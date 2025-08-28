@@ -12,7 +12,7 @@ test_that("SGE monitor terminate one job at a time", {
   controller$start()
   controller$launch(n = 2L)
   names <- vapply(
-    controller$launcher$instances$handle,
+    controller$launcher$launches$handle,
     function(handle) handle$name,
     FUN.VALUE = character(1L)
   )
@@ -29,7 +29,7 @@ test_that("SGE monitor terminate one job at a time", {
   expect_true(is.character(jobs$job_number))
   expect_false(anyNA(jobs$job_number))
   expect_true(all(nzchar(jobs$job_number)))
-  monitor$terminate(jobs = jobs$job_number)
+  monitor$terminate(jobs = unique(jobs$job_number))
   crew::crew_retry(
     ~ !any(jobs$job_number %in% monitor$jobs()$job_number),
     seconds_interval = 1,
@@ -53,7 +53,7 @@ test_that("THIS TEST DELETES ALL USER JOBS! USE WITH CAUTION!", {
   controller$start()
   controller$launch(n = 2L)
   names <- vapply(
-    controller$launcher$instances$handle,
+    controller$launcher$launches$handle,
     function(handle) handle$name,
     FUN.VALUE = character(1L)
   )
