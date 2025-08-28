@@ -8,7 +8,7 @@ SLURM workers.}
 crew_launcher_slurm(
   name = NULL,
   workers = 1L,
-  seconds_interval = 0.5,
+  seconds_interval = 0.25,
   seconds_timeout = 60,
   seconds_launch = 86400,
   seconds_idle = 300,
@@ -82,11 +82,8 @@ have completed.
 See the \code{walltime} argument of \code{mirai::daemon()}.}
 
 \item{tasks_max}{Maximum number of tasks that a worker will do before
-exiting. See the \code{maxtasks} argument of \code{mirai::daemon()}.
-\code{crew} does not
-excel with perfectly transient workers because it does not micromanage
-the assignment of tasks to workers, it is recommended to set
-\code{tasks_max} to a value greater than 1.}
+exiting. Also determines how often the controller auto-scales.
+See the Auto-scaling section for details.}
 
 \item{tasks_timers}{Number of tasks to do before activating
 the timers for \code{seconds_idle} and \code{seconds_wall}.

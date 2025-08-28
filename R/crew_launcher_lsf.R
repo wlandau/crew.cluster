@@ -31,7 +31,7 @@
 crew_launcher_lsf <- function(
   name = NULL,
   workers = 1L,
-  seconds_interval = 0.5,
+  seconds_interval = 0.25,
   seconds_timeout = 60,
   seconds_launch = 86400,
   seconds_idle = 300,
