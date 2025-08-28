@@ -29,6 +29,7 @@
 #' @importFrom crew crew_assert crew_class_launcher crew_deprecate
 #'   crew_launcher crew_options_metrics crew_random_name crew_tls
 #' @importFrom lifecycle badge
+#' @importFrom nanonext random
 #' @importFrom ps ps_username
 #' @importFrom R6 R6Class
 #' @importFrom rlang as_function is_installed
