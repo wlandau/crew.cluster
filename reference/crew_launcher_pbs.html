@@ -44,7 +44,7 @@ workers as jobs on a PBS or TORQUE cluster.</p>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">crew_launcher_pbs</span><span class="op">(</span></span>
 <span>  name <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  workers <span class="op">=</span> <span class="fl">1L</span>,</span>
-<span>  seconds_interval <span class="op">=</span> <span class="fl">0.5</span>,</span>
+<span>  seconds_interval <span class="op">=</span> <span class="fl">0.25</span>,</span>
 <span>  seconds_timeout <span class="op">=</span> <span class="fl">60</span>,</span>
 <span>  seconds_launch <span class="op">=</span> <span class="fl">86400</span>,</span>
 <span>  seconds_idle <span class="op">=</span> <span class="fl">300</span>,</span>
@@ -137,11 +137,8 @@ See the <code>walltime</code> argument of <code><a href="https://mirai.r-lib.org
 
 <dt id="arg-tasks-max">tasks_max<a class="anchor" aria-label="anchor" href="#arg-tasks-max"></a></dt>
 <dd><p>Maximum number of tasks that a worker will do before
-exiting. See the <code>maxtasks</code> argument of <code><a href="https://mirai.r-lib.org/reference/daemon.html" class="external-link">mirai::daemon()</a></code>.
-<code>crew</code> does not
-excel with perfectly transient workers because it does not micromanage
-the assignment of tasks to workers, it is recommended to set
-<code>tasks_max</code> to a value greater than 1.</p></dd>
+exiting. Also determines how often the controller auto-scales.
+See the Auto-scaling section for details.</p></dd>
 
 
 <dt id="arg-tasks-timers">tasks_timers<a class="anchor" aria-label="anchor" href="#arg-tasks-timers"></a></dt>

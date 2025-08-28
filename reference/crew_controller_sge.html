@@ -192,11 +192,8 @@ No longer necessary.</p></dd>
 
 <dt id="arg-tasks-max">tasks_max<a class="anchor" aria-label="anchor" href="#arg-tasks-max"></a></dt>
 <dd><p>Maximum number of tasks that a worker will do before
-exiting. See the <code>maxtasks</code> argument of <code><a href="https://mirai.r-lib.org/reference/daemon.html" class="external-link">mirai::daemon()</a></code>.
-<code>crew</code> does not
-excel with perfectly transient workers because it does not micromanage
-the assignment of tasks to workers, it is recommended to set
-<code>tasks_max</code> to a value greater than 1.</p></dd>
+exiting. Also determines how often the controller auto-scales.
+See the Auto-scaling section for details.</p></dd>
 
 
 <dt id="arg-tasks-timers">tasks_timers<a class="anchor" aria-label="anchor" href="#arg-tasks-timers"></a></dt>
