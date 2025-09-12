@@ -14,6 +14,7 @@ crew_controller_lsf(
   tls_enable = NULL,
   tls_config = NULL,
   serialization = NULL,
+  profile = crew::crew_random_name(),
   seconds_interval = 0.5,
   seconds_timeout = 60,
   seconds_launch = 86400,
@@ -82,6 +83,8 @@ data transfers or to preserve attributes of otherwise
 non-exportable objects (such as \code{torch} tensors or \code{arrow} tables).
 See \code{?mirai::serial_config} for details.}
 
+\item{profile}{Character string, compute profile for \code{\link[mirai:daemons]{mirai::daemons()}}.}
+
 \item{seconds_interval}{Number of seconds between
 polling intervals waiting for certain internal
 synchronous operations to complete. In certain cases, exponential
@@ -90,7 +93,7 @@ in a \code{\link[crew:crew_throttle]{crew_throttle()}} object.}
 
 \item{seconds_timeout}{Number of seconds until timing
 out while waiting for certain synchronous operations to complete,
-such as checking \code{mirai::status()}.}
+such as checking \code{mirai::info()}.}
 
 \item{seconds_launch}{Seconds of startup time to allow.
 A worker is unconditionally assumed to be alive
