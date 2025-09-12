@@ -9,7 +9,7 @@ launch workers on SLURM workers."><meta property="og:image" content="/logo.svg">
 
     <a class="navbar-brand me-2" href="../index.html">crew.cluster</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.3.8.9002</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.3.8.9003</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -50,6 +50,7 @@ launch workers on SLURM workers.</p>
 <span>  tls_enable <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  tls_config <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  serialization <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  profile <span class="op">=</span> <span class="fu">crew</span><span class="fu">::</span><span class="fu"><a href="https://wlandau.github.io/crew/reference/crew_random_name.html" class="external-link">crew_random_name</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  seconds_interval <span class="op">=</span> <span class="fl">0.5</span>,</span>
 <span>  seconds_timeout <span class="op">=</span> <span class="fl">60</span>,</span>
 <span>  seconds_launch <span class="op">=</span> <span class="fl">86400</span>,</span>
@@ -139,6 +140,10 @@ non-exportable objects (such as <code>torch</code> tensors or <code>arrow</code>
 See <code><a href="https://nanonext.r-lib.org/reference/serial_config.html" class="external-link">?mirai::serial_config</a></code> for details.</p></dd>
 
 
+<dt id="arg-profile">profile<a class="anchor" aria-label="anchor" href="#arg-profile"></a></dt>
+<dd><p>Character string, compute profile for <code><a href="https://mirai.r-lib.org/reference/daemons.html" class="external-link">mirai::daemons()</a></code>.</p></dd>
+
+
 <dt id="arg-seconds-interval">seconds_interval<a class="anchor" aria-label="anchor" href="#arg-seconds-interval"></a></dt>
 <dd><p>Number of seconds between
 polling intervals waiting for certain internal
@@ -150,7 +155,7 @@ in a <code><a href="https://wlandau.github.io/crew/reference/crew_throttle.html"
 <dt id="arg-seconds-timeout">seconds_timeout<a class="anchor" aria-label="anchor" href="#arg-seconds-timeout"></a></dt>
 <dd><p>Number of seconds until timing
 out while waiting for certain synchronous operations to complete,
-such as checking <code><a href="https://mirai.r-lib.org/reference/status.html" class="external-link">mirai::status()</a></code>.</p></dd>
+such as checking <code><a href="https://mirai.r-lib.org/reference/info.html" class="external-link">mirai::info()</a></code>.</p></dd>
 
 
 <dt id="arg-seconds-launch">seconds_launch<a class="anchor" aria-label="anchor" href="#arg-seconds-launch"></a></dt>
