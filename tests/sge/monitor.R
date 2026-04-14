@@ -10,7 +10,7 @@ test_that("SGE monitor terminate one job at a time", {
   )
   on.exit(controller$terminate())
   controller$start()
-  controller$launch(n = 2L)
+  replicate(2L, controller$launch(n = 1L))
   names <- vapply(
     controller$launcher$launches$handle,
     function(handle) handle$name,
@@ -51,7 +51,7 @@ test_that("THIS TEST DELETES ALL USER JOBS! USE WITH CAUTION!", {
   )
   on.exit(controller$terminate())
   controller$start()
-  controller$launch(n = 2L)
+  replicate(2L, controller$launch(n = 1L))
   names <- vapply(
     controller$launcher$launches$handle,
     function(handle) handle$name,
