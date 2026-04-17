@@ -173,7 +173,7 @@ crew_class_launcher_slurm <- R6::R6Class(
       c(
         "#!/bin/sh",
         paste0("#SBATCH --job-name=", name),
-        paste0("#SBATCH --array=1-", n),
+        if_any(n > 1L, paste0("#SBATCH --array=1-", n), character(0L)),
         if_any(
           is.null(options$log_output),
           character(0L),

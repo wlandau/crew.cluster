@@ -23,6 +23,20 @@ test_that("invalid crew_launcher_slurm(): SLURM field", {
   expect_error(x$validate(), class = "crew_error")
 })
 
+test_that("crew_launcher_slurm() script() n = 1 omits array directive", {
+  x <- crew_launcher_slurm(
+    options_cluster = crew_options_slurm(time_minutes = NULL)
+  )
+  lines <- c(
+    "#!/bin/sh",
+    "#SBATCH --job-name=a_job",
+    "#SBATCH --output=/dev/null",
+    "#SBATCH --error=/dev/null",
+    "#SBATCH --ntasks=1"
+  )
+  expect_equal(x$script(name = "a_job", n = 1L), lines)
+})
+
 test_that("crew_launcher_slurm() script() nearly empty", {
   x <- crew_launcher_slurm(
     options_cluster = crew_options_slurm(time_minutes = NULL)

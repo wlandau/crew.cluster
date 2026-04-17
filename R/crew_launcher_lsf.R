@@ -179,7 +179,11 @@ crew_class_launcher_lsf <- R6::R6Class(
       options <- private$.options_cluster
       c(
         "#!/bin/sh",
-        sprintf("#BSUB -J \"%s[1-%s]\"", name, n),
+        if_any(
+          n > 1L,
+          sprintf("#BSUB -J \"%s[1-%s]\"", name, n),
+          paste0("#BSUB -J \"", name, "\"")
+        ),
         if_any(
           is.null(options$cwd),
           character(0L),

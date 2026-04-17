@@ -1,6 +1,6 @@
-# crew.cluster 0.4.0.9000 (development)
+# crew.cluster development version
 
-
+* Omit the job array directive when `n = 1` to avoid errors on schedulers that reject single-element arrays (#68).
 
 # crew.cluster 0.4.0
 

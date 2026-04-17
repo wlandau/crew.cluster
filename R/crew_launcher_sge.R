@@ -177,7 +177,7 @@ crew_class_launcher_sge <- R6::R6Class(
       options <- private$.options_cluster
       c(
         paste("#$ -N", name),
-        paste0("#$ -t 1-", n),
+        if_any(n > 1L, paste0("#$ -t 1-", n), character(0L)),
         if_any(options$cwd, "#$ -cwd", character(0L)),
         if_any(options$envvars, "#$ -V", character(0L)),
         paste("#$ -o", options$log_output),

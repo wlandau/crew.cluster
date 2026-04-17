@@ -25,6 +25,20 @@ test_that("invalid crew_launcher_lsf(): lsf field", {
   expect_error(x$validate(), class = "crew_error")
 })
 
+test_that("crew_launcher_lsf() script() n = 1 omits array directive", {
+  x <- crew_launcher_lsf(
+    options_cluster = crew_options_lsf(cwd = "/home")
+  )
+  lines <- c(
+    "#!/bin/sh",
+    "#BSUB -J \"a_job\"",
+    "#BSUB -cwd /home",
+    "#BSUB -o /dev/null",
+    "#BSUB -e /dev/null"
+  )
+  expect_equal(x$script(name = "a_job", n = 1L), lines)
+})
+
 test_that("crew_launcher_lsf() script() nearly empty", {
   x <- crew_launcher_lsf(
     options_cluster = crew_options_lsf(cwd = "/home")

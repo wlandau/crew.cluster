@@ -174,7 +174,7 @@ crew_class_launcher_pbs <- R6::R6Class(
       options <- private$.options_cluster
       c(
         paste("#PBS -N", name),
-        paste0("#PBS -J 1-", n),
+        if_any(n > 1L, paste0("#PBS -J 1-", n), character(0L)),
         paste("#PBS -o", options$log_output),
         if_any(
           is.null(options$log_error),

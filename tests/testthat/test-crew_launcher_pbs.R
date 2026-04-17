@@ -25,6 +25,21 @@ test_that("invalid crew_launcher_pbs(): pbs field", {
   expect_error(x$validate(), class = "crew_error")
 })
 
+test_that("crew_launcher_pbs() script() n = 1 omits array directive", {
+  x <- crew_launcher_pbs(
+    options_cluster = crew_options_pbs(
+      cwd = FALSE,
+      log_output = "log_file",
+      log_join = FALSE,
+      walltime_hours = NULL
+    )
+  )
+  expect_equal(
+    x$script(name = "my_job", n = 1L),
+    c("#PBS -N my_job", "#PBS -o log_file", "#PBS -j n")
+  )
+})
+
 test_that("crew_launcher_pbs() script() nearly empty", {
   x <- crew_launcher_pbs(
     options_cluster = crew_options_pbs(

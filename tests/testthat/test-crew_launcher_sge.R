@@ -28,6 +28,21 @@ test_that("invalid crew_launcher_sge(): SGE field", {
   expect_error(x$validate(), class = "crew_error")
 })
 
+test_that("crew_launcher_sge() script() n = 1 omits array directive", {
+  x <- crew_launcher_sge(
+    options_cluster = crew_options_sge(
+      cwd = FALSE,
+      envvars = FALSE,
+      log_output = "log_file",
+      log_join = FALSE
+    )
+  )
+  expect_equal(
+    x$script(name = "my_job", n = 1L),
+    c("#$ -N my_job", "#$ -o log_file", "#$ -j n")
+  )
+})
+
 test_that("crew_launcher_sge() script() nearly empty", {
   x <- crew_launcher_sge(
     options_cluster = crew_options_sge(
