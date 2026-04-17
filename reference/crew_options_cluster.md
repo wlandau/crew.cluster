@@ -82,7 +82,7 @@ Other cluster:
 #> [1] ""
 #> 
 #> $script_directory
-#> [1] "/tmp/RtmppPc7SX"
+#> [1] "/tmp/RtmpijRtTZ"
 #> 
 #> $script_lines
 #> character(0)

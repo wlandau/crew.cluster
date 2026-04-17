@@ -1,7 +1,5 @@
 # Changelog
 
-## crew.cluster 0.4.0.9000 (development)
-
 ## crew.cluster 0.4.0
 
 CRAN release: 2025-09-15

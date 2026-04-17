@@ -20,12 +20,12 @@ Source:
 
 Landau WM, Levin MG, Furneaux B (2026). *crew.cluster: Crew Launcher
 Plugins for Traditional High-Performance Computing Clusters*. R package
-version 0.4.0.9000, <https://wlandau.github.io/crew.cluster/>.
+version 0.4.0.9001, <https://wlandau.github.io/crew.cluster/>.
 
     @Manual{,
       title = {crew.cluster: Crew Launcher Plugins for Traditional High-Performance Computing Clusters},
       author = {William Michael Landau and Michael Gilbert Levin and Brendan Furneaux},
       year = {2026},
-      note = {R package version 0.4.0.9000},
+      note = {R package version 0.4.0.9001},
       url = {https://wlandau.github.io/crew.cluster/},
     }
