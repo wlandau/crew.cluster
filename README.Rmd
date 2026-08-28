@@ -46,7 +46,9 @@ controller <- crew_controller_sge(
   tasks_max = 2, # to avoid reaching wall time limits
   seconds_idle = 10, # to release resources when they are not needed,
   sge_memory_gigabytes_required = 32,
-  script_lines = "module load R" # if R is an environment module
+  options_cluster = crew_options_sge(
+    script_lines = "module load R" # if R is an environment module
+  )
 )
 controller$start()
 ```
@@ -63,7 +65,7 @@ The `pop()` method retrieves available tasks.
 controller$pop()
 #> # A tibble: 1 × 11
 #>   name         command result seconds   seed error trace warni…¹ launc…² worker insta…³
-#>   <chr>        <chr>   <list>   <dbl>  <int> <chr> <chr> <chr>   <chr>    <int> <chr>  
+#>   <chr>        <chr>   <list>   <dbl>  <int> <chr> <chr> <chr>   <chr>    <int> <chr>
 #> 1 do work   … do_work… <int>        0 1.56e8 NA    NA    NA      79e71c…      1 7686b2…
 #> # … with abbreviated variable names ¹​warnings, ²​launcher, ³​instance
 ```
@@ -85,7 +87,7 @@ job_list
 #> # A tibble: 2 × 9
 #>   job_number prio    name    owner state start_time queue_name jclass_name slots
 #>   <chr>      <chr>   <chr>   <chr> <chr> <chr>      <chr>      <lgl>       <chr>
-#> 1 131853812  0.05000 crew-m… USER… r     2024-01-0… all.norma… NA          1    
+#> 1 131853812  0.05000 crew-m… USER… r     2024-01-0… all.norma… NA          1
 #> 2 131853813  0.05000 crew-m… USER… r     2024-01-0… all.norma… NA          1
 monitor$terminate(jobs = job_list$job_number)
 #> USER has registered the job 131853812 for deletion

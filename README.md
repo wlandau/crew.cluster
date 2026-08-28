@@ -47,7 +47,9 @@ controller <- crew_controller_sge(
   tasks_max = 2, # to avoid reaching wall time limits
   seconds_idle = 10, # to release resources when they are not needed,
   sge_memory_gigabytes_required = 32,
-  script_lines = "module load R" # if R is an environment module
+  options_cluster = crew_options_sge(
+    script_lines = "module load R" # if R is an environment module
+  )
 )
 controller$start()
 ```
