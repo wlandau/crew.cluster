@@ -21,10 +21,10 @@ systems. Inspiration also comes from packages
 
 # Installation
 
-| Type        | Source     | Command                                                                      |
-|-------------|------------|------------------------------------------------------------------------------|
-| Release     | CRAN       | `install.packages("crew.cluster")`                                           |
-| Development | GitHub     | `remotes::install_github("wlandau/crew.cluster")`                            |
+| Type | Source | Command |
+|----|----|----|
+| Release | CRAN | `install.packages("crew.cluster")` |
+| Development | GitHub | `remotes::install_github("wlandau/crew.cluster")` |
 | Development | R-universe | `install.packages("crew.cluster", repos = "https://wlandau.r-universe.dev")` |
 
 # Documentation
@@ -39,6 +39,7 @@ example, to launch workers on a Sun Grid Engine (SGE) cluster, use
 [`crew_controller_sge()`](reference/crew_controller_sge.md).
 
 ``` r
+
 library(crew.cluster)
 controller <- crew_controller_sge(
   name = "my_workflow", # for informative job names
@@ -46,7 +47,9 @@ controller <- crew_controller_sge(
   tasks_max = 2, # to avoid reaching wall time limits
   seconds_idle = 10, # to release resources when they are not needed,
   sge_memory_gigabytes_required = 32,
-  script_lines = "module load R" # if R is an environment module
+  options_cluster = crew_options_sge(
+    script_lines = "module load R" # if R is an environment module
+  )
 )
 controller$start()
 ```
@@ -56,12 +59,14 @@ At this point, usage is exactly the same as basic
 tasks and auto-scales SGE workers to meet demand.
 
 ``` r
+
 controller$push(name = "do work", command = do_work())
 ```
 
 The `pop()` method retrieves available tasks.
 
 ``` r
+
 controller$pop()
 #> # A tibble: 1 × 11
 #>   name         command result seconds   seed error trace warni…¹ launc…² worker insta…³
@@ -73,6 +78,7 @@ controller$pop()
 Remember to terminate the controller when you are done.
 
 ``` r
+
 controller$terminate()
 ```
 
@@ -83,6 +89,7 @@ cluster jobs using [`crew_monitor_sge()`](reference/crew_monitor_sge.md)
 and other supported monitors. Example for SGE:
 
 ``` r
+
 monitor <- crew_monitor_sge()
 job_list <- monitor$jobs()
 job_list
@@ -155,6 +162,7 @@ By contributing to this project, you agree to abide by its terms.
 # Citation
 
 ``` r
+
 citation("crew.cluster")
 ```
 

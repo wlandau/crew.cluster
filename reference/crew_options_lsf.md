@@ -137,7 +137,7 @@ Other lsf: [`crew_class_launcher_lsf`](crew_class_launcher_lsf.md),
 #> [1] ""
 #> 
 #> $script_directory
-#> [1] "/tmp/RtmpijRtTZ"
+#> [1] "/tmp/RtmpZURYlP"
 #> 
 #> $script_lines
 #> character(0)
