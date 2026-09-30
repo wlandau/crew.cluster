@@ -1,6 +1,7 @@
 # crew.cluster development version
 
 * Omit the job array directive when `n = 1` to avoid errors on schedulers that reject single-element arrays (#68).
+* Fix an options test on machines with `qsub` installed (#71, @kyleam).
 
 # crew.cluster 0.4.0
 

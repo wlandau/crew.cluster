@@ -5,7 +5,7 @@ test_that("crew_options_cluster", {
     structure(
       list(
         verbose = FALSE,
-        command_submit = "",
+        command_submit = as.character(Sys.which("qsub")),
         script_directory = "x",
         script_lines = character(0)
       ),
